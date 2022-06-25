@@ -1,17 +1,8 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
-import { accessToken, logout, getCurrentUserProfile } from "./spotify";
 import "./App.css";
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-};
+import { useState, useEffect } from "react";
+import ScrollToTop from "./Components/Core/ScrollToTop";
+import { accessToken, logout, getCurrentUserProfile } from "./spotify";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -43,31 +34,33 @@ const App = () => {
           Log in to Spotify
         </a>
       ) : (
-        <Routes>
+        <Router>
           <ScrollToTop />
-          <Route path="/top-artists" element={<h1>Top Artists</h1>} />
-          <Route path="/top-tracks" element={<h1>Top Tracks</h1>} />
-          <Route path="/playlists/:id" element={<h1>Playlist</h1>} />
-          <Route path="/playlists" element={<h1>Playlists</h1>} />
-          <Route
-            path="/"
-            element={
-              <>
-                <button onClick={logout}>Log Out</button>
+          <Routes>
+            <Route path="/top-artists" element={<h1>Top Artists</h1>} />
+            <Route path="/top-tracks" element={<h1>Top Tracks</h1>} />
+            <Route path="/playlists/:id" element={<h1>Playlist</h1>} />
+            <Route path="/playlists" element={<h1>Playlists</h1>} />
+            <Route
+              path="/"
+              element={
+                <>
+                  <button onClick={logout}>Log Out</button>
 
-                {profile && (
-                  <div>
-                    <h1>{profile.display_name}</h1>
-                    <p>{profile.followers.total} Followers</p>
-                    {profile.images.length && profile.images[0].url && (
-                      <img src={profile.images[0].url} alt="Avatar" />
-                    )}
-                  </div>
-                )}
-              </>
-            }
-          ></Route>
-        </Routes>
+                  {profile && (
+                    <div>
+                      <h1>{profile.display_name}</h1>
+                      <p>{profile.followers.total} Followers</p>
+                      {profile.images.length && profile.images[0].url && (
+                        <img src={profile.images[0].url} alt="Avatar" />
+                      )}
+                    </div>
+                  )}
+                </>
+              }
+            ></Route>
+          </Routes>
+        </Router>
       )}
     </div>
   );
