@@ -12,6 +12,7 @@ import {
   Playlist,
 } from "./pages";
 import Content from "./components/Content";
+import { TrackProvider } from "./components/TrackContext";
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -41,13 +42,15 @@ const App = () => {
           <Router>
             <Content>
               <ScrollToTop />
-              <Routes>
-                <Route path="/" element={<Profile />}></Route>
-                <Route path="/top-artists" element={<TopArtists />} />
-                <Route path="/top-tracks" element={<TopTracks />} />
-                <Route path="/playlists" element={<Playlists />} />
-                <Route path="/playlists/:id" element={<Playlist />} />
-              </Routes>
+              <TrackProvider>
+                <Routes>
+                  <Route path="/" element={<Profile />}></Route>
+                  <Route path="/top-artists" element={<TopArtists />} />
+                  <Route path="/top-tracks" element={<TopTracks />} />
+                  <Route path="/playlists" element={<Playlists />} />
+                  <Route path="/playlists/:id" element={<Playlist />} />
+                </Routes>
+              </TrackProvider>
             </Content>
           </Router>
         </div>

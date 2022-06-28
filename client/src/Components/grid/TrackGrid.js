@@ -1,6 +1,10 @@
 import { formatDuration } from "../../utils";
+import { PlayTrack, ChooseTrack } from "../TrackContext";
 
-export default function TrackGrid({ tracks, playingTrack, chooseTrack }) {
+export default function TrackGrid({ tracks }) {
+  const playingTrack = PlayTrack();
+  const chooseTrack = ChooseTrack();
+
   return (
     <>
       {tracks && tracks.length ? (
