@@ -17,7 +17,7 @@ export default function TimeRange({ timeRange, setTimeRange }) {
   return (
     <ul className="flex flex-row justify-center gap-5 text-white">
       {timeRangeBtns.map((timeRangeBtn) => (
-        <li>
+        <li key={timeRangeBtn.range}>
           <button
             className={`bg-sky-900 py-2 px-4 text-sm rounded-full ${
               timeRange === timeRangeBtn.range

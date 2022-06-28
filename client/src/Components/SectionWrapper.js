@@ -9,7 +9,7 @@ export default function SectionWrapper({
 }) {
   return (
     <div>
-      <div className="flex justify-between mb-5">
+      <div className="flex mb-5">
         <h2 className="font-semibold text-xl text-white">
           {breadcrumb && (
             <span className="text-slate-400">
@@ -35,7 +35,7 @@ export default function SectionWrapper({
         {seeAll && (
           <Link
             to={seeAll}
-            className="font-light text-sm text-gray-300 hover:text-white transition ease-in-out uppercase cursor-pointer"
+            className="font-light text-sm text-gray-300 hover:text-white transition ease-in-out uppercase cursor-pointer ml-auto"
           >
             See All
           </Link>
