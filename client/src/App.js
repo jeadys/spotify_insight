@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 import { accessToken, getCurrentUserProfile } from "./spotify";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/ScrollToTop";
-import { Login, Profile, TopArtists, TopTracks, Playlists } from "./pages";
+import {
+  Login,
+  Profile,
+  TopArtists,
+  TopTracks,
+  Playlists,
+  Playlist,
+} from "./pages";
 import Content from "./components/Content";
 
 const App = () => {
@@ -30,17 +37,16 @@ const App = () => {
       {!token ? (
         <Login />
       ) : (
-        <div className="min-h-screen flex">
+        <div className="min-h-screen">
           <Router>
-            {/* <div className="hidden lg:block w-72 bg-black"></div> */}
             <Content>
               <ScrollToTop />
               <Routes>
+                <Route path="/" element={<Profile />}></Route>
                 <Route path="/top-artists" element={<TopArtists />} />
                 <Route path="/top-tracks" element={<TopTracks />} />
                 <Route path="/playlists" element={<Playlists />} />
-                <Route path="/playlists/:id" element={<h1>Playlist</h1>} />
-                <Route path="/" element={<Profile />}></Route>
+                <Route path="/playlists/:id" element={<Playlist />} />
               </Routes>
             </Content>
           </Router>
