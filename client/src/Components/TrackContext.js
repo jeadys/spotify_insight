@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import Player from "../components/Player";
+import TrackPlayer from "./TrackPlayer";
 import { accessToken } from "../spotify";
 const PlayTrackContext = React.createContext();
 const ChooseTrackContext = React.createContext();
@@ -22,7 +22,7 @@ export const TrackProvider = ({ children }) => {
   return (
     <PlayTrackContext.Provider value={playingTrack}>
       <ChooseTrackContext.Provider value={chooseTrack}>
-        <Player token={accessToken} trackUri={playingTrack} />
+        <TrackPlayer token={accessToken} trackUri={playingTrack} />
         {children}
       </ChooseTrackContext.Provider>
     </PlayTrackContext.Provider>

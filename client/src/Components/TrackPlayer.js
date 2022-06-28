@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
 import { createPortal } from "react-dom";
 
-export default function Player({ token, trackUri }) {
+export default function TrackPlayer({ token, trackUri }) {
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
