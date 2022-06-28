@@ -13,10 +13,16 @@ export default function PlaylistGrid({ playlists }) {
               >
                 <Link to={`/playlists/${playlist.id}`}>
                   <div className="flex-1 flex flex-col p-4">
-                    {playlist.images.length && playlist.images[0] && (
+                    {playlist.images.length && playlist.images[0] ? (
                       <img
                         className="w-42 h-42 flex-shrink-0 mx-auto rounded-md"
                         src={playlist.images[0].url}
+                        alt={playlist.name}
+                      />
+                    ) : (
+                      <img
+                        className="w-42 h-42 flex-shrink-0 mx-auto rounded-md"
+                        src="images/nocover.webp"
                         alt={playlist.name}
                       />
                     )}

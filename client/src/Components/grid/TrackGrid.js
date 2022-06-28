@@ -16,11 +16,19 @@ export default function TrackGrid({ tracks }) {
                     <div className="flex items-center">
                       <span className="mr-4">{index + 1}</span>
                       <div className="h-10 w-10 flex-shrink-0">
-                        <img
-                          className="h-10 w-10 rounded-md"
-                          src={track.album.images[0].url}
-                          alt={track.name}
-                        />
+                        {track.album.images.length && track.album.images[0] ? (
+                          <img
+                            className="h-10 w-10 rounded-md"
+                            src={track.album.images[0].url}
+                            alt={track.name}
+                          />
+                        ) : (
+                          <img
+                            className="h-10 w-10 rounded-md"
+                            src="/images/nocover.webp"
+                            alt={track.name}
+                          />
+                        )}
                       </div>
                       <div className="ml-4">
                         <div className="font-semibold">{track.name}</div>
