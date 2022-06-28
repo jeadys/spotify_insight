@@ -14,3 +14,8 @@ html, body{
     visibility: collapse;
   }
 }
+
+#trackplayer {
+  position: sticky;
+  bottom: 0;
+}

@@ -1,6 +1,6 @@
 import { formatDuration } from "../../utils";
 
-export default function TrackGrid({ tracks }) {
+export default function TrackGrid({ tracks, playingTrack, chooseTrack }) {
   return (
     <>
       {tracks && tracks.length ? (
@@ -10,7 +10,12 @@ export default function TrackGrid({ tracks }) {
               {tracks.map((track, index) => (
                 <tr
                   key={track.id}
-                  className="hover:bg-slate-700 cursor-pointer"
+                  className={`${
+                    playingTrack === track.uri
+                      ? "bg-sky-600 sticky"
+                      : "hover:bg-slate-700 cursor-pointer"
+                  }`}
+                  onClick={() => chooseTrack(track.uri)}
                 >
                   <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                     <div className="flex items-center">
