@@ -76,16 +76,16 @@ export default function Playlist() {
             )}
             <p className="text-white text-center my-5 font-black text-md">
               <span className="block text-2xl"> {playlist.name}</span>
+              <span className="mr-2">
+                {playlist.tracks.total.toLocaleString()}{" "}
+                {`song${playlist.tracks.total !== 1 ? "s" : ""}  `}
+              </span>
               {playlist.followers.total ? (
                 <span>
                   {playlist.followers.total.toLocaleString()}{" "}
                   {`follower${playlist.followers.total !== 1 ? "s " : " "}`}
                 </span>
               ) : null}
-              <span>
-                {playlist.tracks.total.toLocaleString()}{" "}
-                {`song${playlist.tracks.total !== 1 ? "s" : ""}`}
-              </span>
             </p>
             <TrackGrid tracks={tracksForTracklist} />
           </SectionWrapper>
