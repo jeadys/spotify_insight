@@ -210,7 +210,7 @@ export const getArtistAlbums = (artist_id, limit = 10) => {
 /**
  * Get an Album
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-album
- * @param {string} artist_id - The Spotify ID for the artist.
+ * @param {string} album_id - The Spotify ID for the artist.
  * @returns {Promise}
  */
 export const getAlbumById = (album_id) => {
