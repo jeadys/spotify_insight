@@ -11,7 +11,7 @@ import {
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { accessToken, getCurrentUserProfile } from "./spotify";
 import TrackProvider from "./components/TrackContext";
-import { Content } from "./components";
+import { Content, ScrollTop } from "./components";
 import { useState, useEffect } from "react";
 import "./App.css";
 
@@ -42,6 +42,7 @@ const App = () => {
         <div className="min-h-screen">
           <Router>
             <Content>
+              <ScrollTop />
               <TrackProvider>
                 <div className="space-y-10">
                   <Routes>
