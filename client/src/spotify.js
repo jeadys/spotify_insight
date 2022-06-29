@@ -176,3 +176,25 @@ export const getCurrentUserPlaylists = (limit = 20) => {
 export const getPlaylistById = (playlist_id) => {
   return axios.get(`/playlists/${playlist_id}`);
 };
+
+/**
+ * Get an Artist
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artist
+ * @param {string} artist_id - The Spotify ID for the artist.
+ * @returns {Promise}
+ */
+export const getArtistById = (artist_id) => {
+  return axios.get(`/artists/${artist_id}`);
+};
+
+export const getArtistTopTracks = (artist_id, limit = 10) => {
+  return axios.get(`/artists/${artist_id}/top-tracks?market=NL&limit=${limit}`);
+};
+
+export const getArtistAlbums = (artist_id, limit = 10) => {
+  return axios.get(`/artists/${artist_id}/albums?market=NL&limit=${limit}`);
+};
+
+export const getAlbumById = (album_id) => {
+  return axios.get(`/albums/${album_id}`);
+};

@@ -10,6 +10,8 @@ import {
   TopTracks,
   Playlists,
   Playlist,
+  Artist,
+  Album,
 } from "./pages";
 import Content from "./components/Content";
 import { TrackProvider } from "./components/TrackContext";
@@ -43,13 +45,17 @@ const App = () => {
             <Content>
               <ScrollToTop />
               <TrackProvider>
-                <Routes>
-                  <Route path="/" element={<Profile />}></Route>
-                  <Route path="/top-artists" element={<TopArtists />} />
-                  <Route path="/top-tracks" element={<TopTracks />} />
-                  <Route path="/playlists" element={<Playlists />} />
-                  <Route path="/playlists/:id" element={<Playlist />} />
-                </Routes>
+                <div className="space-y-10">
+                  <Routes>
+                    <Route path="/" element={<Profile />}></Route>
+                    <Route path="/top-artists" element={<TopArtists />} />
+                    <Route path="/top-tracks" element={<TopTracks />} />
+                    <Route path="/playlists" element={<Playlists />} />
+                    <Route path="/playlists/:id" element={<Playlist />} />
+                    <Route path="/artists/:id" element={<Artist />} />
+                    <Route path="/albums/:id" element={<Album />} />
+                  </Routes>
+                </div>
               </TrackProvider>
             </Content>
           </Router>
