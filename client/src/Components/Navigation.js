@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 import { logout } from "../spotify";
 
 export default function Navigation() {

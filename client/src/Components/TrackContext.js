@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-import TrackPlayer from "./TrackPlayer";
 import { accessToken } from "../spotify";
+import TrackPlayer from "./TrackPlayer";
+
 const PlayTrackContext = React.createContext();
 const ChooseTrackContext = React.createContext();
 

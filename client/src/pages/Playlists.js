@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import SectionWrapper from "../components/SectionWrapper";
-import PlaylistGrid from "../components/grid/PlaylistGrid";
 import { getCurrentUserPlaylists } from "../spotify";
+import { PlaylistGrid } from "../components/grid";
+import { SectionWrapper } from "../components";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function Playlists() {

@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
-import ArtistGrid from "../components/grid/ArtistGrid";
-import TrackGrid from "../components/grid/TrackGrid";
 import {
   getCurrentUserProfile,
   getCurrentUserPlaylists,
   getTopArtists,
   getTopTracks,
 } from "../spotify";
-import SectionWrapper from "../components/SectionWrapper";
-import PlaylistGrid from "../components/grid/PlaylistGrid";
+import { PlaylistGrid, TrackGrid, ArtistGrid } from "../components/grid";
+import { SectionWrapper } from "../components";
+import { useState, useEffect } from "react";
 
 export default function Profile() {
   const [profile, setProfile] = useState(null);

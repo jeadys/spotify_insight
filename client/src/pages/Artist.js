@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useMemo } from "react";
 import { getArtistById, getArtistTopTracks, getArtistAlbums } from "../spotify";
+import React, { useState, useEffect } from "react";
+import { AlbumGrid, TrackGrid } from "../components/grid";
+import { SectionWrapper, Header } from "../components";
 import { useParams } from "react-router-dom";
-import TrackGrid from "../components/grid/TrackGrid";
-import PlaylistGrid from "../components/grid/PlaylistGrid";
-import SectionWrapper from "../components/SectionWrapper";
-import Header from "../components/Header";
-import AlbumGrid from "../components/grid/AlbumGrid";
 
 export default function Artist() {
   const { id } = useParams();
@@ -24,7 +21,6 @@ export default function Artist() {
 
         const artistAlbums = await getArtistAlbums(id);
         setArtistAlbums(artistAlbums.data.items);
-        console.log(artistAlbums.data.items);
       } catch (e) {
         console.log(e);
       }
@@ -32,8 +28,6 @@ export default function Artist() {
 
     fetchData();
   }, [id]);
-
-  console.log(artistTopTracks);
 
   return (
     <>

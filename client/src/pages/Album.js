@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { getAlbumById } from "../spotify";
+import { SectionWrapper, Header } from "../components";
+import { TrackGrid } from "../components/grid";
 import { useParams } from "react-router-dom";
-import SectionWrapper from "../components/SectionWrapper";
+import { getAlbumById } from "../spotify";
 import axios from "axios";
-import TrackGrid from "../components/grid/TrackGrid";
-import Header from "../components/Header";
 
 export default function Album() {
   const { id } = useParams();

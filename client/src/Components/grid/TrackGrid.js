@@ -1,5 +1,5 @@
-import { formatDuration } from "../../utils";
 import { PlayTrack, ChooseTrack } from "../TrackContext";
+import { formatDuration } from "../../utils";
 import { Link } from "react-router-dom";
 
 export default function TrackGrid({ tracks }) {

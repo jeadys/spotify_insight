@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { SectionWrapper, Header } from "../components";
+import { TrackGrid } from "../components/grid";
 import { getPlaylistById } from "../spotify";
 import { useParams } from "react-router-dom";
-import SectionWrapper from "../components/SectionWrapper";
+
 import axios from "axios";
-import TrackGrid from "../components/grid/TrackGrid";
-import Header from "../components/Header";
 
 export default function Playlist() {
   const { id } = useParams();

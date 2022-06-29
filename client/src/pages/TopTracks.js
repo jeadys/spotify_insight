@@ -1,8 +1,7 @@
+import { SectionWrapper, TimeRange } from "../components";
+import { TrackGrid } from "../components/grid";
 import { useState, useEffect } from "react";
-import TrackGrid from "../components/grid/TrackGrid";
 import { getTopTracks } from "../spotify";
-import SectionWrapper from "../components/SectionWrapper";
-import TimeRange from "../components/TimeRange";
 
 export default function TopTracks() {
   const [topTracks, settopTracks] = useState(null);

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import SpotifyPlayer from "react-spotify-web-playback";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 export default function TrackPlayer({ token, trackUri }) {

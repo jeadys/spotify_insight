@@ -1,8 +1,7 @@
+import { SectionWrapper, TimeRange } from "../components";
+import { ArtistGrid } from "../components/grid";
 import { useState, useEffect } from "react";
-import ArtistGrid from "../components/grid/ArtistGrid";
 import { getTopArtists } from "../spotify";
-import SectionWrapper from "../components/SectionWrapper";
-import TimeRange from "../components/TimeRange";
 
 export default function TopArtists() {
   const [topArtists, setTopArtists] = useState(null);
