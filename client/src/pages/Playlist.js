@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import SectionWrapper from "../components/SectionWrapper";
 import axios from "axios";
 import TrackGrid from "../components/grid/TrackGrid";
+import Header from "../components/Header";
 
 export default function Playlist() {
   const { id } = useParams();
@@ -61,32 +62,7 @@ export default function Playlist() {
       {playlist && (
         <>
           <SectionWrapper title="Playlists" breadcrumb="true">
-            {playlist.images.length && playlist.images[0] ? (
-              <img
-                className="w-96 h-96 flex-shrink-0 mx-auto rounded-md"
-                src={playlist.images[0].url}
-                alt={playlist.name}
-              />
-            ) : (
-              <img
-                className="w-96 h-96 flex-shrink-0 mx-auto rounded-md"
-                src="/images/nocover.webp"
-                alt={playlist.name}
-              />
-            )}
-            <p className="text-white text-center my-5 font-black text-md">
-              <span className="block text-2xl"> {playlist.name}</span>
-              <span className="mr-2">
-                {playlist.tracks.total.toLocaleString()}{" "}
-                {`song${playlist.tracks.total !== 1 ? "s" : ""}  `}
-              </span>
-              {playlist.followers.total ? (
-                <span>
-                  {playlist.followers.total.toLocaleString()}{" "}
-                  {`follower${playlist.followers.total !== 1 ? "s " : " "}`}
-                </span>
-              ) : null}
-            </p>
+            <Header data={playlist} />
             <TrackGrid tracks={tracksForTracklist} />
           </SectionWrapper>
         </>

@@ -41,7 +41,7 @@ export default function Profile() {
   return (
     <>
       {topArtists && topTracks && playlists && (
-        <div className="space-y-10">
+        <>
           <SectionWrapper title="Top artists this month" seeAll="/top-artists">
             <ArtistGrid artists={topArtists.items.slice(0, 12)} />
           </SectionWrapper>
@@ -51,7 +51,7 @@ export default function Profile() {
           <SectionWrapper title="Playlists" seeAll="/playlists">
             <PlaylistGrid playlists={playlists.items.slice(0, 6)} />
           </SectionWrapper>
-        </div>
+        </>
       )}
     </>
   );
