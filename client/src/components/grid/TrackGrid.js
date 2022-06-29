@@ -6,6 +6,10 @@ export default function TrackGrid({ tracks }) {
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
 
+  const stopProp = (e) => {
+    e.stopPropagation();
+  };
+
   return (
     <>
       {tracks && tracks.length ? (
@@ -17,7 +21,7 @@ export default function TrackGrid({ tracks }) {
                   key={track.id}
                   className={`${
                     playingTrack === track.uri
-                      ? "bg-sky-600 sticky"
+                      ? "bg-sky-600"
                       : "hover:bg-slate-700 cursor-pointer"
                   }`}
                   onClick={() => chooseTrack(track.uri)}
@@ -54,7 +58,10 @@ export default function TrackGrid({ tracks }) {
                                 key={artist.id}
                                 className="text-xs text-gray-300 hover:underline"
                               >
-                                <Link to={`/artists/${artist.id}`}>
+                                <Link
+                                  to={`/artists/${artist.id}`}
+                                  onClick={(e) => stopProp(e)}
+                                >
                                   {artist.name}
                                 </Link>
 
@@ -71,7 +78,10 @@ export default function TrackGrid({ tracks }) {
                                 key={artist.id}
                                 className="text-xs text-gray-300 hover:underline"
                               >
-                                <Link to={`/artists/${artist.id}`}>
+                                <Link
+                                  to={`/artists/${artist.id}`}
+                                  onClick={(e) => stopProp(e)}
+                                >
                                   {artist.name}
                                 </Link>
 
@@ -85,7 +95,10 @@ export default function TrackGrid({ tracks }) {
                   </td>
                   {"album" in track && (
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                      <Link to={`/albums/${track.album.id}`}>
+                      <Link
+                        to={`/albums/${track.album.id}`}
+                        onClick={(e) => stopProp(e)}
+                      >
                         <div className=" hover:underline">
                           {track.album.name}
                         </div>

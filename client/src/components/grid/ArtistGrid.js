@@ -36,7 +36,7 @@ export default function ArtistGrid({ artists }) {
                       </dd>
                       <dt className="sr-only">Role</dt>
                       <dd className="mt-3">
-                        <span className="px-2 py-1 text-xs font-medium bg-green-100 rounded-full">
+                        <span className="px-2 py-1 text-xs font-medium bg-cyan-100 rounded-full">
                           {artist.followers.total.toLocaleString()}{" "}
                           {`follower${
                             artist.followers.total !== 1 ? "s " : " "
