@@ -187,14 +187,32 @@ export const getArtistById = (artist_id) => {
   return axios.get(`/artists/${artist_id}`);
 };
 
+/**
+ * Get an Artist's Top tracks
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-top-tracks
+ * @param {string} artist_id - The Spotify ID for the artist.
+ * @returns {Promise}
+ */
 export const getArtistTopTracks = (artist_id, limit = 10) => {
   return axios.get(`/artists/${artist_id}/top-tracks?market=NL&limit=${limit}`);
 };
 
+/**
+ * Get a List of Current Artist's Albums
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-albums
+ * @param {string} artist_id - The Spotify ID for the artist.
+ * @returns {Promise}
+ */
 export const getArtistAlbums = (artist_id, limit = 10) => {
   return axios.get(`/artists/${artist_id}/albums?market=NL&limit=${limit}`);
 };
 
+/**
+ * Get an Album
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-album
+ * @param {string} artist_id - The Spotify ID for the artist.
+ * @returns {Promise}
+ */
 export const getAlbumById = (album_id) => {
   return axios.get(`/albums/${album_id}`);
 };
