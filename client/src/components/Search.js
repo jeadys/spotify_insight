@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { searchItems } from "../spotify";
 import useDebounce from "../hooks/useDebounce";
 import { ChooseTrack, PlayTrack } from "./TrackContext";
@@ -12,6 +12,11 @@ export default function Search() {
   const debouncedSearch = useDebounce(search, 1000);
   const chooseTrack = ChooseTrack();
   const playingTrack = PlayTrack();
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    return searchModal ? inputRef.current.focus() : setSearch("");
+  }, [searchModal]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,6 +81,7 @@ export default function Search() {
                 <input
                   type="text"
                   value={search}
+                  ref={inputRef}
                   onChange={(e) => setSearch(e.target.value)}
                   className="h-12 w-full border-0 bg-transparent pl-11 pr-4 text-white placeholder-gray-400 focus:ring-0 sm:text-sm"
                   placeholder="Search..."
