@@ -1,14 +1,10 @@
 import { PlayTrack, ChooseTrack } from "../TrackContext";
-import { formatDuration } from "../../utils";
+import { formatDuration, stopProp } from "../../utils";
 import { Link } from "react-router-dom";
 
 export default function TrackGrid({ tracks }) {
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
-
-  const stopProp = (e) => {
-    e.stopPropagation();
-  };
 
   return (
     <>
@@ -28,7 +24,9 @@ export default function TrackGrid({ tracks }) {
                 >
                   <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                     <div className="flex items-center">
-                      <span className="mr-4">{index + 1}</span>
+                      <span className="mr-4">
+                        {playingTrack === track.uri ? <></> : <>{index + 1}</>}
+                      </span>
 
                       {"album" in track && (
                         <div className="h-10 w-10 flex-shrink-0">
@@ -95,14 +93,14 @@ export default function TrackGrid({ tracks }) {
                   </td>
                   {"album" in track && (
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
-                      <Link
-                        to={`/albums/${track.album.id}`}
-                        onClick={(e) => stopProp(e)}
-                      >
-                        <div className=" hover:underline">
+                      <span className="text-xs text-gray-300 hover:underline">
+                        <Link
+                          to={`/albums/${track.album.id}`}
+                          onClick={(e) => stopProp(e)}
+                        >
                           {track.album.name}
-                        </div>
-                      </Link>
+                        </Link>
+                      </span>
                     </td>
                   )}
                   <td className="whitespace-nowrap px-3 py-4 text-sm">

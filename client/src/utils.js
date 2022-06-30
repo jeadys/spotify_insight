@@ -22,3 +22,10 @@ export const formatDuration = (ms) => {
   const seconds = Math.floor((ms % 60000) / 1000);
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 };
+
+/**
+ * Prevents further propagation of the current event in the capturing and bubbling phases
+ */
+export const stopProp = (e) => {
+  e.stopPropagation();
+};
