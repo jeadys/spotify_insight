@@ -6,3 +6,4 @@ export { default as TimeRange } from "./TimeRange";
 export { default as TrackContext } from "./TrackContext";
 export { default as TrackPlayer } from "./TrackPlayer";
 export { default as ScrollTop } from "./ScrollTop";
+export { default as Search } from "./Search";

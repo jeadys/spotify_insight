@@ -216,3 +216,7 @@ export const getArtistAlbums = (artist_id, limit = 10) => {
 export const getAlbumById = (album_id) => {
   return axios.get(`/albums/${album_id}`);
 };
+
+export const searchItems = (query, limit = 10) => {
+  return axios.get(`/search?q=${query}&type=track&limit=${limit}`);
+};

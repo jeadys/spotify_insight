@@ -9,34 +9,15 @@ import {
   Album,
 } from "./pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { accessToken, getCurrentUserProfile } from "./spotify";
+import { Content, ScrollTop, Search } from "./components";
 import TrackProvider from "./components/TrackContext";
-import { Content, ScrollTop } from "./components";
-import { useState, useEffect } from "react";
+import { accessToken } from "./spotify";
 import "./App.css";
 
 const App = () => {
-  const [token, setToken] = useState(null);
-  const [profile, setProfile] = useState(null);
-
-  useEffect(() => {
-    setToken(accessToken);
-
-    const fetchData = async () => {
-      try {
-        const { data } = await getCurrentUserProfile();
-        setProfile(data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   return (
     <div className="App bg-gray-900 min-h-screen font-maven">
-      {!token ? (
+      {!accessToken ? (
         <Login />
       ) : (
         <div className="min-h-screen">
@@ -44,6 +25,7 @@ const App = () => {
             <Content>
               <ScrollTop />
               <TrackProvider>
+                <Search />
                 <div className="space-y-10">
                   <Routes>
                     <Route path="/" element={<Profile />}></Route>
