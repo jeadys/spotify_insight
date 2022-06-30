@@ -24,9 +24,7 @@ export default function TrackGrid({ tracks }) {
                 >
                   <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
                     <div className="flex items-center">
-                      <span className="mr-4">
-                        {playingTrack === track.uri ? <></> : <>{index + 1}</>}
-                      </span>
+                      <span className="mr-4">{index + 1}</span>
 
                       {"album" in track && (
                         <div className="h-10 w-10 flex-shrink-0">
@@ -92,7 +90,7 @@ export default function TrackGrid({ tracks }) {
                     </div>
                   </td>
                   {"album" in track && (
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300">
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300 album:hidden">
                       <span className="text-xs text-gray-300 hover:underline">
                         <Link
                           to={`/albums/${track.album.id}`}
@@ -103,7 +101,7 @@ export default function TrackGrid({ tracks }) {
                       </span>
                     </td>
                   )}
-                  <td className="whitespace-nowrap px-3 py-4 text-sm">
+                  <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden">
                     <div className="">{formatDuration(track.duration_ms)}</div>
                   </td>
                 </tr>
