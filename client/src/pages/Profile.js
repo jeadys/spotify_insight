@@ -1,5 +1,4 @@
 import {
-  getCurrentUserProfile,
   getCurrentUserPlaylists,
   getTopArtists,
   getTopTracks,
@@ -9,7 +8,6 @@ import { SectionWrapper } from "../components";
 import { useState, useEffect } from "react";
 
 export default function Profile() {
-  const [profile, setProfile] = useState(null);
   const [topArtists, setTopArtists] = useState();
   const [topTracks, setTopTracks] = useState(null);
   const [playlists, setPlaylists] = useState(null);
@@ -17,9 +15,6 @@ export default function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const userProfile = await getCurrentUserProfile();
-        setProfile(userProfile.data);
-
         const userTopArtists = await getTopArtists("short_term");
         setTopArtists(userTopArtists.data);
 
