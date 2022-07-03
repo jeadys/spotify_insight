@@ -6,11 +6,14 @@ import {
 import { PlaylistGrid, TrackGrid, ArtistGrid } from "../components/grid";
 import { SectionWrapper } from "../components";
 import { useState, useEffect } from "react";
+import { IUsersTopArtists } from "../common/interfaces/usersTopArtists";
+import { IUsersTopTracks } from "../common/interfaces/usersTopTracks";
+import { IUsersPlaylists } from "../common/interfaces/usersPlaylists";
 
 export default function Profile() {
-  const [topArtists, setTopArtists] = useState();
-  const [topTracks, setTopTracks] = useState(null);
-  const [playlists, setPlaylists] = useState(null);
+  const [topArtists, setTopArtists] = useState<IUsersTopArtists>();
+  const [topTracks, setTopTracks] = useState<IUsersTopTracks>();
+  const [playlists, setPlaylists] = useState<IUsersPlaylists>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,13 +39,13 @@ export default function Profile() {
       {topArtists && topTracks && playlists && (
         <>
           <SectionWrapper title="Top artists this month" seeAll="/top-artists">
-            <ArtistGrid artists={topArtists.items.slice(0, 12)} />
+            <ArtistGrid items={topArtists.items.slice(0, 12)} />
           </SectionWrapper>
           <SectionWrapper title="Top tracks this month" seeAll="/top-tracks">
-            <TrackGrid tracks={topTracks.items.slice(0, 6)} />
+            <TrackGrid items={topTracks.items.slice(0, 6)} />
           </SectionWrapper>
           <SectionWrapper title="Playlists" seeAll="/playlists">
-            <PlaylistGrid playlists={playlists.items.slice(0, 6)} />
+            <PlaylistGrid items={playlists.items.slice(0, 6)} />
           </SectionWrapper>
         </>
       )}
