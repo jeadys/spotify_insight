@@ -4,17 +4,18 @@ import { TrackGrid } from "../components/grid";
 import { useParams } from "react-router-dom";
 import { getAlbumById } from "../spotify";
 import axios from "axios";
+import { IAlbum, Tracks } from "../common/interfaces/album";
 
 export default function Album() {
   const { id } = useParams();
-  const [album, setAlbum] = useState(null);
-  const [tracksData, setTracksData] = useState(null);
-  const [tracks, setTracks] = useState(null);
+  const [album, setAlbum] = useState<IAlbum>();
+  const [tracksData, setTracksData] = useState<Tracks>();
+  const [tracks, setTracks] = useState<Tracks["items"]>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await getAlbumById(id);
+        const { data } = await getAlbumById(id!);
         setAlbum(data);
         setTracksData(data.tracks);
       } catch (e) {
@@ -49,7 +50,8 @@ export default function Album() {
     fetchMoreData();
   }, [tracksData]);
 
-  const tracksForTracklist = useMemo(() => {
+  const tracksForTracklist: any = useMemo(() => {
+    // TODO CHANGE ANY DATATYPE
     if (!tracks) {
       return;
     }
@@ -62,7 +64,7 @@ export default function Album() {
         <>
           <SectionWrapper title="Albums" breadcrumb="true">
             <Header data={album} />
-            <TrackGrid tracks={tracksForTracklist} />
+            <TrackGrid items={tracksForTracklist} />
           </SectionWrapper>
         </>
       )}
