@@ -5,17 +5,18 @@ import { getPlaylistById } from "../spotify";
 import { useParams } from "react-router-dom";
 
 import axios from "axios";
+import { IPlaylist, Tracks } from "../common/interfaces/playlist";
 
 export default function Playlist() {
   const { id } = useParams();
-  const [playlist, setPlaylist] = useState(null);
-  const [tracksData, setTracksData] = useState(null);
-  const [tracks, setTracks] = useState(null);
+  const [playlist, setPlaylist] = useState<IPlaylist>();
+  const [tracksData, setTracksData] = useState<Tracks>();
+  const [tracks, setTracks] = useState<Tracks["items"]>();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await getPlaylistById(id);
+        const { data } = await getPlaylistById(id!);
         setPlaylist(data);
         setTracksData(data.tracks);
       } catch (e) {
@@ -50,7 +51,8 @@ export default function Playlist() {
     fetchMoreData();
   }, [tracksData]);
 
-  const tracksForTracklist = useMemo(() => {
+  const tracksForTracklist: any = useMemo(() => {
+    // TODO CHANGE ANY DATATYPE
     if (!tracks) {
       return;
     }
@@ -63,7 +65,7 @@ export default function Playlist() {
         <>
           <SectionWrapper title="Playlists" breadcrumb="true">
             <Header data={playlist} />
-            <TrackGrid tracks={tracksForTracklist} />
+            <TrackGrid items={tracksForTracklist} />
           </SectionWrapper>
         </>
       )}
