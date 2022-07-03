@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+import { IArtistsAlbums } from "../../common/interfaces/artistsAlbums";
 
-export default function AlbumGrid({ albums }) {
+export default function AlbumGrid({ items }: IArtistsAlbums) {
   return (
     <>
-      {albums && albums.length ? (
+      {items && items.length ? (
         <>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
-            {albums.map((album) => (
+            {items.map((album) => (
               <li
                 key={album.id}
                 className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
