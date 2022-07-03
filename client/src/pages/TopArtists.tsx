@@ -2,9 +2,10 @@ import { SectionWrapper, TimeRange } from "../components";
 import { ArtistGrid } from "../components/grid";
 import { useState, useEffect } from "react";
 import { getTopArtists } from "../spotify";
+import { IUsersTopArtists } from "../common/interfaces/usersTopArtists";
 
 export default function TopArtists() {
-  const [topArtists, setTopArtists] = useState(null);
+  const [topArtists, setTopArtists] = useState<IUsersTopArtists>();
   const [timeRange, setTimeRange] = useState("short");
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function TopArtists() {
         <>
           <TimeRange timeRange={timeRange} setTimeRange={setTimeRange} />
           <SectionWrapper title="Top artists" breadcrumb="true">
-            <ArtistGrid artists={topArtists.items} />
+            <ArtistGrid items={topArtists.items} />
           </SectionWrapper>
         </>
       )}

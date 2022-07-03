@@ -1,33 +1,34 @@
 import { Link } from "react-router-dom";
+import { IArtistsAlbums } from "../../common/interfaces/artistsAlbums";
 
-export default function PlaylistGrid({ playlists }) {
+export default function AlbumGrid({ items }: IArtistsAlbums) {
   return (
     <>
-      {playlists && playlists.length ? (
+      {items && items.length ? (
         <>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
-            {playlists.map((playlist) => (
+            {items.map((album) => (
               <li
-                key={playlist.id}
+                key={album.id}
                 className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
               >
-                <Link to={`/playlists/${playlist.id}`}>
+                <Link to={`/albums/${album.id}`}>
                   <div className="flex-1 flex flex-col p-4">
-                    {playlist.images.length && playlist.images[0] ? (
+                    {album.images.length && album.images[0] ? (
                       <img
                         className="w-42 h-42 flex-shrink-0 mx-auto rounded-md"
-                        src={playlist.images[0].url}
-                        alt={playlist.name}
+                        src={album.images[0].url}
+                        alt={album.name}
                       />
                     ) : (
                       <img
                         className="w-42 h-42 flex-shrink-0 mx-auto rounded-md"
                         src="images/nocover.webp"
-                        alt={playlist.name}
+                        alt={album.name}
                       />
                     )}
                     <h3 className="mt-6 text-white text-sm font-medium">
-                      {playlist.name}
+                      {album.name}
                     </h3>
                   </div>
                 </Link>
@@ -38,7 +39,7 @@ export default function PlaylistGrid({ playlists }) {
       ) : (
         <>
           <p className="text-white justify-center content-center text-2xl">
-            No playlists available
+            No albums available
           </p>
         </>
       )}

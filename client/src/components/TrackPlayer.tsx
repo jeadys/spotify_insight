@@ -2,7 +2,16 @@ import SpotifyPlayer from "react-spotify-web-playback";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-export default function TrackPlayer({ token, trackUri }) {
+type ChooseTrackProps = {
+  setPlayingTrack: React.Dispatch<React.SetStateAction<string>>;
+};
+
+type Props = {
+  token: string | undefined;
+  trackUri: string | undefined;
+};
+
+export default function TrackPlayer({ token, trackUri }: Props) {
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
@@ -30,6 +39,6 @@ export default function TrackPlayer({ token, trackUri }) {
         trackNameColor: "#fff",
       }}
     />,
-    document.getElementById("trackplayer")
+    document.getElementById("trackplayer") as Element | DocumentFragment
   );
 }

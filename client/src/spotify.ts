@@ -1,4 +1,13 @@
 import axios from "axios";
+import { IAlbum } from "./common/interfaces/album";
+import { IArtist } from "./common/interfaces/artist";
+import { IArtistsAlbums } from "./common/interfaces/artistsAlbums";
+import { IArtistsTopTracks } from "./common/interfaces/artistsTopTracks";
+import { IPlaylist } from "./common/interfaces/playlist";
+import { ISearchTrack } from "./common/interfaces/searchTrack";
+import { IUsersPlaylists } from "./common/interfaces/usersPlaylists";
+import { IUsersTopArtists } from "./common/interfaces/usersTopArtists";
+import { IUsersTopTracks } from "./common/interfaces/usersTopTracks";
 
 // Map for localStorage keys
 const LOCALSTORAGE_KEYS = {
@@ -23,10 +32,12 @@ const LOCALSTORAGE_VALUES = {
 export const logout = () => {
   // Clear all localStorage items
   for (const property in LOCALSTORAGE_KEYS) {
-    window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
+    window.localStorage.removeItem(
+      LOCALSTORAGE_KEYS[property as keyof typeof LOCALSTORAGE_KEYS]
+    );
   }
   // Navigate to homepage
-  window.location = window.location.origin;
+  window.location.href = window.location.origin;
 };
 
 /**
@@ -70,7 +81,10 @@ const refreshToken = async () => {
       LOCALSTORAGE_KEYS.accessToken,
       data.access_token
     );
-    window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
+    window.localStorage.setItem(
+      LOCALSTORAGE_KEYS.timestamp,
+      Date.now().toLocaleString()
+    );
 
     // Reload the page for localStorage updates to be reflected
     window.location.reload();
@@ -84,7 +98,7 @@ const refreshToken = async () => {
  * or URL query params
  * @returns {string} A Spotify access token
  */
-const getAccessToken = () => {
+const getAccessToken = (): string | undefined => {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const queryParams = {
@@ -115,16 +129,19 @@ const getAccessToken = () => {
   if (queryParams[LOCALSTORAGE_KEYS.accessToken]) {
     // Store the query params in localStorage
     for (const property in queryParams) {
-      window.localStorage.setItem(property, queryParams[property]);
+      window.localStorage.setItem(property, queryParams[property]!); // TODO: IS ! CORRECT?
     }
     // Set timestamp
-    window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now());
+    window.localStorage.setItem(
+      LOCALSTORAGE_KEYS.timestamp,
+      Date.now().toLocaleString()
+    );
     // Return access token from query params
-    return queryParams[LOCALSTORAGE_KEYS.accessToken];
+    return queryParams[LOCALSTORAGE_KEYS.accessToken]!; // TODO: IS ! CORRECT
   }
 
   // We should never get here!
-  return false;
+  return undefined;
 };
 
 export const accessToken = getAccessToken();
@@ -134,8 +151,8 @@ export const accessToken = getAccessToken();
  * https://github.com/axios/axios#global-axios-defaults
  */
 axios.defaults.baseURL = "https://api.spotify.com/v1";
-axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
-axios.defaults.headers["Content-Type"] = "application/json";
+axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
 /**
  * Get Current User's Profile
@@ -150,12 +167,16 @@ export const getCurrentUserProfile = () => axios.get("/me");
  * @param {string} time_range - 'short_term' (last 4 weeks) 'medium_term' (last 6 months) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Defaults to 'short_term'
  * @returns {Promise}
  */
-export const getTopArtists = (time_range, limit = 30) => {
-  return axios.get(`/me/top/artists?time_range=${time_range}&limit=${limit}`);
+export const getTopArtists = (time_range: string, limit = 30) => {
+  return axios.get<IUsersTopArtists>(
+    `/me/top/artists?time_range=${time_range}&limit=${limit}`
+  );
 };
 
-export const getTopTracks = (time_range, limit = 30) => {
-  return axios.get(`/me/top/tracks?time_range=${time_range}&limit=${limit}`);
+export const getTopTracks = (time_range: string, limit = 30) => {
+  return axios.get<IUsersTopTracks>(
+    `/me/top/tracks?time_range=${time_range}&limit=${limit}`
+  );
 };
 
 /**
@@ -164,7 +185,7 @@ export const getTopTracks = (time_range, limit = 30) => {
  * @returns {Promise}
  */
 export const getCurrentUserPlaylists = (limit = 20) => {
-  return axios.get(`/me/playlists?limit=${limit}`);
+  return axios.get<IUsersPlaylists>(`/me/playlists?limit=${limit}`);
 };
 
 /**
@@ -173,8 +194,8 @@ export const getCurrentUserPlaylists = (limit = 20) => {
  * @param {string} playlist_id - The Spotify ID for the playlist.
  * @returns {Promise}
  */
-export const getPlaylistById = (playlist_id) => {
-  return axios.get(`/playlists/${playlist_id}`);
+export const getPlaylistById = (playlist_id: string) => {
+  return axios.get<IPlaylist>(`/playlists/${playlist_id}`);
 };
 
 /**
@@ -183,8 +204,8 @@ export const getPlaylistById = (playlist_id) => {
  * @param {string} artist_id - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getArtistById = (artist_id) => {
-  return axios.get(`/artists/${artist_id}`);
+export const getArtistById = (artist_id: string) => {
+  return axios.get<IArtist>(`/artists/${artist_id}`);
 };
 
 /**
@@ -193,8 +214,10 @@ export const getArtistById = (artist_id) => {
  * @param {string} artist_id - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getArtistTopTracks = (artist_id, limit = 10) => {
-  return axios.get(`/artists/${artist_id}/top-tracks?market=NL&limit=${limit}`);
+export const getArtistTopTracks = (artist_id: string, limit = 10) => {
+  return axios.get<IArtistsTopTracks>(
+    `/artists/${artist_id}/top-tracks?market=NL&limit=${limit}`
+  );
 };
 
 /**
@@ -203,8 +226,10 @@ export const getArtistTopTracks = (artist_id, limit = 10) => {
  * @param {string} artist_id - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getArtistAlbums = (artist_id, limit = 10) => {
-  return axios.get(`/artists/${artist_id}/albums?market=NL&limit=${limit}`);
+export const getArtistAlbums = (artist_id: string, limit = 10) => {
+  return axios.get<IArtistsAlbums>(
+    `/artists/${artist_id}/albums?market=NL&limit=${limit}`
+  );
 };
 
 /**
@@ -213,10 +238,12 @@ export const getArtistAlbums = (artist_id, limit = 10) => {
  * @param {string} album_id - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getAlbumById = (album_id) => {
-  return axios.get(`/albums/${album_id}`);
+export const getAlbumById = (album_id: string) => {
+  return axios.get<IAlbum>(`/albums/${album_id}`);
 };
 
-export const searchItems = (query, limit = 10) => {
-  return axios.get(`/search?q=${query}&type=track&limit=${limit}`);
+export const searchItems = (query: string, limit = 10) => {
+  return axios.get<ISearchTrack>(
+    `/search?q=${query}&type=track&limit=${limit}`
+  );
 };

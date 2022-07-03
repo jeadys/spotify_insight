@@ -3,10 +3,11 @@ import { PlaylistGrid } from "../components/grid";
 import { SectionWrapper } from "../components";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { IUsersPlaylists } from "../common/interfaces/usersPlaylists";
 
 export default function Playlists() {
-  const [playlistsData, setPlaylistsData] = useState(null);
-  const [playlists, setPlaylists] = useState(null);
+  const [playlistsData, setPlaylistsData] = useState<IUsersPlaylists>();
+  const [playlists, setPlaylists] = useState<IUsersPlaylists["items"]>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -58,10 +59,45 @@ export default function Playlists() {
       {playlists && (
         <>
           <SectionWrapper title="Playlists" breadcrumb="true">
-            <PlaylistGrid playlists={playlists} />
+            <PlaylistGrid items={playlists} />
           </SectionWrapper>
         </>
       )}
     </>
   );
 }
+
+// import { getCurrentUserPlaylists } from "../spotify";
+// import { PlaylistGrid } from "../components/grid";
+// import { SectionWrapper } from "../components";
+// import { useState, useEffect } from "react";
+// import { IUsersPlaylists } from "../common/interfaces/usersPlaylists";
+
+// export default function Playlists() {
+//   const [playlists, setPlaylists] = useState<IUsersPlaylists>();
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const userPlaylists = await getCurrentUserPlaylists();
+//         setPlaylists(userPlaylists.data);
+//       } catch (e) {
+//         console.error(e);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   return (
+//     <>
+//       {playlists && (
+//         <>
+//           <SectionWrapper title="Playlists" breadcrumb="true">
+//             <PlaylistGrid items={playlists.items} />
+//           </SectionWrapper>
+//         </>
+//       )}
+//     </>
+//   );
+// }

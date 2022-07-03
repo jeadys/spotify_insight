@@ -1,18 +1,19 @@
 import { PlayTrack, ChooseTrack } from "../TrackContext";
 import { formatDuration, stopProp } from "../../utils";
 import { Link } from "react-router-dom";
+import { ITracks } from "../../common/interfaces/tracks";
 
-export default function TrackGrid({ tracks }) {
+export default function TrackGrid({ items }: ITracks) {
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
 
   return (
     <>
-      {tracks && tracks.length ? (
+      {items && items.length ? (
         <>
           <table className="w-full text-white">
             <tbody className="">
-              {tracks.map((track, index) => (
+              {items.map((track, index) => (
                 <tr
                   key={track.id}
                   className={`${
