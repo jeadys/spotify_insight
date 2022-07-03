@@ -1,6 +1,7 @@
 import React from "react";
+import { IHeader } from "../common/interfaces/header";
 
-export default function Header({ data, artist }) {
+export default function Header({ data }: IHeader) {
   return (
     <>
       {data.images.length && data.images[0] ? (
@@ -19,13 +20,14 @@ export default function Header({ data, artist }) {
       <p className="text-white text-center my-5 font-black text-md">
         <span className="block text-2xl"> {data.name}</span>
         <span>
-          {artist ? (
-            <>{data.genres[0] ? data.genres[0] : "N/A"}</>
-          ) : (
+          {data.tracks && data.tracks !== undefined && (
             <>
               {data.tracks.total.toLocaleString()}{" "}
               {`song${data.tracks.total !== 1 ? "s" : ""}  `}
             </>
+          )}
+          {data.genres && data.genres !== undefined && (
+            <>{data.genres[0] ? data.genres[0] : ""}</>
           )}
         </span>
       </p>
