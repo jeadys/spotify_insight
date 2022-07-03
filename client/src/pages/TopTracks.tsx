@@ -2,9 +2,10 @@ import { SectionWrapper, TimeRange } from "../components";
 import { TrackGrid } from "../components/grid";
 import { useState, useEffect } from "react";
 import { getTopTracks } from "../spotify";
+import { IUsersTopTracks } from "../common/interfaces/usersTopTracks";
 
 export default function TopTracks() {
-  const [topTracks, settopTracks] = useState(null);
+  const [topTracks, settopTracks] = useState<IUsersTopTracks>();
   const [timeRange, setTimeRange] = useState("short");
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function TopTracks() {
         <>
           <TimeRange timeRange={timeRange} setTimeRange={setTimeRange} />
           <SectionWrapper title="Top tracks" breadcrumb="true">
-            <TrackGrid tracks={topTracks.items} />
+            <TrackGrid items={topTracks.items} />
           </SectionWrapper>
         </>
       )}
