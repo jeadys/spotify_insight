@@ -1,4 +1,11 @@
-export default function TimeRange({ timeRange, setTimeRange }) {
+import { Dispatch, SetStateAction } from "react";
+
+interface Props {
+  timeRange: string;
+  setTimeRange: Dispatch<SetStateAction<string>>;
+}
+
+export default function TimeRange({ timeRange, setTimeRange }: Props) {
   const timeRangeBtns = [
     {
       title: "This month",
