@@ -2,8 +2,14 @@ import React, { useState, useContext } from "react";
 import { accessToken } from "../spotify";
 import TrackPlayer from "./TrackPlayer";
 
-const PlayTrackContext = React.createContext();
-const ChooseTrackContext = React.createContext();
+type ChooseTrackProps = {
+  chooseTrack: (track: string) => void;
+};
+
+const PlayTrackContext = React.createContext<string | undefined>(undefined);
+const ChooseTrackContext = React.createContext<ChooseTrackProps["chooseTrack"]>(
+  {} as ChooseTrackProps["chooseTrack"]
+);
 
 export const PlayTrack = () => {
   return useContext(PlayTrackContext);
@@ -13,10 +19,14 @@ export const ChooseTrack = () => {
   return useContext(ChooseTrackContext);
 };
 
-export const TrackProvider = ({ children }) => {
-  const [playingTrack, setPlayingTrack] = useState();
+type TrackProviderProps = {
+  children: React.ReactNode;
+};
 
-  const chooseTrack = (track) => {
+export const TrackProvider = ({ children }: TrackProviderProps) => {
+  const [playingTrack, setPlayingTrack] = useState<string>("");
+
+  const chooseTrack = (track: string) => {
     setPlayingTrack(track);
   };
 
