@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
+import { IUsersTopArtists } from "../../common/interfaces/usersTopArtists";
 
-export default function ArtistGrid({ artists }) {
+export default function ArtistGrid({ items }: IUsersTopArtists) {
   return (
     <>
-      {artists && artists.length ? (
+      {items && items.length ? (
         <>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
-            {artists.map((artist) => (
+            {items.map((artist) => (
               <li
                 key={artist.id}
                 className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
