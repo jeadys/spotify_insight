@@ -1,12 +1,19 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
+type Props = {
+  title: string;
+  breadcrumb?: string;
+  seeAll?: string;
+  children: React.ReactNode;
+};
+
 export default function SectionWrapper({
   title,
   breadcrumb,
   seeAll,
   children,
-}) {
+}: Props) {
   return (
     <div>
       <div className="flex mb-5">
