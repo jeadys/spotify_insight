@@ -83,7 +83,7 @@ const refreshToken = async () => {
     );
     window.localStorage.setItem(
       LOCALSTORAGE_KEYS.timestamp,
-      Date.now().toLocaleString()
+      Date.now().toString()
     );
 
     // Reload the page for localStorage updates to be reflected
@@ -134,7 +134,7 @@ const getAccessToken = (): string | undefined => {
     // Set timestamp
     window.localStorage.setItem(
       LOCALSTORAGE_KEYS.timestamp,
-      Date.now().toLocaleString()
+      Date.now().toString()
     );
     // Return access token from query params
     return queryParams[LOCALSTORAGE_KEYS.accessToken]!; // TODO: IS ! CORRECT
@@ -235,7 +235,7 @@ export const getArtistAlbums = (artist_id: string, limit = 10) => {
 /**
  * Get an Album
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-album
- * @param {string} album_id - The Spotify ID for the artist.
+ * @param {string} album_id - The Spotify ID for the album.
  * @returns {Promise}
  */
 export const getAlbumById = (album_id: string) => {
