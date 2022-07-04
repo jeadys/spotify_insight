@@ -24,7 +24,9 @@ type TrackProviderProps = {
 };
 
 export const TrackProvider = ({ children }: TrackProviderProps) => {
-  const [playingTrack, setPlayingTrack] = useState<string>("");
+  const [playingTrack, setPlayingTrack] = useState<string>(
+    "spotify:track:4cOdK2wGLETKBW3PvgPWqT"
+  );
 
   const chooseTrack = (track: string) => {
     setPlayingTrack(track);
