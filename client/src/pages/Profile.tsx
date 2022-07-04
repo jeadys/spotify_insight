@@ -4,7 +4,7 @@ import {
   getTopTracks,
 } from "../spotify";
 import { PlaylistGrid, TrackGrid, ArtistGrid } from "../components/grid";
-import { SectionWrapper } from "../components";
+import { SectionWrapper, Loader } from "../components";
 import { useState, useEffect } from "react";
 import { IUsersTopArtists } from "../common/interfaces/usersTopArtists";
 import { IUsersTopTracks } from "../common/interfaces/usersTopTracks";
@@ -36,7 +36,7 @@ export default function Profile() {
 
   return (
     <>
-      {topArtists && topTracks && playlists && (
+      {topArtists && topTracks && playlists ? (
         <>
           <SectionWrapper title="Top artists this month" seeAll="/top-artists">
             <ArtistGrid items={topArtists.items.slice(0, 12)} />
@@ -48,6 +48,8 @@ export default function Profile() {
             <PlaylistGrid items={playlists.items.slice(0, 6)} />
           </SectionWrapper>
         </>
+      ) : (
+        <Loader />
       )}
     </>
   );
