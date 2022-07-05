@@ -189,6 +189,45 @@ export const getCurrentUserPlaylists = (limit = 20) => {
 };
 
 /**
+ * Get a List of Current User's saved tracks
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-saved-tracks
+ * @returns {Promise}
+ */
+export const getCurrentUserSavedTracks = (limit = 50) => {
+  return axios.get(`/me/tracks?limit=${limit}`);
+};
+
+/**
+ * Save Tracks for Current User
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-tracks-user
+ * @param {string} track_ids - The Spotify ID for the track.
+ * @returns {Promise}
+ */
+export const getDoesUserHaveTrackSaved = (track_ids: string) => {
+  return axios.get(`/me/tracks/contains?ids=${track_ids}`);
+};
+
+/**
+ * Save Tracks for Current User
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-tracks-user
+ * @param {string} track_ids - The Spotify ID for the track.
+ * @returns {Promise}
+ */
+export const saveTrackForCurrentUser = (track_ids: string) => {
+  return axios.put(`/me/tracks?ids=${track_ids}`);
+};
+
+/**
+ * Remove Tracks for Current User
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-tracks-user
+ * @param {string} track_ids - The Spotify ID for the track.
+ * @returns {Promise}
+ */
+export const removeTrackForCurrentUser = (track_ids: string) => {
+  return axios.delete(`/me/tracks?ids=${track_ids}`);
+};
+
+/**
  * Get a Playlist
  * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-playlist
  * @param {string} playlist_id - The Spotify ID for the playlist.
@@ -242,6 +281,12 @@ export const getAlbumById = (album_id: string) => {
   return axios.get<IAlbum>(`/albums/${album_id}`);
 };
 
+/**
+ * Search for Item
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/search
+ * @param {string} query - The search term
+ * @returns {Promise}
+ */
 export const searchItems = (query: string, limit = 10) => {
   return axios.get<ISearchTrack>(
     `/search?q=${query}&type=track&limit=${limit}`
