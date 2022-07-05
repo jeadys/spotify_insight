@@ -292,3 +292,33 @@ export const searchItems = (query: string, limit = 10) => {
     `/search?q=${query}&type=track&limit=${limit}`
   );
 };
+
+/**
+ * Check If User Follows Artists or Users
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-current-user-follows
+ * @param {string} artist_ids - The Spotify ID for the artist.
+ * @returns {Promise}
+ */
+export const getDoesUserFollowArtist = (artist_ids: string) => {
+  return axios.get(`/me/following/contains?type=artist&ids=${artist_ids}`);
+};
+
+/**
+ * Follow Artists or Users
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/follow-artists-users
+ * @param {string} artist_ids - The Spotify ID for the artist.
+ * @returns {Promise}
+ */
+export const followArtist = (artist_ids: string) => {
+  return axios.put(`/me/following?type=artist&ids=${artist_ids}`);
+};
+
+/**
+ * Unfollow Artists or Users
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/unfollow-artists-users
+ * @param {string} artist_ids - The Spotify ID for the artist.
+ * @returns {Promise}
+ */
+export const unfollowArtist = (artist_ids: string) => {
+  return axios.delete(`/me/following?type=artist&ids=${artist_ids}`);
+};
