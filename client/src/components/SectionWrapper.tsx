@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Dispatch, SetStateAction } from "react";
 import React from "react";
 
 type Props = {
@@ -6,6 +7,8 @@ type Props = {
   breadcrumb?: string;
   seeAll?: string;
   children: React.ReactNode;
+  timeRange?: string;
+  setTimeRange?: Dispatch<SetStateAction<string>>;
 };
 
 export default function SectionWrapper({
@@ -13,7 +16,24 @@ export default function SectionWrapper({
   breadcrumb,
   seeAll,
   children,
+  timeRange,
+  setTimeRange,
 }: Props) {
+  const timeRangeBtns = [
+    {
+      title: "This month",
+      range: "short",
+    },
+    {
+      title: " Last 6 months",
+      range: "medium",
+    },
+    {
+      title: "All time",
+      range: "long",
+    },
+  ];
+
   return (
     <div>
       <div className="flex mb-5">
@@ -46,6 +66,25 @@ export default function SectionWrapper({
           >
             See All
           </Link>
+        )}
+
+        {timeRange && setTimeRange && (
+          <ul className="flex flex-row justify-center gap-5 text-white ml-auto">
+            {timeRangeBtns.map((timeRangeBtn) => (
+              <li key={timeRangeBtn.range}>
+                <button
+                  className={`bg-sky-900 py-2 px-4 text-sm rounded-full ${
+                    timeRange === timeRangeBtn.range
+                      ? "bg-sky-600 cursor-default"
+                      : "hover:bg-sky-700 bg-sky-900 transition ease-in-out"
+                  }`}
+                  onClick={() => setTimeRange(timeRangeBtn.range)}
+                >
+                  {timeRangeBtn.title}
+                </button>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
       {children}
