@@ -1,32 +1,34 @@
-import { SectionWrapper, TimeRange } from "../components";
+import { SectionWrapper } from "../components";
 import { TrackGrid } from "../components/grid";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getTopTracks } from "../spotify";
 import { IUsersTopTracks } from "../common/interfaces/usersTopTracks";
+import { useQuery } from "react-query";
 
 export default function TopTracks() {
-  const [topTracks, settopTracks] = useState<IUsersTopTracks>();
   const [timeRange, setTimeRange] = useState("short");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userTopTracks = await getTopTracks(`${timeRange}_term`);
-        settopTracks(userTopTracks.data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
+  const fetchTopTracks = async () => {
+    const userTopTracks = await getTopTracks(`${timeRange}_term`);
+    return userTopTracks.data;
+  };
 
-    fetchData();
-  }, [timeRange]);
+  const {
+    data: topTracks,
+    isLoading: topTracksIsLoading,
+    error: topTracksError,
+  } = useQuery<IUsersTopTracks>(["top-tracks", timeRange], fetchTopTracks);
 
   return (
     <>
       {topTracks && (
         <>
-          <TimeRange timeRange={timeRange} setTimeRange={setTimeRange} />
-          <SectionWrapper title="Top tracks" breadcrumb="true">
+          <SectionWrapper
+            title="Top tracks"
+            breadcrumb="true"
+            timeRange={timeRange}
+            setTimeRange={setTimeRange}
+          >
             <TrackGrid items={topTracks.items} />
           </SectionWrapper>
         </>
