@@ -1,37 +1,47 @@
 import { getArtistById, getArtistTopTracks, getArtistAlbums } from "../spotify";
-import React, { useState, useEffect } from "react";
 import { AlbumGrid, TrackGrid } from "../components/grid";
 import { SectionWrapper, Header } from "../components";
 import { useParams } from "react-router-dom";
 import { IArtist } from "../common/interfaces/artist";
-// import { IArtistsTopTracks } from "../common/interfaces/artistsTopTracks";
 import { IArtistsAlbums } from "../common/interfaces/artistsAlbums";
 import { IArtistsTopTracks } from "../common/interfaces/artistsTopTracks";
+import { useQuery } from "react-query";
 
 export default function Artist() {
   const { id } = useParams();
-  const [artist, setArtist] = useState<IArtist>();
-  const [artistTopTracks, setArtistTopTracks] = useState<IArtistsTopTracks>();
-  const [artistAlbums, setArtistAlbums] = useState<IArtistsAlbums>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const artistData = await getArtistById(id!);
-        setArtist(artistData.data);
+  const fetchArtist = async () => {
+    const artist = await getArtistById(id!);
+    return artist.data;
+  };
 
-        const artistTopTracks = await getArtistTopTracks(id!);
-        setArtistTopTracks(artistTopTracks.data);
+  const fetchArtistTopTracks = async () => {
+    const artistTopTracks = await getArtistTopTracks(id!);
+    return artistTopTracks.data;
+  };
 
-        const artistAlbums = await getArtistAlbums(id!);
-        setArtistAlbums(artistAlbums.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
+  const fetchArtistAlbums = async () => {
+    const artistAlbums = await getArtistAlbums(id!);
+    return artistAlbums.data;
+  };
 
-    fetchData();
-  }, [id]);
+  const {
+    data: artist,
+    isLoading: artistIsLoading,
+    error: artistError,
+  } = useQuery<IArtist>(["artist", id], fetchArtist);
+
+  const {
+    data: artistTopTracks,
+    isLoading: artistTopTracksIsLoading,
+    error: artistTopTracksError,
+  } = useQuery<IArtistsTopTracks>(["artist-tracks", id], fetchArtistTopTracks);
+
+  const {
+    data: artistAlbums,
+    isLoading: artistAlbumsIsLoading,
+    error: artistAlbumsError,
+  } = useQuery<IArtistsAlbums>(["artist-albums", id], fetchArtistAlbums);
 
   return (
     <>
