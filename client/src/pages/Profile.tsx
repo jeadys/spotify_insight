@@ -5,34 +5,44 @@ import {
 } from "../spotify";
 import { PlaylistGrid, TrackGrid, ArtistGrid } from "../components/grid";
 import { SectionWrapper, Loader } from "../components";
-import { useState, useEffect } from "react";
 import { IUsersTopArtists } from "../common/interfaces/usersTopArtists";
 import { IUsersTopTracks } from "../common/interfaces/usersTopTracks";
 import { IUsersPlaylists } from "../common/interfaces/usersPlaylists";
+import { useQuery } from "react-query";
 
 export default function Profile() {
-  const [topArtists, setTopArtists] = useState<IUsersTopArtists>();
-  const [topTracks, setTopTracks] = useState<IUsersTopTracks>();
-  const [playlists, setPlaylists] = useState<IUsersPlaylists>();
+  const fetchTopArtists = async () => {
+    const userTopArtists = await getTopArtists("short_term");
+    return userTopArtists.data;
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userTopArtists = await getTopArtists("short_term");
-        setTopArtists(userTopArtists.data);
+  const fetchTopTracks = async () => {
+    const userTopTracks = await getTopTracks("short_term");
+    return userTopTracks.data;
+  };
 
-        const userTopTracks = await getTopTracks("short_term");
-        setTopTracks(userTopTracks.data);
+  const fetchPlasylists = async () => {
+    const userPlaylists = await getCurrentUserPlaylists();
+    return userPlaylists.data;
+  };
 
-        const userPlaylists = await getCurrentUserPlaylists();
-        setPlaylists(userPlaylists.data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
+  const {
+    data: topArtists,
+    isLoading: topArtistsIsLoading,
+    error: topArtistsError,
+  } = useQuery<IUsersTopArtists>("top-artists", fetchTopArtists);
 
-    fetchData();
-  }, []);
+  const {
+    data: topTracks,
+    isLoading: topTracksIsLoading,
+    error: topTracksError,
+  } = useQuery<IUsersTopTracks>("top-tracks", fetchTopTracks);
+
+  const {
+    data: playlists,
+    isLoading: playlistsIsLoading,
+    error: playlistsError,
+  } = useQuery<IUsersPlaylists>("playlists", fetchPlasylists);
 
   return (
     <>
