@@ -1,32 +1,34 @@
-import { SectionWrapper, TimeRange } from "../components";
+import { SectionWrapper } from "../components";
 import { ArtistGrid } from "../components/grid";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { getTopArtists } from "../spotify";
 import { IUsersTopArtists } from "../common/interfaces/usersTopArtists";
+import { useQuery } from "react-query";
 
 export default function TopArtists() {
-  const [topArtists, setTopArtists] = useState<IUsersTopArtists>();
   const [timeRange, setTimeRange] = useState("short");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userTopArtists = await getTopArtists(`${timeRange}_term`);
-        setTopArtists(userTopArtists.data);
-      } catch (e) {
-        console.error(e);
-      }
-    };
+  const fetchTopArtists = async () => {
+    const userTopArtists = await getTopArtists(`${timeRange}_term`);
+    return userTopArtists.data;
+  };
 
-    fetchData();
-  }, [timeRange]);
+  const {
+    data: topArtists,
+    isLoading: topArtistsIsLoading,
+    error: topArtistsError,
+  } = useQuery<IUsersTopArtists>(["top-artists", timeRange], fetchTopArtists);
 
   return (
     <>
       {topArtists && (
         <>
-          <TimeRange timeRange={timeRange} setTimeRange={setTimeRange} />
-          <SectionWrapper title="Top artists" breadcrumb="true">
+          <SectionWrapper
+            title="Top artists"
+            breadcrumb="true"
+            timeRange={timeRange}
+            setTimeRange={setTimeRange}
+          >
             <ArtistGrid items={topArtists.items} />
           </SectionWrapper>
         </>
