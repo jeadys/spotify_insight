@@ -27,7 +27,7 @@ export default function TrackGrid({ items }: ITracks) {
                     <div className="flex items-center">
                       <span className="mr-4">{index + 1}</span>
 
-                      {"album" in track && (
+                      {"album" in track && track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
                           {track.album.images.length &&
                           track.album.images[0] ? (
@@ -47,8 +47,13 @@ export default function TrackGrid({ items }: ITracks) {
                       )}
 
                       <div className="ml-4">
-                        <div className="font-semibold">{track.name}</div>
-                        {"album" in track ? (
+                        <div className="font-semibold album:hidden">
+                          {track.name}
+                        </div>
+                        <div className="font-semibold album:block hidden">
+                          {track.name.slice(0, 20).concat("...")}
+                        </div>
+                        {"album" in track && track.album ? (
                           <>
                             {track.album.artists.map((artist, index) => (
                               <span
@@ -62,7 +67,7 @@ export default function TrackGrid({ items }: ITracks) {
                                   {artist.name}
                                 </Link>
 
-                                {index < track.album.artists.length - 1
+                                {index < track.album!.artists.length - 1
                                   ? ", "
                                   : ""}
                               </span>
@@ -90,7 +95,7 @@ export default function TrackGrid({ items }: ITracks) {
                       </div>
                     </div>
                   </td>
-                  {"album" in track && (
+                  {"album" in track && track.album && (
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300 album:hidden">
                       <span className="text-xs text-gray-300 hover:underline">
                         <Link

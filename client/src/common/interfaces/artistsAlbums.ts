@@ -22,7 +22,7 @@ export interface Image {
 }
 
 export interface Item {
-  album_group: string;
+  album_group?: string;
   album_type: string;
   artists: Artist[];
   external_urls: ExternalUrls2;

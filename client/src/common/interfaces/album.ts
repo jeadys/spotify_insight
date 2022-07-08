@@ -52,6 +52,7 @@ export interface Item {
   disc_number: number;
   duration_ms: number;
   explicit: boolean;
+  popularity: number;
   external_urls: ExternalUrls4;
   href: string;
   id: string;
