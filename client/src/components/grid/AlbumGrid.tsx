@@ -28,7 +28,7 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
                       />
                     )}
                     <h3 className="mt-6 text-white text-sm font-medium">
-                      {album.name}
+                      {album.name.slice(0, 20).concat("...")}
                     </h3>
                   </div>
                 </Link>

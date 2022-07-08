@@ -28,7 +28,7 @@ export default function PlaylistGrid({ items }: IUsersPlaylists) {
                       />
                     )}
                     <h3 className="mt-6 text-white text-sm font-medium">
-                      {playlist.name}
+                      {playlist.name.slice(0, 20).concat("...")}
                     </h3>
                   </div>
                 </Link>

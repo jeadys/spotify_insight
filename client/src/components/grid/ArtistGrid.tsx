@@ -35,7 +35,6 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
                       <dd className="text-gray-300 text-sm italic">
                         {artist.genres[0] ? artist.genres[0] : "N/A"}
                       </dd>
-                      <dt className="sr-only">Role</dt>
                       <dd className="mt-3">
                         <span className="px-2 py-1 text-xs font-medium bg-cyan-100 rounded-full">
                           {artist.followers.total.toLocaleString()}{" "}
