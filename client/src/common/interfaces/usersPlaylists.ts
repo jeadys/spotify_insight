@@ -3,9 +3,9 @@ export interface ExternalUrls {
 }
 
 export interface Image {
-  height?: number;
+  height: number;
   url: string;
-  width?: number;
+  width: number;
 }
 
 export interface ExternalUrls2 {

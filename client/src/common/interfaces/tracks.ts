@@ -51,7 +51,7 @@ export interface Artist2 {
 }
 
 export interface ExternalIds {
-  isrc: string;
+  isrc?: string;
 }
 
 export interface ExternalUrls4 {
@@ -59,13 +59,13 @@ export interface ExternalUrls4 {
 }
 
 export interface Item {
-  album: Album;
+  album?: Album;
   artists: Artist2[];
   // available_markets: string[];
   disc_number: number;
   duration_ms: number;
   explicit: boolean;
-  external_ids: ExternalIds;
+  external_ids?: ExternalIds;
   external_urls: ExternalUrls4;
   href: string;
   id: string;
