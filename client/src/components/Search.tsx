@@ -40,7 +40,7 @@ export default function Search() {
     <>
       <svg
         onClick={() => setSearchModal(!searchModal)}
-        className="cursor-pointer top-3.5 left-4 h-7 w-7 text-gray-400 mb-10 ml-auto"
+        className="cursor-pointer top-3.5 left-4 h-7 w-7 text-gray-400"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
