@@ -54,9 +54,6 @@ export default function Profile() {
           <SectionWrapper title="Top tracks this month" seeAll="/top-tracks">
             <TrackGrid items={topTracks.items.slice(0, 6)} />
           </SectionWrapper>
-          <SectionWrapper title="Playlists" seeAll="/playlists">
-            <PlaylistGrid items={playlists.items.slice(0, 6)} />
-          </SectionWrapper>
         </>
       ) : (
         <Loader />
