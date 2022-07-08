@@ -1,9 +1,15 @@
 import { useLocation } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../spotify";
+import {
+  ArrowCircleLeftIcon,
+  ArrowCircleRightIcon,
+} from "@heroicons/react/solid";
+import Search from "./Search";
 
 export default function Navigation() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const items = [
     {
@@ -21,17 +27,21 @@ export default function Navigation() {
   ];
 
   return (
-    <ul className="w-full flex flex-row text-white gap-10 mb-5 sticky top-0">
+    <ul className="w-full flex flex-row text-white gap-10 mb-5 sticky top-0 py-5">
       {items.map((item) => (
         <li
           key={item.title}
-          className={`${pathname === item.link ? "text-blue-600" : ""} py-5`}
+          className={`${pathname === item.link ? "text-blue-400 " : ""}`}
         >
           <Link to={item.link}>{item.title}</Link>
         </li>
       ))}
-      <li onClick={logout} className="py-5 ml-auto cursor-pointer">
-        Logout
+
+      <li className="ml-auto">
+        <Search />
+        {/* <span onClick={logout} className="cursor-pointer">
+          Logout
+        </span> */}
       </li>
     </ul>
   );
