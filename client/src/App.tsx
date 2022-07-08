@@ -7,11 +7,20 @@ import {
   Playlist,
   Artist,
   Album,
+  Library,
+  SavedTracks,
+  SavedAlbums,
+  FollowedArtists,
+  Discover,
+  NewReleases,
+  Categories,
+  Category,
+  FeaturedPlaylists,
 } from "./pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { Content, ScrollTop, Search } from "./components";
+import { Content, Navigation, ScrollTop, Search } from "./components";
 import TrackProvider from "./components/TrackContext";
 import { accessToken } from "./spotify";
 import "./App.css";
@@ -30,16 +39,46 @@ const App = () => {
               <Content>
                 <ScrollTop />
                 <TrackProvider>
-                  <Search />
+                  <Navigation />
                   <div className="space-y-10">
                     <Routes>
                       <Route path="/" element={<Profile />}></Route>
                       <Route path="/top-artists" element={<TopArtists />} />
                       <Route path="/top-tracks" element={<TopTracks />} />
-                      <Route path="/playlists" element={<Playlists />} />
+                      <Route
+                        path="/library/saved-playlists"
+                        element={<Playlists />}
+                      />
                       <Route path="/playlists/:id" element={<Playlist />} />
                       <Route path="/artists/:id" element={<Artist />} />
                       <Route path="/albums/:id" element={<Album />} />
+                      <Route path="/library" element={<Library />} />
+                      <Route
+                        path="/library/saved-tracks"
+                        element={<SavedTracks />}
+                      />
+                      <Route
+                        path="/library/saved-albums"
+                        element={<SavedAlbums />}
+                      />
+                      <Route
+                        path="/library/followed-artists"
+                        element={<FollowedArtists />}
+                      />
+                      <Route path="/discover" element={<Discover />} />
+                      <Route
+                        path="/discover/new-releases"
+                        element={<NewReleases />}
+                      />
+                      <Route
+                        path="/discover/featured-playlists"
+                        element={<FeaturedPlaylists />}
+                      />
+                      <Route
+                        path="/discover/categories"
+                        element={<Categories />}
+                      />
+                      <Route path="/categories/:id" element={<Category />} />
                     </Routes>
                   </div>
                 </TrackProvider>

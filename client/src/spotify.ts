@@ -3,9 +3,15 @@ import { IAlbum } from "./common/interfaces/album";
 import { IArtist } from "./common/interfaces/artist";
 import { IArtistsAlbums } from "./common/interfaces/artistsAlbums";
 import { IArtistsTopTracks } from "./common/interfaces/artistsTopTracks";
+import { ICategories } from "./common/interfaces/categories";
+import { IFeaturedPlaylists } from "./common/interfaces/featuredPlaylists";
+import { INewReleases } from "./common/interfaces/newReleases";
 import { IPlaylist } from "./common/interfaces/playlist";
 import { ISearchTrack } from "./common/interfaces/searchTrack";
+import { IUsersFollowedArtists } from "./common/interfaces/usersFollowedArtists";
 import { IUsersPlaylists } from "./common/interfaces/usersPlaylists";
+import { IUsersSavedAlbums } from "./common/interfaces/usersSavedAlbums";
+import { IUsersSavedTracks } from "./common/interfaces/usersSavedTracks";
 import { IUsersTopArtists } from "./common/interfaces/usersTopArtists";
 import { IUsersTopTracks } from "./common/interfaces/usersTopTracks";
 
@@ -181,7 +187,7 @@ export const getTopTracks = (time_range: string, limit = 30) => {
 
 /**
  * Get a List of Current User's Playlists
- * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-a-list-of-current-users-playlists
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-a-list-of-current-users-playlists
  * @returns {Promise}
  */
 export const getCurrentUserPlaylists = (limit = 20) => {
@@ -194,7 +200,27 @@ export const getCurrentUserPlaylists = (limit = 20) => {
  * @returns {Promise}
  */
 export const getCurrentUserSavedTracks = (limit = 50) => {
-  return axios.get(`/me/tracks?limit=${limit}`);
+  return axios.get<IUsersSavedTracks>(`/me/tracks?limit=${limit}`);
+};
+
+/**
+ * Get a List of Current User's saved albums
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-saved-albums
+ * @returns {Promise}
+ */
+export const getCurrentUserSavedAlbums = (limit = 50) => {
+  return axios.get<IUsersSavedAlbums>(`/me/albums?limit=${limit}`);
+};
+
+/**
+ * Get a List of Current User's followed artists
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/follow-artists-users
+ * @returns {Promise}
+ */
+export const getCurrentUserFollowedArtists = (limit = 50) => {
+  return axios.get<IUsersFollowedArtists>(
+    `me/following?type=artist&limit=${limit}`
+  );
 };
 
 /**
@@ -321,4 +347,26 @@ export const followArtist = (artist_ids: string) => {
  */
 export const unfollowArtist = (artist_ids: string) => {
   return axios.delete(`/me/following?type=artist&ids=${artist_ids}`);
+};
+
+export const getNewReleases = (limit = 50) => {
+  return axios.get<INewReleases>(`/browse/new-releases?limit=${limit}`);
+};
+
+export const getCategories = (limit = 50) => {
+  return axios.get<ICategories>(`/browse/categories?limit=${limit}`);
+};
+
+export const getCategoryById = (category_id: string) => {
+  return axios.get<ICategories>(`browse/categories/${category_id}`);
+};
+
+export const getCategoryPlaylists = (category_id: string, limit = 50) => {
+  return axios.get(`/browse/categories/${category_id}/playlists`);
+};
+
+export const getFeaturedPlaylists = (limit = 50) => {
+  return axios.get<IFeaturedPlaylists>(
+    `/browse/featured-playlists?limit=${limit}`
+  );
 };
