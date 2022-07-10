@@ -61,8 +61,8 @@ export default function Playlist() {
     <>
       {playlist && (
         <>
-          <SectionWrapper title="Playlists" breadcrumb="true">
-            <Header data={playlist} />
+          <Header data={playlist} />
+          <SectionWrapper title="Playlist tracks" breadcrumb="true">
             <TrackGrid
               items={playlist.tracks.items.map(({ track }) => track)}
             />

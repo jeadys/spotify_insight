@@ -20,7 +20,7 @@ export default function NewReleases() {
     <>
       {categories && (
         <>
-          <SectionWrapper title="Categories" seeAll="/discover/categories">
+          <SectionWrapper title="Categories" breadcrumb="true">
             <CategoryGrid items={categories.categories.items} />
           </SectionWrapper>
         </>

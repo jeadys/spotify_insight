@@ -47,8 +47,8 @@ export default function Artist() {
     <>
       {artist && artistTopTracks && artistAlbums && (
         <>
+          <Header data={artist} />
           <SectionWrapper title="Popular releases" breadcrumb="true">
-            <Header data={artist} />
             <TrackGrid items={artistTopTracks.tracks} />
           </SectionWrapper>
 

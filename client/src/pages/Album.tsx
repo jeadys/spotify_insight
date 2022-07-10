@@ -60,8 +60,8 @@ export default function Album() {
     <>
       {album && (
         <>
-          <SectionWrapper title="Albums" breadcrumb="true">
-            <Header data={album} />
+          <Header data={album} />
+          <SectionWrapper title="Album tracks" breadcrumb="true">
             <TrackGrid items={album.tracks.items.map((track) => track)} />
           </SectionWrapper>
         </>
