@@ -5,6 +5,7 @@ export { default as TopTracks } from "./TopTracks";
 export { default as Playlists } from "./Playlists";
 export { default as Playlist } from "./Playlist";
 export { default as Artist } from "./Artist";
+export { default as RelatedArtists } from "./RelatedArtists";
 export { default as Album } from "./Album";
 export { default as Library } from "./Library";
 export { default as SavedTracks } from "./savedTracks";

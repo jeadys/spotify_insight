@@ -6,6 +6,7 @@ import {
   Playlists,
   Playlist,
   Artist,
+  RelatedArtists,
   Album,
   Library,
   SavedTracks,
@@ -51,6 +52,10 @@ const App = () => {
                       />
                       <Route path="/playlists/:id" element={<Playlist />} />
                       <Route path="/artists/:id" element={<Artist />} />
+                      <Route
+                        path="/artists/:id/related"
+                        element={<RelatedArtists />}
+                      />
                       <Route path="/albums/:id" element={<Album />} />
                       <Route path="/library" element={<Library />} />
                       <Route
