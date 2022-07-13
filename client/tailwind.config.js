@@ -22,6 +22,15 @@ module.exports = {
       backgroundImage: (theme) => ({
         login: "url('/public/images/login.jpg')",
       }),
+      keyframes: {
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-20deg)" },
+          "50%": { transform: "rotate(20deg)" }
+        }
+      },
+      animation: {
+        wiggle: "wiggle 200ms ease-in-out"
+      }
     },
   },
   plugins: [],

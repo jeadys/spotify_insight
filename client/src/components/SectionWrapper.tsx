@@ -73,7 +73,7 @@ export default function SectionWrapper({
             {timeRangeBtns.map((timeRangeBtn) => (
               <li key={timeRangeBtn.range}>
                 <button
-                  className={`bg-sky-900 py-2 px-4 text-sm rounded-full ${
+                  className={`py-2 px-4 text-sm rounded-full ${
                     timeRange === timeRangeBtn.range
                       ? "bg-sky-600 cursor-default"
                       : "hover:bg-sky-700 bg-sky-900 transition ease-in-out"

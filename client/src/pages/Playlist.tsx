@@ -64,7 +64,9 @@ export default function Playlist() {
           <Header data={playlist} />
           <SectionWrapper title="Playlist tracks" breadcrumb="true">
             <TrackGrid
-              items={playlist.tracks.items.map(({ track }) => track)}
+              items={playlist.tracks.items
+                .map(({ track }) => track)
+                .slice(0, 50)}
             />
           </SectionWrapper>
         </>

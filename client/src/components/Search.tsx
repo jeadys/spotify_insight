@@ -93,7 +93,7 @@ export default function Search() {
               </div>
 
               <ul
-                className="max-h-72 scroll-py-2 overflow-y-auto py-2 text-sm text-white"
+                className="max-h-96 scroll-py-2 overflow-y-auto py-2 text-sm text-white"
                 id="options"
                 role="listbox"
               >

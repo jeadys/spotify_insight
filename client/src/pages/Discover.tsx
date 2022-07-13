@@ -52,7 +52,10 @@ export default function Discover() {
     <>
       {releases && featured && categories && (
         <>
-          <SectionWrapper title="New releases" seeAll="/discover/new-releases">
+          <SectionWrapper
+            title="New album releases"
+            seeAll="/discover/new-releases"
+          >
             <AlbumGrid items={releases.albums.items.slice(0, 6)} />
           </SectionWrapper>
           <SectionWrapper

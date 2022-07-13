@@ -17,12 +17,17 @@ export default function Header({ data }: IHeader) {
           alt={data.name}
         />
       )}
-      <p className="text-white text-center my-5 font-black text-md">
-        <span className="block text-2xl"> {data.name}</span>
-        <span>
+      <p className="text-white text-center">
+        <span className="block text-2xl md:text-6xl font-black mb-2">
+          {" "}
+          {data.name}
+        </span>
+        <span className="text-lg md:text-2xl italic font-semibold">
           {data.tracks && data.tracks !== undefined && (
             <>
-              {data.tracks.total.toLocaleString()}{" "}
+              {data.tracks.total < 50
+                ? data.tracks.total.toLocaleString()
+                : "50"}{" "}
               {`song${data.tracks.total !== 1 ? "s" : ""}  `}
             </>
           )}

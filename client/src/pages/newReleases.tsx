@@ -20,7 +20,7 @@ export default function NewReleases() {
     <>
       {releases && (
         <>
-          <SectionWrapper title="New releases" breadcrumb="true">
+          <SectionWrapper title="New album releases" breadcrumb="true">
             <AlbumGrid items={releases.albums.items} />
           </SectionWrapper>
         </>
