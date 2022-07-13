@@ -2,6 +2,7 @@ import axios from "axios";
 import { IAlbum } from "./common/interfaces/album";
 import { IArtist } from "./common/interfaces/artist";
 import { IArtistsAlbums } from "./common/interfaces/artistsAlbums";
+import { IArtistsRelatedArtists } from "./common/interfaces/artistsRelatedArtists";
 import { IArtistsTopTracks } from "./common/interfaces/artistsTopTracks";
 import { ICategories } from "./common/interfaces/categories";
 import { IFeaturedPlaylists } from "./common/interfaces/featuredPlaylists";
@@ -213,6 +214,36 @@ export const getCurrentUserSavedAlbums = (limit = 50) => {
 };
 
 /**
+ * Check Saved Albums for Current User
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-albums
+ * @param {string[]} track_ids - The Spotify ID for the track.
+ * @returns {Promise}
+ */
+export const getDoesUserHaveAlbumSaved = (album_ids: string[]) => {
+  return axios.get(`/me/albums/contains?ids=${album_ids}`);
+};
+
+/**
+ * Save Albums for Current User
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-albums-user
+ * @param {string} album_ids - The Spotify ID for the album.
+ * @returns {Promise}
+ */
+export const saveAlbumForCurrentUser = (album_ids: string) => {
+  return axios.put(`/me/albums?ids=${album_ids}`);
+};
+
+/**
+ * Remove Albums for Current User
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-albums-user
+ * @param {string} album_ids - The Spotify ID for the album.
+ * @returns {Promise}
+ */
+export const removeAlbumForCurrentUser = (album_ids: string) => {
+  return axios.delete(`/me/albums?ids=${album_ids}`);
+};
+
+/**
  * Get a List of Current User's followed artists
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/follow-artists-users
  * @returns {Promise}
@@ -224,12 +255,12 @@ export const getCurrentUserFollowedArtists = (limit = 50) => {
 };
 
 /**
- * Save Tracks for Current User
- * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-tracks-user
- * @param {string} track_ids - The Spotify ID for the track.
+ * Check Saved Tracks for Current User
+ * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-tracks
+ * @param {string[]} track_ids - The Spotify ID for the track.
  * @returns {Promise}
  */
-export const getDoesUserHaveTrackSaved = (track_ids: string) => {
+export const getDoesUserHaveTrackSaved = (track_ids: string[]) => {
   return axios.get(`/me/tracks/contains?ids=${track_ids}`);
 };
 
@@ -297,6 +328,12 @@ export const getArtistAlbums = (artist_id: string, limit = 10) => {
   );
 };
 
+export const getArtistRelatedArtists = (artist_id: string) => {
+  return axios.get<IArtistsRelatedArtists>(
+    `/artists/${artist_id}/related-artists`
+  );
+};
+
 /**
  * Get an Album
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-album
@@ -313,7 +350,7 @@ export const getAlbumById = (album_id: string) => {
  * @param {string} query - The search term
  * @returns {Promise}
  */
-export const searchItems = (query: string, limit = 10) => {
+export const searchItems = (query: string, limit = 30) => {
   return axios.get<ISearchTrack>(
     `/search?q=${query}&type=track&limit=${limit}`
   );
@@ -322,10 +359,10 @@ export const searchItems = (query: string, limit = 10) => {
 /**
  * Check If User Follows Artists or Users
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-current-user-follows
- * @param {string} artist_ids - The Spotify ID for the artist.
+ * @param {string[]} artist_ids - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getDoesUserFollowArtist = (artist_ids: string) => {
+export const getDoesUserFollowArtist = (artist_ids: string[]) => {
   return axios.get(`/me/following/contains?type=artist&ids=${artist_ids}`);
 };
 
@@ -362,7 +399,9 @@ export const getCategoryById = (category_id: string) => {
 };
 
 export const getCategoryPlaylists = (category_id: string, limit = 50) => {
-  return axios.get(`/browse/categories/${category_id}/playlists`);
+  return axios.get(
+    `/browse/categories/${category_id}/playlists/?limit=${limit}`
+  );
 };
 
 export const getFeaturedPlaylists = (limit = 50) => {
