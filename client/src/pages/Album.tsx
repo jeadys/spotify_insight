@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { SectionWrapper, Header } from "../components";
+import { SectionWrapper, TrackHeader } from "../components";
 import { TrackGrid } from "../components/grid";
 import { useParams } from "react-router-dom";
 import { getAlbumById } from "../spotify";
@@ -60,10 +60,18 @@ export default function Album() {
     <>
       {album && (
         <>
-          <Header data={album} />
-          <SectionWrapper title="Album tracks" breadcrumb="true">
-            <TrackGrid items={album.tracks.items.map((track) => track)} />
-          </SectionWrapper>
+          <div className="flex lg:space-x-10 flex-wrap">
+            <div className="basis-full xl:basis-1/5 text-center xl:sticky xl:top-0 xl:self-start">
+              <TrackHeader data={album} />
+            </div>
+            <div className="flex-grow">
+              <SectionWrapper title="Album tracks" breadcrumb="true">
+                <TrackGrid
+                  items={album.tracks.items.map((track) => track).slice(0, 50)}
+                />
+              </SectionWrapper>
+            </div>
+          </div>
         </>
       )}
     </>

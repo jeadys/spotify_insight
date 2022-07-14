@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { SectionWrapper, Header } from "../components";
+import { ArtistHeader, SectionWrapper, TrackHeader } from "../components";
 import { TrackGrid } from "../components/grid";
 import { getPlaylistById } from "../spotify";
 import { useParams } from "react-router-dom";
@@ -61,14 +61,20 @@ export default function Playlist() {
     <>
       {playlist && (
         <>
-          <Header data={playlist} />
-          <SectionWrapper title="Playlist tracks" breadcrumb="true">
-            <TrackGrid
-              items={playlist.tracks.items
-                .map(({ track }) => track)
-                .slice(0, 50)}
-            />
-          </SectionWrapper>
+          <div className="flex lg:space-x-10 flex-wrap">
+            <div className="basis-full xl:basis-1/5 text-center xl:sticky xl:top-0 xl:self-start">
+              <TrackHeader data={playlist} />
+            </div>
+            <div className="flex-grow">
+              <SectionWrapper title="Playlist tracks" breadcrumb="true">
+                <TrackGrid
+                  items={playlist.tracks.items
+                    .map(({ track }) => track)
+                    .slice(0, 50)}
+                />
+              </SectionWrapper>
+            </div>
+          </div>
         </>
       )}
     </>
