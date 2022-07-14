@@ -5,7 +5,7 @@ import {
   getArtistRelatedArtists,
 } from "../spotify";
 import { AlbumGrid, TrackGrid, ArtistGrid } from "../components/grid";
-import { SectionWrapper, Header } from "../components";
+import { SectionWrapper, ArtistHeader } from "../components";
 import { useParams } from "react-router-dom";
 import { IArtist } from "../common/interfaces/artist";
 import { IArtistsAlbums } from "../common/interfaces/artistsAlbums";
@@ -68,14 +68,17 @@ export default function Artist() {
     <>
       {artist && artistTopTracks && artistAlbums && artistRelatedArtists && (
         <>
-          <Header data={artist} />
+          <ArtistHeader data={artist} />
           {/* <FollowArtist id={id!} /> */}
           <SectionWrapper title="Popular releases" breadcrumb="true">
             <TrackGrid items={artistTopTracks.tracks} />
           </SectionWrapper>
 
-          <SectionWrapper title="Popular albums" breadcrumb="true">
-            <AlbumGrid items={artistAlbums.items} />
+          <SectionWrapper
+            title="Popular albums"
+            seeAll={`/artists/${id}/albums`}
+          >
+            <AlbumGrid items={artistAlbums.items.slice(0, 6)} />
           </SectionWrapper>
 
           <SectionWrapper

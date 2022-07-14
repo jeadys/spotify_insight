@@ -17,6 +17,7 @@ import {
   Categories,
   Category,
   FeaturedPlaylists,
+  Albums,
 } from "./pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
@@ -56,6 +57,7 @@ const App = () => {
                         path="/artists/:id/related"
                         element={<RelatedArtists />}
                       />
+                      <Route path="/artists/:id/albums" element={<Albums />} />
                       <Route path="/albums/:id" element={<Album />} />
                       <Route path="/library" element={<Library />} />
                       <Route
