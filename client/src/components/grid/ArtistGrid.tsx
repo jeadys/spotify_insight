@@ -1,5 +1,7 @@
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { IUsersTopArtists } from "../../common/interfaces/usersTopArtists";
+import { getDoesUserFollowArtist } from "../../spotify";
 
 export default function ArtistGrid({ items }: IUsersTopArtists) {
   return (
@@ -14,15 +16,15 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
               >
                 <Link to={`/artists/${artist.id}`}>
                   <div className="flex-1 flex flex-col p-8">
-                    {artist.images.length && artist.images[0] ? (
+                    {artist.images.length && artist.images[2] ? (
                       <img
-                        className="w-32 h-32 flex-shrink-0 mx-auto rounded-full"
-                        src={artist.images[0].url}
+                        className="w-32 h-32 object-cover mx-auto rounded-full"
+                        src={artist.images[2].url}
                         alt={artist.name}
                       />
                     ) : (
                       <img
-                        className="w-32 h-32 flex-shrink-0 mx-auto rounded-full"
+                        className="w-32 h-32 object-cover mx-auto rounded-full"
                         src="/images/nocover.webp"
                         alt={artist.name}
                       />
@@ -33,7 +35,17 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
                     <dl className="mt-1 flex-grow flex flex-col justify-between">
                       <dt className="sr-only">Title</dt>
                       <dd className="text-gray-300 text-sm italic">
-                        {artist.genres[0] ? artist.genres[0] : "N/A"}
+                        {artist.genres[0] ? (
+                          <>
+                            {artist.genres[0].length < 20 ? (
+                              <> {artist.genres[0]}</>
+                            ) : (
+                              <>{artist.genres[0].slice(0, 20).concat("...")}</>
+                            )}
+                          </>
+                        ) : (
+                          "NA"
+                        )}
                       </dd>
                       <dd className="mt-3">
                         <span className="px-2 py-1 text-xs font-medium bg-cyan-100 rounded-full">

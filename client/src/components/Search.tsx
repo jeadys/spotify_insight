@@ -112,13 +112,13 @@ export default function Search() {
                         {result.album.images.length &&
                         result.album.images[0] ? (
                           <img
-                            className="h-10 w-10 rounded-md"
+                            className="h-10 w-10 object-cover rounded-md"
                             src={result.album.images[0].url}
                             alt={result.name}
                           />
                         ) : (
                           <img
-                            className="h-10 w-10 rounded-md"
+                            className="h-10 w-10 object-cover rounded-md"
                             src="/images/nocover.webp"
                             alt={result.name}
                           />

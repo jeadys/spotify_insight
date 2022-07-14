@@ -16,14 +16,14 @@ export default function CategoryGrid({ items }: Categories) {
                   <div className="flex-1 flex flex-col p-4">
                     {category.icons.length && category.icons[0] ? (
                       <img
-                        className="w-42 h-42 flex-shrink-0 mx-auto rounded-md"
+                        className="w-44 h-44 object-cover  mx-auto rounded-md"
                         src={category.icons[0].url}
                         alt={category.name}
                       />
                     ) : (
                       <img
-                        className="w-42 h-42 flex-shrink-0 mx-auto rounded-md"
-                        src="images/nocover.webp"
+                        className="w-44 h-44 object-cover  mx-auto rounded-md"
+                        src="/images/nocover.webp"
                         alt={category.name}
                       />
                     )}

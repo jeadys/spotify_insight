@@ -16,19 +16,23 @@ export default function PlaylistGrid({ items }: IUsersPlaylists) {
                   <div className="flex-1 flex flex-col p-4">
                     {playlist.images.length && playlist.images[0] ? (
                       <img
-                        className="w-42 h-42 flex-shrink-0 mx-auto rounded-md"
+                        className="w-44 h-44 object-cover  mx-auto rounded-md"
                         src={playlist.images[0].url}
                         alt={playlist.name}
                       />
                     ) : (
                       <img
-                        className="w-42 h-42 flex-shrink-0 mx-auto rounded-md"
-                        src="images/nocover.webp"
+                        className="w-44 h-44 object-cover  mx-auto rounded-md"
+                        src="/images/nocover.webp"
                         alt={playlist.name}
                       />
                     )}
                     <h3 className="mt-6 text-white text-sm font-medium">
-                      {playlist.name.slice(0, 20).concat("...")}
+                      {playlist.name.length < 20 ? (
+                        <> {playlist.name}</>
+                      ) : (
+                        <>{playlist.name.slice(0, 20).concat("...")}</>
+                      )}
                     </h3>
                   </div>
                 </Link>
