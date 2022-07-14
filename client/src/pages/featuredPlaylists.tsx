@@ -23,7 +23,7 @@ export default function NewReleases() {
     <>
       {featured && (
         <>
-          <SectionWrapper title="New releases" breadcrumb="true">
+          <SectionWrapper title="Featured playlists" breadcrumb="true">
             <PlaylistGrid items={featured.playlists.items} />
           </SectionWrapper>
         </>

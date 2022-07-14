@@ -35,7 +35,7 @@ export default function SaveTrack({ id, saved }: Props) {
     <HeartIcon
       className={`${
         saveState ? "text-green-500" : "text-transparent stroke-white"
-      } h-6 w-6 cursor-pointer mx-auto`}
+      } h-6 w-6 cursor-pointer`}
       onClick={saveState ? remove : save}
     />
   );

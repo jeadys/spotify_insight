@@ -27,7 +27,7 @@ export default function Navigation() {
   ];
 
   return (
-    <ul className="w-full flex flex-row text-white gap-10 mb-5 sticky top-0 py-5">
+    <ul className="w-full flex flex-row text-white gap-10 py-5">
       {items.map((item) => (
         <li
           key={item.title}

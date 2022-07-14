@@ -30,15 +30,15 @@ export default function TrackGrid({ items }: ITracks) {
                       {"album" in track && track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
                           {track.album.images.length &&
-                          track.album.images[0] ? (
+                          track.album.images[2] ? (
                             <img
-                              className="h-10 w-10 rounded-md"
-                              src={track.album.images[0].url}
+                              className="h-10 w-10 object-cover rounded-md"
+                              src={track.album.images[2].url}
                               alt={track.name}
                             />
                           ) : (
                             <img
-                              className="h-10 w-10 rounded-md"
+                              className="h-10 w-10 object-cover rounded-md"
                               src="/images/nocover.webp"
                               alt={track.name}
                             />
@@ -47,11 +47,12 @@ export default function TrackGrid({ items }: ITracks) {
                       )}
 
                       <div className="ml-4">
-                        <div className="font-semibold album:hidden">
-                          {track.name}
-                        </div>
-                        <div className="font-semibold album:block hidden">
-                          {track.name.slice(0, 20).concat("...")}
+                        <div className="font-semibold">
+                          {track.name.length < 20 ? (
+                            <> {track.name}</>
+                          ) : (
+                            <>{track.name.slice(0, 20).concat("...")}</>
+                          )}
                         </div>
                         {"album" in track && track.album ? (
                           <>
@@ -102,13 +103,17 @@ export default function TrackGrid({ items }: ITracks) {
                           to={`/albums/${track.album.id}`}
                           onClick={(e) => stopProp(e)}
                         >
-                          {track.album.name}
+                          {track.album.name.length < 20 ? (
+                            <> {track.album.name}</>
+                          ) : (
+                            <>{track.album.name.slice(0, 20).concat("...")}</>
+                          )}
                         </Link>
                       </span>
                     </td>
                   )}
-                  <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden">
-                    <div className="">{formatDuration(track.duration_ms)}</div>
+                  <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden text-right">
+                    {formatDuration(track.duration_ms)}
                   </td>
                 </tr>
               ))}
