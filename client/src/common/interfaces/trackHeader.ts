@@ -74,6 +74,7 @@ export interface Data {
   images: Image[];
   owner?: Owner;
   name: string;
+  release_date?: string;
   popularity?: number;
   type: string;
   uri: string;

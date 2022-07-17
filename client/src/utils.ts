@@ -1,19 +1,6 @@
 import React from "react";
 
 /**
- * Higher-order function for async/await error handling
- * @param {function} fn an async function
- * @returns {function}
- */
-// export const catchErrors = (fn:) => {
-//   return function (...args) {
-//     return fn(...args).catch((err) => {
-//       console.error(err);
-//     });
-//   };
-// };
-
-/**
  * Format milliseconds to time duration
  * @param {number} ms number of milliseconds
  * @returns {string} formatted duration string
@@ -31,3 +18,6 @@ export const formatDuration = (ms: number) => {
 export const stopProp = (e: React.MouseEvent<HTMLElement>) => {
   e.stopPropagation();
 };
+
+// Get year from YYYY-MM-DD
+export const getYear = (date: string) => date.split("-")[0];
