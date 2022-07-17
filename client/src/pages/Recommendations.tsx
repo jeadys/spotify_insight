@@ -1,7 +1,5 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { SectionWrapper } from "../components";
-import { TrackHeader } from "../components";
 import { TrackGrid } from "../components/grid";
 import { getRecommendationsForTracks, getPlaylistById } from "../spotify";
 import { IPlaylist } from "../common/interfaces/playlist";

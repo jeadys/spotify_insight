@@ -1,4 +1,3 @@
-import React from "react";
 import { IArtistHeader } from "../common/interfaces/artistHeader";
 
 export default function ArtistHeader({ data }: IArtistHeader) {

@@ -22,7 +22,7 @@ import {
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { Content, Navigation, ScrollTop, Search } from "./components";
+import { Content, Navigation, ScrollTop } from "./components";
 import TrackProvider from "./components/TrackContext";
 import { accessToken } from "./spotify";
 import "./App.css";

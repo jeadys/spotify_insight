@@ -3,7 +3,7 @@ import {
   getTopArtists,
   getTopTracks,
 } from "../spotify";
-import { PlaylistGrid, TrackGrid, ArtistGrid } from "../components/grid";
+import { TrackGrid, ArtistGrid } from "../components/grid";
 import { SectionWrapper, Loader } from "../components";
 import { IUsersTopArtists } from "../common/interfaces/usersTopArtists";
 import { IUsersTopTracks } from "../common/interfaces/usersTopTracks";

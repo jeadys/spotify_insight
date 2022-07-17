@@ -4,12 +4,12 @@ import useDebounce from "../hooks/useDebounce";
 import { ChooseTrack, PlayTrack } from "./TrackContext";
 import { Link } from "react-router-dom";
 import { stopProp } from "../utils";
-import { ISearchTrack, Tracks, Item2 } from "../common/interfaces/searchTrack";
+import { Track } from "../common/interfaces/searchTrack";
 
 export default function Search() {
   const [searchModal, setSearchModal] = useState(false);
   const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState<Item2[]>([]); // CHECK IF THIS IS CORRECT
+  const [searchResults, setSearchResults] = useState<Track[]>([]); // CHECK IF THIS IS CORRECT
   const debouncedSearch = useDebounce(search, 1000);
   const chooseTrack = ChooseTrack();
   const playingTrack = PlayTrack();

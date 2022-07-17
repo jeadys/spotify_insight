@@ -1,15 +1,9 @@
 import { useLocation } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
-import { logout } from "../spotify";
-import {
-  ArrowCircleLeftIcon,
-  ArrowCircleRightIcon,
-} from "@heroicons/react/solid";
 import Search from "./Search";
 
 export default function Navigation() {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const items = [
     {
@@ -43,9 +37,6 @@ export default function Navigation() {
 
       <li className="ml-auto">
         <Search />
-        {/* <span onClick={logout} className="cursor-pointer">
-          Logout
-        </span> */}
       </li>
     </ul>
   );

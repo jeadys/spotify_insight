@@ -1,6 +1,5 @@
 import { SectionWrapper } from "../components";
 import { ArtistGrid } from "../components/grid";
-import { useState } from "react";
 import { getCurrentUserFollowedArtists } from "../spotify";
 import { useQuery } from "react-query";
 import { IUsersFollowedArtists } from "../common/interfaces/usersFollowedArtists";

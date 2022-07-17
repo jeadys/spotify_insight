@@ -38,14 +38,6 @@ export default function SectionWrapper({
     <div>
       <div className="flex mb-5">
         <h2 className="font-semibold text-xl text-white">
-          {/* {breadcrumb && (
-            <span className="text-slate-400">
-              <Link className="hover:underline hover:text-white" to="/">
-                Profile
-              </Link>
-              <span className="mx-2">/</span>
-            </span>
-          )} */}
           {title && (
             <>
               {seeAll ? (
