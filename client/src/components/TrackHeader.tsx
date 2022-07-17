@@ -1,22 +1,9 @@
-import React from "react";
-import { useQuery } from "react-query";
 import { ITrackHeader } from "../common/interfaces/trackHeader";
-import { getTrackAudioFeatures } from "../spotify";
+import { Link, useLocation } from "react-router-dom";
+import { getYear } from "../utils";
 
 export default function TrackHeader({ data }: ITrackHeader) {
-  const audioFeatures: string[] = data.tracks.items.map((item) => item.id);
-
-  const fetchTrackAudioFeatures = async () => {
-    const trackAudioFeatures = await getTrackAudioFeatures(audioFeatures);
-    return trackAudioFeatures.data;
-  };
-
-  const { data: trackAudioFeatures } = useQuery(
-    "audio-features",
-    fetchTrackAudioFeatures
-  );
-
-  console.log(trackAudioFeatures);
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -37,9 +24,16 @@ export default function TrackHeader({ data }: ITrackHeader) {
         <div className="text-2xl md:text-4xl font-black text-white">
           {data.name}
         </div>
+
         {data.owner && data.owner !== undefined && (
           <span className="text-sm text-slate-400">
-            By {data.owner?.display_name}
+            By {data.owner.display_name}
+          </span>
+        )}
+
+        {data.release_date && data.release_date !== undefined && (
+          <span className="text-sm text-slate-400">
+            Released in {getYear(data.release_date)}
           </span>
         )}
 
@@ -49,9 +43,25 @@ export default function TrackHeader({ data }: ITrackHeader) {
           </div>
         )}
 
-        <span className="bg-green-600 text-white max-w-fit py-2 px-5 mx-auto rounded-full cursor-pointer my-5 font-semibold">
-          Get recommendations
-        </span>
+        {pathname == `/playlists/${data.id}` && (
+          <Link
+            to={`/recommendations/${data.id}`}
+            className="bg-green-600 text-white max-w-fit py-2 px-5 mx-auto rounded-full cursor-pointer my-5 font-semibold"
+          >
+            Get recommendations
+          </Link>
+        )}
+
+        {pathname == `/albums/${data.id}` && (
+          <div className="my-5">
+            <span className="text-2xl font-black text-blue-400">
+              {data.popularity}%
+            </span>
+            <span className="text-lg font-semibold text-white block">
+              Popularity
+            </span>
+          </div>
+        )}
       </div>
     </>
   );
