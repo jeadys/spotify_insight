@@ -262,10 +262,10 @@ export const getCurrentUserFollowedArtists = (limit = 50) => {
 /**
  * Check Saved Tracks for Current User
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-tracks
- * @param {string[]} track_ids - The Spotify ID for the track.
+ * @param {string} track_ids - The Spotify ID for the track.
  * @returns {Promise}
  */
-export const getDoesUserHaveTrackSaved = (track_ids: string[]) => {
+export const getDoesUserHaveTrackSaved = (track_ids: string) => {
   return axios.get(`/me/tracks/contains?ids=${track_ids}`);
 };
 
@@ -432,8 +432,7 @@ export const getRecommendationsForTracks = (
   limit = 50
 ) => {
   const shuffledTracks = tracks.sort(() => 0.5 - Math.random());
-  console.log(tracks);
-  const seed_tracks = getTrackIds(tracks.slice(0, 5));
+  const seed_tracks = getTrackIds(shuffledTracks.slice(0, 5));
   const seed_artists = "";
   const seed_genres = "";
 
