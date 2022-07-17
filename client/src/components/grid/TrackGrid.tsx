@@ -3,10 +3,27 @@ import { formatDuration, stopProp } from "../../utils";
 import { Link } from "react-router-dom";
 import { ITracks } from "../../common/interfaces/tracks";
 import MusicBar from "../MusicBar";
+import { getDoesUserHaveTrackSaved } from "../../spotify";
+import { useQuery } from "react-query";
+import { SaveTrack } from "../button";
 
 export default function TrackGrid({ items }: ITracks) {
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
+  const track_ids = items.map((track) => track.id).join(",");
+
+  const fetchDoesUserHaveTrackSaved = async () => {
+    const trackSaved = await getDoesUserHaveTrackSaved(track_ids);
+    return trackSaved.data;
+  };
+
+  const { data: trackSaved } = useQuery(
+    ["track-saved", track_ids],
+    fetchDoesUserHaveTrackSaved,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <>
@@ -118,8 +135,13 @@ export default function TrackGrid({ items }: ITracks) {
                       </span>
                     </td>
                   )}
-                  <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden text-right">
-                    {formatDuration(track.duration_ms)}
+                  <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden flex justify-end gap-5">
+                    {trackSaved && (
+                      <SaveTrack id={track.id} saved={trackSaved[index]} />
+                    )}
+                    <span className="block w-7">
+                      {formatDuration(track.duration_ms)}
+                    </span>
                   </td>
                 </tr>
               ))}
@@ -127,11 +149,15 @@ export default function TrackGrid({ items }: ITracks) {
           </table>
         </>
       ) : (
-        <>
-          <p className="text-white justify-center content-center text-2xl">
-            No tracks available
-          </p>
-        </>
+        <span className="flex flex-col items-center text-white">
+          <span className="text-2xl">No tracks available</span>
+          <Link
+            to={`/discover`}
+            className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2"
+          >
+            Discover new tracks
+          </Link>
+        </span>
       )}
     </>
   );
