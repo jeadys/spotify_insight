@@ -22,7 +22,7 @@ export default function TrackPlayer({ token, trackUri }: Props) {
   return createPortal(
     <SpotifyPlayer
       showSaveIcon
-      magnifySliderOnHover={true}
+      magnifySliderOnHover={false}
       callback={(state) => {
         if (!state.isPlaying) setPlay(false);
       }}
@@ -31,10 +31,13 @@ export default function TrackPlayer({ token, trackUri }: Props) {
       uris={trackUri ? [trackUri] : []}
       styles={{
         activeColor: "#fff",
-        bgColor: "#333",
+        bgColor: "#1e293b",
         color: "#fff",
         loaderColor: "#fff",
-        sliderColor: "#7f8dee",
+        sliderColor: "#0284c7",
+        sliderHeight: 8,
+        sliderHandleColor: "#fff",
+        sliderTrackColor: "#c7d5ed",
         trackArtistColor: "#ccc",
         trackNameColor: "#fff",
       }}

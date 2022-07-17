@@ -76,7 +76,7 @@ export default function SectionWrapper({
                   className={`text-sm uppercase underline-offset-8 decoration-4  ${
                     timeRange === timeRangeBtn.range
                       ? "underline decoration-sky-700 cursor-default"
-                      : "hover:underline hover: decoration-sky-900"
+                      : "hover:underline hover:decoration-sky-900"
                   }`}
                   onClick={() => setTimeRange(timeRangeBtn.range)}
                 >

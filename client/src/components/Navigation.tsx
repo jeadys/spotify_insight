@@ -31,7 +31,11 @@ export default function Navigation() {
       {items.map((item) => (
         <li
           key={item.title}
-          className={`${pathname === item.link ? "text-blue-400 " : ""}`}
+          className={`text-sm uppercase underline-offset-8 decoration-4 ${
+            pathname === item.link
+              ? "underline decoration-sky-700 cursor-default"
+              : "hover:underline hover: decoration-sky-900"
+          }`}
         >
           <Link to={item.link}>{item.title}</Link>
         </li>

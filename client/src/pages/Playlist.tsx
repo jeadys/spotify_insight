@@ -5,7 +5,7 @@ import { getPlaylistById } from "../spotify";
 import { useParams } from "react-router-dom";
 
 import axios from "axios";
-import { IPlaylist, Tracks } from "../common/interfaces/playlist";
+import { IPlaylist } from "../common/interfaces/playlist";
 import { useQuery } from "react-query";
 
 export default function Playlist() {
