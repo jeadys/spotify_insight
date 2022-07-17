@@ -18,7 +18,10 @@ export default function Recommendations() {
 
   const { data: playlist } = useQuery<IPlaylist>(
     ["playlist", id],
-    fetchPlaylist
+    fetchPlaylist,
+    {
+      refetchOnWindowFocus: false,
+    }
   );
 
   const fetchRecommendationsForTracks = async () => {

@@ -14,7 +14,9 @@ export default function NewReleases() {
     data: releases,
     isLoading: releasesIsLoading,
     error: releasesError,
-  } = useQuery<INewReleases>("new-releases", fetchNewReleases);
+  } = useQuery<INewReleases>("new-releases", fetchNewReleases, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

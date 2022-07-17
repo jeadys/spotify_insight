@@ -14,7 +14,9 @@ export default function NewReleases() {
     data: categories,
     isLoading: categoriesIsLoading,
     error: categoriesError,
-  } = useQuery<ICategories>("categories", fetchCategories);
+  } = useQuery<ICategories>("categories", fetchCategories, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

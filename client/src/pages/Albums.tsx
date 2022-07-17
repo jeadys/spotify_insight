@@ -17,7 +17,9 @@ export default function Albums() {
     data: artistAlbums,
     isLoading: artistAlbumsIsLoading,
     error: artistAlbumsError,
-  } = useQuery<IArtistsAlbums>(["artist-albums", id], fetchArtistAlbums);
+  } = useQuery<IArtistsAlbums>(["artist-albums", id], fetchArtistAlbums, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

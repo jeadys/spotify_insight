@@ -17,7 +17,8 @@ export default function TopArtists() {
     error: followedArtistsError,
   } = useQuery<IUsersFollowedArtists>(
     "followed-artists",
-    fetchUserFollowedArtists
+    fetchUserFollowedArtists,
+    { refetchOnWindowFocus: false }
   );
 
   return (

@@ -22,7 +22,9 @@ export default function Album() {
     data: album,
     isLoading: albumIsLoading,
     error: albumError,
-  } = useQuery<IAlbum>(["album", id], fetchAlbum);
+  } = useQuery<IAlbum>(["album", id], fetchAlbum, {
+    refetchOnWindowFocus: false,
+  });
 
   // // When tracksData updates, compile arrays of tracks and audioFeatures
   // useEffect(() => {

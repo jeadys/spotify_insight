@@ -23,7 +23,9 @@ export default function Playlist() {
     data: playlist,
     isLoading: playlistIsLoading,
     error: playlistError,
-  } = useQuery<IPlaylist>(["playlist", id], fetchPlaylist);
+  } = useQuery<IPlaylist>(["playlist", id], fetchPlaylist, {
+    refetchOnWindowFocus: false,
+  });
 
   // When tracksData updates, compile arrays of tracks and audioFeatures
   // useEffect(() => {

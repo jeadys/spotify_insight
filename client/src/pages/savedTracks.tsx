@@ -18,7 +18,9 @@ export default function SavedTracks() {
     data: tracks,
     isLoading: tracksIsLoading,
     error: tracksEror,
-  } = useQuery<IUsersSavedTracks>("saved-tracks", fetchCurrentUserSavedTracks);
+  } = useQuery<IUsersSavedTracks>("saved-tracks", fetchCurrentUserSavedTracks, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

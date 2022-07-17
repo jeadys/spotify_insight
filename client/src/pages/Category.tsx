@@ -17,7 +17,9 @@ export default function Category() {
     data: category,
     isLoading: categoryIsLoading,
     error: categoryError,
-  } = useQuery(["category", id], fetchCategory);
+  } = useQuery(["category", id], fetchCategory, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

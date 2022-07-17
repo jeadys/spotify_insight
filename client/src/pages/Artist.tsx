@@ -41,19 +41,25 @@ export default function Artist() {
     data: artist,
     isLoading: artistIsLoading,
     error: artistError,
-  } = useQuery<IArtist>(["artist", id], fetchArtist);
+  } = useQuery<IArtist>(["artist", id], fetchArtist, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: artistTopTracks,
     isLoading: artistTopTracksIsLoading,
     error: artistTopTracksError,
-  } = useQuery<IArtistsTopTracks>(["artist-tracks", id], fetchArtistTopTracks);
+  } = useQuery<IArtistsTopTracks>(["artist-tracks", id], fetchArtistTopTracks, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: artistAlbums,
     isLoading: artistAlbumsIsLoading,
     error: artistAlbumsError,
-  } = useQuery<IArtistsAlbums>(["artist-albums", id], fetchArtistAlbums);
+  } = useQuery<IArtistsAlbums>(["artist-albums", id], fetchArtistAlbums, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: artistRelatedArtists,
@@ -61,7 +67,8 @@ export default function Artist() {
     error: artistRelatedArtistsError,
   } = useQuery<IArtistsRelatedArtists>(
     ["artist-related-artists", id],
-    fetchArtistRelatedArtists
+    fetchArtistRelatedArtists,
+    { refetchOnWindowFocus: false }
   );
 
   return (

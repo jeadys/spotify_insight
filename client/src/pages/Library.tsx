@@ -47,26 +47,33 @@ export default function Library() {
     error: followedArtistsError,
   } = useQuery<IUsersFollowedArtists>(
     "followed-artists",
-    fetchUserFollowedArtists
+    fetchUserFollowedArtists,
+    { refetchOnWindowFocus: false }
   );
 
   const {
     data: playlists,
     isLoading: playlistsIsLoading,
     error: playlistsError,
-  } = useQuery<IUsersPlaylists>("playlists", fetchPlaylists);
+  } = useQuery<IUsersPlaylists>("playlists", fetchPlaylists, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: albums,
     isLoading: albumsIsLoading,
     error: albumsError,
-  } = useQuery<IUsersSavedAlbums>("saved-albums", fetchUsersSavedAlbums);
+  } = useQuery<IUsersSavedAlbums>("saved-albums", fetchUsersSavedAlbums, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: tracks,
     isLoading: tracksIsLoading,
     error: tracksEror,
-  } = useQuery<IUsersSavedTracks>("saved-tracks", fetchUserSavedTracks);
+  } = useQuery<IUsersSavedTracks>("saved-tracks", fetchUserSavedTracks, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>
