@@ -7,7 +7,12 @@ import { IArtistsTopTracks } from "./common/interfaces/artistsTopTracks";
 import { ICategories } from "./common/interfaces/categories";
 import { IFeaturedPlaylists } from "./common/interfaces/featuredPlaylists";
 import { INewReleases } from "./common/interfaces/newReleases";
-import { IPlaylist } from "./common/interfaces/playlist";
+import {
+  IPlaylist,
+  IPlaylistTracks,
+  IPlaylistItem,
+} from "./common/interfaces/playlist";
+import { IRecommendations } from "./common/interfaces/recommendations";
 import { ISearchTrack } from "./common/interfaces/searchTrack";
 import { IUsersFollowedArtists } from "./common/interfaces/usersFollowedArtists";
 import { IUsersPlaylists } from "./common/interfaces/usersPlaylists";
@@ -407,5 +412,32 @@ export const getCategoryPlaylists = (category_id: string, limit = 50) => {
 export const getFeaturedPlaylists = (limit = 50) => {
   return axios.get<IFeaturedPlaylists>(
     `/browse/featured-playlists?limit=${limit}`
+  );
+};
+
+/**
+ * Return a comma separated string of track IDs from the given array of tracks
+ */
+const getTrackIds = (tracks: IPlaylistTracks["items"]) =>
+  tracks.map(({ track }: IPlaylistItem) => track.id).join(",");
+
+/**
+ * Get Recommendations Based on Seeds
+ * https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/
+ * @param {IPlaylistTracks["items"]} tracks - The seeded tracks for the recommendations.
+ * @returns {Promise}
+ */
+export const getRecommendationsForTracks = (
+  tracks: IPlaylistTracks["items"],
+  limit = 50
+) => {
+  const shuffledTracks = tracks.sort(() => 0.5 - Math.random());
+  console.log(tracks);
+  const seed_tracks = getTrackIds(tracks.slice(0, 5));
+  const seed_artists = "";
+  const seed_genres = "";
+
+  return axios.get<IRecommendations>(
+    `https://api.spotify.com/v1/recommendations?limit=${limit}&seed_tracks=${seed_tracks}&seed_artists=${seed_artists}&seed_genres=${seed_genres}`
   );
 };

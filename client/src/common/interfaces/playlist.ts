@@ -136,7 +136,7 @@ export interface VideoThumbnail {
   url?: string;
 }
 
-export interface Item {
+export interface IPlaylistItem {
   added_at: Date;
   added_by: AddedBy;
   primary_color?: string;
@@ -161,8 +161,8 @@ export interface Item {
   uri: string;
 }
 
-export interface Tracks {
-  items: Item[];
+export interface IPlaylistTracks {
+  items: IPlaylistItem[];
   href?: string;
   limit?: number;
   next?: string;
@@ -184,7 +184,7 @@ export interface IPlaylist {
   primary_color?: string;
   public: boolean;
   snapshot_id: string;
-  tracks: Tracks;
+  tracks: IPlaylistTracks;
   type: string;
   uri: string;
 }

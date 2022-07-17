@@ -57,19 +57,7 @@ export interface ExternalUrls4 {
   spotify: string;
 }
 
-export interface ExternalUrls5 {
-  spotify: string;
-}
-
-export interface LinkedFrom {
-  external_urls: ExternalUrls5;
-  href: string;
-  id: string;
-  type: string;
-  uri: string;
-}
-
-export interface ITrack {
+export interface Track {
   album: Album;
   artists: Artist2[];
   disc_number: number;
@@ -80,12 +68,25 @@ export interface ITrack {
   href: string;
   id: string;
   is_local: boolean;
-  is_playable?: boolean;
-  linked_from?: LinkedFrom;
+  is_playable: boolean;
   name: string;
   popularity: number;
   preview_url: string;
   track_number: number;
   type: string;
   uri: string;
+}
+
+export interface Seed {
+  initialPoolSize: number;
+  afterFilteringSize: number;
+  afterRelinkingSize: number;
+  id: string;
+  type: string;
+  href: string;
+}
+
+export interface IRecommendations {
+  tracks: Track[];
+  seeds: Seed[];
 }
