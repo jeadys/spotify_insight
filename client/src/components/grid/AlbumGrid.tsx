@@ -64,11 +64,15 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
           </ul>
         </>
       ) : (
-        <>
-          <p className="text-white justify-center content-center text-2xl">
-            No albums available
-          </p>
-        </>
+        <span className="flex flex-col items-center text-white">
+          <span className="text-2xl">No albums available</span>
+          <Link
+            to={`/discover/new-releases`}
+            className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2"
+          >
+            Discover new albums
+          </Link>
+        </span>
       )}
     </>
   );
