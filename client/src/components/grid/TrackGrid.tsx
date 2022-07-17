@@ -2,6 +2,7 @@ import { PlayTrack, ChooseTrack } from "../TrackContext";
 import { formatDuration, stopProp } from "../../utils";
 import { Link } from "react-router-dom";
 import { ITracks } from "../../common/interfaces/tracks";
+import MusicBar from "../MusicBar";
 
 export default function TrackGrid({ items }: ITracks) {
   const playingTrack = PlayTrack();
@@ -23,10 +24,15 @@ export default function TrackGrid({ items }: ITracks) {
                   }`}
                   onClick={() => chooseTrack(track.uri)}
                 >
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6">
+                  <td className="whitespace-nowrap py-4 px-3 text-sm">
                     <div className="flex items-center">
-                      <span className="mr-4">{index + 1}</span>
-
+                      <div className="w-7 text-center">
+                        {playingTrack === track.uri ? (
+                          <MusicBar />
+                        ) : (
+                          <span>{index + 1}</span>
+                        )}
+                      </div>
                       {"album" in track && track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
                           {track.album.images.length &&

@@ -26,10 +26,18 @@ module.exports = {
         wiggle: {
           "0%, 100%": { transform: "rotate(-20deg)" },
           "50%": { transform: "rotate(20deg)" }
+        },
+        musicbar: {
+          "10%": { transform: "scaleY(0.3)" },
+          "30%": { transform: "scaleY(1)" },
+          "60%": { transform: "scaleY(0.5)" },
+          "80%": { transform: "scaleY(0.75)" },
+          "100": { transform: "scaleY(0.6)" }
         }
       },
       animation: {
-        wiggle: "wiggle 200ms ease-in-out"
+        wiggle: "wiggle 200ms ease-in-out",
+        musicbar: "musicbar 2200ms ease infinite alternate"
       }
     },
   },
