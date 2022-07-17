@@ -26,6 +26,7 @@ import { Content, Navigation, ScrollTop, Search } from "./components";
 import TrackProvider from "./components/TrackContext";
 import { accessToken } from "./spotify";
 import "./App.css";
+import Recommendations from "./pages/Recommendations";
 
 const queryClient = new QueryClient();
 
@@ -86,6 +87,10 @@ const App = () => {
                         element={<Categories />}
                       />
                       <Route path="/categories/:id" element={<Category />} />
+                      <Route
+                        path="/recommendations/:id"
+                        element={<Recommendations />}
+                      />
                     </Routes>
                   </div>
                 </TrackProvider>
