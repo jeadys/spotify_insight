@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import {
   getCurrentUserFollowedArtists,
@@ -31,13 +30,11 @@ export default function Library() {
 
   const fetchUsersSavedAlbums = async () => {
     const userSavedAlbums = await getCurrentUserSavedAlbums();
-    // const album = userSavedAlbums.data.items.map((item) => item.album);
     return userSavedAlbums.data;
   };
 
   const fetchUserSavedTracks = async () => {
     const userSavedTracks = await getCurrentUserSavedTracks();
-    // const track = userSavedTracks.data.items.map((item) => item.track);
     return userSavedTracks.data;
   };
 

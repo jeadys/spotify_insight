@@ -11,7 +11,6 @@ import { IArtist } from "../common/interfaces/artist";
 import { IArtistsAlbums } from "../common/interfaces/artistsAlbums";
 import { IArtistsTopTracks } from "../common/interfaces/artistsTopTracks";
 import { useQuery } from "react-query";
-import FollowArtist from "../components/button/FollowArtist";
 import { IArtistsRelatedArtists } from "../common/interfaces/artistsRelatedArtists";
 
 export default function Artist() {
@@ -76,7 +75,6 @@ export default function Artist() {
       {artist && artistTopTracks && artistAlbums && artistRelatedArtists && (
         <>
           <ArtistHeader data={artist} />
-          {/* <FollowArtist id={id!} /> */}
           <SectionWrapper title="Popular releases" breadcrumb="true">
             <TrackGrid items={artistTopTracks.tracks} />
           </SectionWrapper>

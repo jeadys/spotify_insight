@@ -95,7 +95,7 @@ export interface ExternalUrls5 {
   spotify: string;
 }
 
-export interface Item2 {
+export interface Track {
   album: Album;
   artists: Artist2[];
   disc_number: number;
@@ -117,7 +117,7 @@ export interface Item2 {
 
 export interface Tracks {
   href: string;
-  items: Item2[];
+  items: Track[];
   limit: number;
   next: string;
   offset: number;

@@ -1,4 +1,3 @@
-import React from "react";
 import { getCategoryPlaylists } from "../spotify";
 import { useQuery } from "react-query";
 import { PlaylistGrid } from "../components/grid";
