@@ -16,7 +16,8 @@ export default function NewReleases() {
     error: featuredError,
   } = useQuery<IFeaturedPlaylists>(
     "featured-playlists",
-    fetchFeaturedPlaylists
+    fetchFeaturedPlaylists,
+    { refetchOnWindowFocus: false }
   );
 
   return (

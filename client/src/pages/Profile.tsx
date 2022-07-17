@@ -30,19 +30,25 @@ export default function Profile() {
     data: topArtists,
     isLoading: topArtistsIsLoading,
     error: topArtistsError,
-  } = useQuery<IUsersTopArtists>("top-artists", fetchTopArtists);
+  } = useQuery<IUsersTopArtists>("top-artists", fetchTopArtists, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: topTracks,
     isLoading: topTracksIsLoading,
     error: topTracksError,
-  } = useQuery<IUsersTopTracks>("top-tracks", fetchTopTracks);
+  } = useQuery<IUsersTopTracks>("top-tracks", fetchTopTracks, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: playlists,
     isLoading: playlistsIsLoading,
     error: playlistsError,
-  } = useQuery<IUsersPlaylists>("playlists", fetchPlasylists);
+  } = useQuery<IUsersPlaylists>("playlists", fetchPlasylists, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

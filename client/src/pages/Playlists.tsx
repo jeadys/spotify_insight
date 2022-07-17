@@ -19,7 +19,9 @@ export default function Playlists() {
     data: playlists,
     isLoading: playlistsIsLoading,
     error: playlistsError,
-  } = useQuery<IUsersPlaylists>("playlists", fetchPlaylists);
+  } = useQuery<IUsersPlaylists>("playlists", fetchPlaylists, {
+    refetchOnWindowFocus: false,
+  });
 
   // useEffect(() => {
   //   const fetchData = async () => {

@@ -17,7 +17,9 @@ export default function TopArtists() {
     data: topArtists,
     isLoading: topArtistsIsLoading,
     error: topArtistsError,
-  } = useQuery<IUsersTopArtists>(["top-artists", timeRange], fetchTopArtists);
+  } = useQuery<IUsersTopArtists>(["top-artists", timeRange], fetchTopArtists, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

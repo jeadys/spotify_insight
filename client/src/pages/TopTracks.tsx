@@ -17,7 +17,9 @@ export default function TopTracks() {
     data: topTracks,
     isLoading: topTracksIsLoading,
     error: topTracksError,
-  } = useQuery<IUsersTopTracks>(["top-tracks", timeRange], fetchTopTracks);
+  } = useQuery<IUsersTopTracks>(["top-tracks", timeRange], fetchTopTracks, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

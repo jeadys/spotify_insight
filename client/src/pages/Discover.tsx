@@ -31,7 +31,9 @@ export default function Discover() {
     data: releases,
     isLoading: releasesIsLoading,
     error: releasesError,
-  } = useQuery<INewReleases>("new-releases", fetchNewReleases);
+  } = useQuery<INewReleases>("new-releases", fetchNewReleases, {
+    refetchOnWindowFocus: false,
+  });
 
   const {
     data: featured,
@@ -39,14 +41,17 @@ export default function Discover() {
     error: featuredError,
   } = useQuery<IFeaturedPlaylists>(
     "featured-playlists",
-    fetchFeaturedPlaylists
+    fetchFeaturedPlaylists,
+    { refetchOnWindowFocus: false }
   );
 
   const {
     data: categories,
     isLoading: categoriesIsLoading,
     error: categoriesError,
-  } = useQuery<ICategories>("categories", fetchCategories);
+  } = useQuery<ICategories>("categories", fetchCategories, {
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>

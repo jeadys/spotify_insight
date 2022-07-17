@@ -19,7 +19,8 @@ export default function RelatedArtists() {
     error: artistRelatedArtistsError,
   } = useQuery<IArtistsRelatedArtists>(
     ["artist-related-artists", id],
-    fetchArtistRelatedArtists
+    fetchArtistRelatedArtists,
+    { refetchOnWindowFocus: false }
   );
   return (
     <>
