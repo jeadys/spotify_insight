@@ -1,5 +1,6 @@
 import { HeartIcon } from "@heroicons/react/solid";
 import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import {
   saveTrackForCurrentUser,
   removeTrackForCurrentUser,
@@ -12,24 +13,27 @@ type Props = {
 
 export default function SaveTrack({ id, saved }: Props) {
   const [saveState, setSaveState] = useState<boolean>(saved);
+  const queryClient = useQueryClient();
 
-  const save = async () => {
-    try {
-      await saveTrackForCurrentUser(id);
+  const { mutateAsync: saveTrack } = useMutation(saveTrackForCurrentUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("saved-tracks");
+      queryClient.invalidateQueries("is-track-saved");
       setSaveState(true);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    },
+  });
 
-  const remove = async () => {
-    try {
-      await removeTrackForCurrentUser(id);
+  const { mutateAsync: removeTrack } = useMutation(removeTrackForCurrentUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("saved-tracks");
+      queryClient.invalidateQueries("is-track-saved");
       setSaveState(false);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    },
+  });
+
+  const save = async () => await saveTrack(id);
+
+  const remove = async () => await removeTrack(id);
 
   return (
     <HeartIcon
