@@ -6,21 +6,26 @@ import MusicBar from "../MusicBar";
 import { getDoesUserHaveTrackSaved } from "../../spotify";
 import { useQuery } from "react-query";
 import { SaveTrack } from "../button";
+import { useState } from "react";
 
 export default function TrackGrid({ items }: ITracks) {
+  const trackIds = items.map((track) => track.id).join(",");
+  const [saveState, setSaveState] = useState<boolean[]>();
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
-  const track_ids = items.map((track) => track.id).join(",");
 
   const fetchDoesUserHaveTrackSaved = async () => {
-    const trackSaved = await getDoesUserHaveTrackSaved(track_ids);
-    return trackSaved.data;
+    const isTrackSaved = await getDoesUserHaveTrackSaved(trackIds);
+    return isTrackSaved.data;
   };
 
-  const { data: trackSaved } = useQuery(
-    ["track-saved", track_ids],
+  const { data: isTrackSaved } = useQuery(
+    ["is-track-saved", trackIds],
     fetchDoesUserHaveTrackSaved,
     {
+      onSuccess: (data) => {
+        setSaveState(data);
+      },
       refetchOnWindowFocus: false,
     }
   );
@@ -136,8 +141,10 @@ export default function TrackGrid({ items }: ITracks) {
                     </td>
                   )}
                   <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden flex justify-end gap-5">
-                    {trackSaved && (
-                      <SaveTrack id={track.id} saved={trackSaved[index]} />
+                    {isTrackSaved && saveState && (
+                      <span onClick={(e) => stopProp(e)}>
+                        <SaveTrack id={track.id} saved={saveState[index]} />
+                      </span>
                     )}
                     <span className="block w-7">
                       {formatDuration(track.duration_ms)}
