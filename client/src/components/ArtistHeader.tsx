@@ -1,6 +1,22 @@
 import { IArtistHeader } from "../common/interfaces/artistHeader";
+import { useQuery } from "react-query";
+import { getDoesUserFollowArtist } from "../spotify";
+import { FollowArtist } from "./button";
 
 export default function ArtistHeader({ data }: IArtistHeader) {
+  const fetchDoesUserFollowArtist = async () => {
+    const isArtistFollowed = await getDoesUserFollowArtist(data.id);
+    return isArtistFollowed.data;
+  };
+
+  const { data: isArtistFollowed, isLoading } = useQuery(
+    ["is-artist-followed", data.id],
+    fetchDoesUserFollowArtist,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
   return (
     <>
       {data.images.length && data.images[0] ? (
@@ -19,8 +35,15 @@ export default function ArtistHeader({ data }: IArtistHeader) {
       <div className="text-3xl md:text-6xl lg:text-8xl font-black text-white text-center">
         {data.name}
       </div>
+
+      <div className="h-5">
+        {isArtistFollowed && (
+          <FollowArtist id={data.id} followed={isArtistFollowed[0]} />
+        )}
+      </div>
+
       <div className="w-full flex gap-y-5 flex-col md:flex-row md:gap-x-20 justify-center text-center">
-        {data.followers && data.followers !== undefined && (
+        {data.followers !== undefined && (
           <div>
             <span className="text-2xl font-black text-blue-400">
               {data.followers.total.toLocaleString()}
@@ -42,7 +65,7 @@ export default function ArtistHeader({ data }: IArtistHeader) {
           </div>
         )}
 
-        {data.popularity && data.popularity !== undefined && (
+        {data.popularity !== undefined && (
           <div>
             <span className="text-2xl font-black text-blue-400">
               {data.popularity}%

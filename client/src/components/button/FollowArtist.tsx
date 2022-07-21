@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import {
-  getDoesUserFollowArtist,
-  followArtist,
-  unfollowArtist,
+  followArtistForCurrentUser,
+  unfollowArtistForCurrentUser,
 } from "../../spotify";
 import { HeartIcon } from "@heroicons/react/solid";
-import { useQuery } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 
 type Props = {
   id: string;
@@ -13,35 +12,41 @@ type Props = {
 };
 
 export default function FollowArtist({ id, followed }: Props) {
-  // const [effect, setEffect] = useState<boolean>(false);
   const [followState, setFollowState] = useState<boolean>(followed);
+  const queryClient = useQueryClient();
 
-  const follow = async () => {
-    try {
-      await followArtist(id);
-      setFollowState(true);
-    } catch (e) {
-      console.log(e);
+  const { mutateAsync: followArtist } = useMutation(
+    followArtistForCurrentUser,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("followed-artists");
+        queryClient.invalidateQueries(["is-artist-followed", id]);
+        setFollowState(true);
+      },
     }
-  };
+  );
 
-  const unfollow = async () => {
-    try {
-      await unfollowArtist(id);
-      setFollowState(true);
-    } catch (e) {
-      console.log(e);
+  const { mutateAsync: unfollowArtist } = useMutation(
+    unfollowArtistForCurrentUser,
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("followed-artists");
+        queryClient.invalidateQueries(["is-artist-followed", id]);
+        setFollowState(false);
+      },
     }
-  };
+  );
+
+  const save = async () => await followArtist(id);
+
+  const remove = async () => await unfollowArtist(id);
 
   return (
-    <span
+    <HeartIcon
       className={`${
-        followState ? "bg-green-500 border-transparent" : "border-white"
-      } mx-auto block cursor-pointer text-white py-2 px-5 max-w-max border-2 rounded-md`}
-      onClick={followState ? unfollow : follow}
-    >
-      {followState ? "Following" : "Follow"}
-    </span>
+        followState ? "text-green-500" : "text-transparent stroke-white"
+      } h-6 w-6 cursor-pointer mx-auto`}
+      onClick={followState ? remove : save}
+    />
   );
 }
