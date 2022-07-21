@@ -21,7 +21,6 @@ export default function TrackPlayer({ token, trackUri }: Props) {
   if (!token) return null;
   return createPortal(
     <SpotifyPlayer
-      showSaveIcon
       magnifySliderOnHover={false}
       callback={(state) => {
         if (!state.isPlaying) setPlay(false);
