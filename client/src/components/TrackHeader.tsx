@@ -1,9 +1,27 @@
 import { ITrackHeader } from "../common/interfaces/trackHeader";
 import { Link, useLocation } from "react-router-dom";
+import { useQuery, useQueryClient } from "react-query";
 import { getYear } from "../utils";
+import { getDoesUserHaveAlbumSaved } from "../spotify";
+import { SaveAlbum } from "./button";
 
 export default function TrackHeader({ data }: ITrackHeader) {
+  const queryClient = useQueryClient();
   const { pathname } = useLocation();
+
+  const fetchDoesUserHaveAlbumSaved = async () => {
+    const isAlbumSaved = await getDoesUserHaveAlbumSaved(data.id);
+    return isAlbumSaved.data;
+  };
+
+  const { data: isAlbumSaved } = useQuery(
+    ["is-album-saved", data.id],
+    fetchDoesUserHaveAlbumSaved,
+    {
+      enabled: !!queryClient.getQueryData(["album", data.id]),
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <>
@@ -20,7 +38,7 @@ export default function TrackHeader({ data }: ITrackHeader) {
           alt={data.name}
         />
       )}
-      <div className="gap-y-2 flex flex-col mt-5">
+      <div className="gap-y-2 flex flex-col mt-5 mx items-center">
         <div className="text-2xl md:text-4xl font-black text-white">
           {data.name}
         </div>
@@ -43,10 +61,14 @@ export default function TrackHeader({ data }: ITrackHeader) {
           </div>
         )}
 
+        <div className="h-5">
+          {isAlbumSaved && <SaveAlbum id={data.id} saved={isAlbumSaved[0]} />}
+        </div>
+
         {pathname == `/playlists/${data.id}` && (
           <Link
             to={`/recommendations/${data.id}`}
-            className="bg-green-600 text-white max-w-fit py-2 px-5 mx-auto rounded-full cursor-pointer my-5 font-semibold"
+            className="bg-green-600 text-white max-w-fit py-2 px-5 rounded-full cursor-pointer my-5 font-semibold"
           >
             Get recommendations
           </Link>
