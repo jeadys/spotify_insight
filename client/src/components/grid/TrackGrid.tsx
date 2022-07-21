@@ -23,9 +23,7 @@ export default function TrackGrid({ items }: ITracks) {
     ["is-track-saved", trackIds],
     fetchDoesUserHaveTrackSaved,
     {
-      onSuccess: (data) => {
-        setSaveState(data);
-      },
+      onSuccess: setSaveState,
       refetchOnWindowFocus: false,
     }
   );
@@ -141,10 +139,12 @@ export default function TrackGrid({ items }: ITracks) {
                     </td>
                   )}
                   <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden flex justify-end gap-5">
-                    {isTrackSaved && saveState && (
+                    {isTrackSaved && saveState ? (
                       <span onClick={(e) => stopProp(e)}>
                         <SaveTrack id={track.id} saved={saveState[index]} />
                       </span>
+                    ) : (
+                      <SaveTrack id={track.id} saved={false} />
                     )}
                     <span className="block w-7">
                       {formatDuration(track.duration_ms)}

@@ -221,31 +221,31 @@ export const getCurrentUserSavedAlbums = (limit = 50) => {
 /**
  * Check Saved Albums for Current User
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-albums
- * @param {string[]} track_ids - The Spotify ID for the track.
+ * @param {string} album_id - The Spotify ID for the track.
  * @returns {Promise}
  */
-export const getDoesUserHaveAlbumSaved = (album_ids: string[]) => {
-  return axios.get(`/me/albums/contains?ids=${album_ids}`);
+export const getDoesUserHaveAlbumSaved = (album_id: string) => {
+  return axios.get(`/me/albums/contains?ids=${album_id}`);
 };
 
 /**
  * Save Albums for Current User
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-albums-user
- * @param {string} album_ids - The Spotify ID for the album.
+ * @param {string} album_id - The Spotify ID for the album.
  * @returns {Promise}
  */
-export const saveAlbumForCurrentUser = (album_ids: string) => {
-  return axios.put(`/me/albums?ids=${album_ids}`);
+export const saveAlbumForCurrentUser = (album_id: string) => {
+  return axios.put(`/me/albums?ids=${album_id}`);
 };
 
 /**
  * Remove Albums for Current User
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-albums-user
- * @param {string} album_ids - The Spotify ID for the album.
+ * @param {string} album_id - The Spotify ID for the album.
  * @returns {Promise}
  */
-export const removeAlbumForCurrentUser = (album_ids: string) => {
-  return axios.delete(`/me/albums?ids=${album_ids}`);
+export const removeAlbumForCurrentUser = (album_id: string) => {
+  return axios.delete(`/me/albums?ids=${album_id}`);
 };
 
 /**
@@ -364,31 +364,31 @@ export const searchItems = (query: string, limit = 30) => {
 /**
  * Check If User Follows Artists or Users
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-current-user-follows
- * @param {string[]} artist_ids - The Spotify ID for the artist.
+ * @param {string} artist_id - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getDoesUserFollowArtist = (artist_ids: string[]) => {
-  return axios.get(`/me/following/contains?type=artist&ids=${artist_ids}`);
+export const getDoesUserFollowArtist = (artist_id: string) => {
+  return axios.get(`/me/following/contains?type=artist&ids=${artist_id}`);
 };
 
 /**
  * Follow Artists or Users
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/follow-artists-users
- * @param {string} artist_ids - The Spotify ID for the artist.
+ * @param {string} artist_id - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const followArtist = (artist_ids: string) => {
-  return axios.put(`/me/following?type=artist&ids=${artist_ids}`);
+export const followArtistForCurrentUser = (artist_id: string) => {
+  return axios.put(`/me/following?type=artist&ids=${artist_id}`);
 };
 
 /**
  * Unfollow Artists or Users
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/unfollow-artists-users
- * @param {string} artist_ids - The Spotify ID for the artist.
+ * @param {string} artist_id - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const unfollowArtist = (artist_ids: string) => {
-  return axios.delete(`/me/following?type=artist&ids=${artist_ids}`);
+export const unfollowArtistForCurrentUser = (artist_id: string) => {
+  return axios.delete(`/me/following?type=artist&ids=${artist_id}`);
 };
 
 export const getNewReleases = (limit = 50) => {
