@@ -10,10 +10,11 @@ export default function Search() {
   const [searchModal, setSearchModal] = useState(false);
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<Track[]>([]); // CHECK IF THIS IS CORRECT
+  const trackUris = searchResults.map((track) => track.uri);
   const debouncedSearch = useDebounce(search, 1000);
-  const chooseTrack = ChooseTrack();
-  const playingTrack = PlayTrack();
   const inputRef = useRef<HTMLInputElement>(null);
+  const playingTrack = PlayTrack();
+  const chooseTrack = ChooseTrack();
 
   useEffect(() => {
     return searchModal ? inputRef.current!.focus() : setSearch(""); // && inputRef.current !== null ?
@@ -105,7 +106,7 @@ export default function Search() {
                         : "hover:bg-slate-700 cursor-pointer"
                     } px-4 py-2`}
                     key={result.id}
-                    onClick={() => chooseTrack(result.uri)}
+                    onClick={() => chooseTrack(trackUris, result.uri)}
                   >
                     <div className="flex items-center">
                       <div className="h-10 w-10 flex-shrink-0">

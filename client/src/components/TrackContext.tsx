@@ -3,7 +3,7 @@ import { accessToken } from "../spotify";
 import TrackPlayer from "./TrackPlayer";
 
 type ChooseTrackProps = {
-  chooseTrack: (track: string) => void;
+  chooseTrack: (tracks: string[], track: string) => void;
 };
 
 const PlayTrackContext = React.createContext<string | undefined>(undefined);
@@ -28,14 +28,24 @@ export const TrackProvider = ({ children }: TrackProviderProps) => {
     "spotify:track:4cOdK2wGLETKBW3PvgPWqT"
   );
 
-  const chooseTrack = (track: string) => {
+  const [trackQueue, setTrackQueue] = useState<string[]>([
+    "spotify:track:4cOdK2wGLETKBW3PvgPWqT",
+  ]);
+
+  const chooseTrack = (tracks: string[], track: string) => {
+    setTrackQueue(tracks);
     setPlayingTrack(track);
   };
 
   return (
     <PlayTrackContext.Provider value={playingTrack}>
       <ChooseTrackContext.Provider value={chooseTrack}>
-        <TrackPlayer token={accessToken} trackUri={playingTrack} />
+        <TrackPlayer
+          token={accessToken}
+          trackQueue={trackQueue}
+          trackOffset={playingTrack}
+          setPlayingTrack={setPlayingTrack}
+        />
         {children}
       </ChooseTrackContext.Provider>
     </PlayTrackContext.Provider>

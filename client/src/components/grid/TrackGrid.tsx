@@ -10,6 +10,7 @@ import { useState } from "react";
 
 export default function TrackGrid({ items }: ITracks) {
   const trackIds = items.map((track) => track.id).join(",");
+  const trackUris = items.map((track) => track.uri);
   const [saveState, setSaveState] = useState<boolean[]>();
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
@@ -42,7 +43,7 @@ export default function TrackGrid({ items }: ITracks) {
                       ? "bg-sky-600"
                       : "hover:bg-slate-700 cursor-pointer"
                   }`}
-                  onClick={() => chooseTrack(track.uri)}
+                  onClick={() => chooseTrack(trackUris, track.uri)}
                 >
                   <td className="whitespace-nowrap py-4 px-3 text-sm">
                     <div className="flex items-center">
