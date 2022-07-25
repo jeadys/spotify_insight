@@ -2,32 +2,42 @@ import SpotifyPlayer from "react-spotify-web-playback";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
-type ChooseTrackProps = {
+type Props = {
+  token: string | undefined;
+  trackQueue: string[];
+  trackOffset: string;
   setPlayingTrack: React.Dispatch<React.SetStateAction<string>>;
 };
 
-type Props = {
-  token: string | undefined;
-  trackUri: string | undefined;
-};
-
-export default function TrackPlayer({ token, trackUri }: Props) {
+export default function TrackPlayer({
+  token,
+  trackQueue,
+  trackOffset,
+  setPlayingTrack,
+}: Props) {
+  const offset = trackQueue.indexOf(trackOffset);
   const [play, setPlay] = useState(false);
 
   useEffect(() => {
     setPlay(true);
-  }, [trackUri]);
+  }, [trackQueue, trackOffset]);
 
   if (!token) return null;
   return createPortal(
     <SpotifyPlayer
       magnifySliderOnHover={false}
       callback={(state) => {
-        if (!state.isPlaying) setPlay(false);
+        if (!state.isPlaying) {
+          setPlay(false);
+        }
+        setPlayingTrack(state.track.uri);
       }}
       play={play}
+      offset={offset}
       token={token}
-      uris={trackUri ? [trackUri] : []}
+      uris={trackQueue}
+      persistDeviceSelection={true}
+      syncExternalDevice={true}
       styles={{
         activeColor: "#fff",
         bgColor: "#1e293b",
