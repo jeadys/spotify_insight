@@ -1,7 +1,7 @@
 import { ITrackHeader } from "../../lib/interfaces/track-header";
 import { Link, useLocation } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
-import { getYear } from "../../utils";
+import { getYear } from "../../lib/utils";
 import { getDoesUserHaveAlbumSaved } from "../../spotify";
 import { SaveAlbum } from "../button";
 

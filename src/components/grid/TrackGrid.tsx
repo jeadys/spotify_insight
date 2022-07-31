@@ -1,5 +1,5 @@
 import { PlayTrack, ChooseTrack } from "../TrackContext";
-import { formatDuration, stopProp } from "../../utils";
+import { formatDuration, stopProp } from "../../lib/utils";
 import { Link } from "react-router-dom";
 import { ITracks } from "../../lib/interfaces/tracks";
 import MusicBar from "../MusicBar";
