@@ -129,7 +129,8 @@ export default function Search() {
                       <div className="ml-4">
                         <div className="font-semibold">{result.name}</div>
                         <Link
-                          to={`/albums/${result.album.id}`}
+                          passHref
+                          href={`/albums/${result.album.id}`}
                           onClick={(e) => stopProp(e)}
                         >
                           <div className="hover:underline">
@@ -143,7 +144,8 @@ export default function Search() {
                               className="text-xstext-gray-300 hover:underline"
                             >
                               <Link
-                                to={`/artists/${artist.id}`}
+                                passHref
+                                href={`/artists/${artist.id}`}
                                 onClick={(e) => stopProp(e)}
                               >
                                 {artist.name}

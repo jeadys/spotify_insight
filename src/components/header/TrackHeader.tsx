@@ -68,7 +68,8 @@ export default function TrackHeader({ data }: ITrackHeader) {
 
         {pathname == `/playlists/${data.id}` && (
           <Link
-            to={`/recommendations/${data.id}`}
+            passHref
+            href={`/recommendations/${data.id}`}
             className="bg-green-600 text-white max-w-fit py-2 px-5 rounded-full cursor-pointer my-5 font-semibold"
           >
             Get recommendations

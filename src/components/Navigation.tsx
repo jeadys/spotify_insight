@@ -31,7 +31,9 @@ export default function Navigation() {
               : "hover:underline hover: decoration-sky-900"
           }`}
         >
-          <Link to={item.link}>{item.title}</Link>
+          <Link passHref href={item.link}>
+            {item.title}
+          </Link>
         </li>
       ))}
 

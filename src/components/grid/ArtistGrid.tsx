@@ -14,7 +14,7 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
                 key={artist.id}
                 className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
               >
-                <Link to={`/artists/${artist.id}`}>
+                <Link passHref href={`/artists/${artist.id}`}>
                   <div className="flex-1 flex flex-col p-8">
                     {artist.images.length && artist.images[2] ? (
                       <img

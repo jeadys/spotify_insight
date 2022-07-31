@@ -89,7 +89,8 @@ export default function TrackGrid({ items }: ITracks) {
                                 className="text-xs text-gray-300 hover:underline"
                               >
                                 <Link
-                                  to={`/artists/${artist.id}`}
+                                  passHref
+                                  href={`/artists/${artist.id}`}
                                   onClick={(e) => stopProp(e)}
                                 >
                                   {artist.name}
@@ -109,7 +110,8 @@ export default function TrackGrid({ items }: ITracks) {
                                 className="text-xs text-gray-300 hover:underline"
                               >
                                 <Link
-                                  to={`/artists/${artist.id}`}
+                                  passHref
+                                  href={`/artists/${artist.id}`}
                                   onClick={(e) => stopProp(e)}
                                 >
                                   {artist.name}
@@ -127,7 +129,8 @@ export default function TrackGrid({ items }: ITracks) {
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300 album:hidden">
                       <span className="text-xs text-gray-300 hover:underline">
                         <Link
-                          to={`/albums/${track.album.id}`}
+                          passHref
+                          href={`/albums/${track.album.id}`}
                           onClick={(e) => stopProp(e)}
                         >
                           {track.album.name.length < 20 ? (
@@ -160,7 +163,8 @@ export default function TrackGrid({ items }: ITracks) {
         <span className="flex flex-col items-center text-white">
           <span className="text-2xl">No tracks available</span>
           <Link
-            to={`/discover`}
+            passHref
+            href={`/discover`}
             className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2"
           >
             Discover new tracks

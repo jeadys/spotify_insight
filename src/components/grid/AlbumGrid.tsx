@@ -12,7 +12,11 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
                 key={album.id}
                 className="text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
               >
-                <Link to={`/albums/${album.id}`} className="cursor-pointer">
+                <Link
+                  passHref
+                  href={`/albums/${album.id}`}
+                  className="cursor-pointer"
+                >
                   <div className="p-4">
                     {album.images.length && album.images[1] ? (
                       <img
@@ -38,8 +42,9 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
                 </Link>
                 <div className="mb-5">
                   <Link
+                    passHref
+                    href={`/artists/${album.artists[0].id}`}
                     className="text-xs text-gray-300 hover:underline block w-max mx-auto"
-                    to={`/artists/${album.artists[0].id}`}
                   >
                     {album.artists[0].name}
                   </Link>
@@ -52,7 +57,8 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
         <span className="flex flex-col items-center text-white">
           <span className="text-2xl">No albums available</span>
           <Link
-            to={`/discover/new-releases`}
+            passHref
+            href={`/discover/new-releases`}
             className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2"
           >
             Discover new albums

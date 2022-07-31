@@ -12,7 +12,7 @@ export default function CategoryGrid({ items }: Categories) {
                 key={category.id}
                 className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
               >
-                <Link to={`/categories/${category.id}`}>
+                <Link passHref href={`/categories/${category.id}`}>
                   <div className="flex-1 flex flex-col p-4">
                     {category.icons.length && category.icons[0] ? (
                       <img

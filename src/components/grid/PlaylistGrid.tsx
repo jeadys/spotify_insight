@@ -12,7 +12,7 @@ export default function PlaylistGrid({ items }: IUsersPlaylists) {
                 key={playlist.id}
                 className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
               >
-                <Link to={`/playlists/${playlist.id}`}>
+                <Link passHref href={`/playlists/${playlist.id}`}>
                   <div className="flex-1 flex flex-col p-4">
                     {playlist.images.length && playlist.images[0] ? (
                       <img
@@ -44,7 +44,8 @@ export default function PlaylistGrid({ items }: IUsersPlaylists) {
         <span className="flex flex-col items-center text-white">
           <span className="text-2xl">No playlists available</span>
           <Link
-            to={`/discover/categories`}
+            passHref
+            href={`/discover/categories`}
             className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2"
           >
             Discover new playlists
