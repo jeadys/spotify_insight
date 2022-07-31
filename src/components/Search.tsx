@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { searchItems } from "../spotify";
 import useDebounce from "../hooks/useDebounce";
 import { ChooseTrack, PlayTrack } from "./TrackContext";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { stopProp } from "../lib/utils";
-import { Track } from "../lib/interfaces/searchTrack";
+import { Track } from "../lib/interfaces/search-tracks";
 
 export default function Search() {
   const [searchModal, setSearchModal] = useState(false);

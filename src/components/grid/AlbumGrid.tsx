@@ -1,27 +1,13 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { IArtistsAlbums } from "../../lib/interfaces/artistsAlbums";
-import { getDoesUserHaveAlbumSaved } from "../../spotify";
-import { useQuery } from "react-query";
-import { SaveAlbum } from "../button";
-import { useRoutes } from "react-router-dom";
 
 export default function AlbumGrid({ items }: IArtistsAlbums) {
-  // let savedAlbums: string[] = [];
-  // if (items && items.length) savedAlbums = items.map((item) => item.id);
-
-  // const fetchIsSaved = async () => {
-  //   const isAlbumSaved = await getDoesUserHaveAlbumSaved(savedAlbums);
-  //   return isAlbumSaved.data;
-  // };
-
-  // const { data: isSaved } = useQuery(["is-saved", savedAlbums], fetchIsSaved);
-
   return (
     <>
       {items && items.length ? (
         <>
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
-            {items.map((album, index) => (
+            {items.map((album) => (
               <li
                 key={album.id}
                 className="text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
@@ -57,7 +43,6 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
                   >
                     {album.artists[0].name}
                   </Link>
-                  {/* <SaveAlbum id={savedAlbums[index]} saved={isSaved[index]} /> */}
                 </div>
               </li>
             ))}

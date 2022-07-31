@@ -1,6 +1,6 @@
 import { PlayTrack, ChooseTrack } from "../TrackContext";
 import { formatDuration, stopProp } from "../../lib/utils";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ITracks } from "../../lib/interfaces/tracks";
 import MusicBar from "../MusicBar";
 import { getDoesUserHaveTrackSaved } from "../../spotify";

@@ -7,7 +7,7 @@ import {
 import { AlbumGrid, TrackGrid, ArtistGrid } from "../../../components/grid";
 import { SectionWrapper } from "../../../components";
 import { ArtistHeader } from "../../../components/header";
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 import { IArtist } from "../../../lib/interfaces/artist";
 import { IArtistsAlbums } from "../../../lib/interfaces/artist-album";
 import { IArtistsTopTracks } from "../../../lib/interfaces/artist-top-tracks";
@@ -15,7 +15,8 @@ import { useQuery } from "react-query";
 import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
 
 export default function Artist() {
-  const { id } = useParams();
+  const { query } = useRouter();
+  const { id } = query;
 
   const fetchArtist = async () => {
     const artist = await getArtistById(id!);

@@ -1,11 +1,12 @@
 import { getCategoryPlaylists } from "../spotify";
 import { useQuery } from "react-query";
 import { PlaylistGrid } from "../components/grid";
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 import { SectionWrapper } from "../components";
 
 export default function Category() {
-  const { id } = useParams();
+  const { query } = useRouter();
+  const { id } = query;
 
   const fetchCategory = async () => {
     const category = await getCategoryPlaylists(id!);

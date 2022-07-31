@@ -1,5 +1,6 @@
 import { ITrackHeader } from "../../lib/interfaces/track-header";
-import { Link, useLocation } from "react-router-dom";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { useQuery, useQueryClient } from "react-query";
 import { getYear } from "../../lib/utils";
 import { getDoesUserHaveAlbumSaved } from "../../spotify";
@@ -7,7 +8,7 @@ import { SaveAlbum } from "../button";
 
 export default function TrackHeader({ data }: ITrackHeader) {
   const queryClient = useQueryClient();
-  const { pathname } = useLocation();
+  const { pathname } = useRouter();
 
   const fetchDoesUserHaveAlbumSaved = async () => {
     const isAlbumSaved = await getDoesUserHaveAlbumSaved(data.id);

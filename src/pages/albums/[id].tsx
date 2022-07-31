@@ -1,13 +1,14 @@
 import { SectionWrapper } from "../../components";
 import { TrackHeader } from "../../components/header";
 import { TrackGrid } from "../../components/grid";
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 import { getAlbumById } from "../../spotify";
 import { IAlbum } from "../../lib/interfaces/album";
 import { useQuery } from "react-query";
 
 export default function Album() {
-  const { id } = useParams();
+  const { query } = useRouter();
+  const { id } = query;
 
   const fetchAlbum = async () => {
     const album = await getAlbumById(id!);

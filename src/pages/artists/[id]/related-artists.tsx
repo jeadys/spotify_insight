@@ -2,11 +2,12 @@ import { SectionWrapper } from "../components";
 import { ArtistGrid } from "../components/grid";
 import { getArtistRelatedArtists } from "../spotify";
 import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 
 export default function RelatedArtists() {
-  const { id } = useParams();
+  const { query } = useRouter();
+  const { id } = query;
 
   const fetchArtistRelatedArtists = async () => {
     const artistRelatedArtists = await getArtistRelatedArtists(id!);

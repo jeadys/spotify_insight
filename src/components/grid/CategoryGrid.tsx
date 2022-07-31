@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Categories } from "../../lib/interfaces/categories";
 
 export default function CategoryGrid({ items }: Categories) {

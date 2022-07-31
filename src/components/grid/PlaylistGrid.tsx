@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { IUsersPlaylists } from "../../lib/interfaces/usersPlaylists";
 
 export default function PlaylistGrid({ items }: IUsersPlaylists) {

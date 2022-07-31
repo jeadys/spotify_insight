@@ -1,9 +1,9 @@
-import { useLocation } from "react-router";
-import { Link, useNavigate } from "react-router-dom";
+import Link from "next/link";
 import Search from "./Search";
+import { useRouter } from "next/router";
 
 export default function Navigation() {
-  const { pathname } = useLocation();
+  const { pathname } = useRouter();
 
   const items = [
     {

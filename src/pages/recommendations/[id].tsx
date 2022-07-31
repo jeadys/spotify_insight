@@ -4,10 +4,11 @@ import { TrackGrid } from "../../components/grid";
 import { getRecommendationsForTracks, getPlaylistById } from "../../spotify";
 import { IPlaylist } from "../../lib/interfaces/playlist";
 import { IRecommendations } from "../../lib/interfaces/recommendations";
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 
 export default function Recommendations() {
-  const { id } = useParams();
+  const { query } = useRouter();
+  const { id } = query;
 
   const fetchPlaylist = async () => {
     const playlist = await getPlaylistById(id!);
