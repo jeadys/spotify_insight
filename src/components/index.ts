@@ -1,6 +1,4 @@
 export { default as Content } from "./Content";
-export { default as ArtistHeader } from "./ArtistHeader";
-export { default as TrackHeader } from "./TrackHeader";
 export { default as Navigation } from "./Navigation";
 export { default as SectionWrapper } from "./SectionWrapper";
 export { default as TrackContext } from "./TrackContext";

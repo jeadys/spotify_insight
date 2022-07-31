@@ -1,11 +1,11 @@
-import { getArtistAlbums } from "../spotify";
-import { AlbumGrid } from "../components/grid";
-import { SectionWrapper } from "../components";
+import { getArtistAlbums } from "../../../spotify";
+import { AlbumGrid } from "../../../components/grid";
+import { SectionWrapper } from "../../../components";
 import { useParams } from "react-router-dom";
-import { IArtistsAlbums } from "../common/interfaces/artistsAlbums";
+import { IArtistsAlbums } from "../../../lib/interfaces/artist-album";
 import { useQuery } from "react-query";
 
-export default function Albums() {
+export default function RelatedAlbums() {
   const { id } = useParams();
 
   const fetchArtistAlbums = async () => {

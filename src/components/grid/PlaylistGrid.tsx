@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IUsersPlaylists } from "../../common/interfaces/usersPlaylists";
+import { IUsersPlaylists } from "../../lib/interfaces/usersPlaylists";
 
 export default function PlaylistGrid({ items }: IUsersPlaylists) {
   return (

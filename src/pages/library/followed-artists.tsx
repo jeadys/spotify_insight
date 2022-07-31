@@ -1,10 +1,10 @@
-import { SectionWrapper } from "../components";
-import { ArtistGrid } from "../components/grid";
-import { getCurrentUserFollowedArtists } from "../spotify";
+import { SectionWrapper } from "../../components";
+import { ArtistGrid } from "../../components/grid";
+import { getCurrentUserFollowedArtists } from "../../spotify";
 import { useQuery } from "react-query";
-import { IUsersFollowedArtists } from "../common/interfaces/usersFollowedArtists";
+import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
 
-export default function TopArtists() {
+export default function FollowedArtists() {
   const fetchUserFollowedArtists = async () => {
     const userFollowedArtists = await getCurrentUserFollowedArtists();
     return userFollowedArtists.data;

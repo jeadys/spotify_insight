@@ -1,8 +1,9 @@
-import { SectionWrapper, TrackHeader } from "../components";
-import { TrackGrid } from "../components/grid";
-import { getPlaylistById } from "../spotify";
+import { SectionWrapper } from "../../components";
+import { TrackHeader } from "../../components/header";
+import { TrackGrid } from "../../components/grid";
+import { getPlaylistById } from "../../spotify";
 import { useParams } from "react-router-dom";
-import { IPlaylist } from "../common/interfaces/playlist";
+import { IPlaylist } from "../../lib/interfaces/playlist";
 import { useQuery } from "react-query";
 
 export default function Playlist() {

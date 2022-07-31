@@ -1,9 +1,9 @@
-import { ITrackHeader } from "../common/interfaces/trackHeader";
+import { ITrackHeader } from "../../lib/interfaces/track-header";
 import { Link, useLocation } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
-import { getYear } from "../utils";
-import { getDoesUserHaveAlbumSaved } from "../spotify";
-import { SaveAlbum } from "./button";
+import { getYear } from "../../utils";
+import { getDoesUserHaveAlbumSaved } from "../../spotify";
+import { SaveAlbum } from "../button";
 
 export default function TrackHeader({ data }: ITrackHeader) {
   const queryClient = useQueryClient();

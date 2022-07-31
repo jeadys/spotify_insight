@@ -1,7 +1,7 @@
-import { SectionWrapper } from "../components";
-import { getNewReleases } from "../spotify";
-import { AlbumGrid } from "../components/grid";
-import { INewReleases } from "../common/interfaces/newReleases";
+import { SectionWrapper } from "../../components";
+import { getNewReleases } from "../../spotify";
+import { AlbumGrid } from "../../components/grid";
+import { INewReleases } from "../../lib/interfaces/new-releases";
 import { useQuery } from "react-query";
 
 export default function NewReleases() {

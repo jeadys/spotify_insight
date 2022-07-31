@@ -1,25 +1,25 @@
 import axios from "axios";
-import { IAlbum } from "./common/interfaces/album";
-import { IArtist } from "./common/interfaces/artist";
-import { IArtistsAlbums } from "./common/interfaces/artistsAlbums";
-import { IArtistsRelatedArtists } from "./common/interfaces/artistsRelatedArtists";
-import { IArtistsTopTracks } from "./common/interfaces/artistsTopTracks";
-import { ICategories } from "./common/interfaces/categories";
-import { IFeaturedPlaylists } from "./common/interfaces/featuredPlaylists";
-import { INewReleases } from "./common/interfaces/newReleases";
+import { IAlbum } from "./lib/interfaces/album";
+import { IArtist } from "./lib/interfaces/artist";
+import { IArtistsAlbums } from "./lib/interfaces/artistsAlbums";
+import { IArtistsRelatedArtists } from "./lib/interfaces/artistsRelatedArtists";
+import { IArtistsTopTracks } from "./lib/interfaces/artistsTopTracks";
+import { ICategories } from "./lib/interfaces/categories";
+import { IFeaturedPlaylists } from "./lib/interfaces/featuredPlaylists";
+import { INewReleases } from "./lib/interfaces/newReleases";
 import {
   IPlaylist,
   IPlaylistTracks,
   IPlaylistItem,
-} from "./common/interfaces/playlist";
-import { IRecommendations } from "./common/interfaces/recommendations";
-import { ISearchTrack } from "./common/interfaces/searchTrack";
-import { IUsersFollowedArtists } from "./common/interfaces/usersFollowedArtists";
-import { IUsersPlaylists } from "./common/interfaces/usersPlaylists";
-import { IUsersSavedAlbums } from "./common/interfaces/usersSavedAlbums";
-import { IUsersSavedTracks } from "./common/interfaces/usersSavedTracks";
-import { IUsersTopArtists } from "./common/interfaces/usersTopArtists";
-import { IUsersTopTracks } from "./common/interfaces/usersTopTracks";
+} from "./lib/interfaces/playlist";
+import { IRecommendations } from "./lib/interfaces/recommendations";
+import { ISearchTrack } from "./lib/interfaces/searchTrack";
+import { IUsersFollowedArtists } from "./lib/interfaces/usersFollowedArtists";
+import { IUsersPlaylists } from "./lib/interfaces/usersPlaylists";
+import { IUsersSavedAlbums } from "./lib/interfaces/usersSavedAlbums";
+import { IUsersSavedTracks } from "./lib/interfaces/usersSavedTracks";
+import { IUsersTopArtists } from "./lib/interfaces/usersTopArtists";
+import { IUsersTopTracks } from "./lib/interfaces/users-top-tracks";
 
 // Map for localStorage keys
 const LOCALSTORAGE_KEYS = {

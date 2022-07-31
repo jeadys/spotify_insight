@@ -1,7 +1,7 @@
 import { SectionWrapper } from "../components";
 import { ArtistGrid } from "../components/grid";
 import { getArtistRelatedArtists } from "../spotify";
-import { IArtistsRelatedArtists } from "../common/interfaces/artistsRelatedArtists";
+import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
 import { useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 

@@ -18,7 +18,7 @@ import {
   Category,
   FeaturedPlaylists,
   Albums,
-} from "./pages";
+} from "./pages/library";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";

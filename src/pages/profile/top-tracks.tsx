@@ -2,7 +2,7 @@ import { SectionWrapper } from "../components";
 import { TrackGrid } from "../components/grid";
 import { useState } from "react";
 import { getTopTracks } from "../spotify";
-import { IUsersTopTracks } from "../common/interfaces/usersTopTracks";
+import { IUsersTopTracks } from "../../lib/interfaces/users-top-tracks";
 import { useQuery } from "react-query";
 
 export default function TopTracks() {

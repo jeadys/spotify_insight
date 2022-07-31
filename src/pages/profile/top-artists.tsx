@@ -1,8 +1,8 @@
-import { SectionWrapper } from "../components";
-import { ArtistGrid } from "../components/grid";
+import { SectionWrapper } from "../../components";
+import { ArtistGrid } from "../../components/grid";
 import { useState } from "react";
-import { getTopArtists } from "../spotify";
-import { IUsersTopArtists } from "../common/interfaces/usersTopArtists";
+import { getTopArtists } from "../../spotify";
+import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
 import { useQuery } from "react-query";
 
 export default function TopArtists() {

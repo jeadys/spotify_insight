@@ -1,10 +1,10 @@
 import { getCurrentUserPlaylists } from "../spotify";
 import { PlaylistGrid } from "../components/grid";
 import { SectionWrapper } from "../components";
-import { IUsersPlaylists } from "../common/interfaces/usersPlaylists";
+import { IUsersPlaylists } from "../../lib/interfaces/user-saved-playlists";
 import { useQuery } from "react-query";
 
-export default function Playlists() {
+export default function SavedPlaylists() {
   const fetchPlaylists = async () => {
     const playlists = await getCurrentUserPlaylists();
     return playlists.data;
@@ -22,7 +22,7 @@ export default function Playlists() {
     <>
       {playlists && (
         <>
-          <SectionWrapper title="Playlists" breadcrumb="true">
+          <SectionWrapper title="Saved playlists" breadcrumb="true">
             <PlaylistGrid items={playlists.items} />
           </SectionWrapper>
         </>

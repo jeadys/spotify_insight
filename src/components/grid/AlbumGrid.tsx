@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IArtistsAlbums } from "../../common/interfaces/artistsAlbums";
+import { IArtistsAlbums } from "../../lib/interfaces/artistsAlbums";
 import { getDoesUserHaveAlbumSaved } from "../../spotify";
 import { useQuery } from "react-query";
 import { SaveAlbum } from "../button";

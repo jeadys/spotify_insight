@@ -3,15 +3,16 @@ import {
   getArtistTopTracks,
   getArtistAlbums,
   getArtistRelatedArtists,
-} from "../spotify";
-import { AlbumGrid, TrackGrid, ArtistGrid } from "../components/grid";
-import { SectionWrapper, ArtistHeader } from "../components";
+} from "../../../spotify";
+import { AlbumGrid, TrackGrid, ArtistGrid } from "../../../components/grid";
+import { SectionWrapper } from "../../../components";
+import { ArtistHeader } from "../../../components/header";
 import { useParams } from "react-router-dom";
-import { IArtist } from "../common/interfaces/artist";
-import { IArtistsAlbums } from "../common/interfaces/artistsAlbums";
-import { IArtistsTopTracks } from "../common/interfaces/artistsTopTracks";
+import { IArtist } from "../../../lib/interfaces/artist";
+import { IArtistsAlbums } from "../../../lib/interfaces/artist-album";
+import { IArtistsTopTracks } from "../../../lib/interfaces/artist-top-tracks";
 import { useQuery } from "react-query";
-import { IArtistsRelatedArtists } from "../common/interfaces/artistsRelatedArtists";
+import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
 
 export default function Artist() {
   const { id } = useParams();

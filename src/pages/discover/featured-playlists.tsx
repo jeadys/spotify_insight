@@ -1,10 +1,10 @@
-import { SectionWrapper } from "../components";
-import { getFeaturedPlaylists } from "../spotify";
-import { PlaylistGrid } from "../components/grid";
-import { IFeaturedPlaylists } from "../common/interfaces/featuredPlaylists";
+import { SectionWrapper } from "../../components";
+import { getFeaturedPlaylists } from "../../spotify";
+import { PlaylistGrid } from "../../components/grid";
+import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
 import { useQuery } from "react-query";
 
-export default function NewReleases() {
+export default function FeaturedPlaylists() {
   const fetchFeaturedPlaylists = async () => {
     const featuredPlaylists = await getFeaturedPlaylists();
     return featuredPlaylists.data;

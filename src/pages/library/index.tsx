@@ -4,18 +4,18 @@ import {
   getCurrentUserPlaylists,
   getCurrentUserSavedAlbums,
   getCurrentUserSavedTracks,
-} from "../spotify";
-import { IUsersFollowedArtists } from "../common/interfaces/usersFollowedArtists";
+} from "../../spotify";
+import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
 import {
   ArtistGrid,
   PlaylistGrid,
   AlbumGrid,
   TrackGrid,
-} from "../components/grid";
-import { SectionWrapper } from "../components";
-import { IUsersPlaylists } from "../common/interfaces/usersPlaylists";
-import { IUsersSavedAlbums } from "../common/interfaces/usersSavedAlbums";
-import { IUsersSavedTracks } from "../common/interfaces/usersSavedTracks";
+} from "../../components/grid";
+import { SectionWrapper } from "../../components";
+import { IUsersPlaylists } from "../../lib/interfaces/user-saved-playlists";
+import { IUsersSavedAlbums } from "../../lib/interfaces/user-saved-albums";
+import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";
 
 export default function Library() {
   const fetchUserFollowedArtists = async () => {

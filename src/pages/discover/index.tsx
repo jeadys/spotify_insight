@@ -3,12 +3,12 @@ import {
   getCategories,
   getFeaturedPlaylists,
   getNewReleases,
-} from "../spotify";
-import { AlbumGrid, PlaylistGrid, CategoryGrid } from "../components/grid";
-import { INewReleases } from "../common/interfaces/newReleases";
-import { SectionWrapper } from "../components";
-import { ICategories } from "../common/interfaces/categories";
-import { IFeaturedPlaylists } from "../common/interfaces/featuredPlaylists";
+} from "../../spotify";
+import { AlbumGrid, PlaylistGrid, CategoryGrid } from "../../components/grid";
+import { INewReleases } from "../../lib/interfaces/new-releases";
+import { SectionWrapper } from "../../components";
+import { ICategories } from "../../lib/interfaces/categories";
+import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
 
 export default function Discover() {
   const fetchNewReleases = async () => {

@@ -2,12 +2,12 @@ import {
   getCurrentUserPlaylists,
   getTopArtists,
   getTopTracks,
-} from "../spotify";
-import { TrackGrid, ArtistGrid } from "../components/grid";
-import { SectionWrapper, Loader } from "../components";
-import { IUsersTopArtists } from "../common/interfaces/usersTopArtists";
-import { IUsersTopTracks } from "../common/interfaces/usersTopTracks";
-import { IUsersPlaylists } from "../common/interfaces/usersPlaylists";
+} from "../../spotify";
+import { TrackGrid, ArtistGrid } from "../../components/grid";
+import { SectionWrapper, Loader } from "../../components";
+import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
+import { IUsersTopTracks } from "../../lib/interfaces/users-top-tracks";
+import { IUsersPlaylists } from "../../lib/interfaces/user-saved-playlists";
 import { useQuery } from "react-query";
 
 export default function Profile() {

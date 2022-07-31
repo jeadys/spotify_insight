@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
-import { SectionWrapper } from "../components";
-import { TrackGrid } from "../components/grid";
-import { getRecommendationsForTracks, getPlaylistById } from "../spotify";
-import { IPlaylist } from "../common/interfaces/playlist";
-import { IRecommendations } from "../common/interfaces/recommendations";
+import { SectionWrapper } from "../../components";
+import { TrackGrid } from "../../components/grid";
+import { getRecommendationsForTracks, getPlaylistById } from "../../spotify";
+import { IPlaylist } from "../../lib/interfaces/playlist";
+import { IRecommendations } from "../../lib/interfaces/recommendations";
 import { useParams } from "react-router-dom";
 
 export default function Recommendations() {

@@ -4,7 +4,7 @@ import useDebounce from "../hooks/useDebounce";
 import { ChooseTrack, PlayTrack } from "./TrackContext";
 import { Link } from "react-router-dom";
 import { stopProp } from "../utils";
-import { Track } from "../common/interfaces/searchTrack";
+import { Track } from "../lib/interfaces/searchTrack";
 
 export default function Search() {
   const [searchModal, setSearchModal] = useState(false);

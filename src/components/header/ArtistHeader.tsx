@@ -1,4 +1,4 @@
-import { IArtistHeader } from "../common/interfaces/artistHeader";
+import { IArtistHeader } from "../../lib/interfaces/artist-header";
 import { useQuery } from "react-query";
 import { getDoesUserFollowArtist } from "../spotify";
 import { FollowArtist } from "./button";
