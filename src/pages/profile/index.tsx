@@ -2,7 +2,7 @@ import {
   getCurrentUserPlaylists,
   getTopArtists,
   getTopTracks,
-} from "../../spotify";
+} from "../../lib/spotify";
 import { TrackGrid, ArtistGrid } from "../../components/grid";
 import { SectionWrapper, Loader } from "../../components";
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";

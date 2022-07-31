@@ -1,7 +1,7 @@
 import { SectionWrapper } from "../../components";
 import { TrackHeader } from "../../components/header";
 import { TrackGrid } from "../../components/grid";
-import { getPlaylistById } from "../../spotify";
+import { getPlaylistById } from "../../lib/spotify";
 import { useRouter } from "next/router";
 import { IPlaylist } from "../../lib/interfaces/playlist";
 import { useQuery } from "react-query";

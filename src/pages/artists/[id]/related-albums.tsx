@@ -1,4 +1,4 @@
-import { getArtistAlbums } from "../../../spotify";
+import { getArtistAlbums } from "../../../lib/spotify";
 import { AlbumGrid } from "../../../components/grid";
 import { SectionWrapper } from "../../../components";
 import { useRouter } from "next/router";

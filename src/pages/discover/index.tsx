@@ -3,7 +3,7 @@ import {
   getCategories,
   getFeaturedPlaylists,
   getNewReleases,
-} from "../../spotify";
+} from "../../lib/spotify";
 import { AlbumGrid, PlaylistGrid, CategoryGrid } from "../../components/grid";
 import { INewReleases } from "../../lib/interfaces/new-releases";
 import { SectionWrapper } from "../../components";

@@ -1,7 +1,7 @@
 import { IArtistHeader } from "../../lib/interfaces/artist-header";
 import { useQuery } from "react-query";
-import { getDoesUserFollowArtist } from "../spotify";
-import { FollowArtist } from "./button";
+import { getDoesUserFollowArtist } from "../../lib/spotify";
+import { FollowArtist } from "../button";
 
 export default function ArtistHeader({ data }: IArtistHeader) {
   const fetchDoesUserFollowArtist = async () => {

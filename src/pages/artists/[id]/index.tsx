@@ -3,7 +3,7 @@ import {
   getArtistTopTracks,
   getArtistAlbums,
   getArtistRelatedArtists,
-} from "../../../spotify";
+} from "../../../lib/spotify";
 import { AlbumGrid, TrackGrid, ArtistGrid } from "../../../components/grid";
 import { SectionWrapper } from "../../../components";
 import { ArtistHeader } from "../../../components/header";

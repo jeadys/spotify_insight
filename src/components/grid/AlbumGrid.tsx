@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IArtistsAlbums } from "../../lib/interfaces/artistsAlbums";
+import { IArtistsAlbums } from "../../lib/interfaces/artist-album";
 
 export default function AlbumGrid({ items }: IArtistsAlbums) {
   return (

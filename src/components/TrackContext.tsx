@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { accessToken } from "../spotify";
+import { accessToken } from "../lib/spotify";
 import TrackPlayer from "./TrackPlayer";
 
 type ChooseTrackProps = {

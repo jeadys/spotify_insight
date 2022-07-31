@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import Link from "next/link";
-import { IUsersTopArtists } from "../../lib/interfaces/usersTopArtists";
-import { getDoesUserFollowArtist } from "../../spotify";
+import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
+import { getDoesUserFollowArtist } from "../../lib/spotify";
 
 export default function ArtistGrid({ items }: IUsersTopArtists) {
   return (

@@ -1,6 +1,6 @@
-import { SectionWrapper } from "../components";
-import { TrackGrid } from "../components/grid";
-import { getCurrentUserSavedTracks } from "../spotify";
+import { SectionWrapper } from "../../components";
+import { TrackGrid } from "../../components/grid";
+import { getCurrentUserSavedTracks } from "../../lib/spotify";
 import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";
 import { useQuery } from "react-query";
 

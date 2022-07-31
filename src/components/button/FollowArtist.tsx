@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   followArtistForCurrentUser,
   unfollowArtistForCurrentUser,
-} from "../../spotify";
+} from "../../lib/spotify";
 import { HeartIcon } from "@heroicons/react/solid";
 import { useMutation, useQueryClient } from "react-query";
 

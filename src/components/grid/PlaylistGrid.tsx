@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IUsersPlaylists } from "../../lib/interfaces/usersPlaylists";
+import { IUsersPlaylists } from "../../lib/interfaces/user-saved-playlists";
 
 export default function PlaylistGrid({ items }: IUsersPlaylists) {
   return (

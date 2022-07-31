@@ -1,5 +1,5 @@
 import { SectionWrapper } from "../../components";
-import { getNewReleases } from "../../spotify";
+import { getNewReleases } from "../../lib/spotify";
 import { AlbumGrid } from "../../components/grid";
 import { INewReleases } from "../../lib/interfaces/new-releases";
 import { useQuery } from "react-query";

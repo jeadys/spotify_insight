@@ -1,7 +1,10 @@
 import { useQuery } from "react-query";
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
-import { getRecommendationsForTracks, getPlaylistById } from "../../spotify";
+import {
+  getRecommendationsForTracks,
+  getPlaylistById,
+} from "../../lib/spotify";
 import { IPlaylist } from "../../lib/interfaces/playlist";
 import { IRecommendations } from "../../lib/interfaces/recommendations";
 import { useRouter } from "next/router";

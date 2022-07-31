@@ -1,7 +1,7 @@
-import { SectionWrapper } from "../components";
-import { TrackGrid } from "../components/grid";
+import { SectionWrapper } from "../../components";
+import { TrackGrid } from "../../components/grid";
 import { useState } from "react";
-import { getTopTracks } from "../spotify";
+import { getTopTracks } from "../../lib/spotify";
 import { IUsersTopTracks } from "../../lib/interfaces/users-top-tracks";
 import { useQuery } from "react-query";
 

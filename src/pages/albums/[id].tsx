@@ -2,7 +2,7 @@ import { SectionWrapper } from "../../components";
 import { TrackHeader } from "../../components/header";
 import { TrackGrid } from "../../components/grid";
 import { useRouter } from "next/router";
-import { getAlbumById } from "../../spotify";
+import { getAlbumById } from "../../lib/spotify";
 import { IAlbum } from "../../lib/interfaces/album";
 import { useQuery } from "react-query";
 

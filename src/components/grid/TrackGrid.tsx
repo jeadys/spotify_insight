@@ -3,7 +3,7 @@ import { formatDuration, stopProp } from "../../lib/utils";
 import Link from "next/link";
 import { ITracks } from "../../lib/interfaces/tracks";
 import MusicBar from "../MusicBar";
-import { getDoesUserHaveTrackSaved } from "../../spotify";
+import { getDoesUserHaveTrackSaved } from "../../lib/spotify";
 import { useQuery } from "react-query";
 import { SaveTrack } from "../button";
 import { useState } from "react";

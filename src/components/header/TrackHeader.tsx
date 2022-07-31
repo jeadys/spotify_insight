@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { useQuery, useQueryClient } from "react-query";
 import { getYear } from "../../lib/utils";
-import { getDoesUserHaveAlbumSaved } from "../../spotify";
+import { getDoesUserHaveAlbumSaved } from "../../lib/spotify";
 import { SaveAlbum } from "../button";
 
 export default function TrackHeader({ data }: ITrackHeader) {

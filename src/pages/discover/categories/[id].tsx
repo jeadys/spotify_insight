@@ -1,8 +1,8 @@
-import { getCategoryPlaylists } from "../spotify";
+import { getCategoryPlaylists } from "../../../lib/spotify";
 import { useQuery } from "react-query";
-import { PlaylistGrid } from "../components/grid";
+import { PlaylistGrid } from "../../../components/grid";
 import { useRouter } from "next/router";
-import { SectionWrapper } from "../components";
+import { SectionWrapper } from "../../../components";
 
 export default function Category() {
   const { query } = useRouter();

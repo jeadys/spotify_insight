@@ -4,7 +4,7 @@ import {
   getCurrentUserPlaylists,
   getCurrentUserSavedAlbums,
   getCurrentUserSavedTracks,
-} from "../../spotify";
+} from "../../lib/spotify";
 import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
 import {
   ArtistGrid,

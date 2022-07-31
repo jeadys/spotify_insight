@@ -1,6 +1,6 @@
 import { SectionWrapper } from "../../components";
 import { AlbumGrid } from "../../components/grid";
-import { getCurrentUserSavedAlbums } from "../../spotify";
+import { getCurrentUserSavedAlbums } from "../../lib/spotify";
 import { IUsersSavedAlbums } from "../../lib/interfaces/user-saved-albums";
 import { useQuery } from "react-query";
 

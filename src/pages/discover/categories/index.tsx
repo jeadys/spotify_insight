@@ -1,5 +1,5 @@
 import { SectionWrapper } from "../../../components";
-import { getCategories } from "../../../spotify";
+import { getCategories } from "../../../lib/spotify";
 import CategoryGrid from "../../../components/grid/CategoryGrid";
 import { ICategories } from "../../../lib/interfaces/categories";
 import { useQuery } from "react-query";

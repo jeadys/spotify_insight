@@ -1,6 +1,6 @@
-import { getCurrentUserPlaylists } from "../spotify";
-import { PlaylistGrid } from "../components/grid";
-import { SectionWrapper } from "../components";
+import { getCurrentUserPlaylists } from "../../lib/spotify";
+import { PlaylistGrid } from "../../components/grid";
+import { SectionWrapper } from "../../components";
 import { IUsersPlaylists } from "../../lib/interfaces/user-saved-playlists";
 import { useQuery } from "react-query";
 

@@ -1,5 +1,5 @@
 import { SectionWrapper } from "../../components";
-import { getFeaturedPlaylists } from "../../spotify";
+import { getFeaturedPlaylists } from "../../lib/spotify";
 import { PlaylistGrid } from "../../components/grid";
 import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
 import { useQuery } from "react-query";

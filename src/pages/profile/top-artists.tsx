@@ -1,7 +1,7 @@
 import { SectionWrapper } from "../../components";
 import { ArtistGrid } from "../../components/grid";
 import { useState } from "react";
-import { getTopArtists } from "../../spotify";
+import { getTopArtists } from "../../lib/spotify";
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
 import { useQuery } from "react-query";
 

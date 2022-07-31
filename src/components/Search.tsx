@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { searchItems } from "../spotify";
+import { searchItems } from "../lib/spotify";
 import useDebounce from "../hooks/useDebounce";
 import { ChooseTrack, PlayTrack } from "./TrackContext";
 import Link from "next/link";

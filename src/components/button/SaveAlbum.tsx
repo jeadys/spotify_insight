@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from "react-query";
 import {
   saveAlbumForCurrentUser,
   removeAlbumForCurrentUser,
-} from "../../spotify";
+} from "../../lib/spotify";
 
 type Props = {
   id: string;
