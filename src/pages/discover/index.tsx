@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { AlbumGrid, CategoryGrid, PlaylistGrid } from "../../components/grid";
@@ -23,17 +23,17 @@ export default function Discover() {
     return categories.data;
   };
 
-  const { data: releases } = useQuery<INewReleases>("new-releases", fetchNewReleases, {
+  const { data: releases } = useQuery<INewReleases>(["new-releases"], fetchNewReleases, {
     refetchOnWindowFocus: false,
   });
 
   const { data: featured } = useQuery<IFeaturedPlaylists>(
-    "featured-playlists",
+    ["featured-playlists"],
     fetchFeaturedPlaylists,
     { refetchOnWindowFocus: false }
   );
 
-  const { data: categories } = useQuery<ICategories>("categories", fetchCategories, {
+  const { data: categories } = useQuery<ICategories>(["categories"], fetchCategories, {
     refetchOnWindowFocus: false,
   });
 

@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { AlbumGrid } from "../../components/grid";
@@ -12,11 +12,9 @@ export default function SavedAlbums() {
   };
 
   const { data: tracks } = useQuery<IUsersSavedAlbums>(
-    "saved-albums",
+    ["saved-albums"],
     fetchCurrentUserSavedAlbums,
-    {
-      refetchOnWindowFocus: false,
-    }
+    { refetchOnWindowFocus: false }
   );
 
   return (

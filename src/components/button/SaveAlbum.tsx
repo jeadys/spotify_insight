@@ -1,6 +1,6 @@
 import { HeartIcon } from "@heroicons/react/solid";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import { removeAlbumForCurrentUser, saveAlbumForCurrentUser } from "../../lib/spotify";
 
@@ -15,16 +15,16 @@ export default function SaveAlbum({ id, saved }: Props) {
 
   const { mutateAsync: saveAlbum } = useMutation(saveAlbumForCurrentUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("saved-albums");
-      queryClient.invalidateQueries("is-album-saved");
+      queryClient.invalidateQueries(["saved-albums"]);
+      queryClient.invalidateQueries(["is-album-saved"]);
       setSaveState(true);
     },
   });
 
   const { mutateAsync: removeAlbum } = useMutation(removeAlbumForCurrentUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("saved-albums");
-      queryClient.invalidateQueries("is-album-saved");
+      queryClient.invalidateQueries(["saved-albums"]);
+      queryClient.invalidateQueries(["is-album-saved"]);
       setSaveState(false);
     },
   });

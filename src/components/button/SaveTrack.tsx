@@ -1,6 +1,6 @@
 import { HeartIcon } from "@heroicons/react/solid";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import { removeTrackForCurrentUser, saveTrackForCurrentUser } from "../../lib/spotify";
 
@@ -15,16 +15,16 @@ export default function SaveTrack({ id, saved }: Props) {
 
   const { mutateAsync: saveTrack } = useMutation(saveTrackForCurrentUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("saved-tracks");
-      queryClient.invalidateQueries("is-track-saved");
+      queryClient.invalidateQueries(["saved-tracks"]);
+      queryClient.invalidateQueries(["is-track-saved"]);
       setSaveState(true);
     },
   });
 
   const { mutateAsync: removeTrack } = useMutation(removeTrackForCurrentUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("saved-tracks");
-      queryClient.invalidateQueries("is-track-saved");
+      queryClient.invalidateQueries(["saved-tracks"]);
+      queryClient.invalidateQueries(["is-track-saved"]);
       setSaveState(false);
     },
   });

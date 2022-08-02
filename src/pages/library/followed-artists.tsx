@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { ArtistGrid } from "../../components/grid";
@@ -12,7 +12,7 @@ export default function FollowedArtists() {
   };
 
   const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
-    "followed-artists",
+    ["followed-artists"],
     fetchUserFollowedArtists,
     { refetchOnWindowFocus: false }
   );

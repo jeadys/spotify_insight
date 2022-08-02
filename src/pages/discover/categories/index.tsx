@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../../components";
 import CategoryGrid from "../../../components/grid/CategoryGrid";
@@ -11,7 +11,7 @@ export default function Categories() {
     return categories.data;
   };
 
-  const { data: categories } = useQuery<ICategories>("categories", fetchCategories, {
+  const { data: categories } = useQuery<ICategories>(["categories"], fetchCategories, {
     refetchOnWindowFocus: false,
   });
 

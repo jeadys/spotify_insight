@@ -1,8 +1,8 @@
+import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import React from "react";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
 
 import { Content, Navigation, ScrollTop } from "../components";
 import TrackProvider from "../components/TrackContext";

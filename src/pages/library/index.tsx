@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { AlbumGrid, ArtistGrid, PlaylistGrid, TrackGrid } from "../../components/grid";
@@ -35,23 +35,25 @@ const fetchUserFollowedArtists = async () => {
 
 export default function Library() {
   const { data: savedPlaylists } = useQuery<IUsersSavedPlaylists>(
-    "saved-playlists",
+    ["saved-playlists"],
     fetchUserSavedPlaylists,
-    {
-      refetchOnWindowFocus: false,
-    }
+    { refetchOnWindowFocus: false }
   );
 
-  const { data: savedAlbums } = useQuery<IUsersSavedAlbums>("saved-albums", fetchUsersSavedAlbums, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: savedAlbums } = useQuery<IUsersSavedAlbums>(
+    ["saved-albums"],
+    fetchUsersSavedAlbums,
+    { refetchOnWindowFocus: false }
+  );
 
-  const { data: savedTracks } = useQuery<IUsersSavedTracks>("saved-tracks", fetchUserSavedTracks, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: savedTracks } = useQuery<IUsersSavedTracks>(
+    ["saved-tracks"],
+    fetchUserSavedTracks,
+    { refetchOnWindowFocus: false }
+  );
 
   const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
-    "followed-artists",
+    ["followed-artists"],
     fetchUserFollowedArtists,
     { refetchOnWindowFocus: false }
   );

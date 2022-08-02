@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
 
 import { SectionWrapper } from "../../../components";
 import { AlbumGrid, ArtistGrid, TrackGrid } from "../../../components/grid";
@@ -46,17 +46,13 @@ export default function Artist() {
   const { data: artistTopTracks } = useQuery<IArtistsTopTracks>(
     ["artist-tracks", id],
     fetchArtistTopTracks,
-    {
-      refetchOnWindowFocus: false,
-    }
+    { refetchOnWindowFocus: false }
   );
 
   const { data: artistAlbums } = useQuery<IArtistsAlbums>(
     ["artist-albums", id],
     fetchArtistAlbums,
-    {
-      refetchOnWindowFocus: false,
-    }
+    { refetchOnWindowFocus: false }
   );
 
   const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(
@@ -74,11 +70,11 @@ export default function Artist() {
             <TrackGrid items={artistTopTracks.tracks} />
           </SectionWrapper>
 
-          <SectionWrapper title="Popular albums" seeAll={`/artists/${id}/albums`}>
+          <SectionWrapper title="Popular albums" seeAll={`/artists/${id}/related-albums`}>
             <AlbumGrid items={artistAlbums.items.slice(0, 6)} />
           </SectionWrapper>
 
-          <SectionWrapper title="Fans also like" seeAll={`/artists/${id}/related`}>
+          <SectionWrapper title="Fans also like" seeAll={`/artists/${id}/related-artists`}>
             <ArtistGrid items={artistRelatedArtists.artists.slice(0, 6)} />
           </SectionWrapper>
         </>
