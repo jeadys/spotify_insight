@@ -2,15 +2,13 @@ import { useAxios } from "../hooks/useAxios";
 import { generateRandomString } from "../lib/utils";
 import { IPlaylistItem, IPlaylistTracks } from "./interfaces/playlist";
 
-const CLIENT_ID = process.env.CLIENT_ID!;
-const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI!;
+const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!;
 const state = generateRandomString(16);
 const scope =
   "user-read-private user-read-email user-top-read user-follow-read user-library-read user-read-playback-state user-modify-playback-state streaming user-follow-modify user-library-modify";
 
 const queryParams = {
   client_id: CLIENT_ID,
-  redirect_uri: REDIRECT_URI,
   response_type: "code",
   state: state,
   scope: scope,

@@ -6,8 +6,8 @@ import SpotifyProvider from "next-auth/providers/spotify";
 
 import { LOGIN_URL } from "../../../lib/spotify";
 
-const CLIENT_ID = process.env.CLIENT_ID!;
-const CLIENT_SECRET = process.env.CLIENT_SECRET!;
+const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!;
+const CLIENT_SECRET = process.env.NEXT_PUBLIC_CLIENT_SECRET!;
 
 /**
  * Takes a token, and returns a new token with updated
