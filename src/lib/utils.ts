@@ -1,6 +1,21 @@
 import React from "react";
 
 /**
+ * Generates a random string containing numbers and letters
+ * @param  {number} length The length of the string
+ * @return {string} The generated string
+ */
+export const generateRandomString = (length: number): string => {
+  let text = "";
+  const possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < length; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
+
+/**
  * Format milliseconds to time duration
  * @param {number} ms number of milliseconds
  * @returns {string} formatted duration string

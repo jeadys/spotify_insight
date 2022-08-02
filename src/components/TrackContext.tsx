@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import { accessToken } from "../lib/spotify";
 import TrackPlayer from "./TrackPlayer";
+import { useSession } from "next-auth/react";
 
 type ChooseTrackProps = {
   chooseTrack: (tracks: string[], track: string) => void;
@@ -24,6 +24,8 @@ type TrackProviderProps = {
 };
 
 export const TrackProvider = ({ children }: TrackProviderProps) => {
+  const { data: session } = useSession();
+
   const [playingTrack, setPlayingTrack] = useState<string>(
     "spotify:track:4cOdK2wGLETKBW3PvgPWqT"
   );
@@ -41,7 +43,7 @@ export const TrackProvider = ({ children }: TrackProviderProps) => {
     <PlayTrackContext.Provider value={playingTrack}>
       <ChooseTrackContext.Provider value={chooseTrack}>
         <TrackPlayer
-          token={accessToken}
+          token={session ? (session.accessToken as string) : undefined}
           trackQueue={trackQueue}
           trackOffset={playingTrack}
           setPlayingTrack={setPlayingTrack}
