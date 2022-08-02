@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { PlaylistGrid } from "../../components/grid";
@@ -12,7 +12,7 @@ export default function FeaturedPlaylists() {
   };
 
   const { data: featured } = useQuery<IFeaturedPlaylists>(
-    "featured-playlists",
+    ["featured-playlists"],
     fetchFeaturedPlaylists,
     { refetchOnWindowFocus: false }
   );

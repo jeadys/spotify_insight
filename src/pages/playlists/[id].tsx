@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
 
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
@@ -10,6 +10,7 @@ import { getPlaylistById } from "../../lib/spotify";
 export default function Playlist() {
   const { query } = useRouter();
   const { id } = query;
+  console.log(id);
 
   const fetchPlaylist = async () => {
     const playlist = await getPlaylistById(id!);

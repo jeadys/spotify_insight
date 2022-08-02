@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { PlaylistGrid } from "../../components/grid";
@@ -11,7 +11,7 @@ export default function SavedPlaylists() {
     return playlists.data;
   };
 
-  const { data: playlists } = useQuery<IUsersSavedPlaylists>("playlists", fetchPlaylists, {
+  const { data: playlists } = useQuery<IUsersSavedPlaylists>(["playlists"], fetchPlaylists, {
     refetchOnWindowFocus: false,
   });
 

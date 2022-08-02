@@ -1,6 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useState } from "react";
-import { useQuery } from "react-query";
 
 import { ITracks } from "../../lib/interfaces/tracks";
 import { getDoesUserHaveTrackSaved } from "../../lib/spotify";

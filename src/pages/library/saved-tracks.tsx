@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
@@ -12,11 +12,9 @@ export default function SavedTracks() {
   };
 
   const { data: tracks } = useQuery<IUsersSavedTracks>(
-    "saved-tracks",
+    ["saved-tracks"],
     fetchCurrentUserSavedTracks,
-    {
-      refetchOnWindowFocus: false,
-    }
+    { refetchOnWindowFocus: false }
   );
 
   return (

@@ -130,7 +130,7 @@ export default function Search() {
                         <div className="font-semibold">{result.name}</div>
                         <Link href={`/albums/${result.album.id}`}>
                           <a onClick={(e) => stopProp(e)} className="hover:underline">
-                            {result.album.name}
+                            {result.album.name}{" "}
                           </a>
                         </Link>
                         <>

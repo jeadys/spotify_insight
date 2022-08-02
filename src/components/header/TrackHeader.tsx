@@ -1,6 +1,6 @@
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useQuery, useQueryClient } from "react-query";
 
 import { ITrackHeader } from "../../lib/interfaces/track-header";
 import { getDoesUserHaveAlbumSaved } from "../../lib/spotify";
@@ -9,7 +9,9 @@ import { SaveAlbum } from "../button";
 
 export default function TrackHeader({ data }: ITrackHeader) {
   const queryClient = useQueryClient();
-  const { pathname } = useRouter();
+  const { asPath } = useRouter();
+
+  console.log(asPath);
 
   const fetchDoesUserHaveAlbumSaved = async () => {
     const isAlbumSaved = await getDoesUserHaveAlbumSaved(data.id);
@@ -61,7 +63,7 @@ export default function TrackHeader({ data }: ITrackHeader) {
           {isAlbumSaved && <SaveAlbum id={data.id} saved={isAlbumSaved[0]} />}
         </div>
 
-        {pathname == `/playlists/${data.id}` && (
+        {asPath == `/playlists/${data.id}` && (
           <Link href={`/recommendations/${data.id}`}>
             <a className="bg-green-600 text-white max-w-fit py-2 px-5 rounded-full cursor-pointer my-5 font-semibold">
               Get recommendations
@@ -69,7 +71,7 @@ export default function TrackHeader({ data }: ITrackHeader) {
           </Link>
         )}
 
-        {pathname == `/albums/${data.id}` && (
+        {asPath == `/albums/${data.id}` && (
           <div className="my-5">
             <span className="text-2xl font-black text-blue-400">{data.popularity}%</span>
             <span className="text-lg font-semibold text-white block">Popularity</span>

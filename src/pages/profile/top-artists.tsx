@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { useQuery } from "react-query";
 
 import { SectionWrapper } from "../../components";
 import { ArtistGrid } from "../../components/grid";

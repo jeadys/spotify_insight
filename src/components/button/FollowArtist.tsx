@@ -1,6 +1,6 @@
 import { HeartIcon } from "@heroicons/react/solid";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
 
 import { followArtistForCurrentUser, unfollowArtistForCurrentUser } from "../../lib/spotify";
 
@@ -15,7 +15,7 @@ export default function FollowArtist({ id, followed }: Props) {
 
   const { mutateAsync: followArtist } = useMutation(followArtistForCurrentUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("followed-artists");
+      queryClient.invalidateQueries(["followed-artists"]);
       queryClient.invalidateQueries(["is-artist-followed", id]);
       setFollowState(true);
     },
@@ -23,7 +23,7 @@ export default function FollowArtist({ id, followed }: Props) {
 
   const { mutateAsync: unfollowArtist } = useMutation(unfollowArtistForCurrentUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries("followed-artists");
+      queryClient.invalidateQueries(["followed-artists"]);
       queryClient.invalidateQueries(["is-artist-followed", id]);
       setFollowState(false);
     },

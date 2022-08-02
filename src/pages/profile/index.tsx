@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { Loader, SectionWrapper } from "../../components";
 import { ArtistGrid, TrackGrid } from "../../components/grid";
@@ -17,17 +17,17 @@ export default function Profile() {
     return userTopTracks.data;
   };
 
-  const { data: topArtists } = useQuery<IUsersTopArtists>("top-artists", fetchTopArtists, {
+  const { data: topArtists } = useQuery<IUsersTopArtists>(["top-artists"], fetchTopArtists, {
     refetchOnWindowFocus: false,
   });
 
-  const { data: topTracks } = useQuery<IUsersTopTracks>("top-tracks", fetchTopTracks, {
+  const { data: topTracks } = useQuery<IUsersTopTracks>(["top-tracks"], fetchTopTracks, {
     refetchOnWindowFocus: false,
   });
 
   return (
     <>
-      {topArtists && topTracks ? (
+      {topArtists && topTracks && (
         <>
           <SectionWrapper title="Top artists this month" seeAll="/profile/top-artists">
             <ArtistGrid items={topArtists.items.slice(0, 12)} />
@@ -36,8 +36,6 @@ export default function Profile() {
             <TrackGrid items={topTracks.items.slice(0, 6)} />
           </SectionWrapper>
         </>
-      ) : (
-        <Loader />
       )}
     </>
   );

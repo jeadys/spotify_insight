@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { AlbumGrid } from "../../components/grid";
@@ -11,7 +11,7 @@ export default function NewReleases() {
     return newReleases.data;
   };
 
-  const { data: releases } = useQuery<INewReleases>("new-releases", fetchNewReleases, {
+  const { data: releases } = useQuery<INewReleases>(["new-releases"], fetchNewReleases, {
     refetchOnWindowFocus: false,
   });
 

@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { IArtistHeader } from "../../lib/interfaces/artist-header";
 import { getDoesUserFollowArtist } from "../../lib/spotify";

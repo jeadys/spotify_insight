@@ -1,5 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
 
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
@@ -31,10 +31,7 @@ export default function Recommendations() {
   const { data: recommendations } = useQuery<IRecommendations>(
     ["recommendations-based-on", id],
     fetchRecommendationsForTracks,
-    {
-      enabled: !!playlist,
-      refetchOnWindowFocus: false,
-    }
+    { enabled: !!playlist, refetchOnWindowFocus: false }
   );
 
   return (
