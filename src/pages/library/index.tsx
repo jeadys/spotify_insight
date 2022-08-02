@@ -1,101 +1,78 @@
 import { useQuery } from "react-query";
+
+import { SectionWrapper } from "../../components";
+import { AlbumGrid, ArtistGrid, PlaylistGrid, TrackGrid } from "../../components/grid";
+import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
+import { IUsersSavedAlbums } from "../../lib/interfaces/user-saved-albums";
+import { IUsersSavedPlaylists } from "../../lib/interfaces/user-saved-playlists";
+import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";
 import {
   getCurrentUserFollowedArtists,
-  getCurrentUserPlaylists,
   getCurrentUserSavedAlbums,
+  getCurrentUserSavedPlaylists,
   getCurrentUserSavedTracks,
 } from "../../lib/spotify";
-import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
-import {
-  ArtistGrid,
-  PlaylistGrid,
-  AlbumGrid,
-  TrackGrid,
-} from "../../components/grid";
-import { SectionWrapper } from "../../components";
-import { IUsersPlaylists } from "../../lib/interfaces/user-saved-playlists";
-import { IUsersSavedAlbums } from "../../lib/interfaces/user-saved-albums";
-import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";
+
+const fetchUserSavedPlaylists = async () => {
+  const userPlaylists = await getCurrentUserSavedPlaylists(6);
+  return userPlaylists.data;
+};
+
+const fetchUsersSavedAlbums = async () => {
+  const userSavedAlbums = await getCurrentUserSavedAlbums(6);
+  return userSavedAlbums.data;
+};
+
+const fetchUserSavedTracks = async () => {
+  const userSavedTracks = await getCurrentUserSavedTracks(6);
+  return userSavedTracks.data;
+};
+
+const fetchUserFollowedArtists = async () => {
+  const userFollowedArtists = await getCurrentUserFollowedArtists(12);
+  return userFollowedArtists.data;
+};
 
 export default function Library() {
-  const fetchUserFollowedArtists = async () => {
-    const userFollowedArtists = await getCurrentUserFollowedArtists();
-    return userFollowedArtists.data;
-  };
+  const { data: savedPlaylists } = useQuery<IUsersSavedPlaylists>(
+    "saved-playlists",
+    fetchUserSavedPlaylists,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
-  const fetchPlaylists = async () => {
-    const userPlaylists = await getCurrentUserPlaylists();
-    return userPlaylists.data;
-  };
+  const { data: savedAlbums } = useQuery<IUsersSavedAlbums>("saved-albums", fetchUsersSavedAlbums, {
+    refetchOnWindowFocus: false,
+  });
 
-  const fetchUsersSavedAlbums = async () => {
-    const userSavedAlbums = await getCurrentUserSavedAlbums();
-    return userSavedAlbums.data;
-  };
+  const { data: savedTracks } = useQuery<IUsersSavedTracks>("saved-tracks", fetchUserSavedTracks, {
+    refetchOnWindowFocus: false,
+  });
 
-  const fetchUserSavedTracks = async () => {
-    const userSavedTracks = await getCurrentUserSavedTracks();
-    return userSavedTracks.data;
-  };
-
-  const {
-    data: followedArtists,
-    isLoading: followedArtistsIsLoading,
-    error: followedArtistsError,
-  } = useQuery<IUsersFollowedArtists>(
+  const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
     "followed-artists",
     fetchUserFollowedArtists,
     { refetchOnWindowFocus: false }
   );
 
-  const {
-    data: playlists,
-    isLoading: playlistsIsLoading,
-    error: playlistsError,
-  } = useQuery<IUsersPlaylists>("playlists", fetchPlaylists, {
-    refetchOnWindowFocus: false,
-  });
-
-  const {
-    data: albums,
-    isLoading: albumsIsLoading,
-    error: albumsError,
-  } = useQuery<IUsersSavedAlbums>("saved-albums", fetchUsersSavedAlbums, {
-    refetchOnWindowFocus: false,
-  });
-
-  const {
-    data: tracks,
-    isLoading: tracksIsLoading,
-    error: tracksEror,
-  } = useQuery<IUsersSavedTracks>("saved-tracks", fetchUserSavedTracks, {
-    refetchOnWindowFocus: false,
-  });
-
   return (
     <>
-      {followedArtists && playlists && albums && tracks && (
+      {savedPlaylists && savedAlbums && savedTracks && followedArtists && (
         <>
           <SectionWrapper title="Playlists" seeAll="/library/saved-playlists">
-            <PlaylistGrid items={playlists.items.slice(0, 6)} />
+            <PlaylistGrid items={savedPlaylists.items.slice(0, 6)} />
           </SectionWrapper>
 
           <SectionWrapper title="Saved albums" seeAll="/library/saved-albums">
-            <AlbumGrid
-              items={albums.items.map((item) => item.album).slice(0, 6)}
-            />
+            <AlbumGrid items={savedAlbums.items.map((item) => item.album).slice(0, 6)} />
           </SectionWrapper>
 
           <SectionWrapper title="Saved tracks" seeAll="/library/saved-tracks">
-            <TrackGrid
-              items={tracks.items.map((item) => item.track).slice(0, 6)}
-            />
+            <TrackGrid items={savedTracks.items.map((item) => item.track).slice(0, 6)} />
           </SectionWrapper>
 
-          <SectionWrapper
-            title="Followed artists"
-            seeAll="/library/followed-artists"
-          >
+          <SectionWrapper title="Followed artists" seeAll="/library/followed-artists">
             <ArtistGrid items={followedArtists.artists.items.slice(0, 12)} />
           </SectionWrapper>
         </>

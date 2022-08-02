@@ -1,9 +1,10 @@
-import { SectionWrapper } from "../../../components";
-import { ArtistGrid } from "../../../components/grid";
-import { getArtistRelatedArtists } from "../../../lib/spotify";
-import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
 import { useRouter } from "next/router";
 import { useQuery } from "react-query";
+
+import { SectionWrapper } from "../../../components";
+import { ArtistGrid } from "../../../components/grid";
+import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
+import { getArtistRelatedArtists } from "../../../lib/spotify";
 
 export default function RelatedArtists() {
   const { query } = useRouter();
@@ -14,11 +15,7 @@ export default function RelatedArtists() {
     return artistRelatedArtists.data;
   };
 
-  const {
-    data: artistRelatedArtists,
-    isLoading: artistRelatedArtistsIsLoading,
-    error: artistRelatedArtistsError,
-  } = useQuery<IArtistsRelatedArtists>(
+  const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(
     ["artist-related-artists", id],
     fetchArtistRelatedArtists,
     { refetchOnWindowFocus: false }

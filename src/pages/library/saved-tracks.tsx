@@ -1,23 +1,23 @@
+import { useQuery } from "react-query";
+
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
-import { getCurrentUserSavedTracks } from "../../lib/spotify";
 import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";
-import { useQuery } from "react-query";
+import { getCurrentUserSavedTracks } from "../../lib/spotify";
 
 export default function SavedTracks() {
   const fetchCurrentUserSavedTracks = async () => {
-    const userSavedTracks = await getCurrentUserSavedTracks();
-    const track = userSavedTracks.data.items.map((item) => item.track);
+    const userSavedTracks = await getCurrentUserSavedTracks(50);
     return userSavedTracks.data;
   };
 
-  const {
-    data: tracks,
-    isLoading: tracksIsLoading,
-    error: tracksEror,
-  } = useQuery<IUsersSavedTracks>("saved-tracks", fetchCurrentUserSavedTracks, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: tracks } = useQuery<IUsersSavedTracks>(
+    "saved-tracks",
+    fetchCurrentUserSavedTracks,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <>

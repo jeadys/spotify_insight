@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { IArtistsAlbums } from "../../lib/interfaces/artist-album";
 
 export default function AlbumGrid({ items }: IArtistsAlbums) {
@@ -12,12 +13,8 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
                 key={album.id}
                 className="text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
               >
-                <Link
-                  passHref
-                  href={`/albums/${album.id}`}
-                  className="cursor-pointer"
-                >
-                  <div className="p-4">
+                <Link passHref href={`/albums/${album.id}`}>
+                  <div className="p-4 cursor-pointer">
                     {album.images.length && album.images[1] ? (
                       <img
                         className="w-48 h-48 object-cover mx-auto rounded-md"
@@ -41,12 +38,10 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
                   </div>
                 </Link>
                 <div className="mb-5">
-                  <Link
-                    passHref
-                    href={`/artists/${album.artists[0].id}`}
-                    className="text-xs text-gray-300 hover:underline block w-max mx-auto"
-                  >
-                    {album.artists[0].name}
+                  <Link href={`/artists/${album.artists[0].id}`}>
+                    <a className="text-xs text-gray-300 hover:underline block w-max mx-auto">
+                      {album.artists[0].name}
+                    </a>
                   </Link>
                 </div>
               </li>
@@ -56,12 +51,8 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
       ) : (
         <span className="flex flex-col items-center text-white">
           <span className="text-2xl">No albums available</span>
-          <Link
-            passHref
-            href={`/discover/new-releases`}
-            className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2"
-          >
-            Discover new albums
+          <Link href={`/discover/new-releases`}>
+            <a className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2">Discover new albums</a>
           </Link>
         </span>
       )}

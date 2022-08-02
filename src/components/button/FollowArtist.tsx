@@ -1,10 +1,8 @@
-import { useState } from "react";
-import {
-  followArtistForCurrentUser,
-  unfollowArtistForCurrentUser,
-} from "../../lib/spotify";
 import { HeartIcon } from "@heroicons/react/solid";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
+
+import { followArtistForCurrentUser, unfollowArtistForCurrentUser } from "../../lib/spotify";
 
 type Props = {
   id: string;
@@ -15,27 +13,21 @@ export default function FollowArtist({ id, followed }: Props) {
   const [followState, setFollowState] = useState<boolean>(followed);
   const queryClient = useQueryClient();
 
-  const { mutateAsync: followArtist } = useMutation(
-    followArtistForCurrentUser,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("followed-artists");
-        queryClient.invalidateQueries(["is-artist-followed", id]);
-        setFollowState(true);
-      },
-    }
-  );
+  const { mutateAsync: followArtist } = useMutation(followArtistForCurrentUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("followed-artists");
+      queryClient.invalidateQueries(["is-artist-followed", id]);
+      setFollowState(true);
+    },
+  });
 
-  const { mutateAsync: unfollowArtist } = useMutation(
-    unfollowArtistForCurrentUser,
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries("followed-artists");
-        queryClient.invalidateQueries(["is-artist-followed", id]);
-        setFollowState(false);
-      },
-    }
-  );
+  const { mutateAsync: unfollowArtist } = useMutation(unfollowArtistForCurrentUser, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("followed-artists");
+      queryClient.invalidateQueries(["is-artist-followed", id]);
+      setFollowState(false);
+    },
+  });
 
   const save = async () => await followArtist(id);
 

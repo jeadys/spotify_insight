@@ -41,8 +41,8 @@ export default function SectionWrapper({
           {title && (
             <>
               {seeAll ? (
-                <Link passHref href={seeAll} className="hover:underline">
-                  {title}
+                <Link href={seeAll}>
+                  <a className="hover:underline">{title}</a>
                 </Link>
               ) : (
                 <span>{title}</span>
@@ -52,12 +52,10 @@ export default function SectionWrapper({
         </h2>
 
         {seeAll && (
-          <Link
-            passHref
-            href={seeAll}
-            className="font-light text-sm text-gray-300 hover:text-white transition ease-in-out uppercase cursor-pointer ml-auto"
-          >
-            See All
+          <Link href={seeAll}>
+            <a className="font-light text-sm text-gray-300 hover:text-white transition ease-in-out uppercase cursor-pointer ml-auto">
+              See All
+            </a>
           </Link>
         )}
 

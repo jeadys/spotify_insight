@@ -1,6 +1,6 @@
-import { IPlaylistTracks, IPlaylistItem } from "./interfaces/playlist";
-import { generateRandomString } from "../lib/utils";
 import { useAxios } from "../hooks/useAxios";
+import { generateRandomString } from "../lib/utils";
+import { IPlaylistItem, IPlaylistTracks } from "./interfaces/playlist";
 
 const CLIENT_ID = process.env.CLIENT_ID!;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI!;
@@ -208,10 +208,7 @@ export const getArtistTopTracks = (artist_id: string | string[]) => {
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getArtistAlbums = (
-  artist_id: string | string[],
-  limit: number
-) => {
+export const getArtistAlbums = (artist_id: string | string[], limit: number) => {
   return useAxios({
     url: `/artists/${artist_id}/albums?market=NL&limit=${limit}`,
   });
@@ -311,10 +308,7 @@ export const getCategoryById = (category_id: string | string[]) => {
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getCategoryPlaylists = (
-  category_id: string | string[],
-  limit: number
-) => {
+export const getCategoryPlaylists = (category_id: string | string[], limit: number) => {
   return useAxios({
     url: `/browse/categories/${category_id}/playlists/?limit=${limit}`,
   });
@@ -333,10 +327,7 @@ const getTrackIds = (tracks: IPlaylistTracks["items"]) =>
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getRecommendationsForTracks = (
-  tracks: IPlaylistTracks["items"],
-  limit: number
-) => {
+export const getRecommendationsForTracks = (tracks: IPlaylistTracks["items"], limit: number) => {
   const shuffledTracks = tracks.sort(() => 0.5 - Math.random());
   const seed_tracks = getTrackIds(shuffledTracks.slice(0, 5));
   const seed_artists = "";

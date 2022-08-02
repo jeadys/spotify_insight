@@ -1,7 +1,6 @@
-import { useQuery } from "react-query";
 import Link from "next/link";
+
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
-import { getDoesUserFollowArtist } from "../../lib/spotify";
 
 export default function ArtistGrid({ items }: IUsersTopArtists) {
   return (
@@ -29,9 +28,7 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
                         alt={artist.name}
                       />
                     )}
-                    <h3 className="mt-6 text-white text-sm font-medium">
-                      {artist.name}
-                    </h3>
+                    <h3 className="mt-6 text-white text-sm font-medium">{artist.name}</h3>
                     <dl className="mt-1 flex-grow flex flex-col justify-between">
                       <dt className="sr-only">Title</dt>
                       <dd className="text-gray-300 text-sm italic">
@@ -50,9 +47,7 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
                       <dd className="mt-3">
                         <span className="px-2 py-1 text-xs font-medium bg-cyan-100 rounded-full">
                           {artist.followers.total.toLocaleString()}{" "}
-                          {`follower${
-                            artist.followers.total !== 1 ? "s " : " "
-                          }`}
+                          {`follower${artist.followers.total !== 1 ? "s " : " "}`}
                         </span>
                       </dd>
                     </dl>
@@ -64,9 +59,7 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
         </>
       ) : (
         <>
-          <p className="text-white justify-center content-center text-2xl">
-            No artists available
-          </p>
+          <p className="text-white justify-center content-center text-2xl">No artists available</p>
         </>
       )}
     </>

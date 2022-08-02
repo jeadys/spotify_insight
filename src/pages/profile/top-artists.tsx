@@ -1,25 +1,26 @@
+import { useState } from "react";
+import { useQuery } from "react-query";
+
 import { SectionWrapper } from "../../components";
 import { ArtistGrid } from "../../components/grid";
-import { useState } from "react";
-import { getTopArtists } from "../../lib/spotify";
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
-import { useQuery } from "react-query";
+import { getTopArtists } from "../../lib/spotify";
 
 export default function TopArtists() {
   const [timeRange, setTimeRange] = useState("short");
 
   const fetchTopArtists = async () => {
-    const userTopArtists = await getTopArtists(`${timeRange}_term`);
+    const userTopArtists = await getTopArtists(`${timeRange}_term`, 50);
     return userTopArtists.data;
   };
 
-  const {
-    data: topArtists,
-    isLoading: topArtistsIsLoading,
-    error: topArtistsError,
-  } = useQuery<IUsersTopArtists>(["top-artists", timeRange], fetchTopArtists, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: topArtists } = useQuery<IUsersTopArtists>(
+    ["top-artists", timeRange],
+    fetchTopArtists,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <>

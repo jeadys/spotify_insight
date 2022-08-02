@@ -1,11 +1,12 @@
-import React from "react";
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
-import TrackProvider from "../components/TrackContext";
-import { ReactQueryDevtools } from "react-query/devtools";
+import type { AppProps } from "next/app";
+import React from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
-import { Content, ScrollTop, Navigation } from "../components";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+import { Content, Navigation, ScrollTop } from "../components";
+import TrackProvider from "../components/TrackContext";
+import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());

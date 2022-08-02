@@ -1,23 +1,20 @@
+import { useState } from "react";
+import { useQuery } from "react-query";
+
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
-import { useState } from "react";
-import { getTopTracks } from "../../lib/spotify";
 import { IUsersTopTracks } from "../../lib/interfaces/users-top-tracks";
-import { useQuery } from "react-query";
+import { getTopTracks } from "../../lib/spotify";
 
 export default function TopTracks() {
   const [timeRange, setTimeRange] = useState("short");
 
   const fetchTopTracks = async () => {
-    const userTopTracks = await getTopTracks(`${timeRange}_term`);
+    const userTopTracks = await getTopTracks(`${timeRange}_term`, 50);
     return userTopTracks.data;
   };
 
-  const {
-    data: topTracks,
-    isLoading: topTracksIsLoading,
-    error: topTracksError,
-  } = useQuery<IUsersTopTracks>(["top-tracks", timeRange], fetchTopTracks, {
+  const { data: topTracks } = useQuery<IUsersTopTracks>(["top-tracks", timeRange], fetchTopTracks, {
     refetchOnWindowFocus: false,
   });
 

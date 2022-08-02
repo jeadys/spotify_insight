@@ -1,6 +1,6 @@
-import SpotifyPlayer from "react-spotify-web-playback";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import SpotifyPlayer from "react-spotify-web-playback";
 
 type Props = {
   token: string | undefined;
@@ -9,12 +9,7 @@ type Props = {
   setPlayingTrack: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function TrackPlayer({
-  token,
-  trackQueue,
-  trackOffset,
-  setPlayingTrack,
-}: Props) {
+export default function TrackPlayer({ token, trackQueue, trackOffset, setPlayingTrack }: Props) {
   const offset = trackQueue.indexOf(trackOffset);
   const [play, setPlay] = useState(false);
 

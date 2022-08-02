@@ -1,20 +1,17 @@
+import { useQuery } from "react-query";
+
 import { SectionWrapper } from "../../components";
-import { getFeaturedPlaylists } from "../../lib/spotify";
 import { PlaylistGrid } from "../../components/grid";
 import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
-import { useQuery } from "react-query";
+import { getFeaturedPlaylists } from "../../lib/spotify";
 
 export default function FeaturedPlaylists() {
   const fetchFeaturedPlaylists = async () => {
-    const featuredPlaylists = await getFeaturedPlaylists();
+    const featuredPlaylists = await getFeaturedPlaylists(50);
     return featuredPlaylists.data;
   };
 
-  const {
-    data: featured,
-    isLoading: featuredIsLoading,
-    error: featuredError,
-  } = useQuery<IFeaturedPlaylists>(
+  const { data: featured } = useQuery<IFeaturedPlaylists>(
     "featured-playlists",
     fetchFeaturedPlaylists,
     { refetchOnWindowFocus: false }

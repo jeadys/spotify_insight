@@ -1,10 +1,11 @@
-import { SectionWrapper } from "../../components";
-import { TrackHeader } from "../../components/header";
-import { TrackGrid } from "../../components/grid";
-import { getPlaylistById } from "../../lib/spotify";
 import { useRouter } from "next/router";
-import { IPlaylist } from "../../lib/interfaces/playlist";
 import { useQuery } from "react-query";
+
+import { SectionWrapper } from "../../components";
+import { TrackGrid } from "../../components/grid";
+import { TrackHeader } from "../../components/header";
+import { IPlaylist } from "../../lib/interfaces/playlist";
+import { getPlaylistById } from "../../lib/spotify";
 
 export default function Playlist() {
   const { query } = useRouter();
@@ -15,11 +16,7 @@ export default function Playlist() {
     return playlist.data;
   };
 
-  const {
-    data: playlist,
-    isLoading: playlistIsLoading,
-    error: playlistError,
-  } = useQuery<IPlaylist>(["playlist", id], fetchPlaylist, {
+  const { data: playlist } = useQuery<IPlaylist>(["playlist", id], fetchPlaylist, {
     refetchOnWindowFocus: false,
   });
 
@@ -33,11 +30,7 @@ export default function Playlist() {
             </div>
             <div className="flex-grow">
               <SectionWrapper title="Playlist tracks" breadcrumb="true">
-                <TrackGrid
-                  items={playlist.tracks.items
-                    .map(({ track }) => track)
-                    .slice(0, 50)}
-                />
+                <TrackGrid items={playlist.tracks.items.map(({ track }) => track).slice(0, 50)} />
               </SectionWrapper>
             </div>
           </div>

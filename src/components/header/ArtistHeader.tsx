@@ -1,5 +1,6 @@
-import { IArtistHeader } from "../../lib/interfaces/artist-header";
 import { useQuery } from "react-query";
+
+import { IArtistHeader } from "../../lib/interfaces/artist-header";
 import { getDoesUserFollowArtist } from "../../lib/spotify";
 import { FollowArtist } from "../button";
 
@@ -9,7 +10,7 @@ export default function ArtistHeader({ data }: IArtistHeader) {
     return isArtistFollowed.data;
   };
 
-  const { data: isArtistFollowed, isLoading } = useQuery(
+  const { data: isArtistFollowed } = useQuery(
     ["is-artist-followed", data.id],
     fetchDoesUserFollowArtist,
     {
@@ -37,9 +38,7 @@ export default function ArtistHeader({ data }: IArtistHeader) {
       </div>
 
       <div className="h-5">
-        {isArtistFollowed && (
-          <FollowArtist id={data.id} followed={isArtistFollowed[0]} />
-        )}
+        {isArtistFollowed && <FollowArtist id={data.id} followed={isArtistFollowed[0]} />}
       </div>
 
       <div className="w-full flex gap-y-5 flex-col md:flex-row md:gap-x-20 justify-center text-center">
@@ -48,31 +47,21 @@ export default function ArtistHeader({ data }: IArtistHeader) {
             <span className="text-2xl font-black text-blue-400">
               {data.followers.total.toLocaleString()}
             </span>
-            <span className="text-lg font-semibold text-white block">
-              Followers
-            </span>
+            <span className="text-lg font-semibold text-white block">Followers</span>
           </div>
         )}
 
         {data.genres && data.genres[0] !== undefined && (
           <div>
-            <span className="text-2xl font-black text-blue-400">
-              {data.genres[0]}
-            </span>
-            <span className="text-lg font-semibold text-white block">
-              Genres
-            </span>
+            <span className="text-2xl font-black text-blue-400">{data.genres[0]}</span>
+            <span className="text-lg font-semibold text-white block">Genres</span>
           </div>
         )}
 
         {data.popularity !== undefined && (
           <div>
-            <span className="text-2xl font-black text-blue-400">
-              {data.popularity}%
-            </span>
-            <span className="text-lg font-semibold text-white block">
-              Popularity
-            </span>
+            <span className="text-2xl font-black text-blue-400">{data.popularity}%</span>
+            <span className="text-lg font-semibold text-white block">Popularity</span>
           </div>
         )}
       </div>

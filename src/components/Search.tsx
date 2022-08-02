@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from "react";
-import { searchItems } from "../lib/spotify";
-import useDebounce from "../hooks/useDebounce";
-import { ChooseTrack, PlayTrack } from "./TrackContext";
 import Link from "next/link";
-import { stopProp } from "../lib/utils";
+import { useEffect, useRef, useState } from "react";
+
+import useDebounce from "../hooks/useDebounce";
 import { Track } from "../lib/interfaces/search-tracks";
+import { searchItems } from "../lib/spotify";
+import { stopProp } from "../lib/utils";
+import { ChooseTrack, PlayTrack } from "./TrackContext";
 
 export default function Search() {
   const [searchModal, setSearchModal] = useState(false);
@@ -23,7 +24,7 @@ export default function Search() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const searchData = await searchItems(debouncedSearch);
+        const searchData = await searchItems(debouncedSearch, 30);
         setSearchResults(searchData.data.tracks.items);
       } catch (e) {
         console.log(e);
@@ -110,8 +111,7 @@ export default function Search() {
                   >
                     <div className="flex items-center">
                       <div className="h-10 w-10 flex-shrink-0">
-                        {result.album.images.length &&
-                        result.album.images[0] ? (
+                        {result.album.images.length && result.album.images[0] ? (
                           <img
                             className="h-10 w-10 object-cover rounded-md"
                             src={result.album.images[0].url}
@@ -128,27 +128,16 @@ export default function Search() {
 
                       <div className="ml-4">
                         <div className="font-semibold">{result.name}</div>
-                        <Link
-                          passHref
-                          href={`/albums/${result.album.id}`}
-                          onClick={(e) => stopProp(e)}
-                        >
-                          <div className="hover:underline">
+                        <Link href={`/albums/${result.album.id}`}>
+                          <a onClick={(e) => stopProp(e)} className="hover:underline">
                             {result.album.name}
-                          </div>
+                          </a>
                         </Link>
                         <>
                           {result.artists.map((artist, index) => (
-                            <span
-                              key={artist.id}
-                              className="text-xstext-gray-300 hover:underline"
-                            >
-                              <Link
-                                passHref
-                                href={`/artists/${artist.id}`}
-                                onClick={(e) => stopProp(e)}
-                              >
-                                {artist.name}
+                            <span key={artist.id} className="text-xstext-gray-300 hover:underline">
+                              <Link href={`/artists/${artist.id}`}>
+                                <a onClick={(e) => stopProp(e)}>{artist.name}</a>
                               </Link>
 
                               {index < result.artists.length - 1 ? ", " : ""}
@@ -162,9 +151,7 @@ export default function Search() {
               </ul>
 
               {searchResults.length <= 0 && (
-                <p className="p-4 text-sm text-gray-500">
-                  No tracks or artists found.
-                </p>
+                <p className="p-4 text-sm text-gray-500">No tracks or artists found.</p>
               )}
             </div>
           </div>

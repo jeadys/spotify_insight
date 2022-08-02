@@ -1,22 +1,23 @@
+import { useQuery } from "react-query";
+
 import { SectionWrapper } from "../../components";
 import { AlbumGrid } from "../../components/grid";
-import { getCurrentUserSavedAlbums } from "../../lib/spotify";
 import { IUsersSavedAlbums } from "../../lib/interfaces/user-saved-albums";
-import { useQuery } from "react-query";
+import { getCurrentUserSavedAlbums } from "../../lib/spotify";
 
 export default function SavedAlbums() {
   const fetchCurrentUserSavedAlbums = async () => {
-    const userSavedAlbums = await getCurrentUserSavedAlbums();
+    const userSavedAlbums = await getCurrentUserSavedAlbums(50);
     return userSavedAlbums.data;
   };
 
-  const {
-    data: tracks,
-    isLoading: tracksIsLoading,
-    error: tracksEror,
-  } = useQuery<IUsersSavedAlbums>("saved-albums", fetchCurrentUserSavedAlbums, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: tracks } = useQuery<IUsersSavedAlbums>(
+    "saved-albums",
+    fetchCurrentUserSavedAlbums,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <>

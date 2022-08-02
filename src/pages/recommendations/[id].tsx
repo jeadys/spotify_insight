@@ -1,13 +1,11 @@
+import { useRouter } from "next/router";
 import { useQuery } from "react-query";
+
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
-import {
-  getRecommendationsForTracks,
-  getPlaylistById,
-} from "../../lib/spotify";
 import { IPlaylist } from "../../lib/interfaces/playlist";
 import { IRecommendations } from "../../lib/interfaces/recommendations";
-import { useRouter } from "next/router";
+import { getPlaylistById, getRecommendationsForTracks } from "../../lib/spotify";
 
 export default function Recommendations() {
   const { query } = useRouter();
@@ -18,17 +16,14 @@ export default function Recommendations() {
     return playlist.data;
   };
 
-  const { data: playlist } = useQuery<IPlaylist>(
-    ["playlist", id],
-    fetchPlaylist,
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: playlist } = useQuery<IPlaylist>(["playlist", id], fetchPlaylist, {
+    refetchOnWindowFocus: false,
+  });
 
   const fetchRecommendationsForTracks = async () => {
     const recommendations = await getRecommendationsForTracks(
-      playlist!.tracks.items // Can't be null or undefined because the 'enabled' parameter is set in the usequery.
+      playlist!.tracks.items, // Can't be null or undefined because the 'enabled' parameter is set in the usequery.
+      50
     );
     return recommendations.data;
   };
@@ -46,10 +41,7 @@ export default function Recommendations() {
     <>
       {playlist && recommendations && (
         <>
-          <SectionWrapper
-            title={`Recommendations based on ${playlist.name}`}
-            breadcrumb="true"
-          >
+          <SectionWrapper title={`Recommendations based on ${playlist.name}`} breadcrumb="true">
             <TrackGrid items={recommendations.tracks.slice(0, 50)} />
           </SectionWrapper>
         </>

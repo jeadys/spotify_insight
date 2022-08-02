@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { IUsersPlaylists } from "../../lib/interfaces/user-saved-playlists";
 
-export default function PlaylistGrid({ items }: IUsersPlaylists) {
+import { IUsersSavedPlaylists } from "../../lib/interfaces/user-saved-playlists";
+
+export default function PlaylistGrid({ items }: IUsersSavedPlaylists) {
   return (
     <>
       {items && items.length ? (
@@ -43,12 +44,10 @@ export default function PlaylistGrid({ items }: IUsersPlaylists) {
       ) : (
         <span className="flex flex-col items-center text-white">
           <span className="text-2xl">No playlists available</span>
-          <Link
-            passHref
-            href={`/discover/categories`}
-            className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2"
-          >
-            Discover new playlists
+          <Link href={`/discover/categories`}>
+            <a className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2">
+              Discover new playlists
+            </a>
           </Link>
         </span>
       )}

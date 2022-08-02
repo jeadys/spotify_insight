@@ -1,6 +1,7 @@
 import Link from "next/link";
-import Search from "./Search";
 import { useRouter } from "next/router";
+
+import Search from "./Search";
 
 export default function Navigation() {
   const { pathname } = useRouter();
@@ -8,7 +9,7 @@ export default function Navigation() {
   const items = [
     {
       title: "Profile",
-      link: "/",
+      link: "/profile",
     },
     {
       title: "Library",
@@ -31,8 +32,8 @@ export default function Navigation() {
               : "hover:underline hover: decoration-sky-900"
           }`}
         >
-          <Link passHref href={item.link}>
-            {item.title}
+          <Link href={item.link}>
+            <a>{item.title}</a>
           </Link>
         </li>
       ))}

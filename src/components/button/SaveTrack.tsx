@@ -1,10 +1,8 @@
 import { HeartIcon } from "@heroicons/react/solid";
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import {
-  saveTrackForCurrentUser,
-  removeTrackForCurrentUser,
-} from "../../lib/spotify";
+
+import { removeTrackForCurrentUser, saveTrackForCurrentUser } from "../../lib/spotify";
 
 type Props = {
   id: string;

@@ -1,8 +1,9 @@
 import axios from "axios";
 import NextAuth from "next-auth";
-import { JWT } from "next-auth/jwt";
 import type { NextAuthOptions } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import SpotifyProvider from "next-auth/providers/spotify";
+
 import { LOGIN_URL } from "../../../lib/spotify";
 
 const CLIENT_ID = process.env.CLIENT_ID!;
@@ -39,9 +40,7 @@ export async function refreshAccessToken(token: JWT) {
     }
 
     axios.defaults.baseURL = "https://api.spotify.com/v1";
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${refreshedTokens.access_token}`;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${refreshedTokens.access_token}`;
     axios.defaults.headers.common["Content-Type"] = "application/json";
 
     return {
@@ -96,9 +95,7 @@ export const authOptions: NextAuthOptions = {
       session.refreshToken = token.refreshToken;
 
       axios.defaults.baseURL = "https://api.spotify.com/v1";
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${token.accessToken}`;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token.accessToken}`;
       axios.defaults.headers.common["Content-Type"] = "application/json";
 
       return session;

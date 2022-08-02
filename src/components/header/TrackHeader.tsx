@@ -1,9 +1,10 @@
-import { ITrackHeader } from "../../lib/interfaces/track-header";
-import { useRouter } from "next/router";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useQuery, useQueryClient } from "react-query";
-import { getYear } from "../../lib/utils";
+
+import { ITrackHeader } from "../../lib/interfaces/track-header";
 import { getDoesUserHaveAlbumSaved } from "../../lib/spotify";
+import { getYear } from "../../lib/utils";
 import { SaveAlbum } from "../button";
 
 export default function TrackHeader({ data }: ITrackHeader) {
@@ -40,20 +41,14 @@ export default function TrackHeader({ data }: ITrackHeader) {
         />
       )}
       <div className="gap-y-2 flex flex-col mt-5 mx items-center">
-        <div className="text-2xl md:text-4xl font-black text-white">
-          {data.name}
-        </div>
+        <div className="text-2xl md:text-4xl font-black text-white">{data.name}</div>
 
         {data.owner && data.owner !== undefined && (
-          <span className="text-sm text-slate-400">
-            By {data.owner.display_name}
-          </span>
+          <span className="text-sm text-slate-400">By {data.owner.display_name}</span>
         )}
 
         {data.release_date && data.release_date !== undefined && (
-          <span className="text-sm text-slate-400">
-            Released in {getYear(data.release_date)}
-          </span>
+          <span className="text-sm text-slate-400">Released in {getYear(data.release_date)}</span>
         )}
 
         {data.tracks && data.tracks !== undefined && (
@@ -67,23 +62,17 @@ export default function TrackHeader({ data }: ITrackHeader) {
         </div>
 
         {pathname == `/playlists/${data.id}` && (
-          <Link
-            passHref
-            href={`/recommendations/${data.id}`}
-            className="bg-green-600 text-white max-w-fit py-2 px-5 rounded-full cursor-pointer my-5 font-semibold"
-          >
-            Get recommendations
+          <Link href={`/recommendations/${data.id}`}>
+            <a className="bg-green-600 text-white max-w-fit py-2 px-5 rounded-full cursor-pointer my-5 font-semibold">
+              Get recommendations
+            </a>
           </Link>
         )}
 
         {pathname == `/albums/${data.id}` && (
           <div className="my-5">
-            <span className="text-2xl font-black text-blue-400">
-              {data.popularity}%
-            </span>
-            <span className="text-lg font-semibold text-white block">
-              Popularity
-            </span>
+            <span className="text-2xl font-black text-blue-400">{data.popularity}%</span>
+            <span className="text-lg font-semibold text-white block">Popularity</span>
           </div>
         )}
       </div>

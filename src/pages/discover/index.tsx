@@ -1,54 +1,39 @@
 import { useQuery } from "react-query";
-import {
-  getCategories,
-  getFeaturedPlaylists,
-  getNewReleases,
-} from "../../lib/spotify";
-import { AlbumGrid, PlaylistGrid, CategoryGrid } from "../../components/grid";
-import { INewReleases } from "../../lib/interfaces/new-releases";
+
 import { SectionWrapper } from "../../components";
+import { AlbumGrid, CategoryGrid, PlaylistGrid } from "../../components/grid";
 import { ICategories } from "../../lib/interfaces/categories";
 import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
+import { INewReleases } from "../../lib/interfaces/new-releases";
+import { getCategories, getFeaturedPlaylists, getNewReleases } from "../../lib/spotify";
 
 export default function Discover() {
   const fetchNewReleases = async () => {
-    const newReleases = await getNewReleases();
+    const newReleases = await getNewReleases(6);
     return newReleases.data;
   };
 
   const fetchFeaturedPlaylists = async () => {
-    const featuredPlaylists = await getFeaturedPlaylists();
+    const featuredPlaylists = await getFeaturedPlaylists(6);
     return featuredPlaylists.data;
   };
 
   const fetchCategories = async () => {
-    const categories = await getCategories();
+    const categories = await getCategories(6);
     return categories.data;
   };
 
-  const {
-    data: releases,
-    isLoading: releasesIsLoading,
-    error: releasesError,
-  } = useQuery<INewReleases>("new-releases", fetchNewReleases, {
+  const { data: releases } = useQuery<INewReleases>("new-releases", fetchNewReleases, {
     refetchOnWindowFocus: false,
   });
 
-  const {
-    data: featured,
-    isLoading: featuredIsLoading,
-    error: featuredError,
-  } = useQuery<IFeaturedPlaylists>(
+  const { data: featured } = useQuery<IFeaturedPlaylists>(
     "featured-playlists",
     fetchFeaturedPlaylists,
     { refetchOnWindowFocus: false }
   );
 
-  const {
-    data: categories,
-    isLoading: categoriesIsLoading,
-    error: categoriesError,
-  } = useQuery<ICategories>("categories", fetchCategories, {
+  const { data: categories } = useQuery<ICategories>("categories", fetchCategories, {
     refetchOnWindowFocus: false,
   });
 
@@ -56,20 +41,14 @@ export default function Discover() {
     <>
       {releases && featured && categories && (
         <>
-          <SectionWrapper
-            title="New album releases"
-            seeAll="/discover/new-releases"
-          >
-            <AlbumGrid items={releases.albums.items.slice(0, 6)} />
+          <SectionWrapper title="New album releases" seeAll="/discover/new-releases">
+            <AlbumGrid items={releases.albums.items} />
           </SectionWrapper>
-          <SectionWrapper
-            title="Featured playlists"
-            seeAll="/discover/featured-playlists"
-          >
-            <PlaylistGrid items={featured.playlists.items.slice(0, 6)} />
+          <SectionWrapper title="Featured playlists" seeAll="/discover/featured-playlists">
+            <PlaylistGrid items={featured.playlists.items} />
           </SectionWrapper>
           <SectionWrapper title="Categories" seeAll="/discover/categories">
-            <CategoryGrid items={categories.categories.items.slice(0, 6)} />
+            <CategoryGrid items={categories.categories.items} />
           </SectionWrapper>
         </>
       )}

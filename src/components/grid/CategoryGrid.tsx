@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import { Categories } from "../../lib/interfaces/categories";
 
 export default function CategoryGrid({ items }: Categories) {
@@ -12,7 +13,7 @@ export default function CategoryGrid({ items }: Categories) {
                 key={category.id}
                 className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
               >
-                <Link passHref href={`/categories/${category.id}`}>
+                <Link passHref href={`/discover/categories/${category.id}`}>
                   <div className="flex-1 flex flex-col p-4">
                     {category.icons.length && category.icons[0] ? (
                       <img
@@ -27,9 +28,7 @@ export default function CategoryGrid({ items }: Categories) {
                         alt={category.name}
                       />
                     )}
-                    <h3 className="mt-6 text-white text-sm font-medium">
-                      {category.name}
-                    </h3>
+                    <h3 className="mt-6 text-white text-sm font-medium">{category.name}</h3>
                   </div>
                 </Link>
               </li>

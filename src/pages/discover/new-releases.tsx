@@ -1,20 +1,17 @@
+import { useQuery } from "react-query";
+
 import { SectionWrapper } from "../../components";
-import { getNewReleases } from "../../lib/spotify";
 import { AlbumGrid } from "../../components/grid";
 import { INewReleases } from "../../lib/interfaces/new-releases";
-import { useQuery } from "react-query";
+import { getNewReleases } from "../../lib/spotify";
 
 export default function NewReleases() {
   const fetchNewReleases = async () => {
-    const newReleases = await getNewReleases();
+    const newReleases = await getNewReleases(50);
     return newReleases.data;
   };
 
-  const {
-    data: releases,
-    isLoading: releasesIsLoading,
-    error: releasesError,
-  } = useQuery<INewReleases>("new-releases", fetchNewReleases, {
+  const { data: releases } = useQuery<INewReleases>("new-releases", fetchNewReleases, {
     refetchOnWindowFocus: false,
   });
 

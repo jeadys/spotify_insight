@@ -1,20 +1,17 @@
+import { useQuery } from "react-query";
+
 import { SectionWrapper } from "../../components";
 import { ArtistGrid } from "../../components/grid";
-import { getCurrentUserFollowedArtists } from "../../lib/spotify";
-import { useQuery } from "react-query";
 import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
+import { getCurrentUserFollowedArtists } from "../../lib/spotify";
 
 export default function FollowedArtists() {
   const fetchUserFollowedArtists = async () => {
-    const userFollowedArtists = await getCurrentUserFollowedArtists();
+    const userFollowedArtists = await getCurrentUserFollowedArtists(50);
     return userFollowedArtists.data;
   };
 
-  const {
-    data: followedArtists,
-    isLoading: followedArtistsIsLoading,
-    error: followedArtistsError,
-  } = useQuery<IUsersFollowedArtists>(
+  const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
     "followed-artists",
     fetchUserFollowedArtists,
     { refetchOnWindowFocus: false }

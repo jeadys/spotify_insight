@@ -1,10 +1,11 @@
-import { SectionWrapper } from "../../components";
-import { TrackHeader } from "../../components/header";
-import { TrackGrid } from "../../components/grid";
 import { useRouter } from "next/router";
-import { getAlbumById } from "../../lib/spotify";
-import { IAlbum } from "../../lib/interfaces/album";
 import { useQuery } from "react-query";
+
+import { SectionWrapper } from "../../components";
+import { TrackGrid } from "../../components/grid";
+import { TrackHeader } from "../../components/header";
+import { IAlbum } from "../../lib/interfaces/album";
+import { getAlbumById } from "../../lib/spotify";
 
 export default function Album() {
   const { query } = useRouter();
@@ -15,11 +16,7 @@ export default function Album() {
     return album.data;
   };
 
-  const {
-    data: album,
-    isLoading: albumIsLoading,
-    error: albumError,
-  } = useQuery<IAlbum>(["album", id], fetchAlbum, {
+  const { data: album } = useQuery<IAlbum>(["album", id], fetchAlbum, {
     refetchOnWindowFocus: false,
   });
 
@@ -33,9 +30,7 @@ export default function Album() {
             </div>
             <div className="flex-grow">
               <SectionWrapper title="Album tracks" breadcrumb="true">
-                <TrackGrid
-                  items={album.tracks.items.map((track) => track).slice(0, 50)}
-                />
+                <TrackGrid items={album.tracks.items.map((track) => track).slice(0, 50)} />
               </SectionWrapper>
             </div>
           </div>

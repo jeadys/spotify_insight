@@ -1,12 +1,13 @@
-import { PlayTrack, ChooseTrack } from "../TrackContext";
-import { formatDuration, stopProp } from "../../lib/utils";
 import Link from "next/link";
-import { ITracks } from "../../lib/interfaces/tracks";
-import MusicBar from "../MusicBar";
-import { getDoesUserHaveTrackSaved } from "../../lib/spotify";
-import { useQuery } from "react-query";
-import { SaveTrack } from "../button";
 import { useState } from "react";
+import { useQuery } from "react-query";
+
+import { ITracks } from "../../lib/interfaces/tracks";
+import { getDoesUserHaveTrackSaved } from "../../lib/spotify";
+import { formatDuration, stopProp } from "../../lib/utils";
+import MusicBar from "../MusicBar";
+import { ChooseTrack, PlayTrack } from "../TrackContext";
+import { SaveTrack } from "../button";
 
 export default function TrackGrid({ items }: ITracks) {
   const trackIds = items.map((track) => track.id).join(",");
@@ -39,25 +40,18 @@ export default function TrackGrid({ items }: ITracks) {
                 <tr
                   key={track.id}
                   className={`${
-                    playingTrack === track.uri
-                      ? "bg-sky-600"
-                      : "hover:bg-slate-700 cursor-pointer"
+                    playingTrack === track.uri ? "bg-sky-600" : "hover:bg-slate-700 cursor-pointer"
                   }`}
                   onClick={() => chooseTrack(trackUris, track.uri)}
                 >
                   <td className="whitespace-nowrap py-4 px-3 text-sm">
                     <div className="flex items-center">
                       <div className="w-7 text-center">
-                        {playingTrack === track.uri ? (
-                          <MusicBar />
-                        ) : (
-                          <span>{index + 1}</span>
-                        )}
+                        {playingTrack === track.uri ? <MusicBar /> : <span>{index + 1}</span>}
                       </div>
                       {"album" in track && track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
-                          {track.album.images.length &&
-                          track.album.images[2] ? (
+                          {track.album.images.length && track.album.images[2] ? (
                             <img
                               className="h-10 w-10 object-cover rounded-md"
                               src={track.album.images[2].url}
@@ -88,17 +82,11 @@ export default function TrackGrid({ items }: ITracks) {
                                 key={artist.id}
                                 className="text-xs text-gray-300 hover:underline"
                               >
-                                <Link
-                                  passHref
-                                  href={`/artists/${artist.id}`}
-                                  onClick={(e) => stopProp(e)}
-                                >
-                                  {artist.name}
+                                <Link href={`/artists/${artist.id}`}>
+                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
                                 </Link>
 
-                                {index < track.album!.artists.length - 1
-                                  ? ", "
-                                  : ""}
+                                {index < track.album!.artists.length - 1 ? ", " : ""}
                               </span>
                             ))}
                           </>
@@ -109,12 +97,8 @@ export default function TrackGrid({ items }: ITracks) {
                                 key={artist.id}
                                 className="text-xs text-gray-300 hover:underline"
                               >
-                                <Link
-                                  passHref
-                                  href={`/artists/${artist.id}`}
-                                  onClick={(e) => stopProp(e)}
-                                >
-                                  {artist.name}
+                                <Link href={`/artists/${artist.id}`}>
+                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
                                 </Link>
 
                                 {index < track.artists.length - 1 ? ", " : ""}
@@ -128,16 +112,14 @@ export default function TrackGrid({ items }: ITracks) {
                   {"album" in track && track.album && (
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300 album:hidden">
                       <span className="text-xs text-gray-300 hover:underline">
-                        <Link
-                          passHref
-                          href={`/albums/${track.album.id}`}
-                          onClick={(e) => stopProp(e)}
-                        >
-                          {track.album.name.length < 20 ? (
-                            <> {track.album.name}</>
-                          ) : (
-                            <>{track.album.name.slice(0, 20).concat("...")}</>
-                          )}
+                        <Link href={`/albums/${track.album.id}`}>
+                          <a onClick={(e) => stopProp(e)}>
+                            {track.album.name.length < 20 ? (
+                              <> {track.album.name}</>
+                            ) : (
+                              <>{track.album.name.slice(0, 20).concat("...")}</>
+                            )}
+                          </a>
                         </Link>
                       </span>
                     </td>
@@ -150,9 +132,7 @@ export default function TrackGrid({ items }: ITracks) {
                     ) : (
                       <SaveTrack id={track.id} saved={false} />
                     )}
-                    <span className="block w-7">
-                      {formatDuration(track.duration_ms)}
-                    </span>
+                    <span className="block w-7">{formatDuration(track.duration_ms)}</span>
                   </td>
                 </tr>
               ))}
@@ -162,12 +142,8 @@ export default function TrackGrid({ items }: ITracks) {
       ) : (
         <span className="flex flex-col items-center text-white">
           <span className="text-2xl">No tracks available</span>
-          <Link
-            passHref
-            href={`/discover`}
-            className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2"
-          >
-            Discover new tracks
+          <Link href={`/discover`}>
+            <a className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2">Discover new tracks</a>
           </Link>
         </span>
       )}

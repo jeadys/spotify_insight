@@ -1,20 +1,17 @@
-import { getCurrentUserPlaylists } from "../../lib/spotify";
-import { PlaylistGrid } from "../../components/grid";
-import { SectionWrapper } from "../../components";
-import { IUsersPlaylists } from "../../lib/interfaces/user-saved-playlists";
 import { useQuery } from "react-query";
+
+import { SectionWrapper } from "../../components";
+import { PlaylistGrid } from "../../components/grid";
+import { IUsersSavedPlaylists } from "../../lib/interfaces/user-saved-playlists";
+import { getCurrentUserSavedPlaylists } from "../../lib/spotify";
 
 export default function SavedPlaylists() {
   const fetchPlaylists = async () => {
-    const playlists = await getCurrentUserPlaylists();
+    const playlists = await getCurrentUserSavedPlaylists(50);
     return playlists.data;
   };
 
-  const {
-    data: playlists,
-    isLoading: playlistsIsLoading,
-    error: playlistsError,
-  } = useQuery<IUsersPlaylists>("playlists", fetchPlaylists, {
+  const { data: playlists } = useQuery<IUsersSavedPlaylists>("playlists", fetchPlaylists, {
     refetchOnWindowFocus: false,
   });
 

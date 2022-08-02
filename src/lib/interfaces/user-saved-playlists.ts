@@ -43,7 +43,7 @@ export interface Item {
   uri: string;
 }
 
-export interface IUsersPlaylists {
+export interface IUsersSavedPlaylists {
   href?: string;
   items: Item[];
   limit?: number;
