@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { SectionWrapper } from "../../../components";
 import { PlaylistGrid } from "../../../components/grid";
+import { ICategoryPlaylist } from "../../../lib/interfaces/category-playlist";
 import { getCategoryPlaylists } from "../../../lib/spotify";
 
 export default function Category() {
@@ -14,7 +15,7 @@ export default function Category() {
     return category.data;
   };
 
-  const { data: category } = useQuery(["category", id], fetchCategory, {
+  const { data: category } = useQuery<ICategoryPlaylist>(["category", id], fetchCategory, {
     refetchOnWindowFocus: false,
   });
 
