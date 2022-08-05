@@ -12,7 +12,7 @@ export default function SavedTracks() {
   };
 
   const { data: tracks } = useQuery<IUsersSavedTracks>(
-    ["saved-tracks"],
+    ["all-saved-tracks"],
     fetchCurrentUserSavedTracks,
     { refetchOnWindowFocus: false }
   );

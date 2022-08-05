@@ -12,7 +12,7 @@ export default function SavedAlbums() {
   };
 
   const { data: tracks } = useQuery<IUsersSavedAlbums>(
-    ["saved-albums"],
+    ["all-saved-albums"],
     fetchCurrentUserSavedAlbums,
     { refetchOnWindowFocus: false }
   );

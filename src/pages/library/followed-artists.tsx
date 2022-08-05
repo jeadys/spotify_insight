@@ -12,7 +12,7 @@ export default function FollowedArtists() {
   };
 
   const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
-    ["followed-artists"],
+    ["all-followed-artists"],
     fetchUserFollowedArtists,
     { refetchOnWindowFocus: false }
   );

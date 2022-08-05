@@ -11,9 +11,13 @@ export default function SavedPlaylists() {
     return playlists.data;
   };
 
-  const { data: playlists } = useQuery<IUsersSavedPlaylists>(["playlists"], fetchPlaylists, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: playlists } = useQuery<IUsersSavedPlaylists>(
+    ["all-saved-playlists"],
+    fetchPlaylists,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <>

@@ -12,7 +12,7 @@ export default function FeaturedPlaylists() {
   };
 
   const { data: featured } = useQuery<IFeaturedPlaylists>(
-    ["featured-playlists"],
+    ["all-featured-playlists"],
     fetchFeaturedPlaylists,
     { refetchOnWindowFocus: false }
   );

@@ -11,7 +11,7 @@ export default function Categories() {
     return categories.data;
   };
 
-  const { data: categories } = useQuery<ICategories>(["categories"], fetchCategories, {
+  const { data: categories } = useQuery<ICategories>(["all-categories"], fetchCategories, {
     refetchOnWindowFocus: false,
   });
 

@@ -11,7 +11,7 @@ export default function NewReleases() {
     return newReleases.data;
   };
 
-  const { data: releases } = useQuery<INewReleases>(["new-releases"], fetchNewReleases, {
+  const { data: releases } = useQuery<INewReleases>(["all-new-releases"], fetchNewReleases, {
     refetchOnWindowFocus: false,
   });
 
