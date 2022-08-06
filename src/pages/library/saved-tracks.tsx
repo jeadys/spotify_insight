@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
+import { TrackGridSkeleton } from "../../components/skeleton";
 import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";
 import { getCurrentUserSavedTracks } from "../../lib/spotify";
 
@@ -19,12 +20,14 @@ export default function SavedTracks() {
 
   return (
     <>
-      {tracks && (
+      {tracks ? (
         <>
           <SectionWrapper title="Saved tracks" breadcrumb="true">
             <TrackGrid items={tracks.items.map((item) => item.track)} />
           </SectionWrapper>
         </>
+      ) : (
+        <TrackGridSkeleton amount={50} />
       )}
     </>
   );

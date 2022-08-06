@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
+import { TrackGridSkeleton } from "../../components/skeleton";
 import { IPlaylist } from "../../lib/interfaces/playlist";
 import { IRecommendations } from "../../lib/interfaces/recommendations";
 import { getPlaylistById, getRecommendationsForTracks } from "../../lib/spotify";
@@ -36,12 +37,14 @@ export default function Recommendations() {
 
   return (
     <>
-      {playlist && recommendations && (
+      {playlist && recommendations ? (
         <>
           <SectionWrapper title={`Recommendations based on ${playlist.name}`} breadcrumb="true">
             <TrackGrid items={recommendations.tracks.slice(0, 50)} />
           </SectionWrapper>
         </>
+      ) : (
+        <TrackGridSkeleton amount={50} />
       )}
     </>
   );

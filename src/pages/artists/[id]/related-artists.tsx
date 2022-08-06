@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { SectionWrapper } from "../../../components";
 import { ArtistGrid } from "../../../components/grid";
+import { ArtistGridSkeleton } from "../../../components/skeleton";
 import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
 import { getArtistRelatedArtists } from "../../../lib/spotify";
 
@@ -22,12 +23,14 @@ export default function RelatedArtists() {
   );
   return (
     <>
-      {artistRelatedArtists && (
+      {artistRelatedArtists ? (
         <>
           <SectionWrapper title="Fans also like" breadcrumb="true">
             <ArtistGrid items={artistRelatedArtists.artists} />
           </SectionWrapper>
         </>
+      ) : (
+        <ArtistGridSkeleton amount={50} />
       )}
     </>
   );

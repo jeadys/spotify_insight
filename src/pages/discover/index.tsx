@@ -2,6 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { AlbumGrid, CategoryGrid, PlaylistGrid } from "../../components/grid";
+import {
+  AlbumGridSkeleton,
+  CategoryGridSkeleton,
+  PlaylistGridSkeleton,
+} from "../../components/skeleton";
 import { ICategories } from "../../lib/interfaces/categories";
 import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
 import { INewReleases } from "../../lib/interfaces/new-releases";
@@ -39,7 +44,7 @@ export default function Discover() {
 
   return (
     <>
-      {releases && featured && categories && (
+      {releases && featured && categories ? (
         <>
           <SectionWrapper title="New album releases" seeAll="/discover/new-releases">
             <AlbumGrid items={releases.albums.items} />
@@ -50,6 +55,12 @@ export default function Discover() {
           <SectionWrapper title="Categories" seeAll="/discover/categories">
             <CategoryGrid items={categories.categories.items} />
           </SectionWrapper>
+        </>
+      ) : (
+        <>
+          <AlbumGridSkeleton amount={6} />
+          <CategoryGridSkeleton amount={6} />
+          <PlaylistGridSkeleton amount={6} />
         </>
       )}
     </>

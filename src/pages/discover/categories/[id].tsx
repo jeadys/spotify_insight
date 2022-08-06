@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { SectionWrapper } from "../../../components";
 import { PlaylistGrid } from "../../../components/grid";
+import { PlaylistGridSkeleton } from "../../../components/skeleton";
 import { ICategoryPlaylist } from "../../../lib/interfaces/category-playlist";
 import { getCategoryPlaylists } from "../../../lib/spotify";
 
@@ -21,12 +22,14 @@ export default function Category() {
 
   return (
     <>
-      {category && (
+      {category ? (
         <>
           <SectionWrapper title="Playlists" breadcrumb="true">
             <PlaylistGrid items={category.playlists.items} />
           </SectionWrapper>
         </>
+      ) : (
+        <PlaylistGridSkeleton amount={50} />
       )}
     </>
   );

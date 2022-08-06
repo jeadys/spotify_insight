@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
+import { TrackGridSkeleton } from "../../components/skeleton";
 import { IUsersTopTracks } from "../../lib/interfaces/users-top-tracks";
 import { getTopTracks } from "../../lib/spotify";
 
@@ -20,7 +21,7 @@ export default function TopTracks() {
 
   return (
     <>
-      {topTracks && (
+      {topTracks ? (
         <>
           <SectionWrapper
             title="Top tracks"
@@ -31,6 +32,8 @@ export default function TopTracks() {
             <TrackGrid items={topTracks.items} />
           </SectionWrapper>
         </>
+      ) : (
+        <TrackGridSkeleton amount={50} />
       )}
     </>
   );

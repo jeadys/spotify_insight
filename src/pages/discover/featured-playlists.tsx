@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { PlaylistGrid } from "../../components/grid";
+import { PlaylistGridSkeleton } from "../../components/skeleton";
 import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
 import { getFeaturedPlaylists } from "../../lib/spotify";
 
@@ -19,12 +20,14 @@ export default function FeaturedPlaylists() {
 
   return (
     <>
-      {featured && (
+      {featured ? (
         <>
           <SectionWrapper title="Featured playlists" breadcrumb="true">
             <PlaylistGrid items={featured.playlists.items} />
           </SectionWrapper>
         </>
+      ) : (
+        <PlaylistGridSkeleton amount={50} />
       )}
     </>
   );

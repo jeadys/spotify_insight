@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import { SectionWrapper } from "../../../components";
 import { AlbumGrid } from "../../../components/grid";
+import { AlbumGridSkeleton } from "../../../components/skeleton";
 import { IArtistsAlbums } from "../../../lib/interfaces/artist-album";
 import { getArtistAlbums } from "../../../lib/spotify";
 
@@ -25,12 +26,14 @@ export default function RelatedAlbums() {
 
   return (
     <>
-      {artistAlbums && (
+      {artistAlbums ? (
         <>
           <SectionWrapper title="Popular albums" breadcrumb="true">
             <AlbumGrid items={artistAlbums.items} />
           </SectionWrapper>
         </>
+      ) : (
+        <AlbumGridSkeleton amount={50} />
       )}
     </>
   );
