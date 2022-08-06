@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -51,19 +52,18 @@ export default function TrackGrid({ items }: ITracks) {
                       </div>
                       {"album" in track && track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
-                          {track.album.images.length && track.album.images[2] ? (
-                            <img
-                              className="h-10 w-10 object-cover rounded-md"
-                              src={track.album.images[2].url}
-                              alt={track.name}
-                            />
-                          ) : (
-                            <img
-                              className="h-10 w-10 object-cover rounded-md"
-                              src="/images/nocover.webp"
-                              alt={track.name}
-                            />
-                          )}
+                          <Image
+                            src={
+                              track.album.images.length && track.album.images[2]
+                                ? track.album.images[2].url
+                                : "/images/nocover.webp"
+                            }
+                            className="h-10 w-10 object-cover rounded-md"
+                            width={40}
+                            height={40}
+                            layout="fixed"
+                            alt={track.name}
+                          />
                         </div>
                       )}
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { Categories } from "../../lib/interfaces/categories";
@@ -11,25 +12,25 @@ export default function CategoryGrid({ items }: Categories) {
             {items.map((category) => (
               <li
                 key={category.id}
-                className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
+                className="bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
               >
-                <Link passHref href={`/discover/categories/${category.id}`}>
-                  <div className="flex-1 flex flex-col p-4">
-                    {category.icons.length && category.icons[0] ? (
-                      <img
-                        className="w-44 h-44 object-cover  mx-auto rounded-md"
-                        src={category.icons[0].url}
-                        alt={category.name}
-                      />
-                    ) : (
-                      <img
-                        className="w-44 h-44 object-cover  mx-auto rounded-md"
-                        src="/images/nocover.webp"
-                        alt={category.name}
-                      />
-                    )}
+                <Link href={`/discover/categories/${category.id}`}>
+                  <a className="py-4 flex flex-col items-center">
+                    <Image
+                      src={
+                        category.icons.length && category.icons[0]
+                          ? category.icons[0].url
+                          : "/images/nocover.webp"
+                      }
+                      className="object-cover rounded-md"
+                      width={192}
+                      height={192}
+                      layout="fixed"
+                      alt={category.name}
+                    />
+
                     <h3 className="mt-6 text-white text-sm font-medium">{category.name}</h3>
-                  </div>
+                  </a>
                 </Link>
               </li>
             ))}

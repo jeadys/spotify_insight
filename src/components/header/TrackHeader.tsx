@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -10,8 +11,6 @@ import { SaveAlbum } from "../button";
 export default function TrackHeader({ data }: ITrackHeader) {
   const queryClient = useQueryClient();
   const { asPath } = useRouter();
-
-  console.log(asPath);
 
   const fetchDoesUserHaveAlbumSaved = async () => {
     const isAlbumSaved = await getDoesUserHaveAlbumSaved(data.id);
@@ -28,20 +27,16 @@ export default function TrackHeader({ data }: ITrackHeader) {
   );
 
   return (
-    <>
-      {data.images.length && data.images[0] ? (
-        <img
-          className="w-96 h-96 object-cover rounded-md mt-5 mx-auto"
-          src={data.images[0].url}
-          alt={data.name}
-        />
-      ) : (
-        <img
-          className="w-96 h-96 object-cover rounded-md mt-5 mx-auto"
-          src="/images/nocover.webp"
-          alt={data.name}
-        />
-      )}
+    <div className="mt-5">
+      <Image
+        src={data.images.length && data.images[0] ? data.images[0].url : "/images/nocover.webp"}
+        className="object-cover rounded-md"
+        width={320}
+        height={320}
+        layout="fixed"
+        alt={data.name}
+      />
+
       <div className="gap-y-2 flex flex-col mt-5 mx items-center">
         <div className="text-2xl md:text-4xl font-black text-white">{data.name}</div>
 
@@ -78,6 +73,6 @@ export default function TrackHeader({ data }: ITrackHeader) {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }
