@@ -16,6 +16,7 @@ export default function SavedPlaylists() {
     ["all-saved-playlists"],
     fetchPlaylists,
     {
+      staleTime: Infinity,
       refetchOnWindowFocus: false,
     }
   );

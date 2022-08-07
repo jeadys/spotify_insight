@@ -18,6 +18,7 @@ export default function Playlist() {
   };
 
   const { data: playlist } = useQuery<IPlaylist>(["playlist", id], fetchPlaylist, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

@@ -18,6 +18,7 @@ export default function Album() {
   };
 
   const { data: album } = useQuery<IAlbum>(["album", id], fetchAlbum, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

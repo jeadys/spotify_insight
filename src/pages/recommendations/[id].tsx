@@ -18,6 +18,7 @@ export default function Recommendations() {
   };
 
   const { data: playlist } = useQuery<IPlaylist>(["playlist", id], fetchPlaylist, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
@@ -32,7 +33,7 @@ export default function Recommendations() {
   const { data: recommendations } = useQuery<IRecommendations>(
     ["recommendations-based-on", id],
     fetchRecommendationsForTracks,
-    { enabled: !!playlist, refetchOnWindowFocus: false }
+    { enabled: !!playlist, staleTime: Infinity, refetchOnWindowFocus: false }
   );
 
   return (

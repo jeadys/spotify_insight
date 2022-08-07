@@ -13,6 +13,7 @@ export default function NewReleases() {
   };
 
   const { data: releases } = useQuery<INewReleases>(["all-new-releases"], fetchNewReleases, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

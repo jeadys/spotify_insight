@@ -46,25 +46,35 @@ export default function Artist() {
   };
 
   const { data: artist } = useQuery<IArtist>(["artist", id], fetchArtist, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
   const { data: artistTopTracks } = useQuery<IArtistsTopTracks>(
     ["artist-tracks", id],
     fetchArtistTopTracks,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const { data: artistAlbums } = useQuery<IArtistsAlbums>(
     ["artist-albums", id],
     fetchArtistAlbums,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(
     ["artist-related-artists", id],
     fetchArtistRelatedArtists,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   return (

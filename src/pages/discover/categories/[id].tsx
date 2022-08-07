@@ -17,6 +17,7 @@ export default function Category() {
   };
 
   const { data: category } = useQuery<ICategoryPlaylist>(["category", id], fetchCategory, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

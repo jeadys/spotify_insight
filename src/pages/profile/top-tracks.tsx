@@ -16,6 +16,7 @@ export default function TopTracks() {
   };
 
   const { data: topTracks } = useQuery<IUsersTopTracks>(["top-tracks", timeRange], fetchTopTracks, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { ITracks } from "../../lib/interfaces/tracks";
@@ -13,23 +14,19 @@ import { SaveTrack } from "../button";
 export default function TrackGrid({ items }: ITracks) {
   const trackIds = items.map((track) => track.id).join(",");
   const trackUris = items.map((track) => track.uri);
-  const [saveState, setSaveState] = useState<boolean[]>();
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
+  const { asPath } = useRouter();
 
   const fetchDoesUserHaveTrackSaved = async () => {
     const isTrackSaved = await getDoesUserHaveTrackSaved(trackIds);
     return isTrackSaved.data;
   };
 
-  const { data: isTrackSaved } = useQuery(
-    ["is-track-saved", trackIds],
-    fetchDoesUserHaveTrackSaved,
-    {
-      onSuccess: setSaveState,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: isTrackSaved } = useQuery(["is-track-saved", asPath], fetchDoesUserHaveTrackSaved, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>
@@ -125,9 +122,9 @@ export default function TrackGrid({ items }: ITracks) {
                     </td>
                   )}
                   <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden flex justify-end gap-5">
-                    {isTrackSaved && saveState ? (
+                    {isTrackSaved ? (
                       <span onClick={(e) => stopProp(e)}>
-                        <SaveTrack id={track.id} saved={saveState[index]} />
+                        <SaveTrack id={track.id} saved={isTrackSaved[index]} />
                       </span>
                     ) : (
                       <SaveTrack id={track.id} saved={false} />

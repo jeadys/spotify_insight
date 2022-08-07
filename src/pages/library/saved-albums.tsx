@@ -15,7 +15,10 @@ export default function SavedAlbums() {
   const { data: tracks } = useQuery<IUsersSavedAlbums>(
     ["all-saved-albums"],
     fetchCurrentUserSavedAlbums,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   return (

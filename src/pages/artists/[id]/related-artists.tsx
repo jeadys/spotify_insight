@@ -19,7 +19,10 @@ export default function RelatedArtists() {
   const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(
     ["artist-related-artists", id],
     fetchArtistRelatedArtists,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
   return (
     <>

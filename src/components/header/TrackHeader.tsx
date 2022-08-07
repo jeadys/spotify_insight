@@ -21,6 +21,7 @@ export default function TrackHeader({ data }: ITrackHeader) {
     ["is-album-saved", data.id],
     fetchDoesUserHaveAlbumSaved,
     {
+      staleTime: Infinity,
       enabled: !!queryClient.getQueryData(["album", data.id]),
       refetchOnWindowFocus: false,
     }

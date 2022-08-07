@@ -15,6 +15,7 @@ export default function ArtistHeader({ data }: IArtistHeader) {
     ["is-artist-followed", data.id],
     fetchDoesUserFollowArtist,
     {
+      staleTime: Infinity,
       refetchOnWindowFocus: false,
     }
   );

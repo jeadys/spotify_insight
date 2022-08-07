@@ -43,25 +43,37 @@ export default function Library() {
   const { data: savedPlaylists } = useQuery<IUsersSavedPlaylists>(
     ["saved-playlists"],
     fetchUserSavedPlaylists,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const { data: savedAlbums } = useQuery<IUsersSavedAlbums>(
     ["saved-albums"],
     fetchUsersSavedAlbums,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const { data: savedTracks } = useQuery<IUsersSavedTracks>(
     ["saved-tracks"],
     fetchUserSavedTracks,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
     ["followed-artists"],
     fetchUserFollowedArtists,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   return (

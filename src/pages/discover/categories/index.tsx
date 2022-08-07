@@ -13,6 +13,7 @@ export default function Categories() {
   };
 
   const { data: categories } = useQuery<ICategories>(["all-categories"], fetchCategories, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

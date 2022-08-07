@@ -20,6 +20,7 @@ export default function RelatedAlbums() {
     ["artist-albums", id],
     fetchArtistAlbums,
     {
+      staleTime: Infinity,
       refetchOnWindowFocus: false,
     }
   );

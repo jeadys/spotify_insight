@@ -19,10 +19,12 @@ export default function Profile() {
   };
 
   const { data: topArtists } = useQuery<IUsersTopArtists>(["top-artists"], fetchTopArtists, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
   const { data: topTracks } = useQuery<IUsersTopTracks>(["top-tracks"], fetchTopTracks, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

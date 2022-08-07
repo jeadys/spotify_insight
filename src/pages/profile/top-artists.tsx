@@ -19,6 +19,7 @@ export default function TopArtists() {
     ["top-artists", timeRange],
     fetchTopArtists,
     {
+      staleTime: Infinity,
       refetchOnWindowFocus: false,
     }
   );

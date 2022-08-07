@@ -29,16 +29,21 @@ export default function Discover() {
   };
 
   const { data: releases } = useQuery<INewReleases>(["new-releases"], fetchNewReleases, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
   const { data: featured } = useQuery<IFeaturedPlaylists>(
     ["featured-playlists"],
     fetchFeaturedPlaylists,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const { data: categories } = useQuery<ICategories>(["categories"], fetchCategories, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 

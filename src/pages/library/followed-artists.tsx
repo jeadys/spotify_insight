@@ -15,7 +15,10 @@ export default function FollowedArtists() {
   const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
     ["all-followed-artists"],
     fetchUserFollowedArtists,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   return (
