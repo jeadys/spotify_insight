@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { AlbumGrid } from "../../components/grid";
+import { AlbumGridSkeleton } from "../../components/skeleton";
 import { IUsersSavedAlbums } from "../../lib/interfaces/user-saved-albums";
 import { getCurrentUserSavedAlbums } from "../../lib/spotify";
 
@@ -12,19 +13,24 @@ export default function SavedAlbums() {
   };
 
   const { data: tracks } = useQuery<IUsersSavedAlbums>(
-    ["saved-albums"],
+    ["all-saved-albums"],
     fetchCurrentUserSavedAlbums,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   return (
     <>
-      {tracks && (
+      {tracks ? (
         <>
           <SectionWrapper title="Saved albums" breadcrumb="true">
             <AlbumGrid items={tracks.items.map((item) => item.album)} />
           </SectionWrapper>
         </>
+      ) : (
+        <AlbumGridSkeleton amount={50} />
       )}
     </>
   );

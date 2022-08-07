@@ -125,7 +125,7 @@ export interface Tracks {
   total: number;
 }
 
-export interface ISearchTrack {
+export interface ISearchTracks {
   artists: Artists;
   tracks: Tracks;
 }

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { IArtistsAlbums } from "../../lib/interfaces/artist-album";
@@ -11,39 +12,36 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
             {items.map((album) => (
               <li
                 key={album.id}
-                className="text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
+                className="py-4 gap-3 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
               >
-                <Link passHref href={`/albums/${album.id}`}>
-                  <div className="p-4 cursor-pointer">
-                    {album.images.length && album.images[1] ? (
-                      <img
-                        className="w-48 h-48 object-cover mx-auto rounded-md"
-                        src={album.images[1].url}
-                        alt={album.name}
-                      />
-                    ) : (
-                      <img
-                        className="w-48 h-48 object-cover mx-auto rounded-md"
-                        src="/images/nocover.webp"
-                        alt={album.name}
-                      />
-                    )}
-                    <h3 className="mt-6 text-white text-sm font-medium">
+                <Link href={`/albums/${album.id}`}>
+                  <a>
+                    <Image
+                      src={
+                        album.images.length && album.images[1]
+                          ? album.images[1].url
+                          : "/images/nocover.webp"
+                      }
+                      className="object-cover rounded-md"
+                      width={192}
+                      height={192}
+                      layout="fixed"
+                      alt={album.name}
+                    />
+
+                    <h3 className="mt-4 text-white text-sm font-medium">
                       {album.name.length < 20 ? (
                         <> {album.name}</>
                       ) : (
                         <>{album.name.slice(0, 20).concat("...")}</>
                       )}
                     </h3>
-                  </div>
+                  </a>
                 </Link>
-                <div className="mb-5">
-                  <Link href={`/artists/${album.artists[0].id}`}>
-                    <a className="text-xs text-gray-300 hover:underline block w-max mx-auto">
-                      {album.artists[0].name}
-                    </a>
-                  </Link>
-                </div>
+
+                <Link href={`/artists/${album.artists[0].id}`}>
+                  <a className="text-xs text-gray-300 hover:underline">{album.artists[0].name}</a>
+                </Link>
               </li>
             ))}
           </ul>

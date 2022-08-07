@@ -4,13 +4,13 @@ import { useRouter } from "next/router";
 import { SectionWrapper } from "../../components";
 import { TrackGrid } from "../../components/grid";
 import { TrackHeader } from "../../components/header";
+import { TrackGridSkeleton, TrackHeaderSkeleton } from "../../components/skeleton";
 import { IPlaylist } from "../../lib/interfaces/playlist";
 import { getPlaylistById } from "../../lib/spotify";
 
 export default function Playlist() {
   const { query } = useRouter();
   const { id } = query;
-  console.log(id);
 
   const fetchPlaylist = async () => {
     const playlist = await getPlaylistById(id!);
@@ -18,12 +18,13 @@ export default function Playlist() {
   };
 
   const { data: playlist } = useQuery<IPlaylist>(["playlist", id], fetchPlaylist, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
   return (
     <>
-      {playlist && (
+      {playlist ? (
         <>
           <div className="flex lg:space-x-10 flex-wrap">
             <div className="basis-full xl:basis-1/5 text-center xl:sticky xl:top-0 xl:self-start">
@@ -33,6 +34,17 @@ export default function Playlist() {
               <SectionWrapper title="Playlist tracks" breadcrumb="true">
                 <TrackGrid items={playlist.tracks.items.map(({ track }) => track).slice(0, 50)} />
               </SectionWrapper>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="flex lg:space-x-10 flex-wrap">
+            <div className="basis-full xl:basis-1/5 text-center xl:sticky xl:top-0 xl:self-start">
+              <TrackHeaderSkeleton />
+            </div>
+            <div className="flex-grow">
+              <TrackGridSkeleton amount={50} />
             </div>
           </div>
         </>

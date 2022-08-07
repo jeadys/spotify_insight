@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { ArtistGrid } from "../../components/grid";
+import { ArtistGridSkeleton } from "../../components/skeleton";
 import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
 import { getCurrentUserFollowedArtists } from "../../lib/spotify";
 
@@ -12,19 +13,24 @@ export default function FollowedArtists() {
   };
 
   const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
-    ["followed-artists"],
+    ["all-followed-artists"],
     fetchUserFollowedArtists,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   return (
     <>
-      {followedArtists && (
+      {followedArtists ? (
         <>
           <SectionWrapper title="Followed artists" breadcrumb="true">
             <ArtistGrid items={followedArtists.artists.items} />
           </SectionWrapper>
         </>
+      ) : (
+        <ArtistGridSkeleton amount={50} />
       )}
     </>
   );

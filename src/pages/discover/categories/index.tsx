@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../../components";
 import CategoryGrid from "../../../components/grid/CategoryGrid";
+import { CategoryGridSkeleton } from "../../../components/skeleton";
 import { ICategories } from "../../../lib/interfaces/categories";
 import { getCategories } from "../../../lib/spotify";
 
@@ -11,18 +12,21 @@ export default function Categories() {
     return categories.data;
   };
 
-  const { data: categories } = useQuery<ICategories>(["categories"], fetchCategories, {
+  const { data: categories } = useQuery<ICategories>(["all-categories"], fetchCategories, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
   return (
     <>
-      {categories && (
+      {categories ? (
         <>
           <SectionWrapper title="Categories" breadcrumb="true">
             <CategoryGrid items={categories.categories.items} />
           </SectionWrapper>
         </>
+      ) : (
+        <CategoryGridSkeleton amount={50} />
       )}
     </>
   );

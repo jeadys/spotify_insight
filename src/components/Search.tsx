@@ -1,42 +1,42 @@
+import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import useDebounce from "../hooks/useDebounce";
-import { Track } from "../lib/interfaces/search-tracks";
-import { searchItems } from "../lib/spotify";
+import { ISearchTracks } from "../lib/interfaces/search-tracks";
+import { getSearchItems } from "../lib/spotify";
 import { stopProp } from "../lib/utils";
 import { ChooseTrack, PlayTrack } from "./TrackContext";
 
 export default function Search() {
   const [searchModal, setSearchModal] = useState(false);
   const [search, setSearch] = useState("");
-  const [searchResults, setSearchResults] = useState<Track[]>([]); // CHECK IF THIS IS CORRECT
-  const trackUris = searchResults.map((track) => track.uri);
+
   const debouncedSearch = useDebounce(search, 1000);
   const inputRef = useRef<HTMLInputElement>(null);
+
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
 
-  useEffect(() => {
-    return searchModal ? inputRef.current!.focus() : setSearch(""); // && inputRef.current !== null ?
-  }, [searchModal]);
+  const fetchSearchItems = async () => {
+    const searchItems = await getSearchItems(debouncedSearch, 30);
+    return searchItems.data;
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const searchData = await searchItems(debouncedSearch, 30);
-        setSearchResults(searchData.data.tracks.items);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-
-    if (debouncedSearch) {
-      fetchData();
-    } else {
-      return setSearchResults([]);
+  const { data: searchItems } = useQuery<ISearchTracks>(
+    ["search", debouncedSearch],
+    fetchSearchItems,
+    {
+      enabled: !!debouncedSearch,
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
     }
-  }, [debouncedSearch]);
+  );
+
+  useEffect(() => {
+    return searchModal ? inputRef.current!.focus() : setSearch("");
+  }, [searchModal]);
 
   return (
     <>
@@ -94,63 +94,65 @@ export default function Search() {
                 />
               </div>
 
-              <ul
-                className="max-h-96 scroll-py-2 overflow-y-auto py-2 text-sm text-white"
-                id="options"
-                role="listbox"
-              >
-                {searchResults.map((result) => (
-                  <li
-                    className={`${
-                      playingTrack === result.uri
-                        ? "bg-sky-600"
-                        : "hover:bg-slate-700 cursor-pointer"
-                    } px-4 py-2`}
-                    key={result.id}
-                    onClick={() => chooseTrack(trackUris, result.uri)}
-                  >
-                    <div className="flex items-center">
-                      <div className="h-10 w-10 flex-shrink-0">
-                        {result.album.images.length && result.album.images[0] ? (
-                          <img
-                            className="h-10 w-10 object-cover rounded-md"
-                            src={result.album.images[0].url}
+              {searchItems ? (
+                <ul
+                  className="max-h-96 scroll-py-2 overflow-y-auto py-2 text-sm text-white"
+                  id="options"
+                  role="listbox"
+                >
+                  {searchItems.tracks.items.map((result) => (
+                    <li
+                      className={`${
+                        playingTrack === result.uri
+                          ? "bg-sky-600"
+                          : "hover:bg-slate-700 cursor-pointer"
+                      } px-4 py-2`}
+                      key={result.id}
+                      onClick={() => chooseTrack([result.uri], result.uri)}
+                    >
+                      <div className="flex items-center">
+                        <div className="h-10 w-10 flex-shrink-0">
+                          <Image
+                            src={
+                              result.album.images.length && result.album.images[0]
+                                ? result.album.images[0].url
+                                : "/images/nocover.webp"
+                            }
+                            className="object-cover rounded-md"
+                            width={40}
+                            height={40}
+                            layout="fixed"
                             alt={result.name}
                           />
-                        ) : (
-                          <img
-                            className="h-10 w-10 object-cover rounded-md"
-                            src="/images/nocover.webp"
-                            alt={result.name}
-                          />
-                        )}
+                        </div>
+
+                        <div className="ml-4">
+                          <div className="font-semibold">{result.name}</div>
+                          <Link href={`/albums/${result.album.id}`}>
+                            <a onClick={(e) => stopProp(e)} className="hover:underline">
+                              {result.album.name}{" "}
+                            </a>
+                          </Link>
+                          <>
+                            {result.artists.map((artist, index) => (
+                              <span
+                                key={artist.id}
+                                className="text-xstext-gray-300 hover:underline"
+                              >
+                                <Link href={`/artists/${artist.id}`}>
+                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
+                                </Link>
+
+                                {index < result.artists.length - 1 ? ", " : ""}
+                              </span>
+                            ))}
+                          </>
+                        </div>
                       </div>
-
-                      <div className="ml-4">
-                        <div className="font-semibold">{result.name}</div>
-                        <Link href={`/albums/${result.album.id}`}>
-                          <a onClick={(e) => stopProp(e)} className="hover:underline">
-                            {result.album.name}{" "}
-                          </a>
-                        </Link>
-                        <>
-                          {result.artists.map((artist, index) => (
-                            <span key={artist.id} className="text-xstext-gray-300 hover:underline">
-                              <Link href={`/artists/${artist.id}`}>
-                                <a onClick={(e) => stopProp(e)}>{artist.name}</a>
-                              </Link>
-
-                              {index < result.artists.length - 1 ? ", " : ""}
-                            </span>
-                          ))}
-                        </>
-                      </div>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-
-              {searchResults.length <= 0 && (
+                    </li>
+                  ))}
+                </ul>
+              ) : (
                 <p className="p-4 text-sm text-gray-500">No tracks or artists found.</p>
               )}
             </div>

@@ -13,7 +13,7 @@ import { IFeaturedPlaylists } from "./interfaces/featured-playlists";
 import { INewReleases } from "./interfaces/new-releases";
 import { IPlaylist, IPlaylistItem, IPlaylistTracks } from "./interfaces/playlist";
 import { IRecommendations } from "./interfaces/recommendations";
-import { ISearchTrack } from "./interfaces/search-tracks";
+import { ISearchTracks } from "./interfaces/search-tracks";
 import { IUser } from "./interfaces/user";
 import { IUsersFollowedArtists } from "./interfaces/user-followed-artists";
 import { IUsersSavedAlbums } from "./interfaces/user-saved-albums";
@@ -393,6 +393,9 @@ export const getRecommendationsForTracks = (
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const searchItems = (query: string, limit: number): Promise<AxiosResponse<ISearchTrack>> => {
+export const getSearchItems = (
+  query: string,
+  limit: number
+): Promise<AxiosResponse<ISearchTracks>> => {
   return useAxios({ url: `/search?q=${query}&type=track&limit=${limit}` });
 };

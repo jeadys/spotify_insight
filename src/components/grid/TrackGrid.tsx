@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { ITracks } from "../../lib/interfaces/tracks";
@@ -12,23 +14,19 @@ import { SaveTrack } from "../button";
 export default function TrackGrid({ items }: ITracks) {
   const trackIds = items.map((track) => track.id).join(",");
   const trackUris = items.map((track) => track.uri);
-  const [saveState, setSaveState] = useState<boolean[]>();
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
+  const { asPath } = useRouter();
 
   const fetchDoesUserHaveTrackSaved = async () => {
     const isTrackSaved = await getDoesUserHaveTrackSaved(trackIds);
     return isTrackSaved.data;
   };
 
-  const { data: isTrackSaved } = useQuery(
-    ["is-track-saved", trackIds],
-    fetchDoesUserHaveTrackSaved,
-    {
-      onSuccess: setSaveState,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: isTrackSaved } = useQuery(["is-track-saved", asPath], fetchDoesUserHaveTrackSaved, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  });
 
   return (
     <>
@@ -51,19 +49,18 @@ export default function TrackGrid({ items }: ITracks) {
                       </div>
                       {"album" in track && track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
-                          {track.album.images.length && track.album.images[2] ? (
-                            <img
-                              className="h-10 w-10 object-cover rounded-md"
-                              src={track.album.images[2].url}
-                              alt={track.name}
-                            />
-                          ) : (
-                            <img
-                              className="h-10 w-10 object-cover rounded-md"
-                              src="/images/nocover.webp"
-                              alt={track.name}
-                            />
-                          )}
+                          <Image
+                            src={
+                              track.album.images.length && track.album.images[2]
+                                ? track.album.images[2].url
+                                : "/images/nocover.webp"
+                            }
+                            className="h-10 w-10 object-cover rounded-md"
+                            width={40}
+                            height={40}
+                            layout="fixed"
+                            alt={track.name}
+                          />
                         </div>
                       )}
 
@@ -125,9 +122,9 @@ export default function TrackGrid({ items }: ITracks) {
                     </td>
                   )}
                   <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden flex justify-end gap-5">
-                    {isTrackSaved && saveState ? (
+                    {isTrackSaved ? (
                       <span onClick={(e) => stopProp(e)}>
-                        <SaveTrack id={track.id} saved={saveState[index]} />
+                        <SaveTrack id={track.id} saved={isTrackSaved[index]} />
                       </span>
                     ) : (
                       <SaveTrack id={track.id} saved={false} />

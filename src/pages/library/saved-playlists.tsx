@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { SectionWrapper } from "../../components";
 import { PlaylistGrid } from "../../components/grid";
+import { PlaylistGridSkeleton } from "../../components/skeleton";
 import { IUsersSavedPlaylists } from "../../lib/interfaces/user-saved-playlists";
 import { getCurrentUserSavedPlaylists } from "../../lib/spotify";
 
@@ -11,18 +12,25 @@ export default function SavedPlaylists() {
     return playlists.data;
   };
 
-  const { data: playlists } = useQuery<IUsersSavedPlaylists>(["playlists"], fetchPlaylists, {
-    refetchOnWindowFocus: false,
-  });
+  const { data: playlists } = useQuery<IUsersSavedPlaylists>(
+    ["all-saved-playlists"],
+    fetchPlaylists,
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return (
     <>
-      {playlists && (
+      {playlists ? (
         <>
           <SectionWrapper title="Saved playlists" breadcrumb="true">
             <PlaylistGrid items={playlists.items} />
           </SectionWrapper>
         </>
+      ) : (
+        <PlaylistGridSkeleton amount={50} />
       )}
     </>
   );

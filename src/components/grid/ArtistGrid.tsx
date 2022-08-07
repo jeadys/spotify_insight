@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
@@ -11,47 +12,43 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
             {items.map((artist) => (
               <li
                 key={artist.id}
-                className="col-span-1 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out cursor-pointer"
+                className="bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
               >
-                <Link passHref href={`/artists/${artist.id}`}>
-                  <div className="flex-1 flex flex-col p-8">
-                    {artist.images.length && artist.images[2] ? (
-                      <img
-                        className="w-32 h-32 object-cover mx-auto rounded-full"
-                        src={artist.images[2].url}
-                        alt={artist.name}
-                      />
-                    ) : (
-                      <img
-                        className="w-32 h-32 object-cover mx-auto rounded-full"
-                        src="/images/nocover.webp"
-                        alt={artist.name}
-                      />
-                    )}
-                    <h3 className="mt-6 text-white text-sm font-medium">{artist.name}</h3>
-                    <dl className="mt-1 flex-grow flex flex-col justify-between">
-                      <dt className="sr-only">Title</dt>
-                      <dd className="text-gray-300 text-sm italic">
-                        {artist.genres[0] ? (
-                          <>
-                            {artist.genres[0].length < 20 ? (
-                              <> {artist.genres[0]}</>
-                            ) : (
-                              <>{artist.genres[0].slice(0, 20).concat("...")}</>
-                            )}
-                          </>
-                        ) : (
-                          "NA"
-                        )}
-                      </dd>
-                      <dd className="mt-3">
-                        <span className="px-2 py-1 text-xs font-medium bg-cyan-100 rounded-full">
-                          {artist.followers.total.toLocaleString()}{" "}
-                          {`follower${artist.followers.total !== 1 ? "s " : " "}`}
-                        </span>
-                      </dd>
-                    </dl>
-                  </div>
+                <Link href={`/artists/${artist.id}`}>
+                  <a className="py-8 gap-3 flex flex-col items-center">
+                    <Image
+                      src={
+                        artist.images.length && artist.images[2]
+                          ? artist.images[2].url
+                          : "/images/nocover.webp"
+                      }
+                      className="object-cover mx-auto rounded-full"
+                      width={128}
+                      height={128}
+                      layout="fixed"
+                      alt={artist.name}
+                    />
+
+                    <h3 className="text-white text-sm font-medium">{artist.name}</h3>
+                    <div className="text-gray-300 text-sm italic">
+                      {artist.genres[0] ? (
+                        <>
+                          {artist.genres[0].length < 20 ? (
+                            <> {artist.genres[0]}</>
+                          ) : (
+                            <>{artist.genres[0].slice(0, 20).concat("...")}</>
+                          )}
+                        </>
+                      ) : (
+                        "NA"
+                      )}
+                    </div>
+
+                    <span className="px-2 py-1 text-xs font-medium bg-cyan-100 rounded-full max-w-max">
+                      {artist.followers.total.toLocaleString()}{" "}
+                      {`follower${artist.followers.total !== 1 ? "s " : " "}`}
+                    </span>
+                  </a>
                 </Link>
               </li>
             ))}

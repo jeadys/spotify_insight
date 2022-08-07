@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { SectionWrapper } from "../../components";
 import { ArtistGrid } from "../../components/grid";
+import { ArtistGridSkeleton } from "../../components/skeleton";
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
 import { getTopArtists } from "../../lib/spotify";
 
@@ -18,13 +19,14 @@ export default function TopArtists() {
     ["top-artists", timeRange],
     fetchTopArtists,
     {
+      staleTime: Infinity,
       refetchOnWindowFocus: false,
     }
   );
 
   return (
     <>
-      {topArtists && (
+      {topArtists ? (
         <>
           <SectionWrapper
             title="Top artists"
@@ -35,6 +37,8 @@ export default function TopArtists() {
             <ArtistGrid items={topArtists.items} />
           </SectionWrapper>
         </>
+      ) : (
+        <ArtistGridSkeleton amount={50} />
       )}
     </>
   );

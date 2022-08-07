@@ -1,5 +1,6 @@
 import { HeartIcon } from "@heroicons/react/solid";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 import { removeTrackForCurrentUser, saveTrackForCurrentUser } from "../../lib/spotify";
@@ -12,11 +13,12 @@ type Props = {
 export default function SaveTrack({ id, saved }: Props) {
   const [saveState, setSaveState] = useState<boolean>(saved);
   const queryClient = useQueryClient();
+  const { asPath } = useRouter();
 
   const { mutateAsync: saveTrack } = useMutation(saveTrackForCurrentUser, {
     onSuccess: () => {
       queryClient.invalidateQueries(["saved-tracks"]);
-      queryClient.invalidateQueries(["is-track-saved"]);
+      queryClient.invalidateQueries(["is-track-saved", asPath]);
       setSaveState(true);
     },
   });
@@ -24,7 +26,7 @@ export default function SaveTrack({ id, saved }: Props) {
   const { mutateAsync: removeTrack } = useMutation(removeTrackForCurrentUser, {
     onSuccess: () => {
       queryClient.invalidateQueries(["saved-tracks"]);
-      queryClient.invalidateQueries(["is-track-saved"]);
+      queryClient.invalidateQueries(["is-track-saved", asPath]);
       setSaveState(false);
     },
   });

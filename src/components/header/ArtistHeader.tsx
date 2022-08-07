@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 
 import { IArtistHeader } from "../../lib/interfaces/artist-header";
 import { getDoesUserFollowArtist } from "../../lib/spotify";
@@ -14,34 +15,28 @@ export default function ArtistHeader({ data }: IArtistHeader) {
     ["is-artist-followed", data.id],
     fetchDoesUserFollowArtist,
     {
+      staleTime: Infinity,
       refetchOnWindowFocus: false,
     }
   );
 
   return (
-    <>
-      {data.images.length && data.images[0] ? (
-        <img
-          className="w-96 h-96 object-cover mx-auto rounded-md"
-          src={data.images[0].url}
-          alt={data.name}
-        />
-      ) : (
-        <img
-          className="w-96 h-96 object-cover mx-auto rounded-md"
-          src="/images/nocover.webp"
-          alt={data.name}
-        />
-      )}
-      <div className="text-3xl md:text-6xl lg:text-8xl font-black text-white text-center">
-        {data.name}
-      </div>
+    <div className="text-center">
+      <Image
+        src={data.images.length && data.images[0] ? data.images[0].url : "/images/nocover.webp"}
+        className="object-cover rounded-md"
+        width={384}
+        height={384}
+        layout="fixed"
+        alt={data.name}
+      />
+      <div className="text-3xl md:text-6xl lg:text-8xl font-black text-white mt-8">{data.name}</div>
 
-      <div className="h-5">
+      <div className="h-5 mt-8">
         {isArtistFollowed && <FollowArtist id={data.id} followed={isArtistFollowed[0]} />}
       </div>
 
-      <div className="w-full flex gap-y-5 flex-col md:flex-row md:gap-x-20 justify-center text-center">
+      <div className="w-full flex gap-y-5 flex-col md:flex-row md:gap-x-20 justify-center mt-8">
         {data.followers !== undefined && (
           <div>
             <span className="text-2xl font-black text-blue-400">
@@ -65,6 +60,6 @@ export default function ArtistHeader({ data }: IArtistHeader) {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

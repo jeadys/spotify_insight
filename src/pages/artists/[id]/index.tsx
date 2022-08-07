@@ -4,6 +4,12 @@ import { useRouter } from "next/router";
 import { SectionWrapper } from "../../../components";
 import { AlbumGrid, ArtistGrid, TrackGrid } from "../../../components/grid";
 import { ArtistHeader } from "../../../components/header";
+import {
+  AlbumGridSkeleton,
+  ArtistGridSkeleton,
+  ArtistHeaderSkeleton,
+  TrackGridSkeleton,
+} from "../../../components/skeleton";
 import { IArtist } from "../../../lib/interfaces/artist";
 import { IArtistsAlbums } from "../../../lib/interfaces/artist-album";
 import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
@@ -40,30 +46,40 @@ export default function Artist() {
   };
 
   const { data: artist } = useQuery<IArtist>(["artist", id], fetchArtist, {
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
 
   const { data: artistTopTracks } = useQuery<IArtistsTopTracks>(
     ["artist-tracks", id],
     fetchArtistTopTracks,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const { data: artistAlbums } = useQuery<IArtistsAlbums>(
     ["artist-albums", id],
     fetchArtistAlbums,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(
     ["artist-related-artists", id],
     fetchArtistRelatedArtists,
-    { refetchOnWindowFocus: false }
+    {
+      staleTime: Infinity,
+      refetchOnWindowFocus: false,
+    }
   );
 
   return (
     <>
-      {artist && artistTopTracks && artistAlbums && artistRelatedArtists && (
+      {artist && artistTopTracks && artistAlbums && artistRelatedArtists ? (
         <>
           <ArtistHeader data={artist} />
           <SectionWrapper title="Popular releases" breadcrumb="true">
@@ -71,12 +87,19 @@ export default function Artist() {
           </SectionWrapper>
 
           <SectionWrapper title="Popular albums" seeAll={`/artists/${id}/related-albums`}>
-            <AlbumGrid items={artistAlbums.items.slice(0, 6)} />
+            <AlbumGrid items={artistAlbums.items} />
           </SectionWrapper>
 
           <SectionWrapper title="Fans also like" seeAll={`/artists/${id}/related-artists`}>
             <ArtistGrid items={artistRelatedArtists.artists.slice(0, 6)} />
           </SectionWrapper>
+        </>
+      ) : (
+        <>
+          <ArtistHeaderSkeleton />
+          <TrackGridSkeleton amount={12} />
+          <AlbumGridSkeleton amount={6} />
+          <ArtistGridSkeleton amount={6} />
         </>
       )}
     </>

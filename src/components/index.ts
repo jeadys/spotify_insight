@@ -5,4 +5,3 @@ export { default as TrackContext } from "./TrackContext";
 export { default as TrackPlayer } from "./TrackPlayer";
 export { default as ScrollTop } from "./ScrollTop";
 export { default as Search } from "./Search";
-export { default as Loader } from "./Loader";
