@@ -27,7 +27,7 @@ export default function Playlist() {
       {playlist ? (
         <>
           <div className="flex lg:space-x-10 flex-wrap">
-            <div className="basis-full xl:basis-1/5 text-center xl:sticky xl:top-0 xl:self-start">
+            <div className="basis-full xl:basis-1/4 text-center xl:sticky xl:top-0 xl:self-start">
               <TrackHeader data={playlist} />
             </div>
             <div className="flex-grow">
@@ -40,7 +40,7 @@ export default function Playlist() {
       ) : (
         <>
           <div className="flex lg:space-x-10 flex-wrap">
-            <div className="basis-full xl:basis-1/5 text-center xl:sticky xl:top-0 xl:self-start">
+            <div className="basis-full xl:basis-1/4 text-center xl:sticky xl:top-0 xl:self-start">
               <TrackHeaderSkeleton />
             </div>
             <div className="flex-grow">

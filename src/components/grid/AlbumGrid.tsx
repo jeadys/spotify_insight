@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { IArtistsAlbums } from "../../lib/interfaces/artist-album";
@@ -8,24 +7,21 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
     <>
       {items && items.length ? (
         <>
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
+          <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
             {items.map((album) => (
               <li
                 key={album.id}
-                className="py-4 gap-3 flex flex-col text-center bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
+                className="py-4 gap-3 flex flex-col items-center text-center sm:bg-slate-800 rounded-lg sm:shadow sm:hover:bg-slate-700 transition ease-in-out"
               >
                 <Link href={`/albums/${album.id}`}>
                   <a>
-                    <Image
+                    <img
                       src={
                         album.images.length && album.images[1]
                           ? album.images[1].url
                           : "/images/nocover.webp"
                       }
-                      className="object-cover rounded-md"
-                      width={192}
-                      height={192}
-                      layout="fixed"
+                      className="w-48 h-48 object-cover rounded-md"
                       alt={album.name}
                     />
 

@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -112,16 +111,13 @@ export default function Search() {
                     >
                       <div className="flex items-center">
                         <div className="h-10 w-10 flex-shrink-0">
-                          <Image
+                          <img
                             src={
                               result.album.images.length && result.album.images[0]
                                 ? result.album.images[0].url
                                 : "/images/nocover.webp"
                             }
-                            className="object-cover rounded-md"
-                            width={40}
-                            height={40}
-                            layout="fixed"
+                            className="h-10 w-10 object-cover rounded-md"
                             alt={result.name}
                           />
                         </div>

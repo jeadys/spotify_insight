@@ -27,7 +27,7 @@ export default function Album() {
       {album ? (
         <>
           <div className="flex lg:space-x-10 flex-wrap">
-            <div className="basis-full xl:basis-1/5 text-center xl:sticky xl:top-0 xl:self-start">
+            <div className="basis-full xl:basis-1/4 text-center xl:sticky xl:top-0 xl:self-start">
               <TrackHeader data={album} />
             </div>
             <div className="flex-grow">
@@ -40,7 +40,7 @@ export default function Album() {
       ) : (
         <>
           <div className="flex lg:space-x-10 flex-wrap">
-            <div className="basis-full xl:basis-1/5 text-center xl:sticky xl:top-0 xl:self-start">
+            <div className="basis-full xl:basis-1/4 text-center xl:sticky xl:top-0 xl:self-start">
               <TrackHeaderSkeleton />
             </div>
             <div className="flex-grow">

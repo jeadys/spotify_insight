@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useMemo } from "react";
 
 import { ITracks } from "../../lib/interfaces/tracks";
 import { getDoesUserHaveTrackSaved } from "../../lib/spotify";
@@ -12,8 +11,14 @@ import { ChooseTrack, PlayTrack } from "../TrackContext";
 import { SaveTrack } from "../button";
 
 export default function TrackGrid({ items }: ITracks) {
-  const trackIds = items.map((track) => track.id).join(",");
-  const trackUris = items.map((track) => track.uri);
+  const trackIds = useMemo(() => {
+    return items.map((track) => track.id).join(",");
+  }, [items]);
+
+  const trackUris = useMemo(() => {
+    return items.map((track) => track.uri);
+  }, [items]);
+
   const playingTrack = PlayTrack();
   const chooseTrack = ChooseTrack();
   const { asPath } = useRouter();
@@ -49,16 +54,13 @@ export default function TrackGrid({ items }: ITracks) {
                       </div>
                       {"album" in track && track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
-                          <Image
+                          <img
                             src={
                               track.album.images.length && track.album.images[2]
                                 ? track.album.images[2].url
                                 : "/images/nocover.webp"
                             }
                             className="h-10 w-10 object-cover rounded-md"
-                            width={40}
-                            height={40}
-                            layout="fixed"
                             alt={track.name}
                           />
                         </div>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { IUsersSavedPlaylists } from "../../lib/interfaces/user-saved-playlists";
@@ -8,24 +7,21 @@ export default function PlaylistGrid({ items }: IUsersSavedPlaylists) {
     <>
       {items && items.length ? (
         <>
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
+          <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
             {items.map((playlist) => (
               <li
                 key={playlist.id}
-                className="bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
+                className="py-4 gap-3 flex flex-col items-center text-center sm:bg-slate-800 rounded-lg sm:shadow sm:hover:bg-slate-700 transition ease-in-out"
               >
                 <Link href={`/playlists/${playlist.id}`}>
-                  <a className="py-4 flex flex-col items-center">
-                    <Image
+                  <a>
+                    <img
                       src={
                         playlist.images.length && playlist.images[0]
                           ? playlist.images[0].url
                           : "/images/nocover.webp"
                       }
-                      className="object-cover rounded-md"
-                      width={192}
-                      height={192}
-                      layout="fixed"
+                      className="w-48 h-48 object-cover rounded-md"
                       alt={playlist.name}
                     />
 
@@ -36,6 +32,9 @@ export default function PlaylistGrid({ items }: IUsersSavedPlaylists) {
                         <>{playlist.name.slice(0, 20).concat("...")}</>
                       )}
                     </h3>
+                    <span className="text-xs text-gray-300">
+                      {playlist.tracks.total < 50 ? playlist.tracks.total : "50"} Tracks
+                    </span>
                   </a>
                 </Link>
               </li>

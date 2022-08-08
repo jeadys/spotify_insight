@@ -12,8 +12,8 @@ export default function TrackGridSkeleton({ amount }: Props) {
       <span key={index} className="w-full flex flex-row p-4 gap-5 rounded-md animate-pulse">
         <span className="bg-gray-800 w-9 h-9 rounded-md"></span>
         <span className="bg-gray-800 h-9 flex-1 rounded-md"></span>
-        <span className="bg-gray-800 h-9 flex-1 rounded-md"></span>
-        <span className="bg-gray-800 h-9 flex-1 rounded-md"></span>
+        <span className="album:hidden bg-gray-800 h-9 flex-1 rounded-md"></span>
+        <span className="album:hidden bg-gray-800 h-9 flex-1 rounded-md"></span>
       </span>
     );
   }

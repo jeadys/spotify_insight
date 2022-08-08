@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 
 import { IArtistHeader } from "../../lib/interfaces/artist-header";
 import { getDoesUserFollowArtist } from "../../lib/spotify";
@@ -22,12 +21,9 @@ export default function ArtistHeader({ data }: IArtistHeader) {
 
   return (
     <div className="text-center">
-      <Image
+      <img
         src={data.images.length && data.images[0] ? data.images[0].url : "/images/nocover.webp"}
-        className="object-cover rounded-md"
-        width={384}
-        height={384}
-        layout="fixed"
+        className="w-96 h-96 object-cover rounded-md mx-auto"
         alt={data.name}
       />
       <div className="text-3xl md:text-6xl lg:text-8xl font-black text-white mt-8">{data.name}</div>

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
@@ -8,24 +7,21 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
     <>
       {items && items.length ? (
         <>
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
+          <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
             {items.map((artist) => (
               <li
                 key={artist.id}
-                className="bg-slate-800 rounded-lg shadow hover:bg-slate-700 transition ease-in-out"
+                className="sm:bg-slate-800 rounded-lg sm:shadow sm:hover:bg-slate-700 transition ease-in-out"
               >
                 <Link href={`/artists/${artist.id}`}>
-                  <a className="py-8 gap-3 flex flex-col items-center">
-                    <Image
+                  <a className="py-6 gap-3 flex flex-col items-center">
+                    <img
                       src={
                         artist.images.length && artist.images[2]
                           ? artist.images[2].url
                           : "/images/nocover.webp"
                       }
-                      className="object-cover mx-auto rounded-full"
-                      width={128}
-                      height={128}
-                      layout="fixed"
+                      className="w-32 h-32 object-cover mx-auto rounded-full"
                       alt={artist.name}
                     />
 
@@ -44,7 +40,7 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
                       )}
                     </div>
 
-                    <span className="px-2 py-1 text-xs font-medium bg-cyan-100 rounded-full max-w-max">
+                    <span className="hidden sm:block px-2 py-1 text-xs font-medium bg-cyan-100 rounded-full max-w-max">
                       {artist.followers.total.toLocaleString()}{" "}
                       {`follower${artist.followers.total !== 1 ? "s " : " "}`}
                     </span>

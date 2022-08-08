@@ -1,5 +1,4 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -29,12 +28,9 @@ export default function TrackHeader({ data }: ITrackHeader) {
 
   return (
     <div className="mt-5">
-      <Image
+      <img
         src={data.images.length && data.images[0] ? data.images[0].url : "/images/nocover.webp"}
-        className="object-cover rounded-md"
-        width={320}
-        height={320}
-        layout="fixed"
+        className="w-80 h-80 object-cover rounded-md mx-auto"
         alt={data.name}
       />
 
@@ -51,7 +47,7 @@ export default function TrackHeader({ data }: ITrackHeader) {
 
         {data.tracks && data.tracks !== undefined && (
           <div className="text-sm text-white font-semibold">
-            {data.tracks.total < 50 ? data.tracks.total : "50"} tracks
+            {data.tracks.total < 50 ? data.tracks.total : "50"} Tracks
           </div>
         )}
 
