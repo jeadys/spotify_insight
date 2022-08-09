@@ -4,8 +4,8 @@ import { SessionProvider } from "next-auth/react";
 import type { AppProps } from "next/app";
 import React from "react";
 
-import { Content, Navigation, ScrollTop } from "../components";
-import TrackProvider from "../components/TrackContext";
+import { Content, Navigation, ScrollTop } from "../components/core";
+import TrackProvider from "../components/core/TrackContext";
 import "../styles/globals.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -15,20 +15,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <SessionProvider session={pageProps.session}>
-          <div className="bg-gray-900 min-h-screen font-maven">
-            <div className="min-h-screen">
-              <Content>
-                <ScrollTop />
-                <TrackProvider>
-                  <Navigation />
-                  <div className="space-y-10">
-                    <Component {...pageProps} />
-                  </div>
-                </TrackProvider>
-              </Content>
-              <ReactQueryDevtools initialIsOpen={false} />
-            </div>
-          </div>
+          <Content>
+            <ScrollTop />
+            <TrackProvider>
+              <Navigation />
+              <div className="space-y-10">
+                <Component {...pageProps} />
+              </div>
+            </TrackProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </Content>
           <div id="trackplayer"></div>
         </SessionProvider>
       </Hydrate>

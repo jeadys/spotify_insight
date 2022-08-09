@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { SectionWrapper } from "../../components";
+import { SectionWrapper } from "../../components/core";
 import { PlaylistGrid } from "../../components/grid";
 import { PlaylistGridSkeleton } from "../../components/skeleton";
 import { IUsersSavedPlaylists } from "../../lib/interfaces/user-saved-playlists";

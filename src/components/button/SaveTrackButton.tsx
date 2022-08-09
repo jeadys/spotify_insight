@@ -10,7 +10,7 @@ type Props = {
   saved: boolean;
 };
 
-export default function SaveTrack({ id, saved }: Props) {
+export default function SaveTrackButton({ id, saved }: Props) {
   const [saveState, setSaveState] = useState<boolean>(saved);
   const queryClient = useQueryClient();
   const { asPath } = useRouter();

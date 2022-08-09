@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { SectionWrapper } from "../../components";
+import { SectionWrapper } from "../../components/core";
 import { AlbumGrid, CategoryGrid, PlaylistGrid } from "../../components/grid";
 import {
   AlbumGridSkeleton,
@@ -12,7 +12,7 @@ import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
 import { INewReleases } from "../../lib/interfaces/new-releases";
 import { getCategories, getFeaturedPlaylists, getNewReleases } from "../../lib/spotify";
 
-export default function Discover() {
+export default function DiscoverButton() {
   const fetchNewReleases = async () => {
     const newReleases = await getNewReleases(6);
     return newReleases.data;
@@ -64,8 +64,8 @@ export default function Discover() {
       ) : (
         <>
           <AlbumGridSkeleton amount={6} />
-          <CategoryGridSkeleton amount={6} />
           <PlaylistGridSkeleton amount={6} />
+          <CategoryGridSkeleton amount={6} />
         </>
       )}
     </>

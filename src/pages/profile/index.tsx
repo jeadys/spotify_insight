@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { SectionWrapper } from "../../components";
+import { SectionWrapper } from "../../components/core";
 import { ArtistGrid, TrackGrid } from "../../components/grid";
 import { ArtistGridSkeleton, TrackGridSkeleton } from "../../components/skeleton";
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";

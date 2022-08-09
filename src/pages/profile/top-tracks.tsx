@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { SectionWrapper } from "../../components";
+import { SectionWrapper } from "../../components/core";
 import { TrackGrid } from "../../components/grid";
 import { TrackGridSkeleton } from "../../components/skeleton";
 import { IUsersTopTracks } from "../../lib/interfaces/users-top-tracks";

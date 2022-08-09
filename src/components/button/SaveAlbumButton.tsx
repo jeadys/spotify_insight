@@ -9,7 +9,7 @@ type Props = {
   saved: boolean;
 };
 
-export default function SaveAlbum({ id, saved }: Props) {
+export default function SaveAlbumButton({ id, saved }: Props) {
   const [saveState, setSaveState] = useState<boolean>(saved);
   const queryClient = useQueryClient();
 

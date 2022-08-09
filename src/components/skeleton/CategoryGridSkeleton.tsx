@@ -20,7 +20,7 @@ export default function CategoryGridSkeleton({ amount }: Props) {
 
   return (
     <div className="animate-pulse">
-      <div className="bg-gray-800 w-44 h-8 rounded-md mb-4"></div>
+      <div className="bg-gray-800 w-44 h-8 rounded-md mb-10"></div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
         {categories}
       </div>

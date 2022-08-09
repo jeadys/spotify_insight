@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
-import { SectionWrapper } from "../../components";
+import { SectionWrapper } from "../../components/core";
 import { TrackGrid } from "../../components/grid";
 import { TrackHeader } from "../../components/header";
 import { TrackGridSkeleton, TrackHeaderSkeleton } from "../../components/skeleton";

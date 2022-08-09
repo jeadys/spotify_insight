@@ -6,9 +6,10 @@ import { useMemo } from "react";
 import { ITracks } from "../../lib/interfaces/tracks";
 import { getDoesUserHaveTrackSaved } from "../../lib/spotify";
 import { formatDuration, stopProp } from "../../lib/utils";
-import MusicBar from "../MusicBar";
-import { ChooseTrack, PlayTrack } from "../TrackContext";
-import { SaveTrack } from "../button";
+import { SaveTrackButton } from "../button";
+import DiscoverButton from "../button/DiscoverButton";
+import { MusicBar } from "../core";
+import { ChooseTrack, PlayTrack } from "../core/TrackContext";
 
 export default function TrackGrid({ items }: ITracks) {
   const trackIds = useMemo(() => {
@@ -47,12 +48,12 @@ export default function TrackGrid({ items }: ITracks) {
                   }`}
                   onClick={() => chooseTrack(trackUris, track.uri)}
                 >
-                  <td className="whitespace-nowrap py-4 px-3 text-sm">
+                  <td className="py-4 text-sm">
                     <div className="flex items-center">
                       <div className="w-7 text-center">
                         {playingTrack === track.uri ? <MusicBar /> : <span>{index + 1}</span>}
                       </div>
-                      {"album" in track && track.album && (
+                      {track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
                           <img
                             src={
@@ -74,7 +75,7 @@ export default function TrackGrid({ items }: ITracks) {
                             <>{track.name.slice(0, 20).concat("...")}</>
                           )}
                         </div>
-                        {"album" in track && track.album ? (
+                        {track.album ? (
                           <>
                             {track.album.artists.map((artist, index) => (
                               <span
@@ -108,8 +109,8 @@ export default function TrackGrid({ items }: ITracks) {
                       </div>
                     </div>
                   </td>
-                  {"album" in track && track.album && (
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-300 album:hidden">
+                  {track.album && (
+                    <td className="px-3 py-4 text-sm text-gray-300 album:hidden">
                       <span className="text-xs text-gray-300 hover:underline">
                         <Link href={`/albums/${track.album.id}`}>
                           <a onClick={(e) => stopProp(e)}>
@@ -123,15 +124,15 @@ export default function TrackGrid({ items }: ITracks) {
                       </span>
                     </td>
                   )}
-                  <td className="whitespace-nowrap px-3 py-4 text-sm duration:hidden flex justify-end gap-5">
-                    {isTrackSaved ? (
+                  <td className="px-3 py-4 text-sm w-0">
+                    {isTrackSaved && (
                       <span onClick={(e) => stopProp(e)}>
-                        <SaveTrack id={track.id} saved={isTrackSaved[index]} />
+                        <SaveTrackButton id={track.id} saved={isTrackSaved[index]} />
                       </span>
-                    ) : (
-                      <SaveTrack id={track.id} saved={false} />
                     )}
-                    <span className="block w-7">{formatDuration(track.duration_ms)}</span>
+                  </td>
+                  <td className="px-3 py-4 text-sm duration:hidden w-0">
+                    <span>{formatDuration(track.duration_ms)}</span>
                   </td>
                 </tr>
               ))}
@@ -139,12 +140,7 @@ export default function TrackGrid({ items }: ITracks) {
           </table>
         </>
       ) : (
-        <span className="flex flex-col items-center text-white">
-          <span className="text-2xl">No tracks available</span>
-          <Link href={`/discover`}>
-            <a className="bg-green-500 max-w-max py-2 px-5 rounded-md mt-2">Discover new tracks</a>
-          </Link>
-        </span>
+        <DiscoverButton titleMessage="No tracks found" buttonMessage="Discover new tracks" />
       )}
     </>
   );

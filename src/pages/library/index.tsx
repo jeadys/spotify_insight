@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { SectionWrapper } from "../../components";
+import { SectionWrapper } from "../../components/core";
 import { AlbumGrid, ArtistGrid, PlaylistGrid, TrackGrid } from "../../components/grid";
 import {
   AlbumGridSkeleton,

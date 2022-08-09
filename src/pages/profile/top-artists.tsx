@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
-import { SectionWrapper } from "../../components";
+import { SectionWrapper } from "../../components/core";
 import { ArtistGrid } from "../../components/grid";
 import { ArtistGridSkeleton } from "../../components/skeleton";
 import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";

@@ -35,7 +35,7 @@ export default function SectionWrapper({
   ];
 
   return (
-    <div>
+    <>
       <div className="flex mb-5">
         <h2 className="font-semibold text-xl text-white">
           {title && (
@@ -79,6 +79,6 @@ export default function SectionWrapper({
         )}
       </div>
       {children}
-    </div>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { SectionWrapper } from "../../../components";
+import { SectionWrapper } from "../../../components/core";
 import CategoryGrid from "../../../components/grid/CategoryGrid";
 import { CategoryGridSkeleton } from "../../../components/skeleton";
 import { ICategories } from "../../../lib/interfaces/categories";

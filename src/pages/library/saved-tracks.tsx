@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { SectionWrapper } from "../../components";
+import { SectionWrapper } from "../../components/core";
 import { TrackGrid } from "../../components/grid";
 import { TrackGridSkeleton } from "../../components/skeleton";
 import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";

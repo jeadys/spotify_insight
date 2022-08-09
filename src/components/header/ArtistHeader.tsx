@@ -2,7 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 
 import { IArtistHeader } from "../../lib/interfaces/artist-header";
 import { getDoesUserFollowArtist } from "../../lib/spotify";
-import { FollowArtist } from "../button";
+import BioTitle from "../bio/BioTitle";
+import BioValue from "../bio/BioValue";
+import { FollowArtistButton } from "../button";
 
 export default function ArtistHeader({ data }: IArtistHeader) {
   const fetchDoesUserFollowArtist = async () => {
@@ -29,30 +31,28 @@ export default function ArtistHeader({ data }: IArtistHeader) {
       <div className="text-3xl md:text-6xl lg:text-8xl font-black text-white mt-8">{data.name}</div>
 
       <div className="h-5 mt-8">
-        {isArtistFollowed && <FollowArtist id={data.id} followed={isArtistFollowed[0]} />}
+        {isArtistFollowed && <FollowArtistButton id={data.id} followed={isArtistFollowed[0]} />}
       </div>
 
-      <div className="w-full flex gap-y-5 flex-col md:flex-row md:gap-x-20 justify-center mt-8">
-        {data.followers !== undefined && (
+      <div className="w-full flex flex-row gap-x-5 md:gap-x-20 justify-center mt-8">
+        {data.followers && (
           <div>
-            <span className="text-2xl font-black text-blue-400">
-              {data.followers.total.toLocaleString()}
-            </span>
-            <span className="text-lg font-semibold text-white block">Followers</span>
+            <BioValue value={data.followers.total.toLocaleString()} />
+            <BioTitle title="Followers" />
           </div>
         )}
 
-        {data.genres && data.genres[0] !== undefined && (
+        {data.genres && data.genres[0] && (
           <div>
-            <span className="text-2xl font-black text-blue-400">{data.genres[0]}</span>
-            <span className="text-lg font-semibold text-white block">Genres</span>
+            <BioValue value={data.genres[0]} />
+            <BioTitle title="Genres" />
           </div>
         )}
 
-        {data.popularity !== undefined && (
+        {data.popularity && (
           <div>
-            <span className="text-2xl font-black text-blue-400">{data.popularity}%</span>
-            <span className="text-lg font-semibold text-white block">Popularity</span>
+            <BioValue value={` ${data.popularity.toString()} %`} />
+            <BioTitle title="Popularity" />
           </div>
         )}
       </div>

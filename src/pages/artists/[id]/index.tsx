@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
-import { SectionWrapper } from "../../../components";
+import { SectionWrapper } from "../../../components/core";
 import { AlbumGrid, ArtistGrid, TrackGrid } from "../../../components/grid";
 import { ArtistHeader } from "../../../components/header";
 import {

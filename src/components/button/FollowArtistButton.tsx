@@ -9,7 +9,7 @@ type Props = {
   followed: boolean;
 };
 
-export default function FollowArtist({ id, followed }: Props) {
+export default function FollowArtistButton({ id, followed }: Props) {
   const [followState, setFollowState] = useState<boolean>(followed);
   const queryClient = useQueryClient();
 

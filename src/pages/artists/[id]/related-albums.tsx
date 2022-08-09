@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
-import { SectionWrapper } from "../../../components";
+import { SectionWrapper } from "../../../components/core";
 import { AlbumGrid } from "../../../components/grid";
 import { AlbumGridSkeleton } from "../../../components/skeleton";
 import { IArtistsAlbums } from "../../../lib/interfaces/artist-album";
@@ -17,7 +17,7 @@ export default function RelatedAlbums() {
   };
 
   const { data: artistAlbums } = useQuery<IArtistsAlbums>(
-    ["artist-albums", id],
+    ["all-artist-albums", id],
     fetchArtistAlbums,
     {
       staleTime: Infinity,

@@ -20,7 +20,7 @@ export default function TrackGridSkeleton({ amount }: Props) {
 
   return (
     <div className="w-full">
-      <div className="bg-gray-800 w-44 h-8 rounded-md animate-pulse mb-4"></div>
+      <div className="bg-gray-800 w-44 h-8 rounded-md animate-pulse mb-10"></div>
       <div className="">{tracks}</div>
     </div>
   );

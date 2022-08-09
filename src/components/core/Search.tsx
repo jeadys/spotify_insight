@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-import useDebounce from "../hooks/useDebounce";
-import { ISearchTracks } from "../lib/interfaces/search-tracks";
-import { getSearchItems } from "../lib/spotify";
-import { stopProp } from "../lib/utils";
+import useDebounce from "../../hooks/useDebounce";
+import { ISearchTracks } from "../../lib/interfaces/search-tracks";
+import { getSearchItems } from "../../lib/spotify";
+import { stopProp } from "../../lib/utils";
 import { ChooseTrack, PlayTrack } from "./TrackContext";
 
 export default function Search() {
