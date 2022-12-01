@@ -1,25 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { SectionWrapper } from "../../components/core";
-import { AlbumGrid } from "../../components/grid";
-import { AlbumGridSkeleton } from "../../components/skeleton";
-import { IUsersSavedAlbums } from "../../lib/interfaces/user-saved-albums";
-import { getCurrentUserSavedAlbums } from "../../lib/spotify";
+import { SectionWrapper } from '../../components/core'
+import { AlbumGrid } from '../../components/grid'
+import { AlbumGridSkeleton } from '../../components/skeleton'
+import type { IUsersSavedAlbums } from '../../lib/interfaces/user-saved-albums'
+import { getCurrentUserSavedAlbums } from '../../lib/spotify'
 
 export default function SavedAlbums() {
   const fetchCurrentUserSavedAlbums = async () => {
-    const userSavedAlbums = await getCurrentUserSavedAlbums(50);
-    return userSavedAlbums.data;
-  };
+    const userSavedAlbums = await getCurrentUserSavedAlbums(50)
+    return userSavedAlbums.data
+  }
 
-  const { data: tracks } = useQuery<IUsersSavedAlbums>(
-    ["all-saved-albums"],
-    fetchCurrentUserSavedAlbums,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: tracks } = useQuery<IUsersSavedAlbums>(['all-saved-albums'], fetchCurrentUserSavedAlbums, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
   return (
     <>
@@ -33,5 +29,5 @@ export default function SavedAlbums() {
         <AlbumGridSkeleton amount={50} />
       )}
     </>
-  );
+  )
 }

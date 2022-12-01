@@ -1,8 +1,8 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { IArtistsAlbums } from "../../lib/interfaces/artist-album";
-import DiscoverButton from "../button/DiscoverButton";
-import { CardGrid, CardImage, CardInfo, CardItem, CardName } from "../card";
+import type { IArtistsAlbums } from '../../lib/interfaces/artist-album'
+import DiscoverButton from '../button/DiscoverButton'
+import { CardGrid, CardImage, CardInfo, CardItem, CardName } from '../card'
 
 export default function AlbumGrid({ items }: IArtistsAlbums) {
   return (
@@ -17,11 +17,7 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
                     <Link href={`/albums/${album.id}`}>
                       <a>
                         <CardImage
-                          image={
-                            album.images.length && album.images[1]
-                              ? album.images[1].url
-                              : "/images/nocover.webp"
-                          }
+                          image={album.images.length && album.images[1] ? album.images[1].url : '/images/nocover.webp'}
                           alt={album.name}
                         />
 
@@ -44,5 +40,5 @@ export default function AlbumGrid({ items }: IArtistsAlbums) {
         <DiscoverButton titleMessage="No albums found" buttonMessage="Discover new albums" />
       )}
     </>
-  );
+  )
 }

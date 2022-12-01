@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react'
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export default function Content({ children }: Props) {
   return (
     <>
-      <div className="bg-gray-900 min-h-screen font-maven">
+      <div className="min-h-screen bg-gray-900 font-maven">
         <div className="min-h-screen">
-          <div className="p-5 max-w-8xl mx-auto">{children}</div>
+          <div className="mx-auto max-w-8xl p-5">{children}</div>
         </div>
       </div>
     </>
-  );
+  )
 }

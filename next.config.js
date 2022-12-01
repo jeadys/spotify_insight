@@ -21,25 +21,25 @@ const nextConfig = {
   },
   images: {
     domains: [
-      "i.scdn.co",
-      "t.scdn.co",
-      "newjams-images.scdn.co",
-      "dailymix-images.scdn.co",
-      "seed-mix-image.spotifycdn.com",
-      "charts-images.scdn.co",
-      "daily-mix.scdn.co",
-      "mixed-media-images.spotifycdn.com",
+      'i.scdn.co',
+      't.scdn.co',
+      'newjams-images.scdn.co',
+      'dailymix-images.scdn.co',
+      'seed-mix-image.spotifycdn.com',
+      'charts-images.scdn.co',
+      'daily-mix.scdn.co',
+      'mixed-media-images.spotifycdn.com',
     ],
   },
   redirects: async () => {
     return [
       {
-        source: "/",
-        destination: "/profile",
+        source: '/',
+        destination: '/profile',
         permanent: true,
       },
-    ];
+    ]
   },
-};
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

@@ -1,40 +1,34 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { IArtistHeader } from "../../lib/interfaces/artist-header";
-import { getDoesUserFollowArtist } from "../../lib/spotify";
-import BioTitle from "../bio/BioTitle";
-import BioValue from "../bio/BioValue";
-import { FollowArtistButton } from "../button";
+import type { IArtistHeader } from '../../lib/interfaces/artist-header'
+import { getDoesUserFollowArtist } from '../../lib/spotify'
+import BioTitle from '../bio/BioTitle'
+import BioValue from '../bio/BioValue'
+import { FollowArtistButton } from '../button'
 
 export default function ArtistHeader({ data }: IArtistHeader) {
   const fetchDoesUserFollowArtist = async () => {
-    const isArtistFollowed = await getDoesUserFollowArtist(data.id);
-    return isArtistFollowed.data;
-  };
+    const isArtistFollowed = await getDoesUserFollowArtist(data.id)
+    return isArtistFollowed.data
+  }
 
-  const { data: isArtistFollowed } = useQuery(
-    ["is-artist-followed", data.id],
-    fetchDoesUserFollowArtist,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: isArtistFollowed } = useQuery(['is-artist-followed', data.id], fetchDoesUserFollowArtist, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
   return (
     <div className="text-center">
       <img
-        src={data.images.length && data.images[0] ? data.images[0].url : "/images/nocover.webp"}
-        className="w-96 h-96 object-cover rounded-md mx-auto"
+        src={data.images.length && data.images[0] ? data.images[0].url : '/images/nocover.webp'}
+        className="mx-auto h-96 w-96 rounded-md object-cover"
         alt={data.name}
       />
-      <div className="text-3xl md:text-6xl lg:text-8xl font-black text-white mt-8">{data.name}</div>
+      <div className="mt-8 text-3xl font-black text-white md:text-6xl lg:text-8xl">{data.name}</div>
 
-      <div className="h-5 mt-8">
-        {isArtistFollowed && <FollowArtistButton id={data.id} followed={isArtistFollowed[0]} />}
-      </div>
+      <div className="mt-8 h-5">{isArtistFollowed && <FollowArtistButton id={data.id} followed={isArtistFollowed[0]} />}</div>
 
-      <div className="w-full flex flex-row gap-x-5 md:gap-x-20 justify-center mt-8">
+      <div className="mt-8 flex w-full flex-row justify-center gap-x-5 md:gap-x-20">
         {data.followers && (
           <div>
             <BioValue value={data.followers.total.toLocaleString()} />
@@ -57,5 +51,5 @@ export default function ArtistHeader({ data }: IArtistHeader) {
         )}
       </div>
     </div>
-  );
+  )
 }

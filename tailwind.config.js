@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       screens: {
@@ -13,36 +10,36 @@ module.exports = {
         '6xl': '2280px',
         '7xl': '2560px',
         // Max values set to hide album and duration column in the track table
-        'album': {'max': '800px'},
-        'duration': {'max': '400px'},
+        'album': { 'max': '800px' },
+        'duration': { 'max': '400px' },
       },
       maxWidth: {
         '8xl': '90rem',
       },
       fontFamily: {
-        'maven': 'Maven Pro'
+        'maven': 'Maven Pro',
       },
       backgroundImage: (theme) => ({
         login: "url('/public/images/login.jpg')",
       }),
       keyframes: {
         wiggle: {
-          "0%, 100%": { transform: "rotate(-20deg)" },
-          "50%": { transform: "rotate(20deg)" }
+          '0%, 100%': { transform: 'rotate(-20deg)' },
+          '50%': { transform: 'rotate(20deg)' },
         },
         musicbar: {
-          "10%": { transform: "scaleY(0.3)" },
-          "30%": { transform: "scaleY(1)" },
-          "60%": { transform: "scaleY(0.5)" },
-          "80%": { transform: "scaleY(0.75)" },
-          "100": { transform: "scaleY(0.6)" }
-        }
+          '10%': { transform: 'scaleY(0.3)' },
+          '30%': { transform: 'scaleY(1)' },
+          '60%': { transform: 'scaleY(0.5)' },
+          '80%': { transform: 'scaleY(0.75)' },
+          '100': { transform: 'scaleY(0.6)' },
+        },
       },
       animation: {
-        wiggle: "wiggle 200ms ease-in-out",
-        musicbar: "musicbar 2200ms ease infinite alternate"
-      }
+        wiggle: 'wiggle 200ms ease-in-out',
+        musicbar: 'musicbar 2200ms ease infinite alternate',
+      },
     },
   },
   plugins: [],
-};
+}

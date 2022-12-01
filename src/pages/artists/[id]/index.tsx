@@ -1,81 +1,59 @@
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
-import { SectionWrapper } from "../../../components/core";
-import { AlbumGrid, ArtistGrid, TrackGrid } from "../../../components/grid";
-import { ArtistHeader } from "../../../components/header";
-import {
-  AlbumGridSkeleton,
-  ArtistGridSkeleton,
-  ArtistHeaderSkeleton,
-  TrackGridSkeleton,
-} from "../../../components/skeleton";
-import { IArtist } from "../../../lib/interfaces/artist";
-import { IArtistsAlbums } from "../../../lib/interfaces/artist-album";
-import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
-import { IArtistsTopTracks } from "../../../lib/interfaces/artist-top-tracks";
-import {
-  getArtistAlbums,
-  getArtistById,
-  getArtistRelatedArtists,
-  getArtistTopTracks,
-} from "../../../lib/spotify";
+import { SectionWrapper } from '../../../components/core'
+import { AlbumGrid, ArtistGrid, TrackGrid } from '../../../components/grid'
+import { ArtistHeader } from '../../../components/header'
+import { AlbumGridSkeleton, ArtistGridSkeleton, ArtistHeaderSkeleton, TrackGridSkeleton } from '../../../components/skeleton'
+import type { IArtist } from '../../../lib/interfaces/artist'
+import type { IArtistsAlbums } from '../../../lib/interfaces/artist-album'
+import type { IArtistsRelatedArtists } from '../../../lib/interfaces/artist-related-artists'
+import type { IArtistsTopTracks } from '../../../lib/interfaces/artist-top-tracks'
+import { getArtistAlbums, getArtistById, getArtistRelatedArtists, getArtistTopTracks } from '../../../lib/spotify'
 
 export default function Artist() {
-  const { query } = useRouter();
-  const { id } = query;
+  const { query } = useRouter()
+  const { id } = query
 
   const fetchArtist = async () => {
-    const artist = await getArtistById(id!);
-    return artist.data;
-  };
+    const artist = await getArtistById(id!)
+    return artist.data
+  }
 
   const fetchArtistTopTracks = async () => {
-    const artistTopTracks = await getArtistTopTracks(id!);
-    return artistTopTracks.data;
-  };
+    const artistTopTracks = await getArtistTopTracks(id!)
+    return artistTopTracks.data
+  }
 
   const fetchArtistAlbums = async () => {
-    const artistAlbums = await getArtistAlbums(id!, 6);
-    return artistAlbums.data;
-  };
+    const artistAlbums = await getArtistAlbums(id!, 6)
+    return artistAlbums.data
+  }
 
   const fetchArtistRelatedArtists = async () => {
-    const artistRelatedArtists = await getArtistRelatedArtists(id!);
-    return artistRelatedArtists.data;
-  };
+    const artistRelatedArtists = await getArtistRelatedArtists(id!)
+    return artistRelatedArtists.data
+  }
 
-  const { data: artist } = useQuery<IArtist>(["artist", id], fetchArtist, {
+  const { data: artist } = useQuery<IArtist>(['artist', id], fetchArtist, {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
-  });
+  })
 
-  const { data: artistTopTracks } = useQuery<IArtistsTopTracks>(
-    ["artist-tracks", id],
-    fetchArtistTopTracks,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: artistTopTracks } = useQuery<IArtistsTopTracks>(['artist-tracks', id], fetchArtistTopTracks, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
-  const { data: artistAlbums } = useQuery<IArtistsAlbums>(
-    ["artist-albums", id],
-    fetchArtistAlbums,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: artistAlbums } = useQuery<IArtistsAlbums>(['artist-albums', id], fetchArtistAlbums, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
-  const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(
-    ["artist-related-artists", id],
-    fetchArtistRelatedArtists,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(['artist-related-artists', id], fetchArtistRelatedArtists, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
   return (
     <>
@@ -103,5 +81,5 @@ export default function Artist() {
         </>
       )}
     </>
-  );
+  )
 }

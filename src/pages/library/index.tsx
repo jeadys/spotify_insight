@@ -1,80 +1,59 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { SectionWrapper } from "../../components/core";
-import { AlbumGrid, ArtistGrid, PlaylistGrid, TrackGrid } from "../../components/grid";
-import {
-  AlbumGridSkeleton,
-  ArtistGridSkeleton,
-  PlaylistGridSkeleton,
-  TrackGridSkeleton,
-} from "../../components/skeleton";
-import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
-import { IUsersSavedAlbums } from "../../lib/interfaces/user-saved-albums";
-import { IUsersSavedPlaylists } from "../../lib/interfaces/user-saved-playlists";
-import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";
+import { SectionWrapper } from '../../components/core'
+import { AlbumGrid, ArtistGrid, PlaylistGrid, TrackGrid } from '../../components/grid'
+import { AlbumGridSkeleton, ArtistGridSkeleton, PlaylistGridSkeleton, TrackGridSkeleton } from '../../components/skeleton'
+import type { IUsersFollowedArtists } from '../../lib/interfaces/user-followed-artists'
+import type { IUsersSavedAlbums } from '../../lib/interfaces/user-saved-albums'
+import type { IUsersSavedPlaylists } from '../../lib/interfaces/user-saved-playlists'
+import type { IUsersSavedTracks } from '../../lib/interfaces/user-saved-tracks'
 import {
   getCurrentUserFollowedArtists,
   getCurrentUserSavedAlbums,
   getCurrentUserSavedPlaylists,
   getCurrentUserSavedTracks,
-} from "../../lib/spotify";
+} from '../../lib/spotify'
 
 export default function Library() {
   const fetchUserSavedPlaylists = async () => {
-    const userPlaylists = await getCurrentUserSavedPlaylists(6);
-    return userPlaylists.data;
-  };
+    const userPlaylists = await getCurrentUserSavedPlaylists(6)
+    return userPlaylists.data
+  }
 
   const fetchUsersSavedAlbums = async () => {
-    const userSavedAlbums = await getCurrentUserSavedAlbums(6);
-    return userSavedAlbums.data;
-  };
+    const userSavedAlbums = await getCurrentUserSavedAlbums(6)
+    return userSavedAlbums.data
+  }
 
   const fetchUserSavedTracks = async () => {
-    const userSavedTracks = await getCurrentUserSavedTracks(6);
-    return userSavedTracks.data;
-  };
+    const userSavedTracks = await getCurrentUserSavedTracks(6)
+    return userSavedTracks.data
+  }
 
   const fetchUserFollowedArtists = async () => {
-    const userFollowedArtists = await getCurrentUserFollowedArtists(12);
-    return userFollowedArtists.data;
-  };
+    const userFollowedArtists = await getCurrentUserFollowedArtists(12)
+    return userFollowedArtists.data
+  }
 
-  const { data: savedPlaylists } = useQuery<IUsersSavedPlaylists>(
-    ["saved-playlists"],
-    fetchUserSavedPlaylists,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: savedPlaylists } = useQuery<IUsersSavedPlaylists>(['saved-playlists'], fetchUserSavedPlaylists, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
-  const { data: savedAlbums } = useQuery<IUsersSavedAlbums>(
-    ["saved-albums"],
-    fetchUsersSavedAlbums,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: savedAlbums } = useQuery<IUsersSavedAlbums>(['saved-albums'], fetchUsersSavedAlbums, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
-  const { data: savedTracks } = useQuery<IUsersSavedTracks>(
-    ["saved-tracks"],
-    fetchUserSavedTracks,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: savedTracks } = useQuery<IUsersSavedTracks>(['saved-tracks'], fetchUserSavedTracks, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
-  const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
-    ["followed-artists"],
-    fetchUserFollowedArtists,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: followedArtists } = useQuery<IUsersFollowedArtists>(['followed-artists'], fetchUserFollowedArtists, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
   return (
     <>
@@ -105,5 +84,5 @@ export default function Library() {
         </>
       )}
     </>
-  );
+  )
 }

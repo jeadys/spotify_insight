@@ -1,43 +1,36 @@
-import Link from "next/link";
-import { Dispatch, SetStateAction } from "react";
-import React from "react";
+import type { Dispatch, SetStateAction } from 'react'
+
+import Link from 'next/link'
 
 type Props = {
-  title: string;
-  breadcrumb?: string;
-  seeAll?: string;
-  children: React.ReactNode;
-  timeRange?: string;
-  setTimeRange?: Dispatch<SetStateAction<string>>;
-};
+  title: string
+  breadcrumb?: string
+  seeAll?: string
+  children: React.ReactNode
+  timeRange?: string
+  setTimeRange?: Dispatch<SetStateAction<string>>
+}
 
-export default function SectionWrapper({
-  title,
-  breadcrumb,
-  seeAll,
-  children,
-  timeRange,
-  setTimeRange,
-}: Props) {
+export default function SectionWrapper({ title, breadcrumb, seeAll, children, timeRange, setTimeRange }: Props) {
   const timeRangeBtns = [
     {
-      title: "This month",
-      range: "short",
+      title: 'This month',
+      range: 'short',
     },
     {
-      title: " Last 6 months",
-      range: "medium",
+      title: ' Last 6 months',
+      range: 'medium',
     },
     {
-      title: "All time",
-      range: "long",
+      title: 'All time',
+      range: 'long',
     },
-  ];
+  ]
 
   return (
     <>
-      <div className="flex mb-5">
-        <h2 className="font-semibold text-xl text-white">
+      <div className="mb-5 flex">
+        <h2 className="text-xl font-semibold text-white">
           {title && (
             <>
               {seeAll ? (
@@ -53,21 +46,21 @@ export default function SectionWrapper({
 
         {seeAll && (
           <Link href={seeAll}>
-            <a className="font-light text-sm text-gray-300 hover:text-white transition ease-in-out uppercase cursor-pointer ml-auto">
+            <a className="ml-auto cursor-pointer text-sm font-light uppercase text-gray-300 transition ease-in-out hover:text-white">
               See All
             </a>
           </Link>
         )}
 
         {timeRange && setTimeRange && (
-          <ul className="flex flex-row justify-center gap-5 text-white ml-auto">
+          <ul className="ml-auto flex flex-row justify-center gap-5 text-white">
             {timeRangeBtns.map((timeRangeBtn) => (
               <li key={timeRangeBtn.range}>
                 <button
-                  className={`text-sm uppercase underline-offset-8 decoration-4  ${
+                  className={`text-sm uppercase decoration-4 underline-offset-8  ${
                     timeRange === timeRangeBtn.range
-                      ? "underline decoration-sky-700 cursor-default"
-                      : "hover:underline hover:decoration-sky-900"
+                      ? 'cursor-default underline decoration-sky-700'
+                      : 'hover:underline hover:decoration-sky-900'
                   }`}
                   onClick={() => setTimeRange(timeRangeBtn.range)}
                 >
@@ -80,5 +73,5 @@ export default function SectionWrapper({
       </div>
       {children}
     </>
-  );
+  )
 }

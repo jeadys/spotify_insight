@@ -1,25 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { SectionWrapper } from "../../components/core";
-import { ArtistGrid } from "../../components/grid";
-import { ArtistGridSkeleton } from "../../components/skeleton";
-import { IUsersFollowedArtists } from "../../lib/interfaces/user-followed-artists";
-import { getCurrentUserFollowedArtists } from "../../lib/spotify";
+import { SectionWrapper } from '../../components/core'
+import { ArtistGrid } from '../../components/grid'
+import { ArtistGridSkeleton } from '../../components/skeleton'
+import type { IUsersFollowedArtists } from '../../lib/interfaces/user-followed-artists'
+import { getCurrentUserFollowedArtists } from '../../lib/spotify'
 
 export default function FollowedArtists() {
   const fetchUserFollowedArtists = async () => {
-    const userFollowedArtists = await getCurrentUserFollowedArtists(50);
-    return userFollowedArtists.data;
-  };
+    const userFollowedArtists = await getCurrentUserFollowedArtists(50)
+    return userFollowedArtists.data
+  }
 
-  const { data: followedArtists } = useQuery<IUsersFollowedArtists>(
-    ["all-followed-artists"],
-    fetchUserFollowedArtists,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: followedArtists } = useQuery<IUsersFollowedArtists>(['all-followed-artists'], fetchUserFollowedArtists, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
   return (
     <>
@@ -33,5 +29,5 @@ export default function FollowedArtists() {
         <ArtistGridSkeleton amount={50} />
       )}
     </>
-  );
+  )
 }

@@ -1,33 +1,33 @@
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
-import { SectionWrapper } from "../../components/core";
-import { TrackGrid } from "../../components/grid";
-import { TrackHeader } from "../../components/header";
-import { TrackGridSkeleton, TrackHeaderSkeleton } from "../../components/skeleton";
-import { IAlbum } from "../../lib/interfaces/album";
-import { getAlbumById } from "../../lib/spotify";
+import { SectionWrapper } from '../../components/core'
+import { TrackGrid } from '../../components/grid'
+import { TrackHeader } from '../../components/header'
+import { TrackGridSkeleton, TrackHeaderSkeleton } from '../../components/skeleton'
+import type { IAlbum } from '../../lib/interfaces/album'
+import { getAlbumById } from '../../lib/spotify'
 
 export default function Album() {
-  const { query } = useRouter();
-  const { id } = query;
+  const { query } = useRouter()
+  const { id } = query
 
   const fetchAlbum = async () => {
-    const album = await getAlbumById(id!);
-    return album.data;
-  };
+    const album = await getAlbumById(id!)
+    return album.data
+  }
 
-  const { data: album } = useQuery<IAlbum>(["album", id], fetchAlbum, {
+  const { data: album } = useQuery<IAlbum>(['album', id], fetchAlbum, {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
-  });
+  })
 
   return (
     <>
       {album ? (
         <>
-          <div className="flex lg:space-x-10 flex-wrap">
-            <div className="basis-full xl:basis-1/4 text-center xl:sticky xl:top-0 xl:self-start">
+          <div className="flex flex-wrap lg:space-x-10">
+            <div className="basis-full text-center xl:sticky xl:top-0 xl:basis-1/4 xl:self-start">
               <TrackHeader data={album} />
             </div>
             <div className="flex-grow">
@@ -39,8 +39,8 @@ export default function Album() {
         </>
       ) : (
         <>
-          <div className="flex lg:space-x-10 flex-wrap">
-            <div className="basis-full xl:basis-1/4 text-center xl:sticky xl:top-0 xl:self-start">
+          <div className="flex flex-wrap lg:space-x-10">
+            <div className="basis-full text-center xl:sticky xl:top-0 xl:basis-1/4 xl:self-start">
               <TrackHeaderSkeleton />
             </div>
             <div className="flex-grow">
@@ -50,5 +50,5 @@ export default function Album() {
         </>
       )}
     </>
-  );
+  )
 }

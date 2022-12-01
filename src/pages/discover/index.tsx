@@ -1,51 +1,43 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { SectionWrapper } from "../../components/core";
-import { AlbumGrid, CategoryGrid, PlaylistGrid } from "../../components/grid";
-import {
-  AlbumGridSkeleton,
-  CategoryGridSkeleton,
-  PlaylistGridSkeleton,
-} from "../../components/skeleton";
-import { ICategories } from "../../lib/interfaces/categories";
-import { IFeaturedPlaylists } from "../../lib/interfaces/featured-playlists";
-import { INewReleases } from "../../lib/interfaces/new-releases";
-import { getCategories, getFeaturedPlaylists, getNewReleases } from "../../lib/spotify";
+import { SectionWrapper } from '../../components/core'
+import { AlbumGrid, CategoryGrid, PlaylistGrid } from '../../components/grid'
+import { AlbumGridSkeleton, CategoryGridSkeleton, PlaylistGridSkeleton } from '../../components/skeleton'
+import type { ICategories } from '../../lib/interfaces/categories'
+import type { IFeaturedPlaylists } from '../../lib/interfaces/featured-playlists'
+import type { INewReleases } from '../../lib/interfaces/new-releases'
+import { getCategories, getFeaturedPlaylists, getNewReleases } from '../../lib/spotify'
 
 export default function DiscoverButton() {
   const fetchNewReleases = async () => {
-    const newReleases = await getNewReleases(6);
-    return newReleases.data;
-  };
+    const newReleases = await getNewReleases(6)
+    return newReleases.data
+  }
 
   const fetchFeaturedPlaylists = async () => {
-    const featuredPlaylists = await getFeaturedPlaylists(6);
-    return featuredPlaylists.data;
-  };
+    const featuredPlaylists = await getFeaturedPlaylists(6)
+    return featuredPlaylists.data
+  }
 
   const fetchCategories = async () => {
-    const categories = await getCategories(6);
-    return categories.data;
-  };
+    const categories = await getCategories(6)
+    return categories.data
+  }
 
-  const { data: releases } = useQuery<INewReleases>(["new-releases"], fetchNewReleases, {
+  const { data: releases } = useQuery<INewReleases>(['new-releases'], fetchNewReleases, {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
-  });
+  })
 
-  const { data: featured } = useQuery<IFeaturedPlaylists>(
-    ["featured-playlists"],
-    fetchFeaturedPlaylists,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
-
-  const { data: categories } = useQuery<ICategories>(["categories"], fetchCategories, {
+  const { data: featured } = useQuery<IFeaturedPlaylists>(['featured-playlists'], fetchFeaturedPlaylists, {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
-  });
+  })
+
+  const { data: categories } = useQuery<ICategories>(['categories'], fetchCategories, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
   return (
     <>
@@ -69,5 +61,5 @@ export default function DiscoverButton() {
         </>
       )}
     </>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 type Props = {
-  title: string;
-};
+  title: string
+}
 
 export default function BioTitle({ title }: Props) {
-  return <span className="md:text-lg font-semibold text-white block">{title}</span>;
+  return <span className="block font-semibold text-white md:text-lg">{title}</span>
 }

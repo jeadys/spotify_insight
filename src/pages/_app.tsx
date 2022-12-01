@@ -1,15 +1,16 @@
-import { Hydrate, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { SessionProvider } from "next-auth/react";
-import type { AppProps } from "next/app";
-import React from "react";
+import React from 'react'
 
-import { Content, Navigation, ScrollTop } from "../components/core";
-import TrackProvider from "../components/core/TrackContext";
-import "../styles/globals.css";
+import { Hydrate, QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { SessionProvider } from 'next-auth/react'
+import type { AppProps } from 'next/app'
+
+import { Content, Navigation, ScrollTop } from '../components/core'
+import TrackProvider from '../components/core/TrackContext'
+import '../styles/globals.css'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  const [queryClient] = React.useState(() => new QueryClient());
+  const [queryClient] = React.useState(() => new QueryClient())
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -29,5 +30,5 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         </SessionProvider>
       </Hydrate>
     </QueryClientProvider>
-  );
+  )
 }

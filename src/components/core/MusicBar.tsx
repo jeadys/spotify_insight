@@ -1,9 +1,9 @@
 export default function MusicBar() {
   return (
-    <div className="flex justify-between w-4 h-4 mx-auto">
-      <span className="musicbar w-1 h-full bg-white animate-musicbar origin-bottom"></span>
-      <span className="musicbar w-1 h-full bg-white animate-musicbar origin-bottom"></span>
-      <span className="musicbar w-1 h-full bg-white animate-musicbar origin-bottom"></span>
+    <div className="mx-auto flex h-4 w-4 justify-between">
+      <span className="musicbar h-full w-1 origin-bottom animate-musicbar bg-white"></span>
+      <span className="musicbar h-full w-1 origin-bottom animate-musicbar bg-white"></span>
+      <span className="musicbar h-full w-1 origin-bottom animate-musicbar bg-white"></span>
     </div>
-  );
+  )
 }
