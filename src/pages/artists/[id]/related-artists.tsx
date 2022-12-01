@@ -1,29 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { useQuery } from '@tanstack/react-query'
+import { useRouter } from 'next/router'
 
-import { SectionWrapper } from "../../../components/core";
-import { ArtistGrid } from "../../../components/grid";
-import { ArtistGridSkeleton } from "../../../components/skeleton";
-import { IArtistsRelatedArtists } from "../../../lib/interfaces/artist-related-artists";
-import { getArtistRelatedArtists } from "../../../lib/spotify";
+import { SectionWrapper } from '../../../components/core'
+import { ArtistGrid } from '../../../components/grid'
+import { ArtistGridSkeleton } from '../../../components/skeleton'
+import type { IArtistsRelatedArtists } from '../../../lib/interfaces/artist-related-artists'
+import { getArtistRelatedArtists } from '../../../lib/spotify'
 
 export default function RelatedArtists() {
-  const { query } = useRouter();
-  const { id } = query;
+  const { query } = useRouter()
+  const { id } = query
 
   const fetchArtistRelatedArtists = async () => {
-    const artistRelatedArtists = await getArtistRelatedArtists(id!);
-    return artistRelatedArtists.data;
-  };
+    const artistRelatedArtists = await getArtistRelatedArtists(id!)
+    return artistRelatedArtists.data
+  }
 
-  const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(
-    ["artist-related-artists", id],
-    fetchArtistRelatedArtists,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: artistRelatedArtists } = useQuery<IArtistsRelatedArtists>(['artist-related-artists', id], fetchArtistRelatedArtists, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
   return (
     <>
       {artistRelatedArtists ? (
@@ -36,5 +32,5 @@ export default function RelatedArtists() {
         <ArtistGridSkeleton amount={50} />
       )}
     </>
-  );
+  )
 }

@@ -1,21 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { SectionWrapper } from "../../components/core";
-import { AlbumGrid } from "../../components/grid";
-import { AlbumGridSkeleton } from "../../components/skeleton";
-import { INewReleases } from "../../lib/interfaces/new-releases";
-import { getNewReleases } from "../../lib/spotify";
+import { SectionWrapper } from '../../components/core'
+import { AlbumGrid } from '../../components/grid'
+import { AlbumGridSkeleton } from '../../components/skeleton'
+import type { INewReleases } from '../../lib/interfaces/new-releases'
+import { getNewReleases } from '../../lib/spotify'
 
 export default function NewReleases() {
   const fetchNewReleases = async () => {
-    const newReleases = await getNewReleases(50);
-    return newReleases.data;
-  };
+    const newReleases = await getNewReleases(50)
+    return newReleases.data
+  }
 
-  const { data: releases } = useQuery<INewReleases>(["all-new-releases"], fetchNewReleases, {
+  const { data: releases } = useQuery<INewReleases>(['all-new-releases'], fetchNewReleases, {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
-  });
+  })
 
   return (
     <>
@@ -29,5 +29,5 @@ export default function NewReleases() {
         <AlbumGridSkeleton amount={50} />
       )}
     </>
-  );
+  )
 }

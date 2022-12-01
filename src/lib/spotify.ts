@@ -1,43 +1,43 @@
-import { Axios, AxiosResponse } from "axios";
+import type { AxiosResponse } from 'axios'
 
-import { useAxios } from "../hooks/useAxios";
-import { generateRandomString } from "../lib/utils";
-import { IAlbum } from "./interfaces/album";
-import { IArtist } from "./interfaces/artist";
-import { IArtistsAlbums } from "./interfaces/artist-album";
-import { IArtistsRelatedArtists } from "./interfaces/artist-related-artists";
-import { IArtistsTopTracks } from "./interfaces/artist-top-tracks";
-import { ICategories } from "./interfaces/categories";
-import { ICategoryPlaylist } from "./interfaces/category-playlist";
-import { IFeaturedPlaylists } from "./interfaces/featured-playlists";
-import { INewReleases } from "./interfaces/new-releases";
-import { IPlaylist, IPlaylistItem, IPlaylistTracks } from "./interfaces/playlist";
-import { IRecommendations } from "./interfaces/recommendations";
-import { ISearchTracks } from "./interfaces/search-tracks";
-import { IUser } from "./interfaces/user";
-import { IUsersFollowedArtists } from "./interfaces/user-followed-artists";
-import { IUsersSavedAlbums } from "./interfaces/user-saved-albums";
-import { IUsersSavedPlaylists } from "./interfaces/user-saved-playlists";
-import { IUsersSavedTracks } from "./interfaces/user-saved-tracks";
-import { IUsersTopArtists } from "./interfaces/user-top-artists";
-import { IUsersTopTracks } from "./interfaces/users-top-tracks";
+import UseAxios from '../hooks/useAxios'
+import { generateRandomString } from '../lib/utils'
+import type { IAlbum } from './interfaces/album'
+import type { IArtist } from './interfaces/artist'
+import type { IArtistsAlbums } from './interfaces/artist-album'
+import type { IArtistsRelatedArtists } from './interfaces/artist-related-artists'
+import type { IArtistsTopTracks } from './interfaces/artist-top-tracks'
+import type { ICategories } from './interfaces/categories'
+import type { ICategoryPlaylist } from './interfaces/category-playlist'
+import type { IFeaturedPlaylists } from './interfaces/featured-playlists'
+import type { INewReleases } from './interfaces/new-releases'
+import type { IPlaylist, IPlaylistItem, IPlaylistTracks } from './interfaces/playlist'
+import type { IRecommendations } from './interfaces/recommendations'
+import type { ISearchTracks } from './interfaces/search-tracks'
+import type { IUser } from './interfaces/user'
+import type { IUsersFollowedArtists } from './interfaces/user-followed-artists'
+import type { IUsersSavedAlbums } from './interfaces/user-saved-albums'
+import type { IUsersSavedPlaylists } from './interfaces/user-saved-playlists'
+import type { IUsersSavedTracks } from './interfaces/user-saved-tracks'
+import type { IUsersTopArtists } from './interfaces/user-top-artists'
+import type { IUsersTopTracks } from './interfaces/users-top-tracks'
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!;
-const state = generateRandomString(16);
+const clientId = process.env.NEXT_PUBLIC_CLIENT_ID!
+const state = generateRandomString(16)
 const scope =
-  "user-read-private user-read-email user-top-read user-follow-read user-library-read user-read-playback-state user-modify-playback-state streaming user-follow-modify user-library-modify";
+  'user-read-private user-read-email user-top-read user-follow-read user-library-read user-read-playback-state user-modify-playback-state streaming user-follow-modify user-library-modify'
 
 const queryParams = {
-  client_id: CLIENT_ID,
-  response_type: "code",
+  client_id: clientId,
+  response_type: 'code',
   state: state,
   scope: scope,
-};
+}
 
-const queryParamString = new URLSearchParams(queryParams);
-const LOGIN_URL = `https://accounts.spotify.com/authorize?${queryParamString.toString()}`;
+const queryParamString = new URLSearchParams(queryParams)
+const LOGIN_URL = `https://accounts.spotify.com/authorize?${queryParamString.toString()}`
 
-export { LOGIN_URL };
+export { LOGIN_URL }
 
 /**
  * Get Current User's Profile
@@ -45,40 +45,34 @@ export { LOGIN_URL };
  * @returns {Promise}
  */
 export const getCurrentUserProfile = (): Promise<AxiosResponse<IUser>> => {
-  return useAxios({ url: "/me" });
-};
+  return UseAxios({ url: '/me' })
+}
 
 /**
  * Get Current User's Top Artists
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-top-artists-and-tracks
- * @param {string} time_range - 'short_term' (last 4 weeks) 'medium_term' (last 6 months) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Defaults to 'short_term'
+ * @param {string} timeRange - 'short_term' (last 4 weeks) 'medium_term' (last 6 months) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Defaults to 'short_term'
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getTopArtists = (
-  time_range: string,
-  limit: number
-): Promise<AxiosResponse<IUsersTopArtists>> => {
-  return useAxios({
-    url: `/me/top/artists?time_range=${time_range}&limit=${limit}`,
-  });
-};
+export const getTopArtists = (timeRange: string, limit: number): Promise<AxiosResponse<IUsersTopArtists>> => {
+  return UseAxios({
+    url: `/me/top/artists?time_range=${timeRange}&limit=${limit}`,
+  })
+}
 
 /**
  * Get Current User's Top Tracks
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-users-top-artists-and-tracks
- * @param {string} time_range - 'short_term' (last 4 weeks) 'medium_term' (last 6 months) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Defaults to 'short_term'
+ * @param {string} timeRange - 'short_term' (last 4 weeks) 'medium_term' (last 6 months) or 'long_term' (calculated from several years of data and including all new data as it becomes available). Defaults to 'short_term'
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getTopTracks = (
-  time_range: string,
-  limit: number
-): Promise<AxiosResponse<IUsersTopTracks>> => {
-  return useAxios({
-    url: `/me/top/tracks?time_range=${time_range}&limit=${limit}`,
-  });
-};
+export const getTopTracks = (timeRange: string, limit: number): Promise<AxiosResponse<IUsersTopTracks>> => {
+  return UseAxios({
+    url: `/me/top/tracks?time_range=${timeRange}&limit=${limit}`,
+  })
+}
 
 /**
  * Get Current User's Saved Playlists
@@ -86,11 +80,9 @@ export const getTopTracks = (
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getCurrentUserSavedPlaylists = (
-  limit: number
-): Promise<AxiosResponse<IUsersSavedPlaylists>> => {
-  return useAxios({ url: `/me/playlists?limit=${limit}` });
-};
+export const getCurrentUserSavedPlaylists = (limit: number): Promise<AxiosResponse<IUsersSavedPlaylists>> => {
+  return UseAxios({ url: `/me/playlists?limit=${limit}` })
+}
 
 /**
  * Get Current User's Saved Albums
@@ -98,11 +90,9 @@ export const getCurrentUserSavedPlaylists = (
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getCurrentUserSavedAlbums = (
-  limit: number
-): Promise<AxiosResponse<IUsersSavedAlbums>> => {
-  return useAxios({ url: `/me/albums?limit=${limit}` });
-};
+export const getCurrentUserSavedAlbums = (limit: number): Promise<AxiosResponse<IUsersSavedAlbums>> => {
+  return UseAxios({ url: `/me/albums?limit=${limit}` })
+}
 
 /**
  * Get Current User's Saved Tracks
@@ -110,11 +100,9 @@ export const getCurrentUserSavedAlbums = (
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getCurrentUserSavedTracks = (
-  limit: number
-): Promise<AxiosResponse<IUsersSavedTracks>> => {
-  return useAxios({ url: `/me/tracks?limit=${limit}` });
-};
+export const getCurrentUserSavedTracks = (limit: number): Promise<AxiosResponse<IUsersSavedTracks>> => {
+  return UseAxios({ url: `/me/tracks?limit=${limit}` })
+}
 
 /**
  * Get Current User's followed artists
@@ -122,198 +110,179 @@ export const getCurrentUserSavedTracks = (
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getCurrentUserFollowedArtists = (
-  limit: number
-): Promise<AxiosResponse<IUsersFollowedArtists>> => {
-  return useAxios({ url: `me/following?type=artist&limit=${limit}` });
-};
+export const getCurrentUserFollowedArtists = (limit: number): Promise<AxiosResponse<IUsersFollowedArtists>> => {
+  return UseAxios({ url: `me/following?type=artist&limit=${limit}` })
+}
 
 /**
  * Get Playlist
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlist
- * @param {string} playlist_id - The Spotify ID for the playlist.
+ * @param {string} playlistId - The Spotify ID for the playlist.
  * @returns {Promise}
  */
-export const getPlaylistById = (
-  playlist_id: string | string[]
-): Promise<AxiosResponse<IPlaylist>> => {
-  return useAxios({ url: `/playlists/${playlist_id}` });
-};
+export const getPlaylistById = (playlistId: string | string[]): Promise<AxiosResponse<IPlaylist>> => {
+  return UseAxios({ url: `/playlists/${playlistId}` })
+}
 
 /**
  * Get Album
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-album
- * @param {string} album_id - The Spotify ID for the album.
+ * @param {string} albumId - The Spotify ID for the album.
  * @returns {Promise}
  */
-export const getAlbumById = (album_id: string | string[]): Promise<AxiosResponse<IAlbum>> => {
-  return useAxios({ url: `/albums/${album_id}` });
-};
+export const getAlbumById = (albumId: string | string[]): Promise<AxiosResponse<IAlbum>> => {
+  return UseAxios({ url: `/albums/${albumId}` })
+}
 
 /**
  * Check If Current User Has Album Saved
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-albums
- * @param {string} album_id - The Spotify ID for the album.
+ * @param {string} albumId - The Spotify ID for the album.
  * @returns {Promise}
  */
-export const getDoesUserHaveAlbumSaved = (
-  album_id: string | string[]
-): Promise<AxiosResponse<boolean[]>> => {
-  return useAxios({ url: `/me/albums/contains?ids=${album_id}` });
-};
+export const getDoesUserHaveAlbumSaved = (albumId: string | string[]): Promise<AxiosResponse<boolean[]>> => {
+  return UseAxios({ url: `/me/albums/contains?ids=${albumId}` })
+}
 
 /**
  * Save Albums for Current User
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-albums-user
- * @param {string} album_id - The Spotify ID for the album.
+ * @param {string} albumId - The Spotify ID for the album.
  * @returns {Promise}
  */
-export const saveAlbumForCurrentUser = (album_id: string | string[]) => {
-  return useAxios({ url: `/me/albums?ids=${album_id}`, method: "put" });
-};
+export const saveAlbumForCurrentUser = (albumId: string | string[]) => {
+  return UseAxios({ url: `/me/albums?ids=${albumId}`, method: 'put' })
+}
 
 /**
  * Remove Albums for Current User
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-albums-user
- * @param {string} album_id - The Spotify ID for the album.
+ * @param {string} albumId - The Spotify ID for the album.
  * @returns {Promise}
  */
-export const removeAlbumForCurrentUser = (album_id: string | string[]) => {
-  return useAxios({ url: `/me/albums?ids=${album_id}`, method: "delete" });
-};
+export const removeAlbumForCurrentUser = (albumId: string | string[]) => {
+  return UseAxios({ url: `/me/albums?ids=${albumId}`, method: 'delete' })
+}
 
 /**
  * Check If Current User Has Track Saved
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-users-saved-tracks
- * @param {string} track_ids - The Spotify ID for the track.
+ * @param {string} trackIds - The Spotify ID for the track.
  * @returns {Promise}
  */
-export const getDoesUserHaveTrackSaved = (
-  track_ids: string | string[]
-): Promise<AxiosResponse<boolean[]>> => {
-  return useAxios({ url: `/me/tracks/contains?ids=${track_ids}` });
-};
+export const getDoesUserHaveTrackSaved = (trackIds: string | string[]): Promise<AxiosResponse<boolean[]>> => {
+  return UseAxios({ url: `/me/tracks/contains?ids=${trackIds}` })
+}
 
 /**
  * Save Tracks for Current User
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/save-tracks-user
- * @param {string} track_ids - The Spotify ID for the track.
+ * @param {string} trackIds - The Spotify ID for the track.
  * @returns {Promise}
  */
-export const saveTrackForCurrentUser = (track_ids: string | string[]) => {
-  return useAxios({ url: `/me/tracks?ids=${track_ids}`, method: "put" });
-};
+export const saveTrackForCurrentUser = (trackIds: string | string[]) => {
+  return UseAxios({ url: `/me/tracks?ids=${trackIds}`, method: 'put' })
+}
 
 /**
  * Remove Tracks for Current User
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/remove-tracks-user
- * @param {string} track_ids - The Spotify ID for the track.
+ * @param {string} trackIds - The Spotify ID for the track.
  * @returns {Promise}
  */
-export const removeTrackForCurrentUser = (
-  track_ids: string | string[]
-): Promise<AxiosResponse<boolean>> => {
-  return useAxios({
-    url: `/me/tracks?ids=${track_ids}`,
-    method: "delete",
-  });
-};
+export const removeTrackForCurrentUser = (trackIds: string | string[]): Promise<AxiosResponse<boolean>> => {
+  return UseAxios({
+    url: `/me/tracks?ids=${trackIds}`,
+    method: 'delete',
+  })
+}
 
 /**
  * Get Artist
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artist
- * @param {string} artist_id - The Spotify ID for the artist.
+ * @param {string} artistId - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getArtistById = (artist_id: string | string[]): Promise<AxiosResponse<IArtist>> => {
-  return useAxios({
-    url: `/artists/${artist_id}`,
-  });
-};
+export const getArtistById = (artistId: string | string[]): Promise<AxiosResponse<IArtist>> => {
+  return UseAxios({
+    url: `/artists/${artistId}`,
+  })
+}
 
 /**
  * Get Artist's Top Tracks
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-top-tracks
- * @param {string} artist_id - The Spotify ID for the artist.
+ * @param {string} artistId - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getArtistTopTracks = (
-  artist_id: string | string[]
-): Promise<AxiosResponse<IArtistsTopTracks>> => {
-  return useAxios({
-    url: `/artists/${artist_id}/top-tracks?market=NL`,
-  });
-};
+export const getArtistTopTracks = (artistId: string | string[]): Promise<AxiosResponse<IArtistsTopTracks>> => {
+  return UseAxios({
+    url: `/artists/${artistId}/top-tracks?market=NL`,
+  })
+}
 
 /**
  * Get Artist's Albums
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-albums
- * @param {string} artist_id - The Spotify ID for the artist.
+ * @param {string} artistId - The Spotify ID for the artist.
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getArtistAlbums = (
-  artist_id: string | string[],
-  limit: number
-): Promise<AxiosResponse<IArtistsAlbums>> => {
-  return useAxios({
-    url: `/artists/${artist_id}/albums?market=NL&limit=${limit}`,
-  });
-};
+export const getArtistAlbums = (artistId: string | string[], limit: number): Promise<AxiosResponse<IArtistsAlbums>> => {
+  return UseAxios({
+    url: `/artists/${artistId}/albums?market=NL&limit=${limit}`,
+  })
+}
 
 /**
  * Get Artist's Related Artists
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-an-artists-related-artists
- * @param {string} artist_id - The Spotify ID for the artist.
+ * @param {string} artistId - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getArtistRelatedArtists = (
-  artist_id: string | string[]
-): Promise<AxiosResponse<IArtistsRelatedArtists>> => {
-  return useAxios({
-    url: `/artists/${artist_id}/related-artists`,
-  });
-};
+export const getArtistRelatedArtists = (artistId: string | string[]): Promise<AxiosResponse<IArtistsRelatedArtists>> => {
+  return UseAxios({
+    url: `/artists/${artistId}/related-artists`,
+  })
+}
 
 /**
  * Check If Current User Follows Artist
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/check-current-user-follows
- * @param {string} artist_id - The Spotify ID for the artist.
+ * @param {string} artistId - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const getDoesUserFollowArtist = (
-  artist_id: string | string[]
-): Promise<AxiosResponse<boolean[]>> => {
-  return useAxios({
-    url: `/me/following/contains?type=artist&ids=${artist_id}`,
-  });
-};
+export const getDoesUserFollowArtist = (artistId: string | string[]): Promise<AxiosResponse<boolean[]>> => {
+  return UseAxios({
+    url: `/me/following/contains?type=artist&ids=${artistId}`,
+  })
+}
 
 /**
  * Follow Artist
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/follow-artists-users
- * @param {string} artist_id - The Spotify ID for the artist.
+ * @param {string} artistId - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const followArtistForCurrentUser = (artist_id: string | string[]) => {
-  return useAxios({
-    url: `/me/following?type=artist&ids=${artist_id}`,
-    method: "put",
-  });
-};
+export const followArtistForCurrentUser = (artistId: string | string[]) => {
+  return UseAxios({
+    url: `/me/following?type=artist&ids=${artistId}`,
+    method: 'put',
+  })
+}
 
 /**
  * Unfollow Artist
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/unfollow-artists-users
- * @param {string} artist_id - The Spotify ID for the artist.
+ * @param {string} artistId - The Spotify ID for the artist.
  * @returns {Promise}
  */
-export const unfollowArtistForCurrentUser = (artist_id: string | string[]) => {
-  return useAxios({
-    url: `/me/following?type=artist&ids=${artist_id}`,
-    method: "delete",
-  });
-};
+export const unfollowArtistForCurrentUser = (artistId: string | string[]) => {
+  return UseAxios({
+    url: `/me/following?type=artist&ids=${artistId}`,
+    method: 'delete',
+  })
+}
 
 /**
  * Get New Releases
@@ -321,8 +290,8 @@ export const unfollowArtistForCurrentUser = (artist_id: string | string[]) => {
  * @returns {Promise}
  */
 export const getNewReleases = (limit: number): Promise<AxiosResponse<INewReleases>> => {
-  return useAxios({ url: `/browse/new-releases?limit=${limit}` });
-};
+  return UseAxios({ url: `/browse/new-releases?limit=${limit}` })
+}
 
 /**
  * Get Featured Playlists
@@ -331,8 +300,8 @@ export const getNewReleases = (limit: number): Promise<AxiosResponse<INewRelease
  * @returns {Promise}
  */
 export const getFeaturedPlaylists = (limit: number): Promise<AxiosResponse<IFeaturedPlaylists>> => {
-  return useAxios({ url: `/browse/featured-playlists?limit=${limit}` });
-};
+  return UseAxios({ url: `/browse/featured-playlists?limit=${limit}` })
+}
 
 /**
  * Get Categories
@@ -341,8 +310,8 @@ export const getFeaturedPlaylists = (limit: number): Promise<AxiosResponse<IFeat
  * @returns {Promise}
  */
 export const getCategories = (limit: number): Promise<AxiosResponse<ICategories>> => {
-  return useAxios({ url: `/browse/categories?limit=${limit}` });
-};
+  return UseAxios({ url: `/browse/categories?limit=${limit}` })
+}
 
 /**
  * Get Category's Playlists
@@ -350,20 +319,16 @@ export const getCategories = (limit: number): Promise<AxiosResponse<ICategories>
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getCategoryPlaylists = (
-  category_id: string | string[],
-  limit: number
-): Promise<AxiosResponse<ICategoryPlaylist>> => {
-  return useAxios({
-    url: `/browse/categories/${category_id}/playlists/?limit=${limit}`,
-  });
-};
+export const getCategoryPlaylists = (categoryId: string | string[], limit: number): Promise<AxiosResponse<ICategoryPlaylist>> => {
+  return UseAxios({
+    url: `/browse/categories/${categoryId}/playlists/?limit=${limit}`,
+  })
+}
 
 /**
  * Return a comma separated string of track IDs from the given array of tracks
  */
-const getTrackIds = (tracks: IPlaylistTracks["items"]) =>
-  tracks.map(({ track }: IPlaylistItem) => track.id).join(",");
+const getTrackIds = (tracks: IPlaylistTracks['items']) => tracks.map(({ track }: IPlaylistItem) => track.id).join(',')
 
 /**
  * Get Recommendations Based on Seeds
@@ -372,19 +337,16 @@ const getTrackIds = (tracks: IPlaylistTracks["items"]) =>
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getRecommendationsForTracks = (
-  tracks: IPlaylistTracks["items"],
-  limit: number
-): Promise<AxiosResponse<IRecommendations>> => {
-  const shuffledTracks = tracks.sort(() => 0.5 - Math.random());
-  const seed_tracks = getTrackIds(shuffledTracks.slice(0, 5));
-  const seed_artists = "";
-  const seed_genres = "";
+export const getRecommendationsForTracks = (tracks: IPlaylistTracks['items'], limit: number): Promise<AxiosResponse<IRecommendations>> => {
+  const shuffledTracks = tracks.sort(() => 0.5 - Math.random())
+  const seedTracks = getTrackIds(shuffledTracks.slice(0, 5))
+  const seedArtists = ''
+  const seedGenres = ''
 
-  return useAxios({
-    url: `https://api.spotify.com/v1/recommendations?seed_tracks=${seed_tracks}&seed_artists=${seed_artists}&seed_genres=${seed_genres}&limit=${limit}`,
-  });
-};
+  return UseAxios({
+    url: `https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks}&seed_artists=${seedArtists}&seed_genres=${seedGenres}&limit=${limit}`,
+  })
+}
 
 /**
  * Search for Item
@@ -393,9 +355,6 @@ export const getRecommendationsForTracks = (
  * @param {number} limit - Total amount of items to return
  * @returns {Promise}
  */
-export const getSearchItems = (
-  query: string,
-  limit: number
-): Promise<AxiosResponse<ISearchTracks>> => {
-  return useAxios({ url: `/search?q=${query}&type=track&limit=${limit}` });
-};
+export const getSearchItems = (query: string, limit: number): Promise<AxiosResponse<ISearchTracks>> => {
+  return UseAxios({ url: `/search?q=${query}&type=track&limit=${limit}` })
+}

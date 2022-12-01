@@ -1,25 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query'
 
-import { SectionWrapper } from "../../components/core";
-import { TrackGrid } from "../../components/grid";
-import { TrackGridSkeleton } from "../../components/skeleton";
-import { IUsersSavedTracks } from "../../lib/interfaces/user-saved-tracks";
-import { getCurrentUserSavedTracks } from "../../lib/spotify";
+import { SectionWrapper } from '../../components/core'
+import { TrackGrid } from '../../components/grid'
+import { TrackGridSkeleton } from '../../components/skeleton'
+import type { IUsersSavedTracks } from '../../lib/interfaces/user-saved-tracks'
+import { getCurrentUserSavedTracks } from '../../lib/spotify'
 
 export default function SavedTracks() {
   const fetchCurrentUserSavedTracks = async () => {
-    const userSavedTracks = await getCurrentUserSavedTracks(50);
-    return userSavedTracks.data;
-  };
+    const userSavedTracks = await getCurrentUserSavedTracks(50)
+    return userSavedTracks.data
+  }
 
-  const { data: tracks } = useQuery<IUsersSavedTracks>(
-    ["all-saved-tracks"],
-    fetchCurrentUserSavedTracks,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: tracks } = useQuery<IUsersSavedTracks>(['all-saved-tracks'], fetchCurrentUserSavedTracks, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
   return (
     <>
@@ -33,5 +29,5 @@ export default function SavedTracks() {
         <TrackGridSkeleton amount={50} />
       )}
     </>
-  );
+  )
 }

@@ -1,16 +1,10 @@
 type Props = {
-  image: string;
-  alt: string;
-  rounded?: boolean;
-};
+  image: string
+  alt: string
+  rounded?: boolean
+}
 
 export default function CardImage({ image, alt, rounded }: Props) {
-  console.log(alt);
-  return (
-    <img
-      src={image}
-      className={`object-cover mb-5 ${rounded ? "w-32 h-32 rounded-full" : "w-48 h-48 rounded-md"}`}
-      alt={alt}
-    />
-  );
+  console.log(alt)
+  return <img src={image} className={`mb-5 object-cover ${rounded ? 'h-32 w-32 rounded-full' : 'h-48 w-48 rounded-md'}`} alt={alt} />
 }

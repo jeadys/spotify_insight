@@ -1,39 +1,31 @@
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState } from 'react'
 
-import { SectionWrapper } from "../../components/core";
-import { ArtistGrid } from "../../components/grid";
-import { ArtistGridSkeleton } from "../../components/skeleton";
-import { IUsersTopArtists } from "../../lib/interfaces/user-top-artists";
-import { getTopArtists } from "../../lib/spotify";
+import { useQuery } from '@tanstack/react-query'
+
+import { SectionWrapper } from '../../components/core'
+import { ArtistGrid } from '../../components/grid'
+import { ArtistGridSkeleton } from '../../components/skeleton'
+import type { IUsersTopArtists } from '../../lib/interfaces/user-top-artists'
+import { getTopArtists } from '../../lib/spotify'
 
 export default function TopArtists() {
-  const [timeRange, setTimeRange] = useState("short");
+  const [timeRange, setTimeRange] = useState('short')
 
   const fetchTopArtists = async () => {
-    const userTopArtists = await getTopArtists(`${timeRange}_term`, 50);
-    return userTopArtists.data;
-  };
+    const userTopArtists = await getTopArtists(`${timeRange}_term`, 50)
+    return userTopArtists.data
+  }
 
-  const { data: topArtists } = useQuery<IUsersTopArtists>(
-    ["top-artists", timeRange],
-    fetchTopArtists,
-    {
-      staleTime: Infinity,
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: topArtists } = useQuery<IUsersTopArtists>(['top-artists', timeRange], fetchTopArtists, {
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+  })
 
   return (
     <>
       {topArtists ? (
         <>
-          <SectionWrapper
-            title="Top artists"
-            breadcrumb="true"
-            timeRange={timeRange}
-            setTimeRange={setTimeRange}
-          >
+          <SectionWrapper title="Top artists" breadcrumb="true" timeRange={timeRange} setTimeRange={setTimeRange}>
             <ArtistGrid items={topArtists.items} />
           </SectionWrapper>
         </>
@@ -41,5 +33,5 @@ export default function TopArtists() {
         <ArtistGridSkeleton amount={50} />
       )}
     </>
-  );
+  )
 }

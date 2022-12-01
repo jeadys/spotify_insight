@@ -1,40 +1,39 @@
-import { useSession } from "next-auth/react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState } from 'react'
 
-import TrackPlayer from "./TrackPlayer";
+import { useSession } from 'next-auth/react'
+
+import TrackPlayer from './TrackPlayer'
 
 type ChooseTrackProps = {
-  chooseTrack: (tracks: string[], track: string) => void;
-};
+  chooseTrack: (tracks: string[], track: string) => void
+}
 
-const PlayTrackContext = React.createContext<string | undefined>(undefined);
-const ChooseTrackContext = React.createContext<ChooseTrackProps["chooseTrack"]>(
-  {} as ChooseTrackProps["chooseTrack"]
-);
+const PlayTrackContext = React.createContext<string | undefined>(undefined)
+const ChooseTrackContext = React.createContext<ChooseTrackProps['chooseTrack']>({} as ChooseTrackProps['chooseTrack'])
 
 export const PlayTrack = () => {
-  return useContext(PlayTrackContext);
-};
+  return useContext(PlayTrackContext)
+}
 
 export const ChooseTrack = () => {
-  return useContext(ChooseTrackContext);
-};
+  return useContext(ChooseTrackContext)
+}
 
 type TrackProviderProps = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export const TrackProvider = ({ children }: TrackProviderProps) => {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
-  const [playingTrack, setPlayingTrack] = useState<string>("spotify:track:4cOdK2wGLETKBW3PvgPWqT");
+  const [playingTrack, setPlayingTrack] = useState<string>('spotify:track:4cOdK2wGLETKBW3PvgPWqT')
 
-  const [trackQueue, setTrackQueue] = useState<string[]>(["spotify:track:4cOdK2wGLETKBW3PvgPWqT"]);
+  const [trackQueue, setTrackQueue] = useState<string[]>(['spotify:track:4cOdK2wGLETKBW3PvgPWqT'])
 
   const chooseTrack = (tracks: string[], track: string) => {
-    setTrackQueue(tracks);
-    setPlayingTrack(track);
-  };
+    setTrackQueue(tracks)
+    setPlayingTrack(track)
+  }
 
   return (
     <PlayTrackContext.Provider value={playingTrack}>
@@ -48,7 +47,7 @@ export const TrackProvider = ({ children }: TrackProviderProps) => {
         {children}
       </ChooseTrackContext.Provider>
     </PlayTrackContext.Provider>
-  );
-};
+  )
+}
 
-export default TrackProvider;
+export default TrackProvider
