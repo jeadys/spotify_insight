@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import type { Categories } from '../../lib/interfaces/categories'
@@ -16,10 +17,13 @@ export default function CategoryGrid({ items }: Categories) {
               >
                 <Link href={`/discover/categories/${category.id}`} className="flex flex-col gap-5">
                   <h3 className="m-10 mt-6 text-lg font-extrabold text-white">{category.name}</h3>
-                  <img
+                  <Image
                     src={category.icons.length && category.icons[0] ? category.icons[0].url : '/images/nocover.webp'}
-                    className="-mr-4 h-28 w-28 rotate-12 place-self-end"
                     alt={category.name}
+                    width="0"
+                    height="0"
+                    sizes="100vw"
+                    className="-mr-4 h-28 w-28 rotate-12 place-self-end"
                   />
                 </Link>
               </li>

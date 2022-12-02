@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -26,10 +27,13 @@ export default function TrackHeader({ data }: ITrackHeader) {
 
   return (
     <div className="mt-5">
-      <img
+      <Image
         src={data.images.length && data.images[0] ? data.images[0].url : '/images/nocover.webp'}
-        className="mx-auto h-80 w-80 rounded-md object-cover"
         alt={data.name}
+        width="0"
+        height="0"
+        sizes="100vw"
+        className="mx-auto h-80 w-80 rounded-md object-cover"
       />
 
       <div className="mx mt-5 flex flex-col items-center gap-y-2">

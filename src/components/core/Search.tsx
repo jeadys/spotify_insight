@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import useDebounce from '../../hooks/useDebounce'
@@ -97,10 +98,13 @@ export default function Search() {
                     >
                       <div className="flex items-center">
                         <div className="h-10 w-10 flex-shrink-0">
-                          <img
+                          <Image
                             src={result.album.images.length && result.album.images[0] ? result.album.images[0].url : '/images/nocover.webp'}
-                            className="h-10 w-10 rounded-md object-cover"
                             alt={result.name}
+                            width="0"
+                            height="0"
+                            sizes="100vw"
+                            className="h-10 w-10 rounded-md object-cover"
                           />
                         </div>
 

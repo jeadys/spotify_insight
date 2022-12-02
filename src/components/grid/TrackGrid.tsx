@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -52,10 +53,13 @@ export default function TrackGrid({ items }: ITracks) {
                       <div className="w-7 text-center">{playingTrack === track.uri ? <MusicBar /> : <span>{index + 1}</span>}</div>
                       {track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
-                          <img
+                          <Image
                             src={track.album.images.length && track.album.images[2] ? track.album.images[2].url : '/images/nocover.webp'}
-                            className="h-10 w-10 rounded-md object-cover"
                             alt={track.name}
+                            width="0"
+                            height="0"
+                            sizes="100vw"
+                            className="h-10 w-10 rounded-md object-cover"
                           />
                         </div>
                       )}
