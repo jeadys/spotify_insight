@@ -68,8 +68,8 @@ export default function TrackGrid({ items }: ITracks) {
                           <>
                             {track.album.artists.map((artist, index) => (
                               <span key={artist.id} className="text-xs text-gray-300 hover:underline">
-                                <Link href={`/artists/${artist.id}`}>
-                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
+                                <Link href={`/artists/${artist.id}`} onClick={(e) => stopProp(e)}>
+                                  {artist.name}
                                 </Link>
 
                                 {index < track.album!.artists.length - 1 ? ', ' : ''}
@@ -80,8 +80,8 @@ export default function TrackGrid({ items }: ITracks) {
                           <>
                             {track.artists.map((artist, index) => (
                               <span key={artist.id} className="text-xs text-gray-300 hover:underline">
-                                <Link href={`/artists/${artist.id}`}>
-                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
+                                <Link href={`/artists/${artist.id}`} onClick={(e) => stopProp(e)}>
+                                  {artist.name}
                                 </Link>
 
                                 {index < track.artists.length - 1 ? ', ' : ''}
@@ -95,10 +95,8 @@ export default function TrackGrid({ items }: ITracks) {
                   {track.album && (
                     <td className="px-3 py-4 text-sm text-gray-300 album:hidden">
                       <span className="text-xs text-gray-300 hover:underline">
-                        <Link href={`/albums/${track.album.id}`}>
-                          <a onClick={(e) => stopProp(e)}>
-                            {track.album.name.length < 20 ? <> {track.album.name}</> : <>{track.album.name.slice(0, 20).concat('...')}</>}
-                          </a>
+                        <Link href={`/albums/${track.album.id}`} onClick={(e) => stopProp(e)}>
+                          {track.album.name.length < 20 ? <> {track.album.name}</> : <>{track.album.name.slice(0, 20).concat('...')}</>}
                         </Link>
                       </span>
                     </td>

@@ -2,23 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  // experimental: {
-  //   images: {
-  //     allowFutureImage: true,
-  //     remotePatterns: [
-  //       {
-  //         protocol: "https",
-  //         hostname: "**.scdn.co",
-  //         hostname: "**.spotifycdn.com",
-  //       },
-  //     ],
-  //   },
-  // },
-  experimental: {
-    images: {
-      allowFutureImage: true,
-    },
-  },
   images: {
     domains: [
       'i.scdn.co',

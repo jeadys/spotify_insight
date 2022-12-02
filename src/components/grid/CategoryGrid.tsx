@@ -14,15 +14,13 @@ export default function CategoryGrid({ items }: Categories) {
                 key={category.id}
                 className="overflow-hidden rounded-lg transition ease-in-out sm:bg-slate-800 sm:shadow sm:hover:bg-slate-700"
               >
-                <Link href={`/discover/categories/${category.id}`}>
-                  <a className="flex flex-col gap-5">
-                    <h3 className="m-10 mt-6 text-lg font-extrabold text-white">{category.name}</h3>
-                    <img
-                      src={category.icons.length && category.icons[0] ? category.icons[0].url : '/images/nocover.webp'}
-                      className="-mr-4 h-28 w-28 rotate-12 place-self-end"
-                      alt={category.name}
-                    />
-                  </a>
+                <Link href={`/discover/categories/${category.id}`} className="flex flex-col gap-5">
+                  <h3 className="m-10 mt-6 text-lg font-extrabold text-white">{category.name}</h3>
+                  <img
+                    src={category.icons.length && category.icons[0] ? category.icons[0].url : '/images/nocover.webp'}
+                    className="-mr-4 h-28 w-28 rotate-12 place-self-end"
+                    alt={category.name}
+                  />
                 </Link>
               </li>
             ))}

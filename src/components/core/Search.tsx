@@ -106,16 +106,14 @@ export default function Search() {
 
                         <div className="ml-4">
                           <div className="font-semibold">{result.name}</div>
-                          <Link href={`/albums/${result.album.id}`}>
-                            <a onClick={(e) => stopProp(e)} className="hover:underline">
-                              {result.album.name}{' '}
-                            </a>
+                          <Link href={`/albums/${result.album.id}`} onClick={(e) => stopProp(e)} className="block hover:underline">
+                            {result.album.name}
                           </Link>
                           <>
                             {result.artists.map((artist, index) => (
                               <span key={artist.id} className="text-xstext-gray-300 hover:underline">
-                                <Link href={`/artists/${artist.id}`}>
-                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
+                                <Link href={`/artists/${artist.id}`} onClick={(e) => stopProp(e)}>
+                                  {artist.name}
                                 </Link>
 
                                 {index < result.artists.length - 1 ? ', ' : ''}

@@ -44,8 +44,11 @@ export default function TrackHeader({ data }: ITrackHeader) {
         <div className="h-5">{isAlbumSaved && <SaveAlbumButton id={data.id} saved={isAlbumSaved[0]} />}</div>
 
         {asPath == `/playlists/${data.id}` && data.tracks.total >= 5 && (
-          <Link href={`/recommendations/${data.id}`}>
-            <a className="my-5 max-w-fit cursor-pointer rounded-full bg-cyan-600 py-2 px-5 font-semibold text-white">Get recommendations</a>
+          <Link
+            href={`/recommendations/${data.id}`}
+            className="my-5 max-w-fit cursor-pointer rounded-full bg-cyan-600 py-2 px-5 font-semibold text-white"
+          >
+            Get recommendations
           </Link>
         )}
 

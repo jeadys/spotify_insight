@@ -15,13 +15,11 @@ export default function PlaylistGrid({ items }: IUsersSavedPlaylists) {
                 <li key={playlist.id}>
                   <CardItem>
                     <Link href={`/playlists/${playlist.id}`}>
-                      <a>
-                        <CardImage image={playlist.images.length ? playlist.images[0].url : '/images/nocover.webp'} alt={playlist.name} />
+                      <CardImage image={playlist.images.length ? playlist.images[0].url : '/images/nocover.webp'} alt={playlist.name} />
 
-                        <CardName name={playlist.name} />
+                      <CardName name={playlist.name} />
 
-                        <CardInfo info={playlist.tracks.total < 50 ? `${playlist.tracks.total.toString()} Tracks` : '50 Tracks'} />
-                      </a>
+                      <CardInfo info={playlist.tracks.total < 50 ? `${playlist.tracks.total.toString()} Tracks` : '50 Tracks'} />
                     </Link>
                   </CardItem>
                 </li>
