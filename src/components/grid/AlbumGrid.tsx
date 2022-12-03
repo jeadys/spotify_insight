@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 
 import type { IArtistsAlbums } from '../../lib/interfaces/artist-album'

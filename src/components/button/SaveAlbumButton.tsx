@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 
 import { HeartIcon } from '@heroicons/react/solid'

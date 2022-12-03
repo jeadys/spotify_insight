@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 
 import type { IUsersTopArtists } from '../../lib/interfaces/user-top-artists'

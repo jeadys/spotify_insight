@@ -1,3 +1,5 @@
+'use client'
+
 export { default as Content } from './Content'
 export { default as Navigation } from './Navigation'
 export { default as SectionWrapper } from './SectionWrapper'

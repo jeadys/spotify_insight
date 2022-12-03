@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 
 import type { IUsersSavedPlaylists } from '../../lib/interfaces/user-saved-playlists'
