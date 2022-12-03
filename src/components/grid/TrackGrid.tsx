@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 import type { ITracks } from '../../lib/interfaces/tracks'
 import { getDoesUserHaveTrackSaved } from '../../lib/spotify'
@@ -26,14 +26,14 @@ export default function TrackGrid({ items }: ITracks) {
 
   const playingTrack = PlayTrack()
   const chooseTrack = ChooseTrack()
-  const { asPath } = useRouter()
+  const pathname = usePathname()
 
   const fetchDoesUserHaveTrackSaved = async () => {
     const isTrackSaved = await getDoesUserHaveTrackSaved(trackIds)
     return isTrackSaved.data
   }
 
-  const { data: isTrackSaved } = useQuery(['is-track-saved', asPath], fetchDoesUserHaveTrackSaved, {
+  const { data: isTrackSaved } = useQuery(['is-track-saved', pathname], fetchDoesUserHaveTrackSaved, {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   })

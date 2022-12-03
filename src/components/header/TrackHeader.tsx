@@ -3,7 +3,7 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 import type { ITrackHeader } from '../../lib/interfaces/track-header'
 import { getDoesUserHaveAlbumSaved } from '../../lib/spotify'
@@ -14,7 +14,7 @@ import { SaveAlbumButton } from '../button'
 
 export default function TrackHeader({ data }: ITrackHeader) {
   const queryClient = useQueryClient()
-  const { asPath } = useRouter()
+  const pathname = usePathname()
 
   const fetchDoesUserHaveAlbumSaved = async () => {
     const isAlbumSaved = await getDoesUserHaveAlbumSaved(data.id)
@@ -49,7 +49,7 @@ export default function TrackHeader({ data }: ITrackHeader) {
 
         <div className="h-5">{isAlbumSaved && <SaveAlbumButton id={data.id} saved={isAlbumSaved[0]} />}</div>
 
-        {asPath == `/playlists/${data.id}` && data.tracks.total >= 5 && (
+        {pathname == `/playlists/${data.id}` && data.tracks.total >= 5 && (
           <Link
             href={`/recommendations/${data.id}`}
             className="my-5 max-w-fit cursor-pointer rounded-full bg-cyan-600 py-2 px-5 font-semibold text-white"
