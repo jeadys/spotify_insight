@@ -2,49 +2,35 @@
 
 import { useMemo } from 'react'
 
-import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
-import type { ITracks } from '../../lib/interfaces/tracks'
-import { getDoesUserHaveTrackSaved } from '../../lib/spotify'
-import { formatDuration, stopProp } from '../../lib/utils'
-import { SaveTrackButton } from '../button'
-import DiscoverButton from '../button/DiscoverButton'
-import { MusicBar } from '../core'
-import { ChooseTrack, PlayTrack } from '../core/TrackContext'
+import DiscoverButton from '@/components/button/DiscoverButton'
+import SaveTrackButton from '@/components/button/SaveTrackButton'
+import MusicBar from '@/components/core/MusicBar'
+import { formatTrackDuration, stopProp } from '@/lib/utils'
+import { ChooseTrack, PlayTrack } from '@/providers/PlayedTrackProvider'
 
-export default function TrackGrid({ items }: ITracks) {
-  const trackIds = useMemo(() => {
-    return items.map((track) => track.id).join(',')
-  }, [items])
+type Props = {
+  tracks: SpotifyApi.TrackObjectSimplified[]
+  isTrackSaved: boolean[]
+}
 
+export default function TrackGrid({ tracks, isTrackSaved }: Props) {
   const trackUris = useMemo(() => {
-    return items.map((track) => track.uri)
-  }, [items])
+    return tracks.map((track) => track.uri)
+  }, [tracks])
 
   const playingTrack = PlayTrack()
   const chooseTrack = ChooseTrack()
-  const pathname = usePathname()
-
-  const fetchDoesUserHaveTrackSaved = async () => {
-    const isTrackSaved = await getDoesUserHaveTrackSaved(trackIds)
-    return isTrackSaved.data
-  }
-
-  const { data: isTrackSaved } = useQuery(['is-track-saved', pathname], fetchDoesUserHaveTrackSaved, {
-    staleTime: Infinity,
-    refetchOnWindowFocus: false,
-  })
 
   return (
     <>
-      {items && items.length ? (
+      {tracks && tracks.length ? (
         <>
           <table className="w-full text-white">
             <tbody className="">
-              {items.map((track, index) => (
+              {tracks.map((track, index) => (
                 <tr
                   key={track.id}
                   className={`${playingTrack === track.uri ? 'bg-sky-600' : 'cursor-pointer hover:bg-slate-700'}`}
@@ -78,7 +64,7 @@ export default function TrackGrid({ items }: ITracks) {
                                   {artist.name}
                                 </Link>
 
-                                {index < track.album!.artists.length - 1 ? ', ' : ''}
+                                {index < track.album.artists.length - 1 ? ', ' : ''}
                               </span>
                             ))}
                           </>
@@ -108,14 +94,12 @@ export default function TrackGrid({ items }: ITracks) {
                     </td>
                   )}
                   <td className="w-0 px-3 py-4 text-sm">
-                    {isTrackSaved && (
-                      <span onClick={(e) => stopProp(e)}>
-                        <SaveTrackButton id={track.id} saved={isTrackSaved[index]} />
-                      </span>
-                    )}
+                    <span onClick={(e) => stopProp(e)}>
+                      <SaveTrackButton trackId={track.id} isTrackSaved={isTrackSaved[index]} />
+                    </span>
                   </td>
                   <td className="w-0 px-3 py-4 text-sm duration:hidden">
-                    <span>{formatDuration(track.duration_ms)}</span>
+                    <span>{formatTrackDuration(track.duration_ms)}</span>
                   </td>
                 </tr>
               ))}
@@ -123,7 +107,7 @@ export default function TrackGrid({ items }: ITracks) {
           </table>
         </>
       ) : (
-        <DiscoverButton titleMessage="No tracks found" buttonMessage="Discover new tracks" />
+        <DiscoverButton titleMessage="No tracks found" buttonMessage="Discover new tracks here" />
       )}
     </>
   )

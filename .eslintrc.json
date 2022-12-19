@@ -5,7 +5,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
-  "ignorePatterns": ["src/utils/types/**", "src/utils/schemas/**"],
+  "ignorePatterns": ["src/pages/api/**"],
   "rules": {
     "no-unused-vars": ["warn", { "vars": "all", "args": "all", "ignoreRestSiblings": false }],
     "camelcase": ["warn", { "ignoreImports": true }],

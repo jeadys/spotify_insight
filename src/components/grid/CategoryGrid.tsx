@@ -3,16 +3,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import type { Categories } from '../../lib/interfaces/categories'
-import DiscoverButton from '../button/DiscoverButton'
+import DiscoverButton from '@/components/button/DiscoverButton'
 
-export default function CategoryGrid({ items }: Categories) {
+export default function CategoryGrid({ categories }: { categories: SpotifyApi.CategoryObject[] }) {
   return (
     <>
-      {items && items.length ? (
+      {categories && categories.length ? (
         <>
           <ul className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
-            {items.map((category) => (
+            {categories.map((category) => (
               <li
                 key={category.id}
                 className="overflow-hidden rounded-lg transition ease-in-out sm:bg-slate-800 sm:shadow sm:hover:bg-slate-700"
@@ -33,7 +32,7 @@ export default function CategoryGrid({ items }: Categories) {
           </ul>
         </>
       ) : (
-        <DiscoverButton titleMessage="No categories found" buttonMessage="Discover new tracks" />
+        <DiscoverButton titleMessage="No categories found" buttonMessage="Discover new tracks here" />
       )}
     </>
   )
