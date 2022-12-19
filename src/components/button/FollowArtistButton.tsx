@@ -2,44 +2,61 @@
 
 import { useState } from 'react'
 
-import { HeartIcon } from '@heroicons/react/solid'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { getSession } from 'next-auth/react'
+import type { FollowArtistsOrUsersResponse, UnfollowArtistsOrUsersResponse } from 'spotify-api'
 
-import { followArtistForCurrentUser, unfollowArtistForCurrentUser } from '../../lib/spotify'
+const followArtistForCurrentUser = async (artistId: string): Promise<FollowArtistsOrUsersResponse | undefined> => {
+  const session = await getSession()
+  if (!session) return undefined
 
-type Props = {
-  id: string
-  followed: boolean
+  return await fetch(`https://api.spotify.com/v1/me/following?type=artist&ids=${artistId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.accessToken}`,
+    },
+  })
 }
 
-export default function FollowArtistButton({ id, followed }: Props) {
-  const [followState, setFollowState] = useState<boolean>(followed)
-  const queryClient = useQueryClient()
+const unfollowArtistForCurrentUser = async (artistId: string): Promise<UnfollowArtistsOrUsersResponse | undefined> => {
+  const session = await getSession()
+  if (!session) return undefined
 
-  const { mutateAsync: followArtist } = useMutation(followArtistForCurrentUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['followed-artists'])
-      queryClient.invalidateQueries(['is-artist-followed', id])
-      setFollowState(true)
+  return await fetch(`https://api.spotify.com/v1/me/following?type=artist&ids=${artistId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.accessToken}`,
     },
   })
+}
 
-  const { mutateAsync: unfollowArtist } = useMutation(unfollowArtistForCurrentUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['followed-artists'])
-      queryClient.invalidateQueries(['is-artist-followed', id])
-      setFollowState(false)
-    },
-  })
+type Props = {
+  artistId: string
+  isArtistFollowed: boolean
+}
 
-  const save = async () => await followArtist(id)
+export default function FollowArtistButton({ artistId, isArtistFollowed }: Props) {
+  const [followState, setFollowState] = useState(isArtistFollowed)
 
-  const remove = async () => await unfollowArtist(id)
+  const follow = async () => {
+    await followArtistForCurrentUser(artistId)
+
+    setFollowState(true)
+  }
+
+  const unfollow = async () => {
+    await unfollowArtistForCurrentUser(artistId)
+
+    setFollowState(false)
+  }
 
   return (
-    <HeartIcon
-      className={`${followState ? 'text-green-500' : 'stroke-white text-transparent'} mx-auto h-6 w-6 cursor-pointer`}
-      onClick={followState ? remove : save}
-    />
+    <button
+      className={`cursor-pointer rounded-md py-1 px-6 text-white ${followState ? 'bg-blue-600' : 'border border-white'}`}
+      onClick={followState ? unfollow : follow}
+    >
+      {followState ? 'Following' : 'Follow'}
+    </button>
   )
 }

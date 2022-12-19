@@ -3,45 +3,77 @@
 import { useState } from 'react'
 
 import { HeartIcon } from '@heroicons/react/solid'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { usePathname } from 'next/navigation'
+import { getSession } from 'next-auth/react'
+import type { RemoveUsersSavedTracksResponse, SaveTracksForUserResponse } from 'spotify-api'
 
-import { removeTrackForCurrentUser, saveTrackForCurrentUser } from '../../lib/spotify'
+import ToolTip from '@/components/core/ToolTip'
 
-type Props = {
-  id: string
-  saved: boolean
+/**
+ * Save tracks for user
+ *
+ * PUT /v1/me/tracks?ids={ids}
+ * https://developer.spotify.com/web-api/save-tracks-user/
+ * @param {string} trackId The Spotify ID for the track.
+ * @returns {Promise}
+ */
+const saveTrackForCurrentUser = async (trackId: string): Promise<SaveTracksForUserResponse | undefined> => {
+  const session = await getSession()
+  if (!session) return undefined
+
+  return await fetch(`https://api.spotify.com/v1/me/tracks?ids=${trackId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.accessToken}`,
+    },
+  })
 }
 
-export default function SaveTrackButton({ id, saved }: Props) {
-  const [saveState, setSaveState] = useState<boolean>(saved)
-  const queryClient = useQueryClient()
-  const pathname = usePathname()
+/**
+ * Remove User’s Saved Tracks
+ *
+ * DELETE /v1/me/tracks?ids={ids}
+ * https://developer.spotify.com/web-api/remove-tracks-user/
+ * @param {string} trackId The Spotify ID for the track.
+ * @returns {Promise}
+ */
+const removeTrackForCurrentUser = async (trackId: string): Promise<RemoveUsersSavedTracksResponse | undefined> => {
+  const session = await getSession()
+  if (!session) return undefined
 
-  const { mutateAsync: saveTrack } = useMutation(saveTrackForCurrentUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['saved-tracks'])
-      queryClient.invalidateQueries(['is-track-saved', pathname])
-      setSaveState(true)
+  return await fetch(`https://api.spotify.com/v1/me/tracks?ids=${trackId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${session.accessToken}`,
     },
   })
+}
 
-  const { mutateAsync: removeTrack } = useMutation(removeTrackForCurrentUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['saved-tracks'])
-      queryClient.invalidateQueries(['is-track-saved', pathname])
-      setSaveState(false)
-    },
-  })
+type Props = {
+  trackId: string
+  isTrackSaved: boolean
+}
 
-  const save = async () => await saveTrack(id)
+export default function SaveTrackButton({ trackId, isTrackSaved }: Props) {
+  const [saveState, setSaveState] = useState(isTrackSaved)
 
-  const remove = async () => await removeTrack(id)
+  const save = async () => {
+    await saveTrackForCurrentUser(trackId)
+    setSaveState(true)
+  }
+
+  const remove = async () => {
+    await removeTrackForCurrentUser(trackId)
+    setSaveState(false)
+  }
 
   return (
-    <HeartIcon
-      className={`${saveState ? 'text-green-500' : 'stroke-white text-transparent'} h-6 w-6 cursor-pointer`}
-      onClick={saveState ? remove : save}
-    />
+    <ToolTip tooltip={`${saveState ? 'Remove from library' : 'Save to library'}`}>
+      <HeartIcon
+        className={`${saveState ? 'text-green-500' : 'stroke-white text-transparent'} h-6 w-6 cursor-pointer`}
+        onClick={saveState ? remove : save}
+      />
+    </ToolTip>
   )
 }
