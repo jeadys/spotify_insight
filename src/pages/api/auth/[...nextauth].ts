@@ -1,13 +1,22 @@
-import axios from 'axios'
 import NextAuth from 'next-auth'
 import type { NextAuthOptions } from 'next-auth'
 import type { JWT } from 'next-auth/jwt'
 import SpotifyProvider from 'next-auth/providers/spotify'
+import { generateRandomString } from '@/lib/utils'
 
-import { LOGIN_URL } from '../../../lib/spotify'
+const clientId = process.env.NEXT_PUBLIC_CLIENT_ID!
+const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET!
+const state = generateRandomString(16)
+const scope = `user-read-private user-read-email user-top-read 
+               user-follow-read user-follow-modify user-library-read user-library-modify
+               user-read-playback-state user-modify-playback-state streaming`
 
-const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID!
-const CLIENT_SECRET = process.env.NEXT_PUBLIC_CLIENT_SECRET!
+const queryParamsAuthorize = new URLSearchParams({
+  client_id: clientId,
+  response_type: 'code',
+  state: state,
+  scope: scope,
+})
 
 /**
  * Takes a token, and returns a new token with updated
@@ -16,17 +25,14 @@ const CLIENT_SECRET = process.env.NEXT_PUBLIC_CLIENT_SECRET!
  */
 export async function refreshAccessToken(token: JWT) {
   try {
-    const queryParams = {
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
+    const queryParamsRefresh = new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
       grant_type: 'refresh_token',
-      refresh_token: token.refreshToken as string,
-    }
+      refresh_token: token.refreshToken!,
+    })
 
-    const queryParamString = new URLSearchParams(queryParams)
-    const REFRESH_URL = `https://accounts.spotify.com/api/token?${queryParamString}`
-
-    const response = await fetch(REFRESH_URL, {
+    const response = await fetch(`https://accounts.spotify.com/api/token?${queryParamsRefresh}`, {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
@@ -39,10 +45,6 @@ export async function refreshAccessToken(token: JWT) {
       throw refreshedTokens
     }
 
-    axios.defaults.baseURL = 'https://api.spotify.com/v1'
-    axios.defaults.headers.common['Authorization'] = `Bearer ${refreshedTokens.access_token}`
-    axios.defaults.headers.common['Content-Type'] = 'application/json'
-
     return {
       ...token,
       accessToken: refreshedTokens.access_token,
@@ -50,7 +52,7 @@ export async function refreshAccessToken(token: JWT) {
       refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
 
     return {
       ...token,
@@ -66,9 +68,9 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     SpotifyProvider({
-      clientId: CLIENT_ID,
-      clientSecret: CLIENT_SECRET,
-      authorization: LOGIN_URL,
+      clientId: clientId,
+      clientSecret: clientSecret,
+      authorization: `https://accounts.spotify.com/authorize?${queryParamsAuthorize.toString()}`,
     }),
   ],
   callbacks: {
@@ -84,7 +86,7 @@ export const authOptions: NextAuthOptions = {
       }
 
       // Return previous token if the access token has not yet expired
-      if (typeof token.accessTokenExpires === 'number') {
+      if (token.accessTokenExpires) {
         if (Date.now() < token.accessTokenExpires) {
           return token
         }
@@ -96,11 +98,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       session.accessToken = token.accessToken
       session.refreshToken = token.refreshToken
-
-      axios.defaults.baseURL = 'https://api.spotify.com/v1'
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token.accessToken}`
-      axios.defaults.headers.common['Content-Type'] = 'application/json'
-
+      session.error = token.error
       return session
     },
   },
