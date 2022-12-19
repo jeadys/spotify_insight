@@ -1,3 +1,5 @@
+'use client'
+
 export { default as AlbumGridSkeleton } from './AlbumGridSkeleton'
 export { default as ArtistGridSkeleton } from './ArtistGridSkeleton'
 export { default as PlaylistGridSkeleton } from './PlaylistGridSkeleton'

@@ -1,3 +1,5 @@
+'use client'
+
 export default function MusicBar() {
   return (
     <div className="mx-auto flex h-4 w-4 justify-between">

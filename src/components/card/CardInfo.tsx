@@ -1,3 +1,5 @@
+'usee client'
+
 type Props = {
   info: string
 }

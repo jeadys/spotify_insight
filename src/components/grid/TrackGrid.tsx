@@ -1,8 +1,11 @@
+'use client'
+
 import { useMemo } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 import type { ITracks } from '../../lib/interfaces/tracks'
 import { getDoesUserHaveTrackSaved } from '../../lib/spotify'
@@ -23,14 +26,14 @@ export default function TrackGrid({ items }: ITracks) {
 
   const playingTrack = PlayTrack()
   const chooseTrack = ChooseTrack()
-  const { asPath } = useRouter()
+  const pathname = usePathname()
 
   const fetchDoesUserHaveTrackSaved = async () => {
     const isTrackSaved = await getDoesUserHaveTrackSaved(trackIds)
     return isTrackSaved.data
   }
 
-  const { data: isTrackSaved } = useQuery(['is-track-saved', asPath], fetchDoesUserHaveTrackSaved, {
+  const { data: isTrackSaved } = useQuery(['is-track-saved', pathname], fetchDoesUserHaveTrackSaved, {
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   })
@@ -52,10 +55,13 @@ export default function TrackGrid({ items }: ITracks) {
                       <div className="w-7 text-center">{playingTrack === track.uri ? <MusicBar /> : <span>{index + 1}</span>}</div>
                       {track.album && (
                         <div className="h-10 w-10 flex-shrink-0">
-                          <img
+                          <Image
                             src={track.album.images.length && track.album.images[2] ? track.album.images[2].url : '/images/nocover.webp'}
-                            className="h-10 w-10 rounded-md object-cover"
                             alt={track.name}
+                            width="0"
+                            height="0"
+                            sizes="100vw"
+                            className="h-10 w-10 rounded-md object-cover"
                           />
                         </div>
                       )}
@@ -68,8 +74,8 @@ export default function TrackGrid({ items }: ITracks) {
                           <>
                             {track.album.artists.map((artist, index) => (
                               <span key={artist.id} className="text-xs text-gray-300 hover:underline">
-                                <Link href={`/artists/${artist.id}`}>
-                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
+                                <Link href={`/artists/${artist.id}`} onClick={(e) => stopProp(e)}>
+                                  {artist.name}
                                 </Link>
 
                                 {index < track.album!.artists.length - 1 ? ', ' : ''}
@@ -80,8 +86,8 @@ export default function TrackGrid({ items }: ITracks) {
                           <>
                             {track.artists.map((artist, index) => (
                               <span key={artist.id} className="text-xs text-gray-300 hover:underline">
-                                <Link href={`/artists/${artist.id}`}>
-                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
+                                <Link href={`/artists/${artist.id}`} onClick={(e) => stopProp(e)}>
+                                  {artist.name}
                                 </Link>
 
                                 {index < track.artists.length - 1 ? ', ' : ''}
@@ -95,10 +101,8 @@ export default function TrackGrid({ items }: ITracks) {
                   {track.album && (
                     <td className="px-3 py-4 text-sm text-gray-300 album:hidden">
                       <span className="text-xs text-gray-300 hover:underline">
-                        <Link href={`/albums/${track.album.id}`}>
-                          <a onClick={(e) => stopProp(e)}>
-                            {track.album.name.length < 20 ? <> {track.album.name}</> : <>{track.album.name.slice(0, 20).concat('...')}</>}
-                          </a>
+                        <Link href={`/albums/${track.album.id}`} onClick={(e) => stopProp(e)}>
+                          {track.album.name.length < 20 ? <> {track.album.name}</> : <>{track.album.name.slice(0, 20).concat('...')}</>}
                         </Link>
                       </span>
                     </td>

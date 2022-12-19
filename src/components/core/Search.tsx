@@ -1,6 +1,9 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import useDebounce from '../../hooks/useDebounce'
@@ -97,25 +100,26 @@ export default function Search() {
                     >
                       <div className="flex items-center">
                         <div className="h-10 w-10 flex-shrink-0">
-                          <img
+                          <Image
                             src={result.album.images.length && result.album.images[0] ? result.album.images[0].url : '/images/nocover.webp'}
-                            className="h-10 w-10 rounded-md object-cover"
                             alt={result.name}
+                            width="0"
+                            height="0"
+                            sizes="100vw"
+                            className="h-10 w-10 rounded-md object-cover"
                           />
                         </div>
 
                         <div className="ml-4">
                           <div className="font-semibold">{result.name}</div>
-                          <Link href={`/albums/${result.album.id}`}>
-                            <a onClick={(e) => stopProp(e)} className="hover:underline">
-                              {result.album.name}{' '}
-                            </a>
+                          <Link href={`/albums/${result.album.id}`} onClick={(e) => stopProp(e)} className="block hover:underline">
+                            {result.album.name}
                           </Link>
                           <>
                             {result.artists.map((artist, index) => (
                               <span key={artist.id} className="text-xstext-gray-300 hover:underline">
-                                <Link href={`/artists/${artist.id}`}>
-                                  <a onClick={(e) => stopProp(e)}>{artist.name}</a>
+                                <Link href={`/artists/${artist.id}`} onClick={(e) => stopProp(e)}>
+                                  {artist.name}
                                 </Link>
 
                                 {index < result.artists.length - 1 ? ', ' : ''}

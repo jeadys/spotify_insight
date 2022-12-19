@@ -1,3 +1,5 @@
+'use client'
+
 import type { Dispatch, SetStateAction } from 'react'
 
 import Link from 'next/link'
@@ -34,8 +36,8 @@ export default function SectionWrapper({ title, breadcrumb, seeAll, children, ti
           {title && (
             <>
               {seeAll ? (
-                <Link href={seeAll}>
-                  <a className="hover:underline">{title}</a>
+                <Link href={seeAll} className="hover:underline">
+                  {title}
                 </Link>
               ) : (
                 <span>{title}</span>
@@ -45,10 +47,11 @@ export default function SectionWrapper({ title, breadcrumb, seeAll, children, ti
         </h2>
 
         {seeAll && (
-          <Link href={seeAll}>
-            <a className="ml-auto cursor-pointer text-sm font-light uppercase text-gray-300 transition ease-in-out hover:text-white">
-              See All
-            </a>
+          <Link
+            href={seeAll}
+            className="ml-auto cursor-pointer text-sm font-light uppercase text-gray-300 transition ease-in-out hover:text-white"
+          >
+            See All
           </Link>
         )}
 

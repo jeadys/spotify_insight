@@ -1,9 +1,11 @@
+'use client'
+
 import { useEffect } from 'react'
 
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 export default function ScrollTop() {
-  const { pathname } = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     window.scrollTo(0, 0)

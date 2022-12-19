@@ -4,25 +4,24 @@
   "private": true,
   "dependencies": {
     "@heroicons/react": "^1.0.6",
-    "@tanstack/react-query": "^4.0.10",
-    "@tanstack/react-query-devtools": "^4.0.10",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^28.1.4",
-    "@types/node": "^18.0.0",
-    "@types/react": "^18.0.14",
-    "@types/react-dom": "^18.0.5",
-    "axios": "^0.27.2",
-    "dotenv": "^16.0.1",
-    "next": "^12.2.0",
+    "@tanstack/react-query": "^4.19.0",
+    "@tanstack/react-query-devtools": "^4.19.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.2.3",
+    "@types/node": "^18.11.10",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "axios": "^1.2.0",
+    "next": "^13.0.6",
     "next-auth": "^4.10.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-spotify-web-playback": "^0.10.0",
     "typescript": "^4.7.4",
-    "vercel": "^27.3.3",
-    "web-vitals": "^2.1.4"
+    "vercel": "^28.7.0",
+    "web-vitals": "^3.1.0"
   },
   "scripts": {
     "dev": "next dev",
@@ -45,13 +44,13 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
-    "autoprefixer": "^10.4.7",
+    "autoprefixer": "^10.4.13",
     "eslint": "^8.28.0",
-    "eslint-config-next": "^13.0.5",
+    "eslint-config-next": "^13.0.6",
     "eslint-plugin-import": "^2.26.0",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.19",
     "prettier": "^2.8.0",
     "prettier-plugin-tailwindcss": "^0.2.0",
-    "tailwindcss": "^3.1.4"
+    "tailwindcss": "^3.2.4"
   }
 }

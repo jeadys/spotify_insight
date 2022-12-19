@@ -1,10 +1,12 @@
+'use client'
+
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 import Search from './Search'
 
 export default function Navigation() {
-  const { pathname } = useRouter()
+  const pathname = usePathname()
 
   const items = [
     {
@@ -30,9 +32,7 @@ export default function Navigation() {
             pathname === item.link ? 'cursor-default underline decoration-sky-700' : 'hover: decoration-sky-900 hover:underline'
           }`}
         >
-          <Link href={item.link}>
-            <a>{item.title}</a>
-          </Link>
+          <Link href={item.link}>{item.title}</Link>
         </li>
       ))}
 
