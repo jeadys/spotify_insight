@@ -6,32 +6,36 @@ import Link from 'next/link'
 
 type Props = {
   title: string
-  breadcrumb?: string
   seeAll?: string
   children: React.ReactNode
   timeRange?: string
   setTimeRange?: Dispatch<SetStateAction<string>>
 }
 
-export default function SectionWrapper({ title, breadcrumb, seeAll, children, timeRange, setTimeRange }: Props) {
-  const timeRangeBtns = [
+export default function SectionWrapper({ title, seeAll, children, timeRange, setTimeRange }: Props) {
+  type TimeRangeProps = {
+    title: string
+    range: string
+  }[]
+
+  const timeRangeBtns: TimeRangeProps = [
     {
       title: 'This month',
-      range: 'short',
+      range: 'short_term',
     },
     {
       title: ' Last 6 months',
-      range: 'medium',
+      range: 'medium_term',
     },
     {
       title: 'All time',
-      range: 'long',
+      range: 'long_term',
     },
   ]
 
   return (
     <>
-      <div className="mb-5 flex">
+      <div className="my-5 flex">
         <h2 className="text-xl font-semibold text-white">
           {title && (
             <>
@@ -47,10 +51,7 @@ export default function SectionWrapper({ title, breadcrumb, seeAll, children, ti
         </h2>
 
         {seeAll && (
-          <Link
-            href={seeAll}
-            className="ml-auto cursor-pointer text-sm font-light uppercase text-gray-300 transition ease-in-out hover:text-white"
-          >
+          <Link href={seeAll} className="ml-auto text-sm font-light uppercase text-gray-300 transition ease-in-out hover:text-white">
             See All
           </Link>
         )}
@@ -58,17 +59,16 @@ export default function SectionWrapper({ title, breadcrumb, seeAll, children, ti
         {timeRange && setTimeRange && (
           <ul className="ml-auto flex flex-row justify-center gap-5 text-white">
             {timeRangeBtns.map((timeRangeBtn) => (
-              <li key={timeRangeBtn.range}>
-                <button
-                  className={`text-sm uppercase decoration-4 underline-offset-8  ${
-                    timeRange === timeRangeBtn.range
-                      ? 'cursor-default underline decoration-sky-700'
-                      : 'hover:underline hover:decoration-sky-900'
-                  }`}
-                  onClick={() => setTimeRange(timeRangeBtn.range)}
-                >
-                  {timeRangeBtn.title}
-                </button>
+              <li
+                key={timeRangeBtn.range}
+                className={`text-sm uppercase decoration-4 underline-offset-8  ${
+                  timeRange === timeRangeBtn.range
+                    ? 'cursor-default underline decoration-sky-700'
+                    : 'hover:underline hover:decoration-sky-900'
+                }`}
+                onClick={() => setTimeRange(timeRangeBtn.range)}
+              >
+                {timeRangeBtn.title}
               </li>
             ))}
           </ul>

@@ -1,33 +1,41 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
+import type { ArtistObjectFull } from 'spotify-api'
 
-import type { IUsersTopArtists } from '../../lib/interfaces/user-top-artists'
-import DiscoverButton from '../button/DiscoverButton'
-import { CardGrid, CardImage, CardInfo, CardItem, CardName } from '../card'
+import DiscoverButton from '@/components/button/DiscoverButton'
+import CardGrid from '@/components/card/CardGrid'
+import CardInfo from '@/components/card/CardInfo'
+import CardItem from '@/components/card/CardItem'
+import CardName from '@/components/card/CardName'
+import { formatFollowCount } from '@/lib/utils'
 
-export default function ArtistGrid({ items }: IUsersTopArtists) {
+export default function ArtistGrid({ artists }: { artists: ArtistObjectFull[] }) {
   return (
     <>
-      {items && items.length ? (
+      {artists && artists.length ? (
         <>
           <ul>
             <CardGrid>
-              {items.map((artist) => (
+              {artists.map((artist) => (
                 <li key={artist.id}>
                   <Link href={`/artists/${artist.id}`}>
                     <CardItem>
-                      <CardImage
-                        image={artist.images.length && artist.images[2] ? artist.images[2].url : '/images/nocover.webp'}
+                      <Image
+                        src={artist.images.length && artist.images[2] ? artist.images[2].url : '/images/nocover.webp'}
                         alt={artist.name}
-                        rounded={true}
+                        width="0"
+                        height="0"
+                        sizes="100vw"
+                        className="mb-5 h-32 w-32 rounded-full object-cover"
                       />
                       <CardName name={artist.name} />
 
                       <CardInfo info={artist.genres[0] ? artist.genres[0] : 'N/A'} />
 
-                      <span className="mt-5 hidden rounded-full bg-cyan-100 px-2 py-1 text-xs font-medium sm:block">
-                        {artist.followers.total.toLocaleString()} {`follower${artist.followers.total !== 1 ? 's ' : ' '}`}
+                      <span className="mt-5 hidden rounded-md bg-cyan-100 px-2 py-1 text-xs font-medium sm:block">
+                        {formatFollowCount(artist.followers.total, 1)} followers
                       </span>
                     </CardItem>
                   </Link>
@@ -37,7 +45,7 @@ export default function ArtistGrid({ items }: IUsersTopArtists) {
           </ul>
         </>
       ) : (
-        <DiscoverButton titleMessage="No artists found" buttonMessage="Discover new artists" />
+        <DiscoverButton titleMessage="No artists found" buttonMessage="Discover new artists here" />
       )}
     </>
   )

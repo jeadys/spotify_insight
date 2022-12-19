@@ -1,17 +1,13 @@
 'use client'
 
-import React, { useContext, useState } from 'react'
+import { useContext, createContext, useState } from 'react'
 
 import { useSession } from 'next-auth/react'
 
-import TrackPlayer from './TrackPlayer'
+import TrackPlayer from '@/components/core/TrackPlayer'
 
-type ChooseTrackProps = {
-  chooseTrack: (tracks: string[], track: string) => void
-}
-
-const PlayTrackContext = React.createContext<string | undefined>(undefined)
-const ChooseTrackContext = React.createContext<ChooseTrackProps['chooseTrack']>({} as ChooseTrackProps['chooseTrack'])
+const PlayTrackContext = createContext<string | undefined>(undefined)
+const ChooseTrackContext = createContext((tracks: string[], track: string) => console.log(tracks, track))
 
 export const PlayTrack = () => {
   return useContext(PlayTrackContext)
@@ -25,12 +21,12 @@ type TrackProviderProps = {
   children: React.ReactNode
 }
 
-export const TrackProvider = ({ children }: TrackProviderProps) => {
+export default function PlayedTrackProvider({ children }: TrackProviderProps) {
   const { data: session } = useSession()
+  const rickRolling = 'spotify:track:4cOdK2wGLETKBW3PvgPWqT' // Easter egg troll
 
-  const [playingTrack, setPlayingTrack] = useState<string>('spotify:track:4cOdK2wGLETKBW3PvgPWqT')
-
-  const [trackQueue, setTrackQueue] = useState<string[]>(['spotify:track:4cOdK2wGLETKBW3PvgPWqT'])
+  const [playingTrack, setPlayingTrack] = useState(rickRolling)
+  const [trackQueue, setTrackQueue] = useState([rickRolling])
 
   const chooseTrack = (tracks: string[], track: string) => {
     setTrackQueue(tracks)
@@ -41,7 +37,7 @@ export const TrackProvider = ({ children }: TrackProviderProps) => {
     <PlayTrackContext.Provider value={playingTrack}>
       <ChooseTrackContext.Provider value={chooseTrack}>
         <TrackPlayer
-          token={session ? (session.accessToken as string) : undefined}
+          token={session ? session.accessToken : undefined}
           trackQueue={trackQueue}
           trackOffset={playingTrack}
           setPlayingTrack={setPlayingTrack}
@@ -51,5 +47,3 @@ export const TrackProvider = ({ children }: TrackProviderProps) => {
     </PlayTrackContext.Provider>
   )
 }
-
-export default TrackProvider
