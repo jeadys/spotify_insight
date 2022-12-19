@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/pages/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/app/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       screens: {
@@ -19,9 +19,6 @@ module.exports = {
       fontFamily: {
         'maven': 'Maven Pro',
       },
-      backgroundImage: (theme) => ({
-        login: "url('/public/images/login.jpg')",
-      }),
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(-20deg)' },
