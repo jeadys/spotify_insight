@@ -1,7 +1,6 @@
 'use client'
 
 import type { ReactElement } from 'react'
-import React from 'react'
 
 type Props = {
   amount: number
@@ -23,7 +22,7 @@ export default function TrackGridSkeleton({ amount }: Props) {
 
   return (
     <div className="w-full">
-      <div className="mb-10 h-8 w-44 animate-pulse rounded-md bg-gray-800"></div>
+      <div className="my-6 h-8 w-44 animate-pulse rounded-md bg-gray-800"></div>
       <div className="">{tracks}</div>
     </div>
   )

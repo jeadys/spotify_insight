@@ -24,7 +24,7 @@ export default function ArtistGridSkeleton({ amount }: Props) {
 
   return (
     <div className="animate-pulse">
-      <div className="mb-10 h-8 w-44 rounded-md bg-gray-800"></div>
+      <div className="my-6 h-8 w-44 rounded-md bg-gray-800"></div>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 5xl:grid-cols-6 6xl:grid-cols-6">
         {artists}
       </div>

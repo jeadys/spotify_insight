@@ -1,8 +1,6 @@
 'use client'
 
-import React from 'react'
-
-export default function TrackHeaderSkeleton() {
+export default function AlbumHeaderSkeleton() {
   return (
     <div className="mt-5 animate-pulse">
       <div className="mx-auto h-80 w-80 bg-gray-800"></div>
@@ -11,7 +9,7 @@ export default function TrackHeaderSkeleton() {
         <div className="h-12 w-44 rounded-md bg-gray-800"></div>
         <div className="h-4 w-44 rounded-md bg-gray-800"></div>
         <div className="h-4 w-44 rounded-md bg-gray-800"></div>
-        <div className="my-5 h-10 w-52 rounded-full bg-gray-800"></div>
+        <div className="h-4 w-44 rounded-md bg-gray-800"></div>
       </div>
     </div>
   )
