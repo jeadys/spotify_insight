@@ -1,38 +1,4 @@
 import { unstable_getServerSession } from 'next-auth'
-import type {
-  ArtistsAlbumsResponse,
-  ArtistsRelatedArtistsResponse,
-  ArtistsTopTracksResponse,
-  AudioAnalysisResponse,
-  AudioFeaturesResponse,
-  CategoryPlaylistsResponse,
-  CheckUserSavedAlbumsResponse,
-  CheckUsersSavedTracksResponse,
-  CurrentUsersProfileResponse,
-  FollowArtistsOrUsersResponse,
-  ListOfCurrentUsersPlaylistsResponse,
-  ListOfFeaturedPlaylistsResponse,
-  ListOfNewReleasesResponse,
-  MultipleCategoriesResponse,
-  PlaylistTrackObject,
-  RecommendationsFromSeedsResponse,
-  RemoveAlbumsForUserResponse,
-  RemoveUsersSavedTracksResponse,
-  SaveAlbumsForUserResponse,
-  SaveTracksForUserResponse,
-  SearchResponse,
-  SingleAlbumResponse,
-  SingleArtistResponse,
-  SinglePlaylistResponse,
-  SingleTrackResponse,
-  UnfollowArtistsOrUsersResponse,
-  UserFollowsUsersOrArtistsResponse,
-  UsersFollowedArtistsResponse,
-  UsersSavedAlbumsResponse,
-  UsersSavedTracksResponse,
-  UsersTopArtistsResponse,
-  UsersTopTracksResponse,
-} from 'spotify-api'
 
 import { authOptions } from '@/auth/[...nextauth]'
 
@@ -68,7 +34,7 @@ const fetchWrapper = async (url: string, method: FetchMethod) => {
   return response.json()
 }
 
-export const getCurrentUsersProfile = async (): Promise<CurrentUsersProfileResponse> => {
+export const getCurrentUsersProfile = async (): Promise<SpotifyApi.CurrentUsersProfileResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me`, 'GET')
 }
 
@@ -80,7 +46,7 @@ export const getCurrentUsersProfile = async (): Promise<CurrentUsersProfileRespo
  * @param {string} albumId
  * @returns {Promise}
  */
-export const getAlbumById = async (albumId: string): Promise<SingleAlbumResponse> => {
+export const getAlbumById = async (albumId: string): Promise<SpotifyApi.SingleAlbumResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/albums/${albumId}`, 'GET')
 }
 
@@ -92,7 +58,7 @@ export const getAlbumById = async (albumId: string): Promise<SingleAlbumResponse
  * @param {string} playlistId The Spotify ID for the playlist
  * @returns {Promise}
  */
-export const getPlaylistById = async (playlistId: string): Promise<SinglePlaylistResponse> => {
+export const getPlaylistById = async (playlistId: string): Promise<SpotifyApi.SinglePlaylistResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/playlists/${playlistId}`, 'GET')
 }
 
@@ -104,7 +70,7 @@ export const getPlaylistById = async (playlistId: string): Promise<SinglePlaylis
  * @param {string} artistId
  * @returns {Promise}
  */
-export const getArtistById = async (artistId: string): Promise<SingleArtistResponse> => {
+export const getArtistById = async (artistId: string): Promise<SpotifyApi.SingleArtistResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/artists/${artistId}`, 'GET')
 }
 
@@ -116,7 +82,7 @@ export const getArtistById = async (artistId: string): Promise<SingleArtistRespo
  * @param {string} artistId
  * @returns {Promise}
  */
-export const getArtistTopTracks = async (artistId: string): Promise<ArtistsTopTracksResponse> => {
+export const getArtistTopTracks = async (artistId: string): Promise<SpotifyApi.ArtistsTopTracksResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`, 'GET')
 }
 
@@ -129,7 +95,7 @@ export const getArtistTopTracks = async (artistId: string): Promise<ArtistsTopTr
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getArtistAlbums = async (artistId: string, limit: number): Promise<ArtistsAlbumsResponse> => {
+export const getArtistAlbums = async (artistId: string, limit: number): Promise<SpotifyApi.ArtistsAlbumsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/artists/${artistId}/albums?market=US&limit=${limit}`, 'GET')
 }
 
@@ -141,7 +107,7 @@ export const getArtistAlbums = async (artistId: string, limit: number): Promise<
  * @param {string} artistId The Spotify ID for the artist
  * @returns {Promise}
  */
-export const getArtistRelatedArtists = async (artistId: string): Promise<ArtistsRelatedArtistsResponse> => {
+export const getArtistRelatedArtists = async (artistId: string): Promise<SpotifyApi.ArtistsRelatedArtistsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/artists/${artistId}/related-artists`, 'GET')
 }
 
@@ -152,7 +118,7 @@ export const getArtistRelatedArtists = async (artistId: string): Promise<Artists
  * https://developer.spotify.com/web-api/get-list-new-releases/
  * @returns {Promise}
  */
-export const getNewReleases = async (limit: number): Promise<ListOfNewReleasesResponse> => {
+export const getNewReleases = async (limit: number): Promise<SpotifyApi.ListOfNewReleasesResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/browse/new-releases?limit=${limit}`, 'GET')
 }
 
@@ -164,7 +130,7 @@ export const getNewReleases = async (limit: number): Promise<ListOfNewReleasesRe
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getFeaturedPlaylists = async (limit: number): Promise<ListOfFeaturedPlaylistsResponse> => {
+export const getFeaturedPlaylists = async (limit: number): Promise<SpotifyApi.ListOfFeaturedPlaylistsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/browse/featured-playlists?limit=${limit}`, 'GET')
 }
 
@@ -176,7 +142,7 @@ export const getFeaturedPlaylists = async (limit: number): Promise<ListOfFeature
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getCategories = async (limit: number): Promise<MultipleCategoriesResponse> => {
+export const getCategories = async (limit: number): Promise<SpotifyApi.MultipleCategoriesResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/browse/categories?limit=${limit}`, 'GET')
 }
 
@@ -188,7 +154,7 @@ export const getCategories = async (limit: number): Promise<MultipleCategoriesRe
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getCategoryPlaylists = async (categoryId: string, limit: number): Promise<CategoryPlaylistsResponse> => {
+export const getCategoryPlaylists = async (categoryId: string, limit: number): Promise<SpotifyApi.CategoryPlaylistsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/browse/categories/${categoryId}/playlists/?limit=${limit}`, 'GET')
 }
 
@@ -201,7 +167,7 @@ export const getCategoryPlaylists = async (categoryId: string, limit: number): P
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getTopArtists = async (timeRange: string, limit: number): Promise<UsersTopArtistsResponse> => {
+export const getTopArtists = async (timeRange: string, limit: number): Promise<SpotifyApi.UsersTopArtistsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=${limit}`, 'GET')
 }
 
@@ -214,7 +180,7 @@ export const getTopArtists = async (timeRange: string, limit: number): Promise<U
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getTopTracks = async (timeRange: string, limit: number): Promise<UsersTopTracksResponse> => {
+export const getTopTracks = async (timeRange: string, limit: number): Promise<SpotifyApi.UsersTopTracksResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`, 'GET')
 }
 
@@ -226,7 +192,7 @@ export const getTopTracks = async (timeRange: string, limit: number): Promise<Us
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getCurrentUserSavedTracks = async (limit: number): Promise<UsersSavedTracksResponse> => {
+export const getCurrentUserSavedTracks = async (limit: number): Promise<SpotifyApi.UsersSavedTracksResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/tracks?limit=${limit}`, 'GET')
 }
 
@@ -238,7 +204,7 @@ export const getCurrentUserSavedTracks = async (limit: number): Promise<UsersSav
  * @param {string} trackIds A comma-separated list of the Spotify IDs for the tracks
  * @returns {Promise}
  */
-export const getDoesUserHaveTrackSaved = async (trackIds: string): Promise<CheckUsersSavedTracksResponse> => {
+export const getDoesUserHaveTrackSaved = async (trackIds: string): Promise<SpotifyApi.CheckUsersSavedTracksResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/tracks/contains?ids=${trackIds}`, 'GET')
 }
 
@@ -250,7 +216,7 @@ export const getDoesUserHaveTrackSaved = async (trackIds: string): Promise<Check
  * @param {string} trackIds A comma-separated list of the Spotify IDs for the tracks
  * @returns {Promise}
  */
-export const saveTrackForCurrentUser = async (trackIds: string): Promise<SaveTracksForUserResponse> => {
+export const saveTrackForCurrentUser = async (trackIds: string): Promise<SpotifyApi.SaveTracksForUserResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/tracks?ids=${trackIds}`, 'PUT')
 }
 
@@ -262,7 +228,7 @@ export const saveTrackForCurrentUser = async (trackIds: string): Promise<SaveTra
  * @param {string} trackIds A comma-separated list of the Spotify IDs for the tracks
  * @returns {Promise}
  */
-export const removeTrackForCurrentUser = async (trackIds: string): Promise<RemoveUsersSavedTracksResponse> => {
+export const removeTrackForCurrentUser = async (trackIds: string): Promise<SpotifyApi.RemoveUsersSavedTracksResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/tracks?ids=${trackIds}`, 'DELETE')
 }
 
@@ -274,7 +240,7 @@ export const removeTrackForCurrentUser = async (trackIds: string): Promise<Remov
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getCurrentUserFollowedArtists = async (limit: number): Promise<UsersFollowedArtistsResponse> => {
+export const getCurrentUserFollowedArtists = async (limit: number): Promise<SpotifyApi.UsersFollowedArtistsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/following?type=artist&limit=${limit}`, 'GET')
 }
 
@@ -286,7 +252,7 @@ export const getCurrentUserFollowedArtists = async (limit: number): Promise<User
  * @param {string} artistIds A comma-separated list of the Spotify IDs for the artists
  * @returns {Promise}
  */
-export const getDoesUserFollowArtist = async (artistIds: string): Promise<UserFollowsUsersOrArtistsResponse> => {
+export const getDoesUserFollowArtist = async (artistIds: string): Promise<SpotifyApi.UserFollowsUsersOrArtistsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/following/contains?type=artist&ids=${artistIds}`, 'GET')
 }
 
@@ -298,7 +264,7 @@ export const getDoesUserFollowArtist = async (artistIds: string): Promise<UserFo
  * @param {string} artistIds A comma-separated list of the Spotify IDs for the artists
  * @returns {Promise}
  */
-export const followArtistForCurrentUser = async (artistIds: string): Promise<FollowArtistsOrUsersResponse> => {
+export const followArtistForCurrentUser = async (artistIds: string): Promise<SpotifyApi.FollowArtistsOrUsersResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/following?type=artist&ids=${artistIds}`, 'PUT')
 }
 
@@ -310,7 +276,7 @@ export const followArtistForCurrentUser = async (artistIds: string): Promise<Fol
  * @param {string} artistIds A comma-separated list of the Spotify IDs for the artists
  * @returns {Promise}
  */
-export const unfollowArtistForCurrentUser = async (artistIds: string): Promise<UnfollowArtistsOrUsersResponse> => {
+export const unfollowArtistForCurrentUser = async (artistIds: string): Promise<SpotifyApi.UnfollowArtistsOrUsersResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/following?type=artist&ids=${artistIds}`, 'DELETE')
 }
 
@@ -322,7 +288,7 @@ export const unfollowArtistForCurrentUser = async (artistIds: string): Promise<U
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getCurrentUserSavedAlbums = async (limit: number): Promise<UsersSavedAlbumsResponse> => {
+export const getCurrentUserSavedAlbums = async (limit: number): Promise<SpotifyApi.UsersSavedAlbumsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/albums?limit=${limit}`, 'GET')
 }
 
@@ -334,7 +300,7 @@ export const getCurrentUserSavedAlbums = async (limit: number): Promise<UsersSav
  * @param {string} albumIds A comma-separated list of the Spotify IDs for the albums
  * @returns {Promise}
  */
-export const getDoesUserHaveAlbumSaved = async (albumIds: string): Promise<CheckUserSavedAlbumsResponse> => {
+export const getDoesUserHaveAlbumSaved = async (albumIds: string): Promise<SpotifyApi.CheckUserSavedAlbumsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/albums/contains?ids=${albumIds}`, 'GET')
 }
 
@@ -346,7 +312,7 @@ export const getDoesUserHaveAlbumSaved = async (albumIds: string): Promise<Check
  * @param {string} albumIds A comma-separated list of the Spotify IDs for the albums
  * @returns {Promise}
  */
-export const saveAlbumForCurrentUser = async (albumIds: string): Promise<SaveAlbumsForUserResponse> => {
+export const saveAlbumForCurrentUser = async (albumIds: string): Promise<SpotifyApi.SaveAlbumsForUserResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/albums?ids=${albumIds}`, 'PUT')
 }
 
@@ -358,7 +324,7 @@ export const saveAlbumForCurrentUser = async (albumIds: string): Promise<SaveAlb
  * @param {string} albumIds A comma-separated list of the Spotify IDs for the albums
  * @returns {Promise}
  */
-export const removeAlbumForCurrentUser = async (albumIds: string): Promise<RemoveAlbumsForUserResponse> => {
+export const removeAlbumForCurrentUser = async (albumIds: string): Promise<SpotifyApi.RemoveAlbumsForUserResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/albums?ids=${albumIds}`, 'DELETE')
 }
 
@@ -370,14 +336,14 @@ export const removeAlbumForCurrentUser = async (albumIds: string): Promise<Remov
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getCurrentUserSavedPlaylists = async (limit: number): Promise<ListOfCurrentUsersPlaylistsResponse> => {
+export const getCurrentUserSavedPlaylists = async (limit: number): Promise<SpotifyApi.ListOfCurrentUsersPlaylistsResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/me/playlists?limit=${limit}`, 'GET')
 }
 
 /**
  * Return a comma separated string of track IDs from the given array of tracks
  */
-export const getTrackIds = (tracks: PlaylistTrackObject[]) => tracks.map(({ track }) => track.id).join(',')
+export const getTrackIds = (tracks: SpotifyApi.PlaylistTrackObject[]) => tracks.map(({ track }) => track.id).join(',')
 
 /**
  * Get recommendations based on seeds
@@ -389,9 +355,9 @@ export const getTrackIds = (tracks: PlaylistTrackObject[]) => tracks.map(({ trac
  * @returns {Promise}
  */
 export const getRecommendationsForTracks = async (
-  tracks: PlaylistTrackObject[],
+  tracks: SpotifyApi.PlaylistTrackObject[],
   limit: number
-): Promise<RecommendationsFromSeedsResponse> => {
+): Promise<SpotifyApi.RecommendationsFromSeedsResponse> => {
   const shuffledTracks = tracks.sort(() => 0.5 - Math.random())
   const seedTracks = shuffledTracks
     .slice(0, 5)
@@ -415,7 +381,7 @@ export const getRecommendationsForTracks = async (
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
-export const getSearchItems = async (query: string, limit: number): Promise<SearchResponse> => {
+export const getSearchItems = async (query: string, limit: number): Promise<SpotifyApi.SearchResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/search?q=${query}&type=artist,album,track&limit=${limit}`, 'GET')
 }
 
@@ -427,7 +393,7 @@ export const getSearchItems = async (query: string, limit: number): Promise<Sear
  * @param {string} trackId The Spotify ID for the track.
  * @returns {Promise}
  */
-export const getTrackById = async (trackId: string): Promise<SingleTrackResponse> => {
+export const getTrackById = async (trackId: string): Promise<SpotifyApi.SingleTrackResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/tracks/${trackId}`, 'GET')
 }
 
@@ -439,7 +405,7 @@ export const getTrackById = async (trackId: string): Promise<SingleTrackResponse
  * @param {string} trackId The Spotify ID for the track.
  * @returns {Promise}
  */
-export const getAudioFeaturesForTrack = async (trackId: string): Promise<AudioFeaturesResponse> => {
+export const getAudioFeaturesForTrack = async (trackId: string): Promise<SpotifyApi.AudioFeaturesResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/audio-features/${trackId}`, 'GET')
 }
 
@@ -454,6 +420,6 @@ export const getAudioFeaturesForTrack = async (trackId: string): Promise<AudioFe
  * @param {string} trackId The Spotify ID for the track.
  * @returns {Promise}
  */
-export const getAudioAnalysisForTrack = async (trackId: string): Promise<AudioAnalysisResponse> => {
+export const getAudioAnalysisForTrack = async (trackId: string): Promise<SpotifyApi.AudioAnalysisResponse> => {
   return await fetchWrapper(`https://api.spotify.com/v1/audio-analysis/${trackId}`, 'GET')
 }

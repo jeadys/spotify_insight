@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import type { SingleAlbumResponse } from 'spotify-api'
 
 import BioTitle from '@/components/bio/BioTitle'
 import BioValue from '@/components/bio/BioValue'
@@ -9,7 +8,7 @@ import SaveAlbumButton from '@/components/button/SaveAlbumButton'
 import { getYear } from '@/lib/utils'
 
 type Props = {
-  album: SingleAlbumResponse
+  album: SpotifyApi.SingleAlbumResponse
   isAlbumSaved: boolean
 }
 

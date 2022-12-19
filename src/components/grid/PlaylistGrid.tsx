@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import type { PlaylistObjectSimplified } from 'spotify-api'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
 import CardGrid from '@/components/card/CardGrid'
@@ -10,7 +9,7 @@ import CardInfo from '@/components/card/CardInfo'
 import CardItem from '@/components/card/CardItem'
 import CardName from '@/components/card/CardName'
 
-export default function PlaylistGrid({ playlists }: { playlists: PlaylistObjectSimplified[] }) {
+export default function PlaylistGrid({ playlists }: { playlists: SpotifyApi.PlaylistObjectSimplified[] }) {
   return (
     <>
       {playlists && playlists.length ? (

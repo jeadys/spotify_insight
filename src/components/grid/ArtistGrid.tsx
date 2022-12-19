@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import type { ArtistObjectFull } from 'spotify-api'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
 import CardGrid from '@/components/card/CardGrid'
@@ -11,7 +10,7 @@ import CardItem from '@/components/card/CardItem'
 import CardName from '@/components/card/CardName'
 import { formatFollowCount } from '@/lib/utils'
 
-export default function ArtistGrid({ artists }: { artists: ArtistObjectFull[] }) {
+export default function ArtistGrid({ artists }: { artists: SpotifyApi.ArtistObjectFull[] }) {
   return (
     <>
       {artists && artists.length ? (

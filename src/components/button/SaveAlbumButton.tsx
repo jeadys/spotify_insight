@@ -4,7 +4,6 @@ import { useState } from 'react'
 
 import { HeartIcon } from '@heroicons/react/solid'
 import { getSession } from 'next-auth/react'
-import type { RemoveAlbumsForUserResponse, SaveAlbumsForUserResponse } from 'spotify-api'
 
 import ToolTip from '../core/ToolTip'
 
@@ -16,7 +15,7 @@ import ToolTip from '../core/ToolTip'
  * @param {string} albumId The Spotify ID for the album.
  * @returns {Promise}
  */
-export const saveAlbumForCurrentUser = async (albumId: string): Promise<SaveAlbumsForUserResponse | undefined> => {
+export const saveAlbumForCurrentUser = async (albumId: string): Promise<SpotifyApi.SaveAlbumsForUserResponse | undefined> => {
   const session = await getSession()
   if (!session) return undefined
 
@@ -37,7 +36,7 @@ export const saveAlbumForCurrentUser = async (albumId: string): Promise<SaveAlbu
  * @param {string} albumId The Spotify ID for the album.
  * @returns {Promise}
  */
-export const removeAlbumForCurrentUser = async (albumId: string): Promise<RemoveAlbumsForUserResponse | undefined> => {
+export const removeAlbumForCurrentUser = async (albumId: string): Promise<SpotifyApi.RemoveAlbumsForUserResponse | undefined> => {
   const session = await getSession()
   if (!session) return undefined
 

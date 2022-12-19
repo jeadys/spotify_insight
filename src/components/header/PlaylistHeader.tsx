@@ -2,10 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import type { SinglePlaylistResponse } from 'spotify-api'
 
 type Props = {
-  playlist: SinglePlaylistResponse
+  playlist: SpotifyApi.SinglePlaylistResponse
 }
 
 export default function PlaylistHeader({ playlist }: Props) {

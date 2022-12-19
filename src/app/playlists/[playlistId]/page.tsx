@@ -8,7 +8,12 @@ import { getDoesUserHaveTrackSaved, getPlaylistById } from '@/server/api'
 export default async function Playlist({ params }: { params: { playlistId: string } }) {
   const playlist = await getPlaylistById(params.playlistId)
   const playlistTracks = playlist.tracks.items.slice(0, 50).map(({ track }) => track)
-  const isTrackSaved = await getDoesUserHaveTrackSaved(playlistTracks.map((track) => track.id).join(''))
+  const isTrackSaved = await getDoesUserHaveTrackSaved(
+    playlist.tracks.items
+      .slice(0, 50)
+      .map(({ track }) => track)
+      .join(',')
+  )
 
   return (
     <>

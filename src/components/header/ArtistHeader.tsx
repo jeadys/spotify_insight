@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image'
-import type { SingleArtistResponse } from 'spotify-api'
 
 import BioTitle from '@/components/bio/BioTitle'
 import BioValue from '@/components/bio/BioValue'
@@ -9,7 +8,7 @@ import FollowArtistButton from '@/components/button/FollowArtistButton'
 import { formatFollowCount } from '@/lib/utils'
 
 type Props = {
-  artist: SingleArtistResponse
+  artist: SpotifyApi.SingleArtistResponse
   isArtistFollowed: boolean
 }
 

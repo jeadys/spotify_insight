@@ -3,9 +3,8 @@
 import { useState } from 'react'
 
 import { getSession } from 'next-auth/react'
-import type { FollowArtistsOrUsersResponse, UnfollowArtistsOrUsersResponse } from 'spotify-api'
 
-const followArtistForCurrentUser = async (artistId: string): Promise<FollowArtistsOrUsersResponse | undefined> => {
+const followArtistForCurrentUser = async (artistId: string): Promise<SpotifyApi.FollowArtistsOrUsersResponse | undefined> => {
   const session = await getSession()
   if (!session) return undefined
 
@@ -18,7 +17,7 @@ const followArtistForCurrentUser = async (artistId: string): Promise<FollowArtis
   })
 }
 
-const unfollowArtistForCurrentUser = async (artistId: string): Promise<UnfollowArtistsOrUsersResponse | undefined> => {
+const unfollowArtistForCurrentUser = async (artistId: string): Promise<SpotifyApi.UnfollowArtistsOrUsersResponse | undefined> => {
   const session = await getSession()
   if (!session) return undefined
 

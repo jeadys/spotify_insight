@@ -2,11 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import type { CategoryObject } from 'spotify-api'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
 
-export default function CategoryGrid({ categories }: { categories: CategoryObject[] }) {
+export default function CategoryGrid({ categories }: { categories: SpotifyApi.CategoryObject[] }) {
   return (
     <>
       {categories && categories.length ? (

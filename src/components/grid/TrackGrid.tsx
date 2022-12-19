@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import type { TrackObjectSimplified } from 'spotify-api'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
 import SaveTrackButton from '@/components/button/SaveTrackButton'
@@ -13,7 +12,7 @@ import { formatTrackDuration, stopProp } from '@/lib/utils'
 import { ChooseTrack, PlayTrack } from '@/providers/PlayedTrackProvider'
 
 type Props = {
-  tracks: TrackObjectSimplified[]
+  tracks: SpotifyApi.TrackObjectSimplified[]
   isTrackSaved: boolean[]
 }
 
