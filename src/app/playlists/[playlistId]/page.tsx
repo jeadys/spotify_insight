@@ -5,15 +5,23 @@ import PlaylistHeaderSkeleton from '@/components/skeleton/PlaylistHeaderSkeleton
 import TrackGridSkeleton from '@/components/skeleton/TrackGridSkeleton'
 import { getDoesUserHaveTrackSaved, getPlaylistById } from '@/server/api'
 
+type PlaylistAccumulator = {
+  tracks: SpotifyApi.TrackObjectFull[]
+  trackIds: string[]
+}
+
 export default async function Playlist({ params }: { params: { playlistId: string } }) {
   const playlist = await getPlaylistById(params.playlistId)
-  const playlistTracks = playlist.tracks.items.slice(0, 50).map(({ track }) => track)
-  const isTrackSaved = await getDoesUserHaveTrackSaved(
-    playlist.tracks.items
-      .slice(0, 50)
-      .map(({ track }) => track)
-      .join(',')
+
+  const playlistTracks = playlist.tracks.items.slice(0, 50).reduce<PlaylistAccumulator>(
+    (accumulator, { track }) => {
+      accumulator.tracks.push(track)
+      accumulator.trackIds.push(track.id)
+      return accumulator
+    },
+    { tracks: [], trackIds: [] }
   )
+  const isTrackSaved = await getDoesUserHaveTrackSaved(playlistTracks.trackIds.join(','))
 
   return (
     <>
@@ -25,7 +33,7 @@ export default async function Playlist({ params }: { params: { playlistId: strin
             </div>
             <div className="flex-grow">
               <SectionWrapper title="Playlist tracks">
-                <TrackGrid tracks={playlistTracks} isTrackSaved={isTrackSaved} />
+                <TrackGrid tracks={playlistTracks.tracks} isTrackSaved={isTrackSaved} />
               </SectionWrapper>
             </div>
           </div>
