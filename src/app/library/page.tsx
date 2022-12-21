@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import AlbumGrid from '@/components/grid/AlbumGrid'
 import ArtistGrid from '@/components/grid/ArtistGrid'
@@ -19,35 +21,33 @@ export default async function Library() {
   const savedAlbums = await getCurrentUserSavedAlbums(6)
   const savedTracks = await getCurrentUserSavedTracks(6)
   const followedArtists = await getCurrentUserFollowedArtists(6)
+  const isTrackSaved: boolean[] = Array(50).fill(true)
 
   return (
     <>
-      {savedPlaylists && savedAlbums && savedTracks && followedArtists ? (
-        <>
-          <SectionWrapper title="Saved playlists" seeAll="/library/saved-playlists">
-            <PlaylistGrid playlists={savedPlaylists.items} />
-          </SectionWrapper>
+      <Suspense fallback={<PlaylistGridSkeleton amount={6} />}>
+        <SectionWrapper title="Saved playlists" seeAll="/library/saved-playlists">
+          <PlaylistGrid playlists={savedPlaylists.items} />
+        </SectionWrapper>
+      </Suspense>
 
-          <SectionWrapper title="Saved albums" seeAll="/library/saved-albums">
-            <AlbumGrid albums={savedAlbums.items.map(({ album }) => album)} />
-          </SectionWrapper>
+      <Suspense fallback={<AlbumGridSkeleton amount={6} />}>
+        <SectionWrapper title="Saved albums" seeAll="/library/saved-albums">
+          <AlbumGrid albums={savedAlbums.items.map(({ album }) => album)} />
+        </SectionWrapper>
+      </Suspense>
 
-          <SectionWrapper title="Saved tracks" seeAll="/library/saved-tracks">
-            <TrackGrid tracks={savedTracks.items.map(({ track }) => track)} isTrackSaved={savedTracks.items.map(() => true)} />
-          </SectionWrapper>
+      <Suspense fallback={<TrackGridSkeleton amount={6} />}>
+        <SectionWrapper title="Saved tracks" seeAll="/library/saved-tracks">
+          <TrackGrid tracks={savedTracks.items.map(({ track }) => track)} isTrackSaved={isTrackSaved} />
+        </SectionWrapper>
+      </Suspense>
 
-          <SectionWrapper title="Followed artists" seeAll="/library/followed-artists">
-            <ArtistGrid artists={followedArtists.artists.items} />
-          </SectionWrapper>
-        </>
-      ) : (
-        <>
-          <PlaylistGridSkeleton amount={6} />
-          <AlbumGridSkeleton amount={6} />
-          <TrackGridSkeleton amount={6} />
-          <ArtistGridSkeleton amount={6} />
-        </>
-      )}
+      <Suspense fallback={<ArtistGridSkeleton amount={6} />}>
+        <SectionWrapper title="Followed artists" seeAll="/library/followed-artists">
+          <ArtistGrid artists={followedArtists.artists.items} />
+        </SectionWrapper>
+      </Suspense>
     </>
   )
 }

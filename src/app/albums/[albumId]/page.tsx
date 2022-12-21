@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import TrackGrid from '@/components/grid/TrackGrid'
 import AlbumHeader from '@/components/header/AlbumHeader'
@@ -25,32 +27,19 @@ export default async function Album({ params }: { params: { albumId: string } })
   const isTrackSaved = await getDoesUserHaveTrackSaved(albumTracks.trackIds.join(','))
 
   return (
-    <>
-      {album ? (
-        <>
-          <div className="flex flex-wrap lg:space-x-10">
-            <div className="basis-full text-center xl:sticky xl:top-0 xl:basis-1/4 xl:self-start">
-              <AlbumHeader album={album} isAlbumSaved={isAlbumSaved[0]} />
-            </div>
-            <div className="flex-grow">
-              <SectionWrapper title="Album tracks">
-                <TrackGrid tracks={albumTracks.tracks} isTrackSaved={isTrackSaved} />
-              </SectionWrapper>
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="flex flex-wrap lg:space-x-10">
-            <div className="basis-full text-center xl:sticky xl:top-0 xl:basis-1/4 xl:self-start">
-              <AlbumHeaderSkeleton />
-            </div>
-            <div className="flex-grow">
-              <TrackGridSkeleton amount={50} />
-            </div>
-          </div>
-        </>
-      )}
-    </>
+    <div className="flex flex-wrap lg:space-x-10">
+      <div className="basis-full text-center xl:sticky xl:top-0 xl:basis-1/4 xl:self-start">
+        <Suspense fallback={<AlbumHeaderSkeleton />}>
+          <AlbumHeader album={album} isAlbumSaved={isAlbumSaved[0]} />
+        </Suspense>
+      </div>
+      <div className="flex-grow">
+        <Suspense fallback={<TrackGridSkeleton amount={50} />}>
+          <SectionWrapper title="Album tracks">
+            <TrackGrid tracks={albumTracks.tracks} isTrackSaved={isTrackSaved} />
+          </SectionWrapper>
+        </Suspense>
+      </div>
+    </div>
   )
 }

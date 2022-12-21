@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import ArtistGrid from '@/components/grid/ArtistGrid'
 import ArtistGridSkeleton from '@/components/skeleton/ArtistGridSkeleton'
@@ -7,16 +9,10 @@ export default async function FollowedArtists() {
   const followedArtists = await getCurrentUserFollowedArtists(50)
 
   return (
-    <>
-      {followedArtists ? (
-        <>
-          <SectionWrapper title="Followed artists">
-            <ArtistGrid artists={followedArtists.artists.items} />
-          </SectionWrapper>
-        </>
-      ) : (
-        <ArtistGridSkeleton amount={50} />
-      )}
-    </>
+    <Suspense fallback={<ArtistGridSkeleton amount={50} />}>
+      <SectionWrapper title="Followed artists">
+        <ArtistGrid artists={followedArtists.artists.items} />
+      </SectionWrapper>
+    </Suspense>
   )
 }

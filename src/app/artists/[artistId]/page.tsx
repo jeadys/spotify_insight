@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import AlbumGrid from '@/components/grid/AlbumGrid'
 import ArtistGrid from '@/components/grid/ArtistGrid'
@@ -26,29 +28,27 @@ export default async function Artist({ params }: { params: { artistId: string } 
 
   return (
     <>
-      {artist && artistTopTracks && artistAlbums && artistRelatedArtists ? (
-        <>
-          <ArtistHeader artist={artist} isArtistFollowed={isArtistFollowed[0]} />
-          <SectionWrapper title="Popular releases">
-            <TrackGrid tracks={artistTopTracks.tracks} isTrackSaved={isTrackSaved} />
-          </SectionWrapper>
+      <Suspense fallback={<ArtistHeaderSkeleton />}>
+        <ArtistHeader artist={artist} isArtistFollowed={isArtistFollowed[0]} />
+      </Suspense>
 
-          <SectionWrapper title="Popular albums" seeAll={`/artists/${params.artistId}/related-albums`}>
-            <AlbumGrid albums={artistAlbums.items} />
-          </SectionWrapper>
+      <Suspense fallback={<TrackGridSkeleton amount={10} />}>
+        <SectionWrapper title="Popular releases">
+          <TrackGrid tracks={artistTopTracks.tracks} isTrackSaved={isTrackSaved} />
+        </SectionWrapper>
+      </Suspense>
 
-          <SectionWrapper title="Fans also like" seeAll={`/artists/${params.artistId}/related-artists`}>
-            <ArtistGrid artists={artistRelatedArtists.artists.slice(0, 6)} />
-          </SectionWrapper>
-        </>
-      ) : (
-        <>
-          <ArtistHeaderSkeleton />
-          <TrackGridSkeleton amount={12} />
-          <AlbumGridSkeleton amount={6} />
-          <ArtistGridSkeleton amount={6} />
-        </>
-      )}
+      <Suspense fallback={<AlbumGridSkeleton amount={6} />}>
+        <SectionWrapper title="Popular albums" seeAll={`/artists/${params.artistId}/related-albums`}>
+          <AlbumGrid albums={artistAlbums.items} />
+        </SectionWrapper>
+      </Suspense>
+
+      <Suspense fallback={<ArtistGridSkeleton amount={6} />}>
+        <SectionWrapper title="Fans also like" seeAll={`/artists/${params.artistId}/related-artists`}>
+          <ArtistGrid artists={artistRelatedArtists.artists.slice(0, 6)} />
+        </SectionWrapper>
+      </Suspense>
     </>
   )
 }

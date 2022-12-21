@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import PlaylistGrid from '@/components/grid/PlaylistGrid'
 import PlaylistGridSkeleton from '@/components/skeleton/PlaylistGridSkeleton'
@@ -7,16 +9,10 @@ export default async function Category({ params }: { params: { categoryId: strin
   const categoryPlaylist = await getCategoryPlaylists(params.categoryId, 50)
 
   return (
-    <>
-      {categoryPlaylist ? (
-        <>
-          <SectionWrapper title="Playlists">
-            <PlaylistGrid playlists={categoryPlaylist.playlists.items} />
-          </SectionWrapper>
-        </>
-      ) : (
-        <PlaylistGridSkeleton amount={50} />
-      )}
-    </>
+    <Suspense fallback={<PlaylistGridSkeleton amount={50} />}>
+      <SectionWrapper title="Playlists">
+        <PlaylistGrid playlists={categoryPlaylist.playlists.items} />
+      </SectionWrapper>
+    </Suspense>
   )
 }

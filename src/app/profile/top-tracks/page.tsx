@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import TrackGrid from '@/components/grid/TrackGrid'
 import TrackGridSkeleton from '@/components/skeleton/TrackGridSkeleton'
@@ -8,16 +10,10 @@ export default async function TopTracks() {
   const isTrackSaved = await getDoesUserHaveTrackSaved(topTracks.items.map((track) => track.id).join(','))
 
   return (
-    <>
-      {topTracks ? (
-        <>
-          <SectionWrapper title="Top tracks" timeRange={'short'}>
-            <TrackGrid tracks={topTracks.items} isTrackSaved={isTrackSaved} />
-          </SectionWrapper>
-        </>
-      ) : (
-        <TrackGridSkeleton amount={50} />
-      )}
-    </>
+    <Suspense fallback={<TrackGridSkeleton amount={50} />}>
+      <SectionWrapper title="Top tracks" timeRange={'short'}>
+        <TrackGrid tracks={topTracks.items} isTrackSaved={isTrackSaved} />
+      </SectionWrapper>
+    </Suspense>
   )
 }

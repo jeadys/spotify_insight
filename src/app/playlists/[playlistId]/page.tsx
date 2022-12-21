@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import TrackGrid from '@/components/grid/TrackGrid'
 import PlaylistHeader from '@/components/header/PlaylistHeader'
@@ -24,32 +26,19 @@ export default async function Playlist({ params }: { params: { playlistId: strin
   const isTrackSaved = await getDoesUserHaveTrackSaved(playlistTracks.trackIds.join(','))
 
   return (
-    <>
-      {playlist ? (
-        <>
-          <div className="flex flex-wrap lg:space-x-10">
-            <div className="basis-full text-center xl:sticky xl:top-0 xl:basis-1/4 xl:self-start">
-              <PlaylistHeader playlist={playlist} />
-            </div>
-            <div className="flex-grow">
-              <SectionWrapper title="Playlist tracks">
-                <TrackGrid tracks={playlistTracks.tracks} isTrackSaved={isTrackSaved} />
-              </SectionWrapper>
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="flex flex-wrap lg:space-x-10">
-            <div className="basis-full text-center xl:sticky xl:top-0 xl:basis-1/4 xl:self-start">
-              <PlaylistHeaderSkeleton />
-            </div>
-            <div className="flex-grow">
-              <TrackGridSkeleton amount={50} />
-            </div>
-          </div>
-        </>
-      )}
-    </>
+    <div className="flex flex-wrap lg:space-x-10">
+      <div className="basis-full text-center xl:sticky xl:top-0 xl:basis-1/4 xl:self-start">
+        <Suspense fallback={<PlaylistHeaderSkeleton />}>
+          <PlaylistHeader playlist={playlist} />
+        </Suspense>
+      </div>
+      <div className="flex-grow">
+        <Suspense fallback={<TrackGridSkeleton amount={50} />}>
+          <SectionWrapper title="Playlist tracks">
+            <TrackGrid tracks={playlistTracks.tracks} isTrackSaved={isTrackSaved} />
+          </SectionWrapper>
+        </Suspense>
+      </div>
+    </div>
   )
 }
