@@ -1,7 +1,10 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import AlbumGrid from '@/components/grid/AlbumGrid'
 import ArtistGrid from '@/components/grid/ArtistGrid'
 import TrackGrid from '@/components/grid/TrackGrid'
+import ArtistGridSkeleton from '@/components/skeleton/ArtistGridSkeleton'
 import { getDoesUserHaveTrackSaved, getSearchItems } from '@/server/api'
 
 export default async function SearchResult({ params }: { params: { searchTerm: string } }) {
@@ -11,12 +14,14 @@ export default async function SearchResult({ params }: { params: { searchTerm: s
   )
 
   return (
-    <ul>
-      {searchResult.artists && searchResult.albums && searchResult.tracks ? (
+    <>
+      {searchResult.artists && searchResult.albums && searchResult.tracks && (
         <>
-          <SectionWrapper title="Artists">
-            <ArtistGrid artists={searchResult.artists.items} />
-          </SectionWrapper>
+          <Suspense fallback={<ArtistGridSkeleton amount={50} />}>
+            <SectionWrapper title="Artists">
+              <ArtistGrid artists={searchResult.artists.items} />
+            </SectionWrapper>
+          </Suspense>
           <SectionWrapper title="Albums">
             <AlbumGrid albums={searchResult.albums.items} />
           </SectionWrapper>
@@ -24,11 +29,7 @@ export default async function SearchResult({ params }: { params: { searchTerm: s
             <TrackGrid tracks={searchResult.tracks.items} isTrackSaved={isTrackSaved} />
           </SectionWrapper>
         </>
-      ) : (
-        <>
-          <h1>LOADING...</h1>
-        </>
       )}
-    </ul>
+    </>
   )
 }

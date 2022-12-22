@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import CategoryGrid from '@/components/grid/CategoryGrid'
 import CategoryGridSkeleton from '@/components/skeleton/CategoryGridSkeleton'
@@ -7,16 +9,10 @@ export default async function Categories() {
   const categories = await getCategories(50)
 
   return (
-    <>
-      {categories ? (
-        <>
-          <SectionWrapper title="Categories">
-            <CategoryGrid categories={categories.categories.items} />
-          </SectionWrapper>
-        </>
-      ) : (
-        <CategoryGridSkeleton amount={50} />
-      )}
-    </>
+    <Suspense fallback={<CategoryGridSkeleton amount={50} />}>
+      <SectionWrapper title="Categories">
+        <CategoryGrid categories={categories.categories.items} />
+      </SectionWrapper>
+    </Suspense>
   )
 }

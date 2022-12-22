@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import SectionWrapper from '@/components/core/SectionWrapper'
 import ArtistGrid from '@/components/grid/ArtistGrid'
 import TrackGrid from '@/components/grid/TrackGrid'
@@ -12,21 +14,17 @@ export default async function page() {
 
   return (
     <>
-      {topArtists && topTracks ? (
-        <>
-          <SectionWrapper title="Top artists all time" seeAll="/profile/top-artists">
-            <ArtistGrid artists={topArtists.items} />
-          </SectionWrapper>
-          <SectionWrapper title="Top tracks all time" seeAll="/profile/top-tracks">
-            <TrackGrid tracks={topTracks.items} isTrackSaved={isTrackSaved} />
-          </SectionWrapper>
-        </>
-      ) : (
-        <>
-          <ArtistGridSkeleton amount={12} />
-          <TrackGridSkeleton amount={6} />
-        </>
-      )}
+      <Suspense fallback={<ArtistGridSkeleton amount={12} />}>
+        <SectionWrapper title="Top artists all time" seeAll="/profile/top-artists">
+          <ArtistGrid artists={topArtists.items} />
+        </SectionWrapper>
+      </Suspense>
+
+      <Suspense fallback={<TrackGridSkeleton amount={12} />}>
+        <SectionWrapper title="Top tracks all time" seeAll="/profile/top-tracks">
+          <TrackGrid tracks={topTracks.items} isTrackSaved={isTrackSaved} />
+        </SectionWrapper>
+      </Suspense>
     </>
   )
 }
