@@ -10,8 +10,8 @@ module.exports = {
         '6xl': '2280px',
         '7xl': '2560px',
         // Max values set to hide album and duration column in the track table
-        'album': { 'max': '800px' },
-        'duration': { 'max': '400px' },
+        'album': { 'max': '768px' },
+        'duration': { 'max': '440px' },
       },
       maxWidth: {
         '8xl': '90rem',
