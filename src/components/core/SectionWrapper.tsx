@@ -34,7 +34,7 @@ export default function SectionWrapper({ title, seeAll, children, timeRange, set
   ]
 
   return (
-    <>
+    <section>
       <div className="my-5 flex">
         <h2 className="text-xl font-semibold text-white">
           {title && (
@@ -75,6 +75,6 @@ export default function SectionWrapper({ title, seeAll, children, timeRange, set
         )}
       </div>
       {children}
-    </>
+    </section>
   )
 }

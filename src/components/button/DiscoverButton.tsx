@@ -9,11 +9,11 @@ type Props = {
 
 export default function DiscoverButton({ titleMessage, buttonMessage }: Props) {
   return (
-    <span className="flex flex-col items-center gap-5 text-white">
-      <span>{titleMessage}</span>
-      <Link href={`/discover`} className="text-xs text-gray-300 hover:underline">
+    <div className="flex flex-col items-center gap-5 text-white">
+      <h3>{titleMessage}</h3>
+      <Link href={`/discover`} className="text-sm text-gray-300 underline">
         {buttonMessage}
       </Link>
-    </span>
+    </div>
   )
 }

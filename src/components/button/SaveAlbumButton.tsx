@@ -68,11 +68,13 @@ export default function SaveAlbumButton({ albumId, isAlbumSaved }: Props) {
   }
 
   return (
-    <ToolTip tooltip={`${saveState ? 'Remove from library' : 'Save to library'}`}>
-      <HeartIcon
-        className={`${saveState ? 'text-green-500' : 'stroke-white text-transparent'} h-6 w-6 cursor-pointer`}
-        onClick={saveState ? remove : save}
-      />
-    </ToolTip>
+    <button>
+      <ToolTip tooltip={`${saveState ? 'Remove from library' : 'Save to library'}`}>
+        <HeartIcon
+          className={`${saveState ? 'text-green-500' : 'stroke-white text-transparent'} h-6 w-6 cursor-pointer`}
+          onClick={saveState ? remove : save}
+        />
+      </ToolTip>
+    </button>
   )
 }
