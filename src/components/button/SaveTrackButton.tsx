@@ -57,22 +57,26 @@ type Props = {
 export default function SaveTrackButton({ trackId, isTrackSaved }: Props) {
   const [saveState, setSaveState] = useState(isTrackSaved)
 
-  const save = async () => {
+  const save = async (event: React.MouseEvent<SVGSVGElement>) => {
+    event.stopPropagation()
     await saveTrackForCurrentUser(trackId)
     setSaveState(true)
   }
 
-  const remove = async () => {
+  const remove = async (event: React.MouseEvent<SVGSVGElement>) => {
+    event.stopPropagation()
     await removeTrackForCurrentUser(trackId)
     setSaveState(false)
   }
 
   return (
-    <ToolTip tooltip={`${saveState ? 'Remove from library' : 'Save to library'}`}>
-      <HeartIcon
-        className={`${saveState ? 'text-green-500' : 'stroke-white text-transparent'} h-6 w-6 cursor-pointer`}
-        onClick={saveState ? remove : save}
-      />
-    </ToolTip>
+    <button>
+      <ToolTip tooltip={`${saveState ? 'Remove from library' : 'Save to library'}`}>
+        <HeartIcon
+          className={`${saveState ? 'text-green-500' : 'stroke-white text-transparent'} h-6 w-6 cursor-pointer`}
+          onClick={saveState ? remove : save}
+        />
+      </ToolTip>
+    </button>
   )
 }

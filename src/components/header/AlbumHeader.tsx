@@ -14,7 +14,7 @@ type Props = {
 
 export default function AlbumHeader({ album, isAlbumSaved }: Props) {
   return (
-    <div className="mt-5">
+    <header className="mt-5">
       <Image
         src={album.images.length && album.images[0] ? album.images[0].url : '/images/nocover.webp'}
         alt={album.name}
@@ -25,21 +25,15 @@ export default function AlbumHeader({ album, isAlbumSaved }: Props) {
       />
 
       <div className="mx mt-5 flex flex-col items-center gap-y-2">
-        <div className="text-2xl font-black text-white md:text-4xl">{album.name}</div>
-
+        <span className="text-2xl font-black text-white md:text-4xl">{album.name}</span>
         <span className="text-sm text-slate-400">Released in {getYear(album.release_date)}</span>
+        <span className="text-sm font-semibold text-white">{album.tracks.total < 50 ? album.tracks.total : '50'} Tracks</span>
 
-        <div className="text-sm font-semibold text-white">{album.tracks.total < 50 ? album.tracks.total : '50'} Tracks</div>
+        <SaveAlbumButton albumId={album.id} isAlbumSaved={isAlbumSaved} />
 
-        <div className="h-5">
-          <SaveAlbumButton albumId={album.id} isAlbumSaved={isAlbumSaved} />
-        </div>
-
-        <div className="my-5">
-          <BioValue value={` ${album.popularity} %`} />
-          <BioTitle title="Popularity" />
-        </div>
+        <BioValue value={` ${album.popularity} %`} />
+        <BioTitle title="Popularity" />
       </div>
-    </div>
+    </header>
   )
 }

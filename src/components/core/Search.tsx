@@ -19,18 +19,13 @@ export default function Search() {
   }, [router, debouncedSearch])
 
   return (
-    <>
-      <input
-        type="text"
-        value={search}
-        placeholder="What do you want to listen to?"
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-72 border-b-2 border-b-cyan-700 bg-transparent text-white placeholder-gray-400 outline-none focus:border-b-cyan-800"
-        ref={inputRef}
-        role="combobox"
-        aria-expanded="false"
-        aria-controls="options"
-      />
-    </>
+    <input
+      type="search"
+      value={search}
+      ref={inputRef}
+      onChange={(e) => setSearch(e.target.value)}
+      placeholder="What do you want to listen to?"
+      className="w-72 border-b-2 border-b-cyan-700 bg-transparent text-white placeholder-gray-400 outline-none focus:border-b-cyan-800"
+    />
   )
 }
