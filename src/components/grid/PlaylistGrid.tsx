@@ -5,9 +5,9 @@ import Link from 'next/link'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
 import CardGrid from '@/components/card/CardGrid'
-import CardInfo from '@/components/card/CardInfo'
 import CardItem from '@/components/card/CardItem'
 import CardName from '@/components/card/CardName'
+import CardStatistic from '@/components/card/CardStatistic'
 
 export default function PlaylistGrid({ playlists }: { playlists: SpotifyApi.PlaylistObjectSimplified[] }) {
   if (!playlists?.length) return <DiscoverButton titleMessage="No playlists found" buttonMessage="Discover new playlists here" />
@@ -27,7 +27,7 @@ export default function PlaylistGrid({ playlists }: { playlists: SpotifyApi.Play
             />
             <CardName name={playlist.name} />
 
-            <CardInfo info={playlist.tracks.total < 50 ? `${playlist.tracks.total} Tracks` : '50 Tracks'} />
+            <CardStatistic statistic={playlist.tracks.total < 50 ? `${playlist.tracks.total} Tracks` : '50 Tracks'} />
           </Link>
         </CardItem>
       ))}

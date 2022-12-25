@@ -8,6 +8,7 @@ import CardGrid from '@/components/card/CardGrid'
 import CardInfo from '@/components/card/CardInfo'
 import CardItem from '@/components/card/CardItem'
 import CardName from '@/components/card/CardName'
+import CardStatistic from '@/components/card/CardStatistic'
 import { formatFollowCount } from '@/lib/utils'
 
 export default function ArtistGrid({ artists }: { artists: SpotifyApi.ArtistObjectFull[] }) {
@@ -30,9 +31,7 @@ export default function ArtistGrid({ artists }: { artists: SpotifyApi.ArtistObje
 
             <CardInfo info={artist.genres[0] ? artist.genres[0] : 'N/A'} />
 
-            <span className="mt-5 hidden rounded-md bg-cyan-100 px-2 py-1 text-xs font-medium sm:block">
-              {formatFollowCount(artist.followers.total, 1)} followers
-            </span>
+            <CardStatistic statistic={`${formatFollowCount(artist.followers.total, 1)} followers`} />
           </Link>
         </CardItem>
       ))}
