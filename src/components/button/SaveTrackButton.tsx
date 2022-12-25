@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { HeartIcon } from '@heroicons/react/solid'
+import clsx from 'clsx'
 import { getSession } from 'next-auth/react'
 
 import ToolTip from '@/components/core/ToolTip'
@@ -73,7 +74,10 @@ export default function SaveTrackButton({ trackId, isTrackSaved }: Props) {
     <button>
       <ToolTip tooltip={`${saveState ? 'Remove from library' : 'Save to library'}`}>
         <HeartIcon
-          className={`${saveState ? 'text-green-500' : 'stroke-white text-transparent'} h-6 w-6 cursor-pointer`}
+          className={clsx('h-6 w-6', {
+            'text-green-500': saveState,
+            'stroke-white text-transparent': !saveState,
+          })}
           onClick={saveState ? remove : save}
         />
       </ToolTip>

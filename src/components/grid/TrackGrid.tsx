@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -28,7 +29,7 @@ export default function TrackGrid({ tracks, isTrackSaved }: Props) {
           <tr
             key={track.id}
             onClick={() => chosenTrack(trackUris, track.uri)}
-            className={`${playingTrack === track.uri ? 'bg-sky-600' : 'cursor-pointer hover:bg-slate-700'}`}
+            className={clsx(playingTrack === track.uri ? 'bg-sky-600' : 'cursor-pointer hover:bg-slate-700')}
           >
             <td className="py-4">
               <div className="flex items-center">

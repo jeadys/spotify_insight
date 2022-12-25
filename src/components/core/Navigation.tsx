@@ -2,6 +2,7 @@
 
 import type { ReactElement } from 'react'
 
+import clsx from 'clsx'
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -40,9 +41,10 @@ export default function Navigation() {
         {navigationItems.map((navigationItem) => (
           <li
             key={navigationItem.title}
-            className={`text-sm uppercase decoration-4 underline-offset-8 ${
+            className={clsx(
+              'text-sm uppercase decoration-4 underline-offset-8',
               pathname === navigationItem.link ? 'cursor-default underline decoration-sky-700' : 'hover:underline hover:decoration-sky-900'
-            }`}
+            )}
           >
             <Link href={navigationItem.link}>{navigationItem.title}</Link>
           </li>
