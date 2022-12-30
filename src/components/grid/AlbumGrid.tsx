@@ -1,10 +1,10 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
 import CardGrid from '@/components/card/CardGrid'
+import CardImage from '@/components/card/CardImage'
 import CardInfo from '@/components/card/CardInfo'
 import CardItem from '@/components/card/CardItem'
 import CardName from '@/components/card/CardName'
@@ -17,14 +17,7 @@ export default function AlbumGrid({ albums }: { albums: SpotifyApi.AlbumObjectSi
       {albums.map((album) => (
         <CardItem key={album.id}>
           <Link href={`/albums/${album.id}`} className="flex flex-col items-center">
-            <Image
-              src={album.images.length && album.images[1] ? album.images[1].url : '/images/nocover.webp'}
-              alt={album.name}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="mx-auto mb-5 h-48 w-48 rounded-md object-cover"
-            />
+            <CardImage imageUrl={(album.images[1] || {}).url} imageAlt={album.name} imageType="album" />
 
             <CardName name={album.name} />
           </Link>

@@ -2,6 +2,7 @@
 
 import type { Dispatch, SetStateAction } from 'react'
 
+import clsx from 'clsx'
 import Link from 'next/link'
 
 type Props = {
@@ -61,12 +62,13 @@ export default function SectionWrapper({ title, seeAll, children, timeRange, set
             {timeRangeBtns.map((timeRangeBtn) => (
               <li
                 key={timeRangeBtn.range}
-                className={`text-sm uppercase decoration-4 underline-offset-8  ${
+                onClick={() => setTimeRange(timeRangeBtn.range)}
+                className={clsx(
+                  'text-sm uppercase decoration-4 underline-offset-8',
                   timeRange === timeRangeBtn.range
                     ? 'cursor-default underline decoration-sky-700'
                     : 'hover:underline hover:decoration-sky-900'
-                }`}
-                onClick={() => setTimeRange(timeRangeBtn.range)}
+                )}
               >
                 {timeRangeBtn.title}
               </li>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 
+import clsx from 'clsx'
 import { getSession } from 'next-auth/react'
 
 const followArtistForCurrentUser = async (artistId: string): Promise<SpotifyApi.FollowArtistsOrUsersResponse | undefined> => {
@@ -52,7 +53,10 @@ export default function FollowArtistButton({ artistId, isArtistFollowed }: Props
 
   return (
     <button
-      className={`cursor-pointer rounded-md py-1 px-6 text-white ${followState ? 'bg-blue-600' : 'border border-white'}`}
+      className={clsx('rounded-md py-1 px-6 text-white', {
+        'bg-blue-600': followState,
+        'border border-white': !followState,
+      })}
       onClick={followState ? unfollow : follow}
     >
       {followState ? 'Following' : 'Follow'}

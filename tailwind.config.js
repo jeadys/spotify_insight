@@ -17,7 +17,7 @@ module.exports = {
         '8xl': '90rem',
       },
       fontFamily: {
-        'maven': 'Maven Pro',
+        saira: ['var(--font-saira)'],
       },
       keyframes: {
         wiggle: {

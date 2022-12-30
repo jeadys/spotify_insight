@@ -9,13 +9,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '*.spotifycdn.com',
+        hostname: '**.spotifycdn.com',
       },
       {
         protocol: 'https',
-        hostname: '*.scdn.co',
+        hostname: '**.scdn.co',
       },
     ],
+    unoptimized: true,
   },
   redirects: async () => {
     return [

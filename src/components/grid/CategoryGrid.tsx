@@ -1,11 +1,12 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
 import CardGrid from '@/components/card/CardGrid'
+import CardImage from '@/components/card/CardImage'
 import CardItem from '@/components/card/CardItem'
+import CardName from '@/components/card/CardName'
 
 export default function CategoryGrid({ categories }: { categories: SpotifyApi.CategoryObject[] }) {
   if (!categories?.length) return <DiscoverButton titleMessage="No categories found" buttonMessage="Discover new tracks here" />
@@ -15,14 +16,8 @@ export default function CategoryGrid({ categories }: { categories: SpotifyApi.Ca
       {categories.map((category) => (
         <CardItem key={category.id}>
           <Link href={`/discover/categories/${category.id}`} className="flex flex-col items-center">
-            <Image
-              src={category.icons.length && category.icons[0] ? category.icons[0].url : '/images/nocover.webp'}
-              alt={category.name}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="mx-auto h-32 w-32 rounded-full object-cover"
-            />
+            <CardImage imageUrl={(category.icons[0] || {}).url} imageAlt={category.name} imageType="category" rounded />
+            <CardName name={category.name} />
           </Link>
         </CardItem>
       ))}

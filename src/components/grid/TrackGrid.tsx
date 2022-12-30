@@ -1,5 +1,6 @@
 'use client'
 
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -23,14 +24,14 @@ export default function TrackGrid({ tracks, isTrackSaved }: Props) {
 
   return (
     <table className="w-full text-white">
-      <tbody className="">
+      <tbody>
         {tracks.map((track, index) => (
           <tr
             key={track.id}
             onClick={() => chosenTrack(trackUris, track.uri)}
-            className={`${playingTrack === track.uri ? 'bg-sky-600' : 'cursor-pointer hover:bg-slate-700'}`}
+            className={clsx(playingTrack === track.uri ? 'bg-sky-600' : 'cursor-pointer hover:bg-slate-700')}
           >
-            <td className="py-4 text-sm">
+            <td className="py-4">
               <div className="flex items-center">
                 <div className="w-7 text-center">{playingTrack === track.uri ? <MusicBar /> : index + 1}</div>
                 {track.album && (
@@ -47,7 +48,9 @@ export default function TrackGrid({ tracks, isTrackSaved }: Props) {
                 )}
 
                 <div className="ml-4">
-                  <div className="font-semibold">{track.name.length <= 20 ? track.name : track.name.slice(0, 20).concat('...')}</div>
+                  <div className="text-base font-semibold">
+                    {track.name.length <= 20 ? track.name : track.name.slice(0, 20).concat('...')}
+                  </div>
 
                   {track.artists.slice(0, 3).map<React.ReactNode>((artist, index) => [
                     ...(index ? [', '] : []),
@@ -56,7 +59,7 @@ export default function TrackGrid({ tracks, isTrackSaved }: Props) {
                       key={artist.id}
                       href={`/artists/${artist.id}`}
                       onClick={stopProp}
-                      className="text-xs text-gray-300 hover:underline"
+                      className="text-sm text-gray-300 hover:underline"
                     >
                       {artist.name}
                     </Link>,
@@ -67,7 +70,7 @@ export default function TrackGrid({ tracks, isTrackSaved }: Props) {
 
             {track.album && (
               <td className="px-3 py-4 album:hidden">
-                <Link href={`/albums/${track.album.id}`} onClick={stopProp} className="text-xs text-gray-300 hover:underline">
+                <Link href={`/albums/${track.album.id}`} onClick={stopProp} className="text-sm text-gray-300 hover:underline">
                   {track.album.name.length <= 20 ? track.album.name : track.album.name.slice(0, 20).concat('...')}
                 </Link>
               </td>
