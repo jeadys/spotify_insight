@@ -5,5 +5,5 @@ type Props = {
 }
 
 export default function CardItem({ children }: Props) {
-  return <li className="py-4 text-center">{children}</li>
+  return <li className="rounded-lg py-4 text-center transition ease-in-out sm:bg-slate-800 sm:shadow sm:hover:bg-slate-700">{children}</li>
 }

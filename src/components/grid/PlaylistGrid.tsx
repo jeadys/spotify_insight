@@ -1,10 +1,10 @@
 'use client'
 
-import Image from 'next/image'
 import Link from 'next/link'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
 import CardGrid from '@/components/card/CardGrid'
+import CardImage from '@/components/card/CardImage'
 import CardItem from '@/components/card/CardItem'
 import CardName from '@/components/card/CardName'
 import CardStatistic from '@/components/card/CardStatistic'
@@ -17,14 +17,8 @@ export default function PlaylistGrid({ playlists }: { playlists: SpotifyApi.Play
       {playlists.map((playlist) => (
         <CardItem key={playlist.id}>
           <Link href={`/playlists/${playlist.id}`} className="flex flex-col items-center">
-            <Image
-              src={playlist.images.length ? playlist.images[0].url : '/images/nocover.webp'}
-              alt={playlist.name}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="mb-5 h-48 w-48 rounded-md object-cover"
-            />
+            <CardImage imageUrl={(playlist.images[0] || {}).url} imageAlt={playlist.name} imageType="playlist" />
+
             <CardName name={playlist.name} />
 
             <CardStatistic statistic={playlist.tracks.total < 50 ? `${playlist.tracks.total} Tracks` : '50 Tracks'} />
