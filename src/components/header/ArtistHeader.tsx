@@ -4,15 +4,13 @@ import Image from 'next/image'
 
 import BioTitle from '@/components/bio/BioTitle'
 import BioValue from '@/components/bio/BioValue'
-import FollowArtistButton from '@/components/button/FollowArtistButton'
 import { formatFollowCount } from '@/lib/utils'
 
 type Props = {
   artist: SpotifyApi.SingleArtistResponse
-  isArtistFollowed: boolean
 }
 
-export default function ArtistHeader({ artist, isArtistFollowed }: Props) {
+export default function ArtistHeader({ artist }: Props) {
   return (
     <header className="text-center">
       <Image
@@ -23,7 +21,6 @@ export default function ArtistHeader({ artist, isArtistFollowed }: Props) {
         sizes="100vw"
         className="mx-auto h-96 w-96 rounded-md object-cover"
       />
-      <button className="mt-8 h-5">{<FollowArtistButton artistId={artist.id} isArtistFollowed={isArtistFollowed} />}</button>
 
       <div className="mt-8 text-3xl font-black text-white md:text-6xl lg:text-8xl">{artist.name}</div>
 

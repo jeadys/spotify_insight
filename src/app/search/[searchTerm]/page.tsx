@@ -5,13 +5,10 @@ import AlbumGrid from '@/components/grid/AlbumGrid'
 import ArtistGrid from '@/components/grid/ArtistGrid'
 import TrackGrid from '@/components/grid/TrackGrid'
 import ArtistGridSkeleton from '@/components/skeleton/ArtistGridSkeleton'
-import { getDoesUserHaveTrackSaved, getSearchItems } from '@/server/api'
+import { getSearchItems } from '@/server/api'
 
 export default async function SearchResult({ params }: { params: { searchTerm: string } }) {
   const searchResult = await getSearchItems(params.searchTerm, 6)
-  const isTrackSaved = await getDoesUserHaveTrackSaved(
-    searchResult.tracks ? searchResult.tracks.items.map((track) => track.id).join(',') : ''
-  )
 
   return (
     <>
@@ -26,7 +23,7 @@ export default async function SearchResult({ params }: { params: { searchTerm: s
             <AlbumGrid albums={searchResult.albums.items} />
           </SectionWrapper>
           <SectionWrapper title="Tracks">
-            <TrackGrid tracks={searchResult.tracks.items} isTrackSaved={isTrackSaved} />
+            <TrackGrid tracks={searchResult.tracks.items} />
           </SectionWrapper>
         </>
       )}

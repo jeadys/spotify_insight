@@ -21,7 +21,6 @@ export default async function Library() {
   const savedAlbums = await getCurrentUserSavedAlbums(6)
   const savedTracks = await getCurrentUserSavedTracks(6)
   const followedArtists = await getCurrentUserFollowedArtists(6)
-  const isTrackSaved: boolean[] = Array(50).fill(true)
 
   return (
     <>
@@ -39,7 +38,7 @@ export default async function Library() {
 
       <Suspense fallback={<TrackGridSkeleton amount={6} />}>
         <SectionWrapper title="Saved tracks" seeAll="/library/saved-tracks">
-          <TrackGrid tracks={savedTracks.items.map(({ track }) => track)} isTrackSaved={isTrackSaved} />
+          <TrackGrid tracks={savedTracks.items.map(({ track }) => track)} />
         </SectionWrapper>
       </Suspense>
 
