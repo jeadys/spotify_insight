@@ -18,9 +18,9 @@ export default function CardImage({ imageUrl, imageAlt, imageType, rounded }: Pr
       width="0"
       height="0"
       sizes="100vw"
-      className={clsx('mx-auto mb-5 object-cover', {
+      className={clsx('mx-auto object-cover', {
         'h-48 w-48': imageType === 'album' || imageType === 'playlist',
-        'h-32 w-32': imageType === 'artist' || imageType === 'category',
+        'h-36 w-36': imageType === 'artist' || imageType === 'category',
         'h-10 w-10 ': imageType === 'track',
         'rounded-full': rounded,
         'rounded-md': !rounded,

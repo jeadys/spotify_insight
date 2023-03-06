@@ -49,7 +49,7 @@ export const formatFollowCount = (number: number, digits: number): string => {
       return number >= item.value
     })
 
-  return item ? (number / item.value).toFixed(digits).replace(rx, '$1') + item.symbol : '0'
+  return item ? (number / item.value).toFixed(item.symbol === 'k' ? 0 : digits).replace(rx, '$1') + item.symbol : '0'
 }
 
 /**
