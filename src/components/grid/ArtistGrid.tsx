@@ -22,14 +22,16 @@ export default function ArtistGrid({ artists }: Props) {
     <CardGrid>
       {artists.map((artist) => (
         <CardItem key={artist.id}>
-          <Link href={`/artists/${artist.id}`} className="flex flex-col items-center">
+          <Link href={`/artists/${artist.id}`} className="flex flex-col items-center gap-2">
             <CardImage imageUrl={(artist.images[2] || {}).url} imageAlt={artist.name} imageType="artist" rounded />
 
             <CardName name={artist.name} />
 
-            <CardInfo info={artist.genres[0] ? artist.genres[0] : 'N/A'} />
-
             <CardStatistic statistic={`${formatFollowCount(artist.followers.total, 1)} followers`} />
+          </Link>
+
+          <Link href={`/genres/${artist.genres[0]}`} className="hover:underline hover:decoration-white">
+            <CardInfo info={artist.genres[0] ? artist.genres[0] : 'N/A'} />
           </Link>
         </CardItem>
       ))}

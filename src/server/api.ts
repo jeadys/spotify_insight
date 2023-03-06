@@ -380,6 +380,13 @@ export const getSearchItems = async (query: string, limit: number): Promise<Spot
   return fetchWrapper({ url: `https://api.spotify.com/v1/search?q=${query}&type=artist,album,track&limit=${limit}`, method: 'GET' })
 }
 
+export const getArtistBasedOnGenre = async (query: string, limit: number): Promise<SpotifyApi.SearchResponse> => {
+  return fetchWrapper({
+    url: `https://api.spotify.com/v1/search?q=genre:${query}&type=artist&limit=${limit}`,
+    method: 'GET',
+  })
+}
+
 /**
  * Get a track
  *

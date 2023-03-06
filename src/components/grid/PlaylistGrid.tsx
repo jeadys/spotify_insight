@@ -16,7 +16,7 @@ export default function PlaylistGrid({ playlists }: { playlists: SpotifyApi.Play
     <CardGrid>
       {playlists.map((playlist) => (
         <CardItem key={playlist.id}>
-          <Link href={`/playlists/${playlist.id}`} className="flex flex-col items-center">
+          <Link href={`/playlists/${playlist.id}`} className="flex flex-col items-center gap-2">
             <CardImage imageUrl={(playlist.images[0] || {}).url} imageAlt={playlist.name} imageType="playlist" />
 
             <CardName name={playlist.name} />

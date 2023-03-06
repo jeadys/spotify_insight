@@ -9,32 +9,23 @@ import AlbumGridSkeleton from '@/components/skeleton/AlbumGridSkeleton'
 import ArtistGridSkeleton from '@/components/skeleton/ArtistGridSkeleton'
 import ArtistHeaderSkeleton from '@/components/skeleton/ArtistHeaderSkeleton'
 import TrackGridSkeleton from '@/components/skeleton/TrackGridSkeleton'
-import {
-  getArtistAlbums,
-  getArtistById,
-  getArtistRelatedArtists,
-  getArtistTopTracks,
-  getDoesUserFollowArtist,
-  getDoesUserHaveTrackSaved,
-} from '@/server/api'
+import { getArtistAlbums, getArtistById, getArtistRelatedArtists, getArtistTopTracks } from '@/server/api'
 
 export default async function Artist({ params }: { params: { artistId: string } }) {
   const artist = await getArtistById(params.artistId)
   const artistTopTracks = await getArtistTopTracks(params.artistId)
   const artistAlbums = await getArtistAlbums(params.artistId, 6)
   const artistRelatedArtists = await getArtistRelatedArtists(params.artistId)
-  const isArtistFollowed = await getDoesUserFollowArtist(params.artistId)
-  const isTrackSaved = await getDoesUserHaveTrackSaved(artistTopTracks.tracks.map((track) => track.id).join(','))
 
   return (
     <>
       <Suspense fallback={<ArtistHeaderSkeleton />}>
-        <ArtistHeader artist={artist} isArtistFollowed={isArtistFollowed[0]} />
+        <ArtistHeader artist={artist} />
       </Suspense>
 
       <Suspense fallback={<TrackGridSkeleton amount={10} />}>
         <SectionWrapper title="Popular releases">
-          <TrackGrid tracks={artistTopTracks.tracks} isTrackSaved={isTrackSaved} />
+          <TrackGrid tracks={artistTopTracks.tracks} />
         </SectionWrapper>
       </Suspense>
 

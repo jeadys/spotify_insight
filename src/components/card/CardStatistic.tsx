@@ -5,5 +5,5 @@ type Props = {
 }
 
 export default function CardStatistic({ statistic }: Props) {
-  return <span className="mt-5 hidden rounded-md bg-cyan-100 px-2 py-1 text-xs font-medium sm:block">{statistic}</span>
+  return <span className="text-sm text-gray-400">{statistic}</span>
 }

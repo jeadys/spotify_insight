@@ -12,10 +12,9 @@ import { ChooseTrack, PlayTrack } from '@/providers/PlayedTrackProvider'
 
 type Props = {
   tracks: SpotifyApi.TrackObjectSimplified[]
-  isTrackSaved: boolean[]
 }
 
-export default function TrackGrid({ tracks, isTrackSaved }: Props) {
+export default function TrackGrid({ tracks }: Props) {
   if (!tracks?.length) return <DiscoverButton titleMessage="No tracks found" buttonMessage="Discover new tracks here" />
 
   const trackUris = tracks.map((track) => track.uri)
@@ -75,10 +74,6 @@ export default function TrackGrid({ tracks, isTrackSaved }: Props) {
                 </Link>
               </td>
             )}
-
-            <td className="w-0 px-3 py-4">
-              <SaveTrackButton trackId={track.id} isTrackSaved={isTrackSaved[index]} />
-            </td>
 
             <td className="w-0 px-3 py-4 duration:hidden">
               <span className="text-sm">{formatTrackDuration(track.duration_ms)}</span>
