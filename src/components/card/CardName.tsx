@@ -5,5 +5,5 @@ type Props = {
 }
 
 export default function CardName({ name }: Props) {
-  return <span className="text-base font-medium text-white">{name.length <= 20 ? name : name.slice(0, 20).concat('...')}</span>
+  return <span className="text-base font-medium text-white line-clamp-1">{name}</span>
 }

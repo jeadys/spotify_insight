@@ -5,5 +5,5 @@ type Props = {
 }
 
 export default function CardStatistic({ statistic }: Props) {
-  return <span className="text-sm text-gray-400">{statistic}</span>
+  return <span className="text-sm text-gray-400 line-clamp-1">{statistic}</span>
 }

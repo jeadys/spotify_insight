@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import DiscoverButton from '@/components/button/DiscoverButton'
-import SaveTrackButton from '@/components/button/SaveTrackButton'
 import MusicBar from '@/components/core/MusicBar'
 import { formatTrackDuration, stopProp } from '@/lib/utils'
 import { ChooseTrack, PlayTrack } from '@/providers/PlayedTrackProvider'
@@ -30,9 +29,9 @@ export default function TrackGrid({ tracks }: Props) {
             onClick={() => chosenTrack(trackUris, track.uri)}
             className={clsx(playingTrack === track.uri ? 'bg-sky-600' : 'cursor-pointer hover:bg-slate-700')}
           >
-            <td className="py-4">
-              <div className="flex items-center">
-                <div className="w-7 text-center">{playingTrack === track.uri ? <MusicBar /> : index + 1}</div>
+            <td className="w-0 px-3 py-4">
+              <div className="flex items-center justify-start gap-4">
+                <div className="w-4 text-center">{playingTrack === track.uri ? <MusicBar /> : index + 1}</div>
                 {track.album && (
                   <div className="h-10 w-10 flex-shrink-0">
                     <Image
@@ -45,32 +44,27 @@ export default function TrackGrid({ tracks }: Props) {
                     />
                   </div>
                 )}
+              </div>
+            </td>
 
-                <div className="ml-4">
-                  <div className="text-base font-semibold">
-                    {track.name.length <= 20 ? track.name : track.name.slice(0, 20).concat('...')}
-                  </div>
+            <td className="py-4">
+              <div className="text-base font-semibold line-clamp-1">{track.name}</div>
 
-                  {track.artists.slice(0, 3).map<React.ReactNode>((artist, index) => [
-                    ...(index ? [', '] : []),
+              <div className="line-clamp-1">
+                {track.artists.slice(0, 3).map<React.ReactNode>((artist, index) => [
+                  ...(index ? [', '] : []),
 
-                    <Link
-                      key={artist.id}
-                      href={`/artists/${artist.id}`}
-                      onClick={stopProp}
-                      className="text-sm text-gray-300 hover:underline"
-                    >
-                      {artist.name}
-                    </Link>,
-                  ])}
-                </div>
+                  <Link key={artist.id} href={`/artists/${artist.id}`} onClick={stopProp} className="text-sm text-gray-300 hover:underline">
+                    {artist.name}
+                  </Link>,
+                ])}
               </div>
             </td>
 
             {track.album && (
               <td className="px-3 py-4 album:hidden">
-                <Link href={`/albums/${track.album.id}`} onClick={stopProp} className="text-sm text-gray-300 hover:underline">
-                  {track.album.name.length <= 20 ? track.album.name : track.album.name.slice(0, 20).concat('...')}
+                <Link href={`/albums/${track.album.id}`} onClick={stopProp} className="text-sm text-gray-300 line-clamp-1 hover:underline">
+                  {track.album.name}
                 </Link>
               </td>
             )}
