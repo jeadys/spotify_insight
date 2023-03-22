@@ -53,11 +53,60 @@ export const formatFollowCount = (number: number, digits: number): string => {
 }
 
 /**
- * Prevents further propagation of the current event in the capturing and bubbling phases
+ * Format music key to human readable version
+ * @param {number} note Music key of the track
+ * @returns {string} Human readable music key
  */
-export const stopProp = (event: React.MouseEvent<HTMLElement>) => {
-  event.stopPropagation()
+export const getMusicKeyOfTrack = (note: number): string => {
+  switch (note) {
+    case 0:
+      return 'C'
+    case 1:
+      return 'C♯, D♭'
+    case 2:
+      return 'D'
+    case 3:
+      return 'D♯, E♭'
+    case 4:
+      return 'E'
+    case 5:
+      return 'F'
+    case 6:
+      return 'F♯, G♭'
+    case 7:
+      return 'G'
+    case 8:
+      return 'G♯, A♭'
+    case 9:
+      return 'A'
+    case 10:
+      return 'A♯, B♭'
+    case 11:
+      return 'B'
+    default:
+      return 'N/A'
+  }
 }
 
-// Get year from YYYY-MM-DD
-export const getYear = (date: string): string => date.split('-')[0]
+/**
+ * How many bars in a full track
+ * @param {number} durationMs Duration of track in milliseconds
+ * @param {number} note Tempo (BPM) of the track
+ * @param {number} timeSignature Beats in every measure
+ * @returns {string} Total bars of track
+ */
+export const calculateTotalBars = (durationMs: number, tempo: number, timeSignature: number): string => {
+  const bars = ((durationMs / 1000) * tempo) / (60 * timeSignature)
+  return Math.round(bars).toString()
+}
+
+/**
+ * How many beats in a full track
+ * @param {number} durationMs Duration of track in milliseconds
+ * @param {number} note Tempo (BPM) of the track
+ * @returns {string} Total beats of track
+ */
+export const calculateTotalBeats = (durationMs: number, tempo: number): string => {
+  const beats = (durationMs / 60000) * tempo
+  return Math.round(beats).toString()
+}
