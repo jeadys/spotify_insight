@@ -10,6 +10,11 @@ declare namespace SpotifyApi {
     is_local?: boolean | undefined
   }
 
+  interface AlbumObjectSimplified {
+    copyrights: CopyrightObject[]
+    label: string
+  }
+
   interface PlaylistTrackObject {
     track: TrackObjectFull
   }
