@@ -34,7 +34,7 @@ export default function TrackList({ tracks, cover }: Props) {
               </td>
 
               <td className="flex-grow">
-                <Link key={track.id} href={`/track/${track.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+                <Link href={`/track/${track.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
                   {track.name}
                 </Link>
 
@@ -52,7 +52,6 @@ export default function TrackList({ tracks, cover }: Props) {
               {track.album && (
                 <td>
                   <Link
-                    key={track.album.id}
                     href={`/album/${track.album.id}`}
                     className="max-w-max text-sm text-gray-400 line-clamp-1 hover:underline album:hidden"
                   >

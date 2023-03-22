@@ -31,7 +31,7 @@ export default async function Album({ params }: { params: { albumId: string } })
       <Section title="Copyrights" description={`${album.name} released by ${album.label}`}>
         <div className="text-sm text-gray-300">
           {album.copyrights.map((copyright) => (
-            <div key={copyright.text}>
+            <div key={copyright.text + copyright.type}>
               {copyright.text} {copyright.type}
             </div>
           ))}

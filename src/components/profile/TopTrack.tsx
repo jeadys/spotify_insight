@@ -10,7 +10,7 @@ export default async function TopTrack() {
   return (
     <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 5xl:grid-cols-3">
       {topTracks.items.map((track) => (
-        <li className="group flex flex-row items-center gap-5" key={track.id}>
+        <li key={track.id} className="group flex flex-row items-center gap-5">
           <div className="relative flex flex-shrink-0 items-center justify-center">
             <Image
               src={track.album?.images?.[2]?.url || '/images/nocover.webp'}
@@ -25,14 +25,10 @@ export default async function TopTrack() {
           </div>
 
           <div className="flex flex-col">
-            <Link key={track.id} href={`/track/${track.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+            <Link href={`/track/${track.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
               {track.name}
             </Link>
-            <Link
-              key={track.artists[0].id}
-              href={`/artist/${track.artists[0].id}`}
-              className="max-w-max text-gray-400 line-clamp-1 hover:underline"
-            >
+            <Link href={`/artist/${track.artists[0].id}`} className="max-w-max text-gray-400 line-clamp-1 hover:underline">
               {track.artists[0].name}
             </Link>
           </div>

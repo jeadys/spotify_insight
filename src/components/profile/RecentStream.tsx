@@ -27,23 +27,15 @@ export default async function RecentStream() {
                 />
               </td>
               <td className="flex-grow">
-                <Link key={track.id} href={`/track/${track.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+                <Link href={`/track/${track.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
                   {track.name}
                 </Link>
-                <Link
-                  key={track.artists[0].id}
-                  href={`/artist/${track.artists[0].id}`}
-                  className="max-w-max text-gray-400 line-clamp-1 hover:underline"
-                >
+                <Link href={`/artist/${track.artists[0].id}`} className="max-w-max text-gray-400 line-clamp-1 hover:underline">
                   {track.artists[0].name}
                 </Link>
               </td>
               <td>
-                <Link
-                  key={track.album.id}
-                  href={`/album/${track.album.id}`}
-                  className="max-w-max text-gray-400 line-clamp-1 hover:underline album:hidden"
-                >
+                <Link href={`/album/${track.album.id}`} className="max-w-max text-gray-400 line-clamp-1 hover:underline album:hidden">
                   {track.album.name}
                 </Link>
               </td>

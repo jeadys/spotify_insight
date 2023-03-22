@@ -18,7 +18,7 @@ export default function TopArtist({ artists }: Props) {
     <ul className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 5xl:grid-cols-6">
       {artists.map((artist) => (
         <li key={artist.id} className="flex flex-col">
-          <Link key={artist.id} href={`/artist/${artist.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+          <Link href={`/artist/${artist.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
             <Image
               src={artist.images?.[2]?.url || '/images/nocover.webp'}
               alt={artist.name}
@@ -29,16 +29,12 @@ export default function TopArtist({ artists }: Props) {
             />
           </Link>
 
-          <Link key={artist.id} href={`/artist/${artist.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+          <Link href={`/artist/${artist.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
             {artist.name}
           </Link>
 
           {artist.genres?.[0] && (
-            <Link
-              key={artist.genres[0]}
-              href={`/genre/${artist.genres[0]}`}
-              className="max-w-max text-gray-400 line-clamp-1 hover:underline"
-            >
+            <Link href={`/genre/${artist.genres[0]}`} className="max-w-max text-gray-400 line-clamp-1 hover:underline">
               {artist.genres[0]}
             </Link>
           )}

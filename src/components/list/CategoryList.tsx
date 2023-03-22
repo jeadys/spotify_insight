@@ -11,7 +11,7 @@ export default async function CategoryList() {
   return (
     <ul className="grid grid-cols-3 gap-5 lg:grid-cols-4 5xl:grid-cols-6">
       {categories.items.map((category) => (
-        <Link href={`/discover/categories/${category.id}`} className="relative flex flex-row gap-5 text-white" key={category.id}>
+        <Link key={category.id} href={`/discover/categories/${category.id}`} className="relative flex flex-row gap-5 text-white">
           <Image
             src={category.icons.length && category.icons[0] ? category.icons[0].url : '/images/nocover.webp'}
             alt={category.name}

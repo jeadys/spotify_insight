@@ -13,8 +13,8 @@ export default function AlbumList({ albums }: { albums: SpotifyApi.AlbumObjectSi
   return (
     <ul className="grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 5xl:grid-cols-6">
       {albums.map((album) => (
-        <li className="flex flex-col" key={album.id}>
-          <Link key={album.id} href={`/album/${album.id}`}>
+        <li key={album.id} className="flex flex-col">
+          <Link href={`/album/${album.id}`}>
             <Image
               src={album.images?.[1]?.url || '/images/nocover.webp'}
               alt={album.name}
@@ -25,7 +25,7 @@ export default function AlbumList({ albums }: { albums: SpotifyApi.AlbumObjectSi
             />
           </Link>
 
-          <Link key={album.id} href={`/album/${album.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+          <Link href={`/album/${album.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
             {album.name}
           </Link>
 

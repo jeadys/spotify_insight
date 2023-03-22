@@ -28,7 +28,7 @@ export default function AlbumHeader({ album }: Props) {
         <div className="capitalize text-white">
           <h2>{album.type}</h2>
           <h1 className="text-3xl font-black sm:text-4xl">{album.name}</h1>
-          <Link key={album.artists[0].id} href={`/artist/${album.artists[0].id}`} className="text-xl text-gray-300 hover:underline">
+          <Link href={`/artist/${album.artists[0].id}`} className="text-xl text-gray-300 hover:underline">
             {album.artists[0].name}
           </Link>
         </div>
