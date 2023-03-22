@@ -345,18 +345,18 @@ export const getCurrentUserSavedPlaylists = async (limit: number): Promise<Spoti
  *
  * GET /v1/recommendations
  * https://developer.spotify.com/get-recommendations/
- * @param {PlaylistTrackObject[]} tracks The seeded tracks for the recommendations.
+ * @param {UsersTopTracksResponse[]} tracks The seeded tracks for the recommendations.
  * @param {number} limit Total amount of items to return
  * @returns {Promise}
  */
 export const getRecommendationsForTracks = async (
-  tracks: SpotifyApi.PlaylistTrackObject[],
+  tracks: SpotifyApi.TrackObjectFull[],
   limit: number
 ): Promise<SpotifyApi.RecommendationsFromSeedsResponse> => {
   const shuffledTracks = tracks.sort(() => 0.5 - Math.random())
   const seedTracks = shuffledTracks
     .slice(0, 5)
-    .map(({ track }) => track.id)
+    .map((track) => track.id)
     .join(',')
   const seedArtists = ''
   const seedGenres = ''
