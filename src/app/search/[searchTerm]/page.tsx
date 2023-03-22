@@ -1,30 +1,27 @@
-import { Suspense } from 'react'
-
-import SectionWrapper from '@/components/core/SectionWrapper'
-import AlbumGrid from '@/components/grid/AlbumGrid'
-import ArtistGrid from '@/components/grid/ArtistGrid'
-import TrackGrid from '@/components/grid/TrackGrid'
-import ArtistGridSkeleton from '@/components/skeleton/ArtistGridSkeleton'
+import Section from '@/components/layout/Section'
+import AlbumList from '@/components/list/AlbumList'
+import ArtistList from '@/components/list/ArtistList'
+import TrackList from '@/components/list/TrackList'
 import { getSearchItems } from '@/server/api'
 
 export default async function SearchResult({ params }: { params: { searchTerm: string } }) {
-  const searchResult = await getSearchItems(params.searchTerm, 6)
+  const searchResult = await getSearchItems(params.searchTerm, 12)
 
   return (
     <>
       {searchResult.artists && searchResult.albums && searchResult.tracks && (
         <>
-          <Suspense fallback={<ArtistGridSkeleton amount={50} />}>
-            <SectionWrapper title="Artists">
-              <ArtistGrid artists={searchResult.artists.items} />
-            </SectionWrapper>
-          </Suspense>
-          <SectionWrapper title="Albums">
-            <AlbumGrid albums={searchResult.albums.items} />
-          </SectionWrapper>
-          <SectionWrapper title="Tracks">
-            <TrackGrid tracks={searchResult.tracks.items} />
-          </SectionWrapper>
+          <Section title="Artists">
+            <ArtistList artists={searchResult.artists.items} />
+          </Section>
+
+          <Section title="Albums">
+            <AlbumList albums={searchResult.albums.items} />
+          </Section>
+
+          <Section title="Tracks">
+            <TrackList tracks={searchResult.tracks.items} />
+          </Section>
         </>
       )}
     </>

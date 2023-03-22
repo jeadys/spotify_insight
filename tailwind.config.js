@@ -3,6 +3,14 @@ module.exports = {
   content: ['./src/app/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      blur: {
+        'blur-xs': '2px',
+      },
+      backgroundColor: {
+        'gray-1100': '#23252d',
+        'gray-1200': '#191a20',
+        'gray-1300': '#0c0e12',
+      },
       screens: {
         '3xl': '1600px',
         '4xl': '1800px',
@@ -30,6 +38,11 @@ module.exports = {
           '60%': { transform: 'scaleY(0.5)' },
           '80%': { transform: 'scaleY(0.75)' },
           '100': { transform: 'scaleY(0.6)' },
+        },
+        shimmer: {
+          '100%': {
+            transform: 'translateX(100%)',
+          },
         },
       },
       animation: {

@@ -1,27 +1,35 @@
-import SectionWrapper from '@/components/core/SectionWrapper'
-import ArtistGrid from '@/components/grid/ArtistGrid'
-import GenreGrid from '@/components/grid/GenreGrid'
-import TrackGrid from '@/components/grid/TrackGrid'
-import { getTopArtists, getTopTracks } from '@/server/api'
+import { Suspense } from 'react'
+
+import Section from '@/components/layout/Section'
+import RecentStream from '@/components/profile/RecentStream'
+import TopArtist from '@/components/profile/TopArtist'
+import TopGenre from '@/components/profile/TopGenre'
+import TopTrack from '@/components/profile/TopTrack'
 
 export default async function page() {
-  const topArtists = await getTopArtists('long_term', 12)
-  const topTracks = await getTopTracks('long_term', 12)
-  const topGenres = topArtists.items.map((artist) => artist.genres).flat()
-
   return (
     <>
-      <SectionWrapper title="Top genres">
-        <GenreGrid genres={topGenres} />
-      </SectionWrapper>
+      <Section title="Top Genres" description="Past several years">
+        <Suspense fallback="...">
+          {/* @ts-expect-error Server Component */}
+          <TopGenre />
+        </Suspense>
+      </Section>
 
-      <SectionWrapper title="Top artists" seeAll="/profile/top-artists">
-        <ArtistGrid artists={topArtists.items} />
-      </SectionWrapper>
+      <Section title="Top Artists" description="Past several years">
+        {/* @ts-expect-error Server Component */}
+        <TopArtist />
+      </Section>
 
-      <SectionWrapper title="Top tracks" seeAll="/profile/top-tracks">
-        <TrackGrid tracks={topTracks.items} />
-      </SectionWrapper>
+      <Section title="Top Tracks" description="Past several years">
+        {/* @ts-expect-error Server Component */}
+        <TopTrack />
+      </Section>
+
+      <Section title="Recent Streams" description="Enjoying these tracks">
+        {/* @ts-expect-error Server Component */}
+        <RecentStream />
+      </Section>
     </>
   )
 }
