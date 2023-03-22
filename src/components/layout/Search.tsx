@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 
+import { SearchIcon } from '@heroicons/react/solid'
 import { useRouter } from 'next/navigation'
 
 import useDebounce from '@/hooks/useDebounce'
@@ -19,13 +20,16 @@ export default function Search() {
   }, [router, debouncedSearch])
 
   return (
-    <input
-      type="search"
-      value={search}
-      ref={inputRef}
-      onChange={(e) => setSearch(e.target.value)}
-      placeholder="What do you want to listen to?"
-      className="w-72 border-b-2 border-b-cyan-700 bg-transparent text-white placeholder-gray-400 outline-none focus:border-b-cyan-800"
-    />
+    <form className="flex w-80 flex-row items-center gap-2 rounded-full border-solid bg-gray-1200 py-1 px-3 text-sm text-white">
+      <SearchIcon className="h-8 w-8" />
+      <input
+        type="search"
+        value={search}
+        ref={inputRef}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="What do you want to listen to?"
+        className="w-full bg-transparent py-2 focus:outline-none"
+      />
+    </form>
   )
 }
