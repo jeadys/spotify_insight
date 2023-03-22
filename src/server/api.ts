@@ -425,3 +425,7 @@ export const getAudioFeaturesForTrack = async (trackId: string): Promise<Spotify
 export const getAudioAnalysisForTrack = async (trackId: string): Promise<SpotifyApi.AudioAnalysisResponse> => {
   return fetchWrapper({ url: `https://api.spotify.com/v1/audio-analysis/${trackId}`, method: 'GET' })
 }
+
+export const getRecentlyPlayedTracks = async (limit: number): Promise<SpotifyApi.UsersRecentlyPlayedTracksResponse> => {
+  return fetchWrapper({ url: `https://api.spotify.com/v1/me/player/recently-played?limit=${limit}`, method: 'GET' })
+}

@@ -9,7 +9,7 @@ const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET!
 const state = generateRandomString(16)
 const scope = `user-read-private user-read-email user-top-read 
                user-follow-read user-follow-modify user-library-read user-library-modify
-               user-read-playback-state user-modify-playback-state streaming`
+               user-read-playback-state user-modify-playback-state streaming user-read-recently-played`
 
 const queryParamsAuthorize = new URLSearchParams({
   client_id: clientId,
