@@ -1,4 +1,5 @@
-import Search from '@/components/core/Search'
+import Search from '@/components/layout/Search'
+import Section from '@/components/layout/Section'
 
 type Props = {
   children: React.ReactNode
@@ -7,7 +8,9 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <>
-      <Search />
+      <Section title="Browse catalog">
+        <Search />
+      </Section>
       {children}
     </>
   )
