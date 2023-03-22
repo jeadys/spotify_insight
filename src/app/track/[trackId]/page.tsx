@@ -19,7 +19,7 @@ export default async function Track({ params }: { params: { trackId: string } })
 
       <Section title="Appears on" description={`Albums featuring ${track.name}`}>
         <div className="flex flex-col">
-          <Link key={track.album.id} href={`/album/${track.album.id}`}>
+          <Link href={`/album/${track.album.id}`}>
             <Image
               src={track.album.images?.[1]?.url || '/images/nocover.webp'}
               alt={track.album.name}
@@ -30,7 +30,7 @@ export default async function Track({ params }: { params: { trackId: string } })
             />
           </Link>
 
-          <Link key={track.album.id} href={`/album/${track.album.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+          <Link href={`/album/${track.album.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
             {track.album.name}
           </Link>
 
