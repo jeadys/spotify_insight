@@ -2,50 +2,36 @@
 
 import Image from 'next/image'
 
-import BioTitle from '@/components/bio/BioTitle'
-import BioValue from '@/components/bio/BioValue'
-import { formatFollowCount } from '@/lib/utils'
+import MetadataGrid from '@/components/analysis/MetadataGrid'
+import MetadataItem from '@/components/analysis/MetadataItem'
+import Header from '@/components/layout/Header'
 
 type Props = {
   artist: SpotifyApi.SingleArtistResponse
 }
-
 export default function ArtistHeader({ artist }: Props) {
   return (
-    <header className="text-center">
-      <Image
-        src={artist.images.length && artist.images[0] ? artist.images[0].url : '/images/nocover.webp'}
-        alt={artist.name}
-        width="0"
-        height="0"
-        sizes="100vw"
-        className="mx-auto h-96 w-96 rounded-md object-cover"
-      />
+    <Header>
+      <div className="flex flex-col items-center gap-4 sm:flex-row">
+        <Image
+          src={artist.images?.[1]?.url || '/images/nocover.webp'}
+          alt={artist.name}
+          width="0"
+          height="0"
+          sizes="100vw"
+          className="h-52 w-52 flex-grow-0 rounded-full object-cover sm:h-60 sm:w-60"
+        />
 
-      <div className="mt-8 text-3xl font-black text-white md:text-6xl lg:text-8xl">{artist.name}</div>
-
-      <div className="mt-8 flex w-full flex-row justify-center gap-x-5 md:gap-x-20">
-        {artist.followers && (
-          <span>
-            <BioValue value={formatFollowCount(artist.followers.total, 1)} />
-            <BioTitle title="Followers" />
-          </span>
-        )}
-
-        {artist.genres && artist.genres[0] && (
-          <span>
-            <BioValue value={artist.genres[0]} />
-            <BioTitle title="Genre" />
-          </span>
-        )}
-
-        {artist.popularity && (
-          <span>
-            <BioValue value={` ${artist.popularity}%`} />
-            <BioTitle title="Popularity" />
-          </span>
-        )}
+        <div className="capitalize text-white">
+          <h2>{artist.type}</h2>
+          <h1 className="text-3xl font-black sm:text-4xl">{artist.name}</h1>
+        </div>
       </div>
-    </header>
+
+      <MetadataGrid>
+        <MetadataItem title="Followers" value={artist.followers.total.toLocaleString()} />
+        <MetadataItem title="Popularity" value={artist.popularity / 10} />
+      </MetadataGrid>
+    </Header>
   )
 }
