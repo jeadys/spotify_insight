@@ -21,7 +21,7 @@ export default function TrackAudioFeatureChart({ trackAudioFeatures }: Props) {
     .map(([name, value]) => ({ name: name as ChartName, value }))
 
   return (
-    <div className="mx-auto w-full max-w-lg lg:max-w-none">
+    <div className="mx-auto h-80 w-full max-w-lg md:h-144 lg:max-w-none">
       <ResponsiveContainer width="100%">
         <RadarChart data={data} innerRadius={25}>
           <PolarGrid gridType="circle" stroke="#1f2937" />

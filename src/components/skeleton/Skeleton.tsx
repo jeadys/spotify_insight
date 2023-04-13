@@ -36,9 +36,9 @@ export default function Skeleton({ imageShape, imageSize, gridFlow, gridSize, co
 
   return (
     <div
-      className={clsx('grid animate-pulse grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5', {
-        '5xl:grid-cols-3': gridSize === 'compact',
-        '5xl:grid-cols-6': gridSize === 'broad',
+      className={clsx('grid animate-pulse', {
+        'grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 5xl:grid-cols-3': gridSize === 'compact',
+        'grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 5xl:grid-cols-6': gridSize === 'broad',
       })}
     >
       {skeletons}
