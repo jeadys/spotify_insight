@@ -1,4 +1,5 @@
-import { unstable_getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth'
+import { getSession } from 'next-auth/react'
 
 import { authOptions } from '@/auth/[...nextauth]'
 
@@ -8,8 +9,11 @@ type FetchWrapperProps = {
 }
 
 const fetchWrapper = async ({ url, method }: FetchWrapperProps) => {
-  const session = await unstable_getServerSession(authOptions)
-  if (!session) return null
+  const session = typeof window === 'undefined' ? await getServerSession(authOptions) : await getSession()
+
+  if (!session) {
+    throw new Error('No session available')
+  }
 
   try {
     const response = await fetch(url, {

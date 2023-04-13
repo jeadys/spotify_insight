@@ -1,10 +1,19 @@
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
+
 import GenreList from '@/components/list/GenreList'
 import { getTopArtists } from '@/server/api'
+import { useProfileFilterStore } from 'store/useProfileFilter'
 
-export default async function TopGenre() {
-  const topArtists = await getTopArtists('short_term', 50)
-  const topGenres = topArtists.items.map((artist) => artist.genres).flat()
-  const uniqueTopGenres = Array.from(new Set(topGenres)).slice(0, 6)
+export default function TopGenre() {
+  const term = useProfileFilterStore((state) => state.profileFilter)
 
-  return <GenreList genres={uniqueTopGenres} />
+  const { data } = useQuery({
+    queryKey: ['topArtists', term],
+    queryFn: () => getTopArtists(term, 12),
+    suspense: true,
+  })
+
+  return <GenreList genres={[...new Set(data?.items.flatMap((artist) => artist.genres))].slice(0, 12)} />
 }
