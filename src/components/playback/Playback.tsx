@@ -9,7 +9,6 @@ export default function TrackPlayer() {
   const { data: session } = useSession()
   const offset = usePlaybackStore((state) => state.offset)
   const trackQueue = usePlaybackStore((state) => state.queue)
-  const setPlayback = usePlaybackStore((state) => state.setPlayback)
 
   if (!session?.accessToken) return null
 
@@ -17,7 +16,7 @@ export default function TrackPlayer() {
     <SpotifyPlayer
       magnifySliderOnHover={false}
       callback={(state) => {
-        setPlayback(state.track.uri, trackQueue)
+        usePlaybackStore.setState({ offset: state.track.uri })
       }}
       layout="responsive"
       hideAttribution
