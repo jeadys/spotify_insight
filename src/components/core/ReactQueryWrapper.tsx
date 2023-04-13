@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
@@ -8,7 +10,17 @@ type Props = {
 }
 
 export default function ReactQueryWrapper({ children }: Props) {
-  const queryClient = new QueryClient()
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            staleTime: 10 * (60 * 1000), // 10 mins
+            cacheTime: 15 * (60 * 1000), // 15 mins
+          },
+        },
+      })
+  )
 
   return (
     <QueryClientProvider client={queryClient}>
