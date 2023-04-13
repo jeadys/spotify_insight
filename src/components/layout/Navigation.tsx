@@ -32,14 +32,13 @@ export default function Navigation() {
 
   return (
     <nav className="text-sm uppercase">
-      <ul className="flex w-full flex-row gap-10 py-5 text-white lg:justify-start">
-        <div>LOGO</div>
+      <ul className="flex w-full flex-row justify-end gap-5 py-5 text-white">
+        <div className="mr-auto">LOGO</div>
         {navigationItems.map((navigationItem) => (
-          <li
-            key={navigationItem.title}
-            className={'hidden  decoration-4 underline-offset-8 hover:underline hover:decoration-blue-400 lg:block'}
-          >
-            <Link href={navigationItem.link}>{navigationItem.title}</Link>
+          <li key={navigationItem.title} className={'hidden rounded-md hover:bg-gray-1100 lg:block'}>
+            <Link className="block p-2" href={navigationItem.link}>
+              {navigationItem.title}
+            </Link>
           </li>
         ))}
 
@@ -61,9 +60,9 @@ export default function Navigation() {
           </svg>
         </button>
 
-        <button className="ml-auto hidden lg:block" onClick={() => signOut()}>
+        {/* <button className="ml-auto hidden lg:block" onClick={() => signOut()}>
           Sign out
-        </button>
+        </button> */}
       </ul>
 
       {/* Dropdown menu */}
@@ -71,14 +70,18 @@ export default function Navigation() {
         <ul className="lg:hidden">
           <li>
             {navigationItems.map((navigationItem) => (
-              <Link key={navigationItem.title} href={navigationItem.link} className="block py-2 px-4 text-white hover:bg-gray-700">
+              <Link
+                key={navigationItem.title}
+                href={navigationItem.link}
+                className="block py-2 px-4 text-white hover:rounded-md hover:bg-gray-1100"
+              >
                 {navigationItem.title}
               </Link>
             ))}
           </li>
-          <button className="block py-2 px-4 text-white hover:bg-gray-700" onClick={() => signOut()}>
+          {/* <button className="block py-2 px-4 text-white hover:bg-gray-1100" onClick={() => signOut()}>
             Sign out
-          </button>
+          </button> */}
         </ul>
       )}
     </nav>

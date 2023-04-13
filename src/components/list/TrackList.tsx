@@ -45,7 +45,7 @@ export default function TrackList({ tracks, cover }: Props) {
                 <Link
                   key={track.artists[0].id}
                   href={`/artist/${track.artists[0].id}`}
-                  className="max-w-max text-sm text-gray-400 line-clamp-1 hover:underline"
+                  className="max-w-max text-gray-400 line-clamp-1 hover:underline"
                 >
                   {track.artists[0].name}
                 </Link>
@@ -54,10 +54,7 @@ export default function TrackList({ tracks, cover }: Props) {
 
             {track.album && (
               <td>
-                <Link
-                  href={`/album/${track.album.id}`}
-                  className="max-w-max text-sm text-gray-400 line-clamp-1 hover:underline album:hidden"
-                >
+                <Link href={`/album/${track.album.id}`} className="max-w-max text-gray-400 line-clamp-1 hover:underline album:hidden">
                   {track.album.name}
                 </Link>
               </td>

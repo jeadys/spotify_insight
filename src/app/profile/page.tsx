@@ -4,6 +4,7 @@ import { dehydrate, Hydrate } from '@tanstack/react-query'
 
 import getQueryClient from '@/components/core/getQueryClient'
 import ProfileFilter from '@/components/filter/ProfileFilter'
+import ProfileHeader from '@/components/header/ProfileHeader'
 import Section from '@/components/layout/Section'
 import RecentStream from '@/components/profile/RecentStream'
 import TopArtist from '@/components/profile/TopArtist'
@@ -20,6 +21,9 @@ export default async function page() {
 
   return (
     <>
+      {/* @ts-expect-error Server Component */}
+      <ProfileHeader />
+
       <ProfileFilter />
 
       <Hydrate state={dehydratedState}>

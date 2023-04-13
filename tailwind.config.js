@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       blur: {
-        'blur-xs': '2px',
+        'xs': '2px',
       },
       backgroundColor: {
         'gray-1100': '#23252d',
@@ -20,6 +20,9 @@ module.exports = {
         // Max values set to hide album and duration column in the track table
         'album': { 'max': '768px' },
         'duration': { 'max': '440px' },
+      },
+      height: {
+        '144': '36rem',
       },
       maxWidth: {
         '8xl': '90rem',
