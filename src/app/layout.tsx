@@ -1,14 +1,12 @@
 import '@/styles/globals.css'
 
-import { Saira } from '@next/font/google'
+import { Saira } from 'next/font/google'
 
 import NextAuthWrapper from '@/components/core/NextAuthWrapper'
 import ReactQueryWrapper from '@/components/core/ReactQueryWrapper'
 import ScrollToTop from '@/components/core/ScrollToTop'
 import Navigation from '@/components/layout/Navigation'
 import Playback from '@/components/playback/Playback'
-import UserProfileProvider from '@/providers/UserProfileProvider'
-import { getCurrentUsersProfile } from '@/server/api'
 
 const saira = Saira({
   subsets: ['latin'],
@@ -20,28 +18,24 @@ type Props = {
 }
 
 export default async function RootLayout({ children }: Props) {
-  const userProfile = await getCurrentUsersProfile()
-
   return (
     <html lang="en" className={saira.className}>
       <head />
       <body>
-        <ReactQueryWrapper>
-          <NextAuthWrapper>
-            <UserProfileProvider userProfile={userProfile}>
-              <ScrollToTop />
-              <div className="min-h-screen bg-gray-1300">
-                <div className="mx-auto min-h-screen max-w-7xl py-5 px-6 sm:px-10">
-                  <Navigation />
-                  <main className="grid-col grid gap-10">{children}</main>
-                </div>
+        <NextAuthWrapper>
+          <ReactQueryWrapper>
+            <ScrollToTop />
+            <div className="min-h-screen bg-gray-1300">
+              <div className="mx-auto min-h-screen max-w-7xl py-5 px-6 sm:px-10">
+                <Navigation />
+                <main className="grid-col grid gap-10">{children}</main>
               </div>
-              <div className="sticky bottom-0 z-20">
-                <Playback />
-              </div>
-            </UserProfileProvider>
-          </NextAuthWrapper>
-        </ReactQueryWrapper>
+            </div>
+            <div className="sticky bottom-0 z-20">
+              <Playback />
+            </div>
+          </ReactQueryWrapper>
+        </NextAuthWrapper>
       </body>
     </html>
   )
