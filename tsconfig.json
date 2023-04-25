@@ -23,7 +23,7 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/lib/*": ["lib/*"],
+      "@/utils/*": ["utils/*"],
       "@/auth/*": ["pages/api/auth/*"],
       "@/providers/*": ["providers/*"],
       "@/server/*": ["server/*"],
