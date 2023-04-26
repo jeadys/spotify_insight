@@ -10,7 +10,7 @@ type Props = {
   trackAudioFeatures: SpotifyApi.AudioFeaturesResponse
 }
 
-export default function TrackAudioProgress({ trackAudioFeatures }: Props) {
+export default function TrackAudioFeatureStatistics({ trackAudioFeatures }: Props) {
   return (
     <FeatureList>
       <FeatureItem title="BPM" value={Math.round(trackAudioFeatures.tempo)} />
