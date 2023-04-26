@@ -361,24 +361,52 @@ export const getCurrentUserSavedPlaylists = async (limit: number): Promise<Spoti
  *
  * GET /v1/recommendations
  * https://developer.spotify.com/get-recommendations/
- * @param {UsersTopTracksResponse[]} tracks The seeded tracks for the recommendations.
- * @param {number} limit Total amount of items to return
+ * @param {getRecommendationsBasedOnSeedsProps}
  * @returns {Promise}
  */
-export const getRecommendationsForTracks = async (
-  tracks: SpotifyApi.TrackObjectFull[],
-  limit: number
-): Promise<SpotifyApi.RecommendationsFromSeedsResponse> => {
-  const shuffledTracks = tracks.sort(() => 0.5 - Math.random())
-  const seedTracks = shuffledTracks
-    .slice(0, 5)
-    .map((track) => track.id)
-    .join(',')
-  const seedArtists = ''
-  const seedGenres = ''
 
+type getRecommendationsBasedOnSeedsProps = {
+  seedArtists: string[]
+  seedTracks: string[]
+  seedGenres: string[]
+  acousticness: { min: number; max: number }
+  danceability: { min: number; max: number }
+  energy: { min: number; max: number }
+  instrumentalness: { min: number; max: number }
+  popularity: { min: number; max: number }
+  valence: { min: number; max: number }
+  limit: number
+}
+export const getRecommendationsBasedOnSeeds = async ({
+  seedArtists,
+  seedTracks,
+  seedGenres,
+  acousticness: { min: minAcousticness, max: maxAcousticness },
+  danceability: { min: minDanceability, max: maxDanceability },
+  energy: { min: minEnergy, max: maxEnergy },
+  instrumentalness: { min: minInstrumentalness, max: maxInstrumentalness },
+  popularity: { min: minPopularity, max: maxPopularity },
+  valence: { min: minValence, max: maxValence },
+  limit,
+}: getRecommendationsBasedOnSeedsProps): Promise<SpotifyApi.RecommendationsFromSeedsResponse> => {
   return fetchWrapper({
-    url: `https://api.spotify.com/v1/recommendations?seed_tracks=${seedTracks}&seed_artists=${seedArtists}&seed_genres=${seedGenres}&limit=${limit}`,
+    url: `https://api.spotify.com/v1/recommendations?\
+seed_artists=${seedArtists}&\
+seed_tracks=${seedTracks}&\
+seed_genres=${seedGenres}&\
+min_acousticness=${minAcousticness}&\
+max_acousticness=${maxAcousticness}&\
+min_danceability=${minDanceability}&\
+max_danceability=${maxDanceability}&\
+min_energy=${minEnergy}&\
+max_energy=${maxEnergy}&\
+min_instrumentalness=${minInstrumentalness}&\
+max_instrumentalness=${maxInstrumentalness}&\
+min_popularity=${minPopularity}&\
+max_popularity=${maxPopularity}&\
+min_valence=${minValence}&\
+max_valence=${maxValence}&\
+limit=${limit}`,
     method: 'GET',
   })
 }
@@ -394,6 +422,19 @@ export const getRecommendationsForTracks = async (
  */
 export const getSearchItems = async (query: string, limit: number): Promise<SpotifyApi.SearchResponse> => {
   return fetchWrapper({ url: `https://api.spotify.com/v1/search?q=${query}&type=artist,album,track&limit=${limit}`, method: 'GET' })
+}
+
+/**
+ * Search for artists/albums/tracks/playlists/show/episode
+ *
+ * GET /v1/search
+ * https://developer.spotify.com/web-api/search-item/
+ * @param {string} query The search term
+ * @param {number} limit Total amount of items to return
+ * @returns {Promise}
+ */
+export const getSearchSeeds = async (query: string, limit: number): Promise<SpotifyApi.SearchResponse> => {
+  return fetchWrapper({ url: `https://api.spotify.com/v1/search?q=${query}&type=artist,track&limit=${limit}`, method: 'GET' })
 }
 
 export const getArtistBasedOnGenre = async (query: string, limit: number): Promise<SpotifyApi.SearchResponse> => {
