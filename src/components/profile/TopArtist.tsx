@@ -1,24 +1,17 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { getTopArtists } from '@/server/api'
-import { useProfileFilterStore } from 'store/useProfileFilter'
+import useTopArtists from '@/hooks/query/useTopArtists'
 
 export default function TopArtist() {
-  const term = useProfileFilterStore((state) => state.profileFilter)
-
-  const { data } = useQuery({
-    queryKey: ['topArtists', term],
-    queryFn: () => getTopArtists(term, 12),
-    suspense: true,
-  })
+  const topArtists = useTopArtists()
+  if (!topArtists?.items?.length) return <span className="text-white">No artists found</span>
 
   return (
     <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 5xl:grid-cols-3">
-      {data?.items.map((artist) => (
+      {topArtists.items.map((artist) => (
         <li key={artist.id} className="flex flex-row items-center gap-5">
           <Link href={`/artist/${artist.id}`}>
             <Image
@@ -31,7 +24,7 @@ export default function TopArtist() {
             />
           </Link>
 
-          <div className="flex flex-col">
+          <span className="flex flex-col">
             <Link href={`/artist/${artist.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
               {artist.name}
             </Link>
@@ -41,7 +34,7 @@ export default function TopArtist() {
                 {artist.genres[0]}
               </Link>
             )}
-          </div>
+          </span>
         </li>
       ))}
     </ul>

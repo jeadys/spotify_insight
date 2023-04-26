@@ -1,19 +1,26 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
+import Link from 'next/link'
 
-import GenreList from '@/components/list/GenreList'
-import { getTopArtists } from '@/server/api'
-import { useProfileFilterStore } from 'store/useProfileFilter'
+import useTopArtists from '@/hooks/query/useTopArtists'
 
 export default function TopGenre() {
-  const term = useProfileFilterStore((state) => state.profileFilter)
+  const topArtists = useTopArtists()
+  if (!topArtists?.items?.length) return <span className="text-white">No genre associations</span>
 
-  const { data } = useQuery({
-    queryKey: ['topArtists', term],
-    queryFn: () => getTopArtists(term, 12),
-    suspense: true,
-  })
+  const topGenres = [...new Set(topArtists.items.flatMap((artist) => artist.genres))].slice(0, 12)
 
-  return <GenreList genres={[...new Set(data?.items.flatMap((artist) => artist.genres))].slice(0, 12)} />
+  return (
+    <div className="flex flex-wrap gap-5">
+      {topGenres.map((genre) => (
+        <Link
+          key={genre}
+          href={`/genre/${genre}`}
+          className="max-w-max rounded-full bg-gray-1200 py-2 px-3 text-white line-clamp-1 hover:bg-gray-1100"
+        >
+          {genre}
+        </Link>
+      ))}
+    </div>
+  )
 }
