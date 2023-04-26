@@ -1,31 +1,30 @@
+import { Suspense } from 'react'
+
 import AlbumHeader from '@/components/header/AlbumHeader'
 import Section from '@/components/layout/Section'
-import TrackList from '@/components/list/TrackList'
+import AlbumTrackList from '@/components/track/AlbumTrackList'
+import SkeletonTrackList from '@/components/track/SkeletonTrackList'
 import { getAlbumById } from '@/server/api'
 
-type AlbumAccumulator = {
-  tracks: SpotifyApi.TrackObjectSimplified[]
-  trackIds: string[]
+type Params = {
+  params: {
+    albumId: string
+  }
 }
 
-export default async function Album({ params }: { params: { albumId: string } }) {
-  const album = await getAlbumById(params.albumId)
-
-  const albumTracks = album?.tracks.items.slice(0, 50).reduce<AlbumAccumulator>(
-    (accumulator, track) => {
-      accumulator.tracks.push(track)
-      accumulator.trackIds.push(track.id)
-      return accumulator
-    },
-    { tracks: [], trackIds: [] }
-  )
+export default async function Album({ params: { albumId } }: Params) {
+  const album = await getAlbumById(albumId)
 
   return (
     <>
-      <AlbumHeader album={album} />
+      {/* @ts-expect-error Server Component */}
+      <AlbumHeader albumId={albumId} />
 
       <Section title="Tracks" description={`Album tracks of ${album.name}`}>
-        <TrackList tracks={albumTracks.tracks} cover={album.images?.[2]?.url} />
+        <Suspense fallback={<SkeletonTrackList contentAmount={10} />}>
+          {/* @ts-expect-error Server Component */}
+          <AlbumTrackList albumId={albumId} cover={album.images?.[2]?.url} />
+        </Suspense>
       </Section>
 
       <Section title="Copyrights" description={`${album.name} released by ${album.label}`}>

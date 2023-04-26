@@ -1,25 +1,22 @@
+import { Suspense } from 'react'
+
+import GenreArtistList from '@/components/artist/GenreArtistList'
+import SkeletonArtistList from '@/components/artist/SkeletonArtistList'
 import Section from '@/components/layout/Section'
-import ArtistList from '@/components/list/ArtistList'
-import { getArtistBasedOnGenre } from '@/server/api'
 
-export default async function Genre({ params }: { params: { genreId: string } }) {
-  const genreArtists = await getArtistBasedOnGenre(params.genreId.replace(/%20/g, '-'), 50)
+type Params = {
+  params: {
+    genreId: string
+  }
+}
 
-  // FIGURE OUT HOW TO GET ACCURATE ARTISTS BASED ON GENRE.
-
+export default async function Genre({ params: { genreId } }: Params) {
   return (
-    <>
-      {genreArtists.artists && (
-        <>
-          <Section title={decodeURIComponent(params.genreId)} description="Associated artists">
-            <ArtistList
-              artists={genreArtists.artists.items
-                .filter((a) => a.genres.includes(decodeURIComponent(params.genreId)))
-                .sort((a, b) => b.popularity - a.popularity)}
-            />
-          </Section>
-        </>
-      )}
-    </>
+    <Section title={decodeURIComponent(genreId)} description="Associated artists">
+      <Suspense fallback={<SkeletonArtistList contentAmount={12} />}>
+        {/* @ts-expect-error Server Component */}
+        <GenreArtistList id={genreId} />
+      </Suspense>
+    </Section>
   )
 }

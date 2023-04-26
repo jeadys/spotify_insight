@@ -1,35 +1,57 @@
+import { Suspense } from 'react'
+
+import ArtistAlbumList from '@/components/album/ArtistAlbumList'
+import SkeletonAlbumList from '@/components/album/SkeletonAlbumList'
+import ArtistRelatedArtistList from '@/components/artist/ArtistRelatedArtistList'
+import SkeletonArtistList from '@/components/artist/SkeletonArtistList'
+import ArtistGenreList from '@/components/genre/ArtistGenreList'
+import SkeletonGenreList from '@/components/genre/SkeletonGenreList'
 import ArtistHeader from '@/components/header/ArtistHeader'
 import Section from '@/components/layout/Section'
-import AlbumList from '@/components/list/AlbumList'
-import ArtistList from '@/components/list/ArtistList'
-import GenreList from '@/components/list/GenreList'
-import TrackList from '@/components/list/TrackList'
-import { getArtistAlbums, getArtistById, getArtistRelatedArtists, getArtistTopTracks } from '@/server/api'
+import ArtistTrackList from '@/components/track/ArtistTrackList'
+import SkeletonTrackList from '@/components/track/SkeletonTrackList'
+import { getArtistById } from '@/server/api'
 
-export default async function Artist({ params }: { params: { artistId: string } }) {
-  const artist = await getArtistById(params.artistId)
-  const artistTopTracks = await getArtistTopTracks(params.artistId)
-  const artistAlbums = await getArtistAlbums(params.artistId, 12)
-  const artistRelatedArtists = await getArtistRelatedArtists(params.artistId)
+type Params = {
+  params: {
+    artistId: string
+  }
+}
+
+export default async function Artist({ params: { artistId } }: Params) {
+  const artist = await getArtistById(artistId)
 
   return (
     <>
-      <ArtistHeader artist={artist} />
+      {/* @ts-expect-error Server Component */}
+      <ArtistHeader artistId={artistId} />
 
       <Section title="Genres" description={`Associated with ${artist.name}`}>
-        <GenreList genres={artist.genres} />
+        <Suspense fallback={<SkeletonGenreList contentAmount={5} />}>
+          {/* @ts-expect-error Server Component */}
+          <ArtistGenreList artistId={artistId} />
+        </Suspense>
       </Section>
 
       <Section title="Tracks" description={`Released by ${artist.name}`}>
-        <TrackList tracks={artistTopTracks.tracks} />
+        <Suspense fallback={<SkeletonTrackList contentAmount={10} />}>
+          {/* @ts-expect-error Server Component */}
+          <ArtistTrackList artistId={artistId} />
+        </Suspense>
       </Section>
 
       <Section title="Albums" description={`Released by ${artist.name}`}>
-        <AlbumList albums={artistAlbums.items} />
+        <Suspense fallback={<SkeletonAlbumList contentAmount={12} />}>
+          {/* @ts-expect-error Server Component */}
+          <ArtistAlbumList artistId={artistId} />
+        </Suspense>
       </Section>
 
       <Section title="Fans Like" description={`Similar to ${artist.name}`}>
-        <ArtistList artists={artistRelatedArtists.artists} />
+        <Suspense fallback={<SkeletonArtistList contentAmount={12} />}>
+          {/* @ts-expect-error Server Component */}
+          <ArtistRelatedArtistList artistId={artistId} />
+        </Suspense>
       </Section>
     </>
   )

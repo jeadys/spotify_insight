@@ -1,26 +1,35 @@
+import { Suspense } from 'react'
+
+import SavedAlbumList from '@/components/album/SavedAlbumList'
+import SkeletonAlbumList from '@/components/album/SkeletonAlbumList'
+import FollowedArtistList from '@/components/artist/FollowedArtistList'
+import SkeletonArtistList from '@/components/artist/SkeletonArtistList'
 import Section from '@/components/layout/Section'
-import AlbumList from '@/components/list/AlbumList'
-import ArtistList from '@/components/list/ArtistList'
-import TrackList from '@/components/list/TrackList'
-import { getCurrentUserSavedTracks, getCurrentUserFollowedArtists, getCurrentUserSavedAlbums } from '@/server/api'
+import SavedTrackList from '@/components/track/SavedTrackList'
+import SkeletonTrackList from '@/components/track/SkeletonTrackList'
 
 export default async function Library() {
-  const savedTracks = await getCurrentUserSavedTracks(12)
-  const savedAlbums = await getCurrentUserSavedAlbums(12)
-  const followedArtists = await getCurrentUserFollowedArtists(12)
-
   return (
     <>
       <Section title="Saved Tracks">
-        <TrackList tracks={savedTracks.items.map(({ track }) => track)} />
+        <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>
+          {/* @ts-expect-error Server Component */}
+          <SavedTrackList />
+        </Suspense>
       </Section>
 
       <Section title="Saved Albums">
-        <AlbumList albums={savedAlbums.items.map(({ album }) => album)} />
+        <Suspense fallback={<SkeletonAlbumList contentAmount={12} />}>
+          {/* @ts-expect-error Server Component */}
+          <SavedAlbumList />
+        </Suspense>
       </Section>
 
       <Section title="Followed artists">
-        <ArtistList artists={followedArtists.artists.items} />
+        <Suspense fallback={<SkeletonArtistList contentAmount={12} />}>
+          {/* @ts-expect-error Server Component */}
+          <FollowedArtistList />
+        </Suspense>
       </Section>
     </>
   )
