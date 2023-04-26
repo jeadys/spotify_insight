@@ -6,7 +6,7 @@ import Link from 'next/link'
 import MetadataGrid from '@/components/analysis/MetadataGrid'
 import MetadataItem from '@/components/analysis/MetadataItem'
 import Header from '@/components/layout/Header'
-import { formatTrackDuration } from '@/lib/utils'
+import { formatTrackDuration } from '@/utils/formatTrackDuration'
 
 type Props = {
   track: SpotifyApi.SingleTrackResponse
@@ -21,6 +21,7 @@ export default function TrackHeader({ track }: Props) {
           width="0"
           height="0"
           sizes="100vw"
+          priority={true}
           className="h-52 w-52 rounded-md object-cover sm:h-60 sm:w-60"
         />
 
@@ -35,7 +36,7 @@ export default function TrackHeader({ track }: Props) {
 
       <MetadataGrid>
         <MetadataItem title="Duration" value={formatTrackDuration(track.duration_ms)} />
-        <MetadataItem title="Popularity" value={track.popularity} />
+        <MetadataItem title="Popularity" value={track.popularity / 10} />
       </MetadataGrid>
     </Header>
   )

@@ -1,29 +1,42 @@
+import { Suspense } from 'react'
+
+import SearchAlbumList from '@/components/album/SearchAlbumList'
+import SkeletonAlbumList from '@/components/album/SkeletonAlbumList'
+import SearchArtistList from '@/components/artist/SearchArtistList'
+import SkeletonArtistList from '@/components/artist/SkeletonArtistList'
 import Section from '@/components/layout/Section'
-import AlbumList from '@/components/list/AlbumList'
-import ArtistList from '@/components/list/ArtistList'
-import TrackList from '@/components/list/TrackList'
-import { getSearchItems } from '@/server/api'
+import SearchTrackList from '@/components/track/SearchTrackList'
+import SkeletonTrackList from '@/components/track/SkeletonTrackList'
 
-export default async function SearchResult({ params }: { params: { searchTerm: string } }) {
-  const searchResult = await getSearchItems(params.searchTerm, 12)
+type Params = {
+  params: {
+    searchTerm: string
+  }
+}
 
+export default async function SearchResult({ params: { searchTerm } }: Params) {
   return (
     <>
-      {searchResult.artists && searchResult.albums && searchResult.tracks && (
-        <>
-          <Section title="Artists">
-            <ArtistList artists={searchResult.artists.items} />
-          </Section>
+      <Section title="Artists" description={`Result based on ${searchTerm}`}>
+        <Suspense fallback={<SkeletonArtistList contentAmount={10} />}>
+          {/* @ts-expect-error Server Component */}
+          <SearchArtistList searchTerm={searchTerm} />
+        </Suspense>
+      </Section>
 
-          <Section title="Albums">
-            <AlbumList albums={searchResult.albums.items} />
-          </Section>
+      <Section title="Albums" description={`Result based on ${searchTerm}`}>
+        <Suspense fallback={<SkeletonAlbumList contentAmount={10} />}>
+          {/* @ts-expect-error Server Component */}
+          <SearchAlbumList searchTerm={searchTerm} />
+        </Suspense>
+      </Section>
 
-          <Section title="Tracks">
-            <TrackList tracks={searchResult.tracks.items} />
-          </Section>
-        </>
-      )}
+      <Section title="Tracks" description={`Result based on ${searchTerm}`}>
+        <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>
+          {/* @ts-expect-error Server Component */}
+          <SearchTrackList searchTerm={searchTerm} />
+        </Suspense>
+      </Section>
     </>
   )
 }

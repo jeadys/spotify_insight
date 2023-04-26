@@ -1,8 +1,10 @@
 'use client'
 
-import FeatureGrid from '@/components/analysis/FeatureGrid'
 import FeatureItem from '@/components/analysis/FeatureItem'
-import { calculateTotalBars, calculateTotalBeats, getMusicKeyOfTrack } from '@/lib/utils'
+import FeatureList from '@/components/analysis/FeatureList'
+import { calculateTotalBars } from '@/utils/calculateTotalBars'
+import { calculateTotalBeats } from '@/utils/calculateTotalBeats'
+import { formatMusicKey } from '@/utils/formatMusicKey'
 
 type Props = {
   trackAudioFeatures: SpotifyApi.AudioFeaturesResponse
@@ -10,7 +12,7 @@ type Props = {
 
 export default function TrackAudioProgress({ trackAudioFeatures }: Props) {
   return (
-    <FeatureGrid>
+    <FeatureList>
       <FeatureItem title="BPM" value={Math.round(trackAudioFeatures.tempo)} />
       <FeatureItem
         title="Bars"
@@ -18,9 +20,9 @@ export default function TrackAudioProgress({ trackAudioFeatures }: Props) {
       />
       <FeatureItem title="Beats" value={calculateTotalBeats(trackAudioFeatures.duration_ms, trackAudioFeatures.tempo)} />
       <FeatureItem title="Signature" value={`${trackAudioFeatures.time_signature}/4`} />
-      <FeatureItem title="Key" value={getMusicKeyOfTrack(trackAudioFeatures.key)} />
+      <FeatureItem title="Key" value={formatMusicKey(trackAudioFeatures.key)} />
       <FeatureItem title="Mode" value={trackAudioFeatures.mode ? 'Major' : 'Minor'} />
       <FeatureItem title="dB" value={trackAudioFeatures.loudness.toFixed(1)} />
-    </FeatureGrid>
+    </FeatureList>
   )
 }

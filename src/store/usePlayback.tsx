@@ -1,13 +1,21 @@
 import { create } from 'zustand'
 
-type PlaybackType = {
+type PlaybackState = {
   offset: string
   queue: string[]
-  setPlayback: (trackOffset: string, trackQueue: string[]) => void
 }
 
-export const usePlaybackStore = create<PlaybackType>((set) => ({
+type PlaybackActions = {
+  setPlayback: (offset: string, queue: string[]) => void
+}
+
+const initialState: PlaybackState = {
   offset: '',
   queue: [],
-  setPlayback: (trackOffset: string, trackQueue: string[]) => set(() => ({ offset: trackOffset, queue: trackQueue })),
+}
+
+export const usePlaybackStore = create<PlaybackState & PlaybackActions>()((set) => ({
+  ...initialState,
+
+  setPlayback: (offset: string, queue: string[]) => set(() => ({ offset: offset, queue: queue })),
 }))

@@ -2,23 +2,37 @@
 
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts'
 
-const ChartNames = ['danceability', 'energy', 'speechiness', 'acousticness', 'valence', 'liveness'] as const
-
-type ChartName = typeof ChartNames[number]
-
-type ChartProps = {
-  name: ChartName
-  value: number
-}
-
 type Props = {
   trackAudioFeatures: SpotifyApi.AudioFeaturesResponse
 }
 
 export default function TrackAudioFeatureChart({ trackAudioFeatures }: Props) {
-  const data: ChartProps[] = Object.entries(trackAudioFeatures)
-    .filter(([name]) => ChartNames.includes(name as ChartName))
-    .map(([name, value]) => ({ name: name as ChartName, value }))
+  const data = [
+    {
+      name: 'danceability',
+      value: trackAudioFeatures.danceability,
+    },
+    {
+      name: 'energy',
+      value: trackAudioFeatures.energy,
+    },
+    {
+      name: 'speechiness',
+      value: trackAudioFeatures.speechiness,
+    },
+    {
+      name: 'acousticness',
+      value: trackAudioFeatures.acousticness,
+    },
+    {
+      name: 'liveness',
+      value: trackAudioFeatures.liveness,
+    },
+    {
+      name: 'valence',
+      value: trackAudioFeatures.valence,
+    },
+  ]
 
   return (
     <div className="mx-auto h-80 w-full max-w-lg md:h-144 lg:max-w-none">

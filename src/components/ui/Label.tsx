@@ -21,7 +21,7 @@ export default function Label({ value, icon, className = '' }: Props) {
   })()
 
   return (
-    <span className={`mt-2 max-w-max rounded-md bg-gray-1200 px-2 py-1 text-xs text-white ${className}`}>
+    <span className={`mt-2 mr-2 max-w-max rounded-md bg-gray-1200 px-2 py-1 text-xs text-white ${className}`}>
       {iconComponent}
       {value}
     </span>

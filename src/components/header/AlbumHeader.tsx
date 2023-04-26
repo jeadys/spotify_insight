@@ -1,5 +1,3 @@
-'use client'
-
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,21 +5,25 @@ import Link from 'next/link'
 import MetadataGrid from '@/components/analysis/MetadataGrid'
 import MetadataItem from '@/components/analysis/MetadataItem'
 import Header from '@/components/layout/Header'
+import { getAlbumById } from '@/server/api'
 
 type Props = {
-  album: SpotifyApi.SingleAlbumResponse
+  albumId: string
 }
 
-export default function AlbumHeader({ album }: Props) {
+export default async function AlbumHeader({ albumId }: Props) {
+  const album = await getAlbumById(albumId)
+
   return (
     <Header>
       <div className="flex flex-col items-center gap-4 sm:flex-row">
         <Image
-          src={album.images.length && album.images[0] ? album.images[0].url : '/images/nocover.webp'}
+          src={album.images?.[1]?.url || '/images/nocover.webp'}
           alt={album.name}
           width="0"
           height="0"
           sizes="100vw"
+          priority={true}
           className="h-52 w-52 rounded-md object-cover sm:h-60 sm:w-60"
         />
 
@@ -35,9 +37,9 @@ export default function AlbumHeader({ album }: Props) {
       </div>
 
       <MetadataGrid>
-        <MetadataItem title="Tracks" value={album.total_tracks} />
         <MetadataItem title="Released" value={dayjs(album.release_date).format('DD/MM/YYYY')} />
-        <MetadataItem title="Popularity" value={album.popularity} />
+        <MetadataItem title="Tracks" value={album.total_tracks} />
+        <MetadataItem title="Popularity" value={album.popularity / 10} />
       </MetadataGrid>
     </Header>
   )

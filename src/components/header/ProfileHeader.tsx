@@ -15,6 +15,7 @@ export default async function ProfileHeader() {
           width="0"
           height="0"
           sizes="100vw"
+          priority={true}
           className="h-52 w-52 flex-grow-0 rounded-full object-cover sm:h-60 sm:w-60"
         />
 

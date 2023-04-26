@@ -2,7 +2,8 @@ import NextAuth from 'next-auth'
 import type { NextAuthOptions } from 'next-auth'
 import type { JWT } from 'next-auth/jwt'
 import SpotifyProvider from 'next-auth/providers/spotify'
-import { generateRandomString } from '@/lib/utils'
+
+import { generateRandomString } from '@/utils/generateRandomString'
 
 const clientId = process.env.NEXT_PUBLIC_CLIENT_ID!
 const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET!
@@ -23,37 +24,31 @@ const queryParamsAuthorize = new URLSearchParams({
  * `accessToken` and `accessTokenExpires`. If an error occurs,
  * returns the old token and an error property
  */
-export async function refreshAccessToken(token: JWT) {
+async function refreshAccessToken(token: JWT): Promise<JWT> {
   try {
-    const queryParamsRefresh = new URLSearchParams({
-      client_id: clientId,
-      client_secret: clientSecret,
+    const basicAuth = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
+
+    const requestBody = new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: token.refreshToken!,
-    })
+    }).toString()
 
-    const response = await fetch(`https://accounts.spotify.com/api/token?${queryParamsRefresh}`, {
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
       headers: {
+        Authorization: `Basic ${basicAuth}`,
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      method: 'POST',
+      body: requestBody,
     })
 
-    const refreshedTokens = await response.json()
-
-    if (!response.ok) {
-      throw refreshedTokens
-    }
-
+    const data = await response.json()
     return {
       ...token,
-      accessToken: refreshedTokens.access_token,
-      accessTokenExpires: Date.now() + refreshedTokens.expires_at * 1000,
-      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken, // Fall back to old refresh token
+      accessToken: data.access_token,
+      accessTokenExpires: Date.now() + data.expires_in * 1000,
     }
   } catch (error) {
-    console.error(error)
-
     return {
       ...token,
       error: 'RefreshAccessTokenError',
@@ -77,28 +72,27 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, account, user }) {
       if (account && user) {
         return {
-          ...token,
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
-          accessTokenExpires: account.expires_at! * 1000, // expiry time in miliseconds
+          accessTokenExpires: account.expires_at * 1000,
           user,
         }
       }
 
       // Return previous token if the access token has not yet expired
-      if (token.accessTokenExpires) {
-        if (Date.now() < token.accessTokenExpires) {
-          return token
-        }
+      if (token.accessTokenExpires && Date.now() < token.accessTokenExpires) {
+        return token
       }
 
       // Access token has expired, so we need to refresh it...
-      return await refreshAccessToken(token)
+      // return await refreshAccessToken(token)
+      const newToken = await refreshAccessToken(token)
+      return newToken
     },
     async session({ session, token }) {
       session.accessToken = token.accessToken
-      session.refreshToken = token.refreshToken
       session.error = token.error
+      session.user = token.user
       return session
     },
   },
