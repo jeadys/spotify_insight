@@ -14,3 +14,111 @@ html, body{
 .musicbar:nth-child(3) {
   animation-delay: -3700ms;
 }
+
+#root {
+  max-width: 500px;
+  padding: 12px;
+  margin: auto;
+}
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrapper {
+  width: calc(100% + 32px);
+  margin: 0 calc(32px / -2);
+  position: absolute;
+  height: 32px;
+}
+.control-wrapper {
+  width: 100%;
+  position: absolute;
+  height: 32px;
+}
+.input {
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+  appearance: none;
+  height: 100%;
+  opacity: 0;
+  z-index: 3;
+  padding: 0;
+}
+.input::-ms-track {
+  appearance: none;
+  background: transparent;
+  border: transparent;
+}
+.input::-moz-range-track {
+  appearance: none;
+  background: transparent;
+  border: transparent;
+}
+.input:focus::-webkit-slider-runnable-track {
+  appearance: none;
+  background: transparent;
+  border: transparent;
+}
+.input::-ms-thumb {
+  appearance: none;
+  pointer-events: all;
+  width: 32px;
+  height: 32px;
+  border-radius: 0px;
+  border: 0 none;
+  cursor: grab;
+  background-color: red;
+}
+.input::-ms-thumb:active {
+  cursor: grabbing;
+}
+.input::-moz-range-thumb {
+  appearance: none;
+  pointer-events: all;
+  width: 32px;
+  height: 32px;
+  border-radius: 0px;
+  border: 0 none;
+  cursor: grab;
+  background-color: red;
+}
+.input::-moz-range-thumb:active {
+  cursor: grabbing;
+}
+.input::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: all;
+  width: 32px;
+  height: 32px;
+  border-radius: 0px;
+  border: 0 none;
+  cursor: grab;
+  background-color: red;
+}
+.input::-webkit-slider-thumb:active {
+  cursor: grabbing;
+}
+.rail {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 6px;
+  border-radius: 3px;
+}
+.inner-rail {
+  position: absolute;
+  height: 100%;
+}
+.control {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  margin-left: calc(32px / -2);
+  transform: translate3d(0, -50%, 0);
+  z-index: 2;
+}
