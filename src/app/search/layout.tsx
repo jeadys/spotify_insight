@@ -8,7 +8,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <>
-      <Section title="Browse catalog">
+      <Section title="Browse catalog" description="Find artists, albums and tracks">
         <Search />
       </Section>
       {children}
