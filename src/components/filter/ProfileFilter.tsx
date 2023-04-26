@@ -24,7 +24,7 @@ export default function ProfileFilter() {
   ]
 
   const setProfileFilter = useProfileFilterStore((state) => state.setProfileFilter)
-  const term = useProfileFilterStore((state) => state.profileFilter)
+  const term = useProfileFilterStore((state) => state.term)
 
   return (
     <div className="flex flex-row gap-5">
@@ -35,7 +35,7 @@ export default function ProfileFilter() {
           className={`${
             term === profileFilterItem.term ? 'text-white underline decoration-blue-300' : 'hover:text-white'
           } rounded-md p-2 text-sm font-semibold uppercase text-gray-400 decoration-4 underline-offset-8`}
-          onClick={() => setProfileFilter(profileFilterItem.term)}
+          onClick={() => setProfileFilter(profileFilterItem.term, profileFilterItem.title)}
         >
           {profileFilterItem.title}
         </button>
