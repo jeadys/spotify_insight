@@ -1,10 +1,11 @@
 'use client'
 
 import type { ReactElement } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { signOut } from 'next-auth/react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Navigation() {
   type NavigationProps = {
@@ -28,10 +29,15 @@ export default function Navigation() {
     },
   ]
 
+  const pathname = usePathname()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
+  useEffect(() => {
+    setIsDropdownOpen(false)
+  }, [pathname])
+
   return (
-    <nav className="text-sm uppercase">
+    <nav className="relative text-sm uppercase">
       <ul className="flex w-full flex-row justify-end gap-5 py-5 text-white">
         <div className="mr-auto">LOGO</div>
         {navigationItems.map((navigationItem) => (
@@ -60,25 +66,21 @@ export default function Navigation() {
           </svg>
         </button>
 
-        {/* <button className="ml-auto hidden lg:block" onClick={() => signOut()}>
+        <button className="ml-auto hidden lg:block" onClick={() => signOut()}>
           Sign out
-        </button> */}
+        </button>
       </ul>
 
       {/* Dropdown menu */}
       {isDropdownOpen && (
-        <ul className="lg:hidden">
-          <li>
-            {navigationItems.map((navigationItem) => (
-              <Link
-                key={navigationItem.title}
-                href={navigationItem.link}
-                className="block py-2 px-4 text-white hover:rounded-md hover:bg-gray-1100"
-              >
+        <ul className="absolute right-0 z-30 w-1/2 max-w-max rounded-md bg-gray-1200 lg:hidden">
+          {navigationItems.map((navigationItem) => (
+            <li key={navigationItem.title}>
+              <Link href={navigationItem.link} className="block py-2 px-4 text-white hover:rounded-md hover:bg-gray-1100">
                 {navigationItem.title}
               </Link>
-            ))}
-          </li>
+            </li>
+          ))}
           {/* <button className="block py-2 px-4 text-white hover:bg-gray-1100" onClick={() => signOut()}>
             Sign out
           </button> */}
