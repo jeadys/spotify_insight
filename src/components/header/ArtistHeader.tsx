@@ -1,15 +1,17 @@
-'use client'
-
 import Image from 'next/image'
 
 import MetadataGrid from '@/components/analysis/MetadataGrid'
 import MetadataItem from '@/components/analysis/MetadataItem'
 import Header from '@/components/layout/Header'
+import { getArtistById } from '@/server/api'
 
 type Props = {
-  artist: SpotifyApi.SingleArtistResponse
+  artistId: string
 }
-export default function ArtistHeader({ artist }: Props) {
+
+export default async function ArtistHeader({ artistId }: Props) {
+  const artist = await getArtistById(artistId)
+
   return (
     <Header>
       <div className="flex flex-col items-center gap-4 sm:flex-row">
@@ -19,7 +21,8 @@ export default function ArtistHeader({ artist }: Props) {
           width="0"
           height="0"
           sizes="100vw"
-          className="h-52 w-52 flex-grow-0 rounded-full object-cover sm:h-60 sm:w-60"
+          priority={true}
+          className="h-52 w-52  rounded-full object-cover sm:h-60 sm:w-60"
         />
 
         <div className="capitalize text-white">
