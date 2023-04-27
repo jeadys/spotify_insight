@@ -16,7 +16,7 @@ export default function Search() {
   const router = useRouter()
 
   useEffect(() => {
-    router.replace(`search/${debouncedSearch}`)
+    router.replace(!debouncedSearch ? 'search' : `search/${debouncedSearch}`)
   }, [router, debouncedSearch])
 
   return (
