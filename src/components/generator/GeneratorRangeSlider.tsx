@@ -1,8 +1,9 @@
 'use client'
 
 import { useStore } from '@/hooks/useStore'
-import type { AttributeType } from 'store/useAttribute'
-import { useAttributeStore } from 'store/useAttribute'
+import type { AttributeType } from 'store/useGenerator'
+import { initialGeneratorState } from 'store/useGenerator'
+import { useGeneratorStore } from 'store/useGenerator'
 
 type Props = {
   title: AttributeType
@@ -14,10 +15,10 @@ type Props = {
 }
 
 export default function GeneratorSlider({ title, description, min, max, step, gap }: Props) {
-  const setRangeValue = useAttributeStore((state) => state.setRangeValue)
-
-  const minValue = useStore(useAttributeStore, (state) => state[title].min) || min
-  const maxValue = useStore(useAttributeStore, (state) => state[title].max) || max
+  const setRangeValue = useGeneratorStore((state) => state.setRangeValue)
+  // Custom useStore hook needed for persist storage to work with NextJS Hydration
+  const minValue = useStore(useGeneratorStore, (state) => state[title].min) ?? initialGeneratorState[title].min
+  const maxValue = useStore(useGeneratorStore, (state) => state[title].max) ?? initialGeneratorState[title].max
 
   const minPos = ((minValue - min) / (max - min)) * 100
   const maxPos = ((maxValue - min) / (max - min)) * 100

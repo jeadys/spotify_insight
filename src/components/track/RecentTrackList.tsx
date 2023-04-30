@@ -22,7 +22,7 @@ export default async function RecentTrackList() {
   const trackQueue = recentTracks.items.map(({ track }) => track.uri)
 
   const tracksByDay = recentTracks.items.reduce((acc: TracksByDay, { track, played_at }, index) => {
-    const date = dayjs(played_at).format('DD/MM/YYYY')
+    const date = dayjs(played_at).format('MMMM DD, YYYY')
     if (!acc[date]) {
       acc[date] = []
     }

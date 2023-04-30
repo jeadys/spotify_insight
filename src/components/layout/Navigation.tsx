@@ -27,6 +27,10 @@ export default function Navigation() {
       title: 'Library',
       link: '/library',
     },
+    {
+      title: 'Generator',
+      link: '/generator',
+    },
   ]
 
   const pathname = usePathname()

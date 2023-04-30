@@ -1,21 +1,26 @@
+import React from 'react'
+
 import Image from 'next/image'
 
 import PlaybackHandle from '@/components/playback/PlaybackHandle'
-import TrackAlbum from '@/components/track/TrackAlbum'
 import TrackArtist from '@/components/track/TrackArtist'
 import TrackDuration from '@/components/track/TrackDuration'
 import TrackName from '@/components/track/TrackName'
-import { getCurrentUserSavedTracks } from '@/server/api'
+import { getPlaylistTracks } from '@/server/api'
 
-export default async function SavedTrackList() {
-  const savedTracks = await getCurrentUserSavedTracks(12)
-  if (!savedTracks?.items?.length) return <span className="text-white">No tracks found</span>
+type Props = {
+  playlistId: string
+}
 
-  const trackQueue = savedTracks.items.map(({ track }) => track.uri)
+export default async function PlaylistTrackList({ playlistId }: Props) {
+  const playlistTracks = await getPlaylistTracks(playlistId, 50)
+  if (!playlistTracks?.items?.length) return <span className="text-white">No tracks found</span>
+
+  const trackQueue = playlistTracks.items.map(({ track }) => track.uri)
 
   return (
     <ul className="w-full">
-      {savedTracks.items.map(({ track }) => (
+      {playlistTracks.items.map(({ track }) => (
         <li key={track.id} className="group flex items-center gap-5 p-2 hover:bg-gray-1200">
           <div className="relative flex flex-shrink-0 items-center justify-center">
             <Image
@@ -34,8 +39,6 @@ export default async function SavedTrackList() {
             <TrackName trackId={track.id} trackName={track.name} />
             <TrackArtist artistId={track.artists[0].id} artistName={track.artists[0].name} />
           </span>
-
-          <TrackAlbum albumId={track.album.id} albumName={track.album.name} />
 
           <TrackDuration trackDuration={track.duration_ms} />
         </li>

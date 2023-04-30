@@ -6,6 +6,9 @@ declare module 'next-auth' {
   interface Session extends DefaultSession {
     accessToken?: string
     error?: string
+    user: {
+      id?: string
+    } & DefaultSession['user']
   }
   interface Account extends NextAuthAccount {
     expires_at: number
@@ -18,6 +21,7 @@ declare module 'next-auth/jwt' {
     refreshToken?: string
     accessTokenExpires?: number
     error?: string
+    id?: string
     user?: Session['user']
   }
 }
