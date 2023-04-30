@@ -1,4 +1,6 @@
+import GeneratorCreate from '@/components/generator/GeneratorCreate'
 import GeneratorRangeSlider from '@/components/generator/GeneratorRangeSlider'
+import GeneratorReset from '@/components/generator/GeneratorReset'
 import GeneratorSearch from '@/components/generator/GeneratorSearch'
 import GeneratorSeed from '@/components/generator/GeneratorSeed'
 import Section from '@/components/layout/Section'
@@ -7,9 +9,10 @@ export default async function Generator() {
   return (
     <>
       <Section title="Seeds" description="Seeds based on artists and tracks">
-        <GeneratorSearch>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <GeneratorSearch />
           <GeneratorSeed />
-        </GeneratorSearch>
+        </div>
       </Section>
 
       <Section title="Attributes" description="Fine tune based on attributes.">
@@ -64,6 +67,11 @@ export default async function Generator() {
           />
         </div>
       </Section>
+
+      <div className="flex flex-wrap justify-between gap-5">
+        <GeneratorCreate />
+        <GeneratorReset />
+      </div>
     </>
   )
 }

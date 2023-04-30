@@ -10,6 +10,7 @@ const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET!
 const state = generateRandomString(16)
 const scope = `user-read-private user-read-email user-top-read 
                user-follow-read user-follow-modify user-library-read user-library-modify
+               playlist-modify-public playlist-modify-private
                user-read-playback-state user-modify-playback-state streaming user-read-recently-played`
 
 const queryParamsAuthorize = new URLSearchParams({
@@ -75,6 +76,7 @@ export const authOptions: NextAuthOptions = {
           accessToken: account.access_token,
           refreshToken: account.refresh_token,
           accessTokenExpires: account.expires_at * 1000,
+          id: account.userId,
           user,
         }
       }
@@ -92,6 +94,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       session.accessToken = token.accessToken
       session.error = token.error
+      session.user.id = token.id
       session.user = token.user
       return session
     },

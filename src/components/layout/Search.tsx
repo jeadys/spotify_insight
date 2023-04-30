@@ -4,10 +4,9 @@ import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
+import SearchInput from '@/components/layout/SearchInput'
 import useDebounce from '@/hooks/useDebounce'
 import useFocus from '@/hooks/useFocus'
-
-import SearchInput from './SearchInput'
 
 export default function Search() {
   const [search, setSearch] = useState('')
@@ -19,12 +18,5 @@ export default function Search() {
     router.replace(!debouncedSearch ? 'search' : `search/${debouncedSearch}`)
   }, [router, debouncedSearch])
 
-  return (
-    <SearchInput
-      value={search}
-      placeholder="What do you want to listen to?"
-      inputRef={inputRef}
-      onChange={(e) => setSearch(e.target.value)}
-    />
-  )
+  return <SearchInput value={search} placeholder="What do you want to listen to?" inputRef={inputRef} setSearch={setSearch} />
 }
