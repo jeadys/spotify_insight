@@ -1,56 +1,48 @@
 'use client'
 
-import { XCircleIcon } from '@heroicons/react/solid'
+import { XIcon } from '@heroicons/react/solid'
 
 import { useStore } from '@/hooks/useStore'
-import { useSeedStore } from 'store/useSeed'
+import { initialGeneratorState, useGeneratorStore } from 'store/useGenerator'
 
 export default function GeneratorSeed() {
-  const removeSeed = useSeedStore((state) => state.removeSeed)
+  const removeSeed = useGeneratorStore((state) => state.removeSeed)
   // Custom useStore hook needed for persist storage to work with NextJS Hydration
-  const seedCount = useStore(useSeedStore, (state) => state.seedCount) || 0
-  const artistSeed = useStore(useSeedStore, (state) => state.artist) || []
-  const trackSeeds = useStore(useSeedStore, (state) => state.track) || []
+  const state = useStore(useGeneratorStore, (state) => state) ?? initialGeneratorState
 
   return (
-    <>
-      <h4 className="mb-5 text-xl text-white">{seedCount} / 5 seeds used</h4>
+    <div className="flex flex-col gap-5">
+      <h4 className="text-lg text-white">
+        {state.seedCount} of 5 seeds <span className="block text-sm text-blue-300">At least one required</span>
+      </h4>
 
-      <p className="font-bold">Artist Seeds</p>
-      {artistSeed.length ? (
+      <p className="mt-5 font-medium text-white">Artists</p>
+      {state.artist.length ? (
         <ul className="flex flex-wrap items-center gap-2 text-white">
-          {artistSeed.map((artist) => (
-            <li
-              key={artist.id}
-              onClick={() => removeSeed('artist', artist.id)}
-              className="flex items-center gap-2 rounded-md bg-gray-1200 p-2"
-            >
-              <XCircleIcon className="h-6 w-6 hover:cursor-pointer hover:text-blue-300" />
+          {state.artist.map((artist) => (
+            <li key={artist.id} className="flex items-center gap-2 rounded-md bg-gray-1200 p-2">
+              <XIcon onClick={() => removeSeed('artist', artist.id)} className="h-6 w-6 hover:cursor-pointer" />
               {artist.name}
             </li>
           ))}
         </ul>
       ) : (
-        <p>None</p>
+        <p className="my-2 text-white">No seeds</p>
       )}
 
-      <p className="font-bold">Track Seeds</p>
-      {trackSeeds.length ? (
+      <p className="font-medium text-white">Tracks</p>
+      {state.track.length ? (
         <ul className="flex flex-wrap items-center gap-2 text-white">
-          {trackSeeds.map((track) => (
-            <li
-              key={track.id}
-              onClick={() => removeSeed('track', track.id)}
-              className="flex items-center gap-2 rounded-md bg-gray-1200 p-2"
-            >
-              <XCircleIcon className="h-6 w-6 hover:cursor-pointer hover:text-blue-300" />
+          {state.track.map((track) => (
+            <li key={track.id} className="flex items-center gap-2 rounded-md bg-gray-1200 p-2">
+              <XIcon onClick={() => removeSeed('track', track.id)} className="h-6 w-6 hover:cursor-pointer" />
               {track.name}
             </li>
           ))}
         </ul>
       ) : (
-        <p>None</p>
+        <p className="my-2 text-white">No seeds</p>
       )}
-    </>
+    </div>
   )
 }
