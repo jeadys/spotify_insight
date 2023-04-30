@@ -30,10 +30,10 @@ export default async function SavedTrackList() {
             <PlaybackHandle uri={track.uri} queue={trackQueue} />
           </div>
 
-          <td className="flex-grow">
+          <span className="flex-grow">
             <TrackName trackId={track.id} trackName={track.name} />
             <TrackArtist artistId={track.artists[0].id} artistName={track.artists[0].name} />
-          </td>
+          </span>
 
           <TrackAlbum albumId={track.album.id} albumName={track.album.name} />
 

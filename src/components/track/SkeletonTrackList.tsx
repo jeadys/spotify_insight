@@ -12,7 +12,7 @@ export default function TrackSkeleton({ contentAmount }: Props) {
         <span className="h-4 w-32 rounded-md bg-gray-1100"></span>
       </span>
 
-      <td className="h-4 w-16 rounded-md bg-gray-1100"></td>
+      <span className="h-4 w-16 rounded-md bg-gray-1100"></span>
     </li>
   ))
 

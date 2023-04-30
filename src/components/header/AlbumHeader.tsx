@@ -37,7 +37,7 @@ export default async function AlbumHeader({ albumId }: Props) {
       </div>
 
       <MetadataGrid>
-        <MetadataItem title="Released" value={dayjs(album.release_date).format('DD/MM/YYYY')} />
+        <MetadataItem title="Released" value={dayjs(album.release_date).format('MMMM DD, YYYY')} />
         <MetadataItem title="Tracks" value={album.total_tracks} />
         <MetadataItem title="Popularity" value={album.popularity / 10} />
       </MetadataGrid>
