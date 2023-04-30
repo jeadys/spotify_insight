@@ -6,9 +6,10 @@ import { authOptions } from '@/auth/[...nextauth]'
 type FetchWrapperProps = {
   url: string
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+  body?: any
 }
 
-const fetchWrapper = async ({ url, method }: FetchWrapperProps) => {
+const fetchWrapper = async ({ url, method, body }: FetchWrapperProps) => {
   const session = typeof window === 'undefined' ? await getServerSession(authOptions) : await getSession()
 
   if (!session) {
@@ -17,7 +18,7 @@ const fetchWrapper = async ({ url, method }: FetchWrapperProps) => {
 
   try {
     const response = await fetch(url, {
-      method,
+      method: method,
       cache: 'default',
       next: {
         revalidate: 3600,
@@ -26,6 +27,7 @@ const fetchWrapper = async ({ url, method }: FetchWrapperProps) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${session.accessToken}`,
       },
+      body: JSON.stringify(body),
     })
 
     if (!response.ok) throw new Error(`Request to ${url} resulted in a ${response.status}: ${response.statusText}`)
@@ -76,6 +78,18 @@ export const getAlbumTracks = async (albumId: string, limit: number): Promise<Sp
  */
 export const getPlaylistById = async (playlistId: string): Promise<SpotifyApi.SinglePlaylistResponse> => {
   return fetchWrapper({ url: `https://api.spotify.com/v1/playlists/${playlistId}`, method: 'GET' })
+}
+
+/**
+ * Get a playlist's tracks
+ *
+ * GET /v1/users/{user_id}/playlists/{playlist_id}/tracks
+ * https://developer.spotify.com/web-api/get-playlists-tracks/
+ * @param {string} playlistId The Spotify ID for the playlist
+ * @returns {Promise}
+ */
+export const getPlaylistTracks = async (playlistId: string, limit: number): Promise<SpotifyApi.PlaylistTrackResponse> => {
+  return fetchWrapper({ url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?limit=${limit}`, method: 'GET' })
 }
 
 /**
@@ -356,59 +370,86 @@ export const getCurrentUserSavedPlaylists = async (limit: number): Promise<Spoti
   return fetchWrapper({ url: `https://api.spotify.com/v1/me/playlists?limit=${limit}`, method: 'GET' })
 }
 
+type getRecommendationsBasedOnSeedsProps = {
+  seedArtists: string[]
+  seedTracks: string[]
+  targetAcousticness: number
+  targetDanceability: number
+  targetEnergy: number
+  targetInstrumentalness: number
+  targetPopularity: number
+  targetValence: number
+  limit: number
+}
+
 /**
  * Get recommendations based on seeds
  *
  * GET /v1/recommendations
  * https://developer.spotify.com/get-recommendations/
- * @param {getRecommendationsBasedOnSeedsProps}
+ * @param {object} getRecommendationsBasedOnSeedsProps Object
  * @returns {Promise}
  */
-
-type getRecommendationsBasedOnSeedsProps = {
-  seedArtists: string[]
-  seedTracks: string[]
-  seedGenres: string[]
-  acousticness: { min: number; max: number }
-  danceability: { min: number; max: number }
-  energy: { min: number; max: number }
-  instrumentalness: { min: number; max: number }
-  popularity: { min: number; max: number }
-  valence: { min: number; max: number }
-  limit: number
-}
-export const getRecommendationsBasedOnSeeds = async ({
+export const getRecommendationsFromSeeds = async ({
   seedArtists,
   seedTracks,
-  seedGenres,
-  acousticness: { min: minAcousticness, max: maxAcousticness },
-  danceability: { min: minDanceability, max: maxDanceability },
-  energy: { min: minEnergy, max: maxEnergy },
-  instrumentalness: { min: minInstrumentalness, max: maxInstrumentalness },
-  popularity: { min: minPopularity, max: maxPopularity },
-  valence: { min: minValence, max: maxValence },
+  targetAcousticness,
+  targetDanceability,
+  targetEnergy,
+  targetInstrumentalness,
+  targetPopularity,
+  targetValence,
   limit,
 }: getRecommendationsBasedOnSeedsProps): Promise<SpotifyApi.RecommendationsFromSeedsResponse> => {
   return fetchWrapper({
     url: `https://api.spotify.com/v1/recommendations?\
 seed_artists=${seedArtists}&\
 seed_tracks=${seedTracks}&\
-seed_genres=${seedGenres}&\
-min_acousticness=${minAcousticness}&\
-max_acousticness=${maxAcousticness}&\
-min_danceability=${minDanceability}&\
-max_danceability=${maxDanceability}&\
-min_energy=${minEnergy}&\
-max_energy=${maxEnergy}&\
-min_instrumentalness=${minInstrumentalness}&\
-max_instrumentalness=${maxInstrumentalness}&\
-min_popularity=${minPopularity}&\
-max_popularity=${maxPopularity}&\
-min_valence=${minValence}&\
-max_valence=${maxValence}&\
+target_acousticness=${targetAcousticness}&\
+target_danceability=${targetDanceability}&\
+target_energy=${targetEnergy}&\
+target_instrumentalness=${targetInstrumentalness}&\
+target_popularity=${targetPopularity}&\
+target_valence=${targetValence}&\
 limit=${limit}`,
     method: 'GET',
   })
+}
+
+/**
+ * Create a Playlist
+ *
+ * POST /v1/users/{user_id}/playlists
+ * https://developer.spotify.com/web-api/create-playlist/
+ */
+export const createPlaylist = async (
+  userId?: string,
+  name?: string,
+  description?: string,
+  publicPlaylist?: boolean
+): Promise<SpotifyApi.CreatePlaylistResponse> => {
+  return fetchWrapper({
+    url: `https://api.spotify.com/v1/users/${userId}/playlists`,
+    method: 'POST',
+    body: {
+      'name': name,
+      'description': description,
+      'public': publicPlaylist,
+    },
+  })
+}
+
+/**
+ * Add Tracks to a Playlist
+ *
+ * POST /v1/users/{user_id}/playlists/{playlist_id}/tracks
+ * https://developer.spotify.com/web-api/add-tracks-to-playlist/
+ */
+export const addTracksToPlaylist = async (
+  playlistId: string,
+  trackUris: string[] | undefined
+): Promise<SpotifyApi.AddTracksToPlaylistResponse> => {
+  return fetchWrapper({ url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${trackUris}`, method: 'POST' })
 }
 
 /**
@@ -439,7 +480,7 @@ export const getSearchSeeds = async (query: string, limit: number): Promise<Spot
 
 export const getArtistBasedOnGenre = async (query: string, limit: number): Promise<SpotifyApi.SearchResponse> => {
   return fetchWrapper({
-    url: `https://api.spotify.com/v1/search?q=genre:${query}&type=artist&limit=${limit}`,
+    url: `https://api.spotify.com/v1/search?q=genre:"${query}"&type=artist&limit=${limit}`,
     method: 'GET',
   })
 }
