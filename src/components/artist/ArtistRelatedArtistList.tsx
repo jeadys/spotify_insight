@@ -19,7 +19,7 @@ export default async function ArtistRelatedArtistList({ artistId }: Props) {
 
   return (
     <List>
-      {artistRelatedArtists.artists.map((artist) => (
+      {artistRelatedArtists.artists.slice(0, 12).map((artist) => (
         <ListItem key={artist.id}>
           <Link href={`/artist/${artist.id}`} className="flex-shrink-0">
             <Image

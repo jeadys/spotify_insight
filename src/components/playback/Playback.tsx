@@ -19,7 +19,6 @@ export default function TrackPlayer() {
         usePlaybackStore.setState({ offset: state.track.uri })
       }}
       layout="responsive"
-      hideAttribution
       offset={trackQueue.indexOf(offset)}
       token={session.accessToken}
       uris={trackQueue}

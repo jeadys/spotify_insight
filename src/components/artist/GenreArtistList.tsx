@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import ArtistGenre from '@/components/artist/ArtistGenre'
 import ArtistName from '@/components/artist/ArtistName'
 import List from '@/components/layout/List'
 import ListItem from '@/components/layout/ListItem'
@@ -38,8 +37,6 @@ export default async function GenreArtistList({ id }: Props) {
 
           <span className="sm:flex sm:flex-col">
             <ArtistName artistId={artist.id} artistName={artist.name} />
-
-            <ArtistGenre artistGenre={artist.genres[0]} />
 
             <span className="flex flex-row">
               <Label value={formatFollowCount(artist.followers.total, 1)} icon="heart" />
