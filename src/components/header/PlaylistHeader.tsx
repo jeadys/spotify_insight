@@ -17,7 +17,7 @@ export default async function AlbumHeader({ playlistId }: Props) {
     <Header>
       <div className="flex flex-col items-center gap-4 sm:flex-row">
         <Image
-          src={playlist.images?.[1]?.url || '/images/nocover.webp'}
+          src={playlist.images?.[1]?.url || playlist.images?.[0]?.url || '/images/nocover.webp'}
           alt={playlist.name}
           width="0"
           height="0"
@@ -31,6 +31,9 @@ export default async function AlbumHeader({ playlistId }: Props) {
           <h1 className="text-3xl font-black sm:text-4xl">{playlist.name}</h1>
           <Link href={playlist.owner.external_urls.spotify} className="text-xl text-gray-300 hover:underline">
             {playlist.owner.display_name}
+          </Link>
+          <Link href={playlist.external_urls.spotify} target="_blank" className="block max-w-max">
+            <Image src="/icons/spotify.svg" alt="Spotify" width="0" height="0" sizes="100vw" className="mt-2 h-6 w-6" />
           </Link>
         </div>
       </div>

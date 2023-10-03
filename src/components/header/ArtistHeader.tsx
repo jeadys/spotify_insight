@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import MetadataGrid from '@/components/analysis/MetadataGrid'
 import MetadataItem from '@/components/analysis/MetadataItem'
@@ -28,6 +29,9 @@ export default async function ArtistHeader({ artistId }: Props) {
         <div className="capitalize text-white">
           <h2>{artist.type}</h2>
           <h1 className="text-3xl font-black sm:text-4xl">{artist.name}</h1>
+          <Link href={artist.external_urls.spotify} target="_blank" className="block max-w-max">
+            <Image src="/icons/spotify.svg" alt="Spotify" width="0" height="0" sizes="100vw" className="mt-2 h-6 w-6" />
+          </Link>
         </div>
       </div>
 

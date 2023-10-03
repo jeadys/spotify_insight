@@ -31,6 +31,9 @@ export default function TrackHeader({ track }: Props) {
           <Link href={`/artist/${track.artists[0].id}`} className="text-xl text-gray-300 hover:underline">
             {track.artists[0].name}
           </Link>
+          <Link href={track.external_urls.spotify} target="_blank" className="block max-w-max">
+            <Image src="/icons/spotify.svg" alt="Spotify" width="0" height="0" sizes="100vw" className="mt-2 h-6 w-6" />
+          </Link>
         </div>
       </div>
 

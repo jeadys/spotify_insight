@@ -50,19 +50,17 @@ export default async function Track({ params: { trackId } }: Params) {
         </div>
       </Section>
 
-      <Section title="Track Analysis" description={`Audio elements of ${track.name}`}>
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          <div className="flex flex-col gap-5">
-            <TrackAudioFeatureProgressBar trackAudioFeatures={trackAudioFeatures} />
-            <TrackAudioFeatureStatistics trackAudioFeatures={trackAudioFeatures} />
+      {trackAudioFeatures && (
+        <Section title="Track Analysis" description={`Audio elements of ${track.name}`}>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+            <div className="flex flex-col gap-5">
+              <TrackAudioFeatureProgressBar trackAudioFeatures={trackAudioFeatures} />
+              <TrackAudioFeatureStatistics trackAudioFeatures={trackAudioFeatures} />
+            </div>
+            <TrackAudioFeatureChart trackAudioFeatures={trackAudioFeatures} />
           </div>
-          <TrackAudioFeatureChart trackAudioFeatures={trackAudioFeatures} />
-        </div>
-      </Section>
-
-      <div className="flex flex-row text-sm text-gray-300">
-        <>{track.album.label}</>
-      </div>
+        </Section>
+      )}
     </>
   )
 }

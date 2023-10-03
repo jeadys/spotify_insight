@@ -5,12 +5,12 @@ import { Saira } from 'next/font/google'
 import NextAuthWrapper from '@/components/core/NextAuthWrapper'
 import ReactQueryWrapper from '@/components/core/ReactQueryWrapper'
 import ScrollToTop from '@/components/core/ScrollToTop'
+import Footer from '@/components/layout/Footer'
 import Navigation from '@/components/layout/Navigation'
 import Playback from '@/components/playback/Playback'
 
 const saira = Saira({
   subsets: ['latin'],
-  variable: '--font-saira',
 })
 
 type Props = {
@@ -29,6 +29,7 @@ export default async function RootLayout({ children }: Props) {
               <div className="mx-auto min-h-screen max-w-7xl py-5 px-6 sm:px-10">
                 <Navigation />
                 <main className="grid-col grid gap-10">{children}</main>
+                <Footer />
               </div>
             </div>
             <div className="sticky bottom-0 z-20">

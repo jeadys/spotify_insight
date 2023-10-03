@@ -41,7 +41,7 @@ export default function GeneratorCreate() {
 
   const { mutate: mutateCreatePlaylist, isLoading: createLoading } = useMutation({
     mutationFn: () =>
-      createPlaylist(session.data?.user.id, 'Discover Anytime', 'Created at https://spotify-insight-jeadys.vercel.app', false),
+      createPlaylist(session.data?.user.id, 'Discover Anytime', 'Created at https://spotify-insight-jeadys.vercel.app', true),
     onSuccess: (data) => {
       mutateAddTracksToPlaylist(data.id)
     },
@@ -54,7 +54,7 @@ export default function GeneratorCreate() {
         recommendationsFromSeeds?.tracks.map((track) => track.uri)
       ),
     onSuccess: (data, playlistId) => {
-      router.push(`/playlist/${playlistId}`)
+      router.refresh()
     },
   })
 
