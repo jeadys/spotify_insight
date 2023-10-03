@@ -7,7 +7,7 @@ import Section from '@/components/layout/Section'
 export default async function page() {
   return (
     <Section title="New Releases" description="Albums to explore">
-      <Suspense fallback={<SkeletonAlbumList contentAmount={12} />}>
+      <Suspense fallback={<SkeletonAlbumList contentAmount={50} />}>
         {/* @ts-expect-error Server Component */}
         <NewAlbumList />
       </Suspense>

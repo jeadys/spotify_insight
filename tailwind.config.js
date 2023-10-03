@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/app/**/*.{js,ts,jsx,tsx}', './src/components/**/*.{js,ts,jsx,tsx}'],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     extend: {
       blur: {
@@ -26,9 +29,6 @@ module.exports = {
       },
       maxWidth: {
         '8xl': '90rem',
-      },
-      fontFamily: {
-        saira: ['var(--font-saira)'],
       },
       keyframes: {
         wiggle: {
