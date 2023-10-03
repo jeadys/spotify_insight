@@ -13,10 +13,24 @@ type Props = {
 }
 
 export default async function PlaylistTrackList({ playlistId }: Props) {
-  const playlistTracks = await getPlaylistTracks(playlistId, 50)
+  const playlistTracks = await getPlaylistTracks(playlistId, 100)
   if (!playlistTracks?.items?.length) return <span className="text-white">No tracks found</span>
 
-  const trackQueue = playlistTracks.items.map(({ track }) => track.uri)
+  type Acc = {
+    uris: string[]
+    ids: string[]
+  }
+
+  const { uris, ids } = playlistTracks.items.reduce(
+    (acc: Acc, { track }) => {
+      if (track) {
+        acc.uris.push(track.uri)
+        acc.ids.push(track.id)
+      }
+      return acc
+    },
+    { uris: [], ids: [] }
+  )
 
   return (
     <ul className="w-full">
@@ -32,7 +46,7 @@ export default async function PlaylistTrackList({ playlistId }: Props) {
               className="h-10 w-10 rounded-md object-cover group-hover:blur-xs"
             />
 
-            <PlaybackHandle uri={track.uri} queue={trackQueue} />
+            <PlaybackHandle uri={track.uri} queue={uris} />
           </div>
 
           <span className="flex-grow">

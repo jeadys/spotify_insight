@@ -4,7 +4,6 @@ import Image from 'next/image'
 
 import PlaybackHandle from '@/components/playback/PlaybackHandle'
 import TrackAlbum from '@/components/track/TrackAlbum'
-import TrackArtist from '@/components/track/TrackArtist'
 import TrackDuration from '@/components/track/TrackDuration'
 import TrackName from '@/components/track/TrackName'
 import { getArtistTopTracks } from '@/server/api'
@@ -38,7 +37,6 @@ export default async function ArtistTrackList({ artistId }: Props) {
 
           <span className="flex-grow">
             <TrackName trackId={track.id} trackName={track.name} />
-            <TrackArtist artistId={track.artists[0].id} artistName={track.artists[0].name} />
           </span>
 
           <TrackAlbum albumId={track.album.id} albumName={track.album.name} />

@@ -14,7 +14,7 @@ export default function TopTrack() {
 
   return (
     <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 5xl:grid-cols-3">
-      {topTracks.items.map((track, index) => (
+      {topTracks.items.map((track) => (
         <li key={track.id} className="group flex flex-row items-center gap-5">
           <div className="relative flex flex-shrink-0 items-center justify-center">
             <Image
@@ -26,7 +26,7 @@ export default function TopTrack() {
               className="h-14 w-14 rounded-md object-cover group-hover:blur-xs"
             />
 
-            {/* <PlaybackHandle uri={track.uri} queue={trackQueue} /> */}
+            <PlaybackHandle uri={track.uri} queue={trackQueue} />
           </div>
 
           <span className="flex flex-col">
