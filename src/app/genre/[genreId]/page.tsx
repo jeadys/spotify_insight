@@ -14,7 +14,6 @@ export default async function Genre({ params: { genreId } }: Params) {
   return (
     <Section title={decodeURIComponent(genreId)} description="Associated artists">
       <Suspense fallback={<SkeletonArtistList contentAmount={12} />}>
-        {/* @ts-expect-error Server Component */}
         <GenreArtistList id={genreId} />
       </Suspense>
     </Section>

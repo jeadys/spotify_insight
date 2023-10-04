@@ -23,33 +23,28 @@ export default async function Artist({ params: { artistId } }: Params) {
 
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <ArtistHeader artistId={artistId} />
 
       <Section title="Genres" description={`Associated with ${artist.name}`}>
         <Suspense fallback={<SkeletonGenreList contentAmount={5} />}>
-          {/* @ts-expect-error Server Component */}
           <ArtistGenreList artistId={artistId} />
         </Suspense>
       </Section>
 
       <Section title="Tracks" description={`Released by ${artist.name}`}>
         <Suspense fallback={<SkeletonTrackList contentAmount={10} />}>
-          {/* @ts-expect-error Server Component */}
           <ArtistTrackList artistId={artistId} />
         </Suspense>
       </Section>
 
       <Section title="Albums" description={`Released by ${artist.name}`}>
         <Suspense fallback={<SkeletonAlbumList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <ArtistAlbumList artistId={artistId} />
         </Suspense>
       </Section>
 
       <Section title="Fans Like" description={`Similar to ${artist.name}`}>
         <Suspense fallback={<SkeletonArtistList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <ArtistRelatedArtistList artistId={artistId} />
         </Suspense>
       </Section>
