@@ -1,12 +1,12 @@
 'use client'
 
 import type { ReactElement } from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { AdjustmentsIcon, LogoutIcon, SearchIcon, UserIcon } from '@heroicons/react/outline'
-import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { signOut } from 'next-auth/react'
 
 export default function Navigation() {
   type NavigationProps = {
@@ -101,7 +101,7 @@ export default function Navigation() {
         <ul className="absolute right-0 z-30 w-1/2 max-w-max rounded-md border border-gray-700 bg-gray-1200 text-white lg:hidden">
           {navigationItems.map((navigationItem) => (
             <li key={navigationItem.title} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-              <Link href={navigationItem.link} className="flex items-center rounded-md py-2 px-4 hover:bg-gray-1100">
+              <Link href={navigationItem.link} className="flex items-center rounded-md px-4 py-2 hover:bg-gray-1100">
                 {navigationItem.icon}
                 {navigationItem.title}
               </Link>
@@ -110,7 +110,7 @@ export default function Navigation() {
 
           <hr className="my-2" />
 
-          <button className="block w-full rounded-md py-2 px-4 text-left uppercase hover:bg-gray-1100" onClick={() => signOut()}>
+          <button className="block w-full rounded-md px-4 py-2 text-left uppercase hover:bg-gray-1100" onClick={() => signOut()}>
             <span className="flex items-center  hover:bg-gray-1100">
               <LogoutIcon className="mr-2 h-6 w-6" />
               <span className="uppercase">Sign out</span>

@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AlbumName from '@/components/album/AlbumName'
 import List from '@/components/layout/List'
 import ListItem from '@/components/layout/ListItem'
+import PlaylistName from '@/components/playlist/PlaylistName'
 import Label from '@/components/ui/Label'
 import { getCurrentUserSavedPlaylists } from '@/server/api'
 
@@ -27,7 +27,7 @@ export default async function SavedPlayList() {
           </Link>
 
           <span className="sm:flex sm:flex-col">
-            <AlbumName albumId={playlist.id} albumName={playlist.name} />
+            <PlaylistName playlistId={playlist.id} playlistName={playlist.name} />
 
             <span className="flex flex-row">
               <Label value={playlist.tracks.total} icon="music" />

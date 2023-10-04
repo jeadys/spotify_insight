@@ -1,14 +1,13 @@
 'use client'
 
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 import { useStore } from '@/hooks/useStore'
 import { addTracksToPlaylist, createPlaylist, getRecommendationsFromSeeds } from '@/server/api'
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 import { calculateTargetAttribute } from '@/utils/calculateTargetAttribute'
-import { initialGeneratorState, useGeneratorStore } from 'store/useGenerator'
 
 export default function GeneratorCreate() {
   // Custom useStore hook needed for persist storage to work with NextJS Hydration
@@ -56,6 +55,7 @@ export default function GeneratorCreate() {
       ),
     onSuccess: (data, playlistId) => {
       router.refresh()
+      router.push(`/playlist/${playlistId}`)
     },
   })
 
@@ -63,10 +63,10 @@ export default function GeneratorCreate() {
     <button
       type="button"
       onClick={() => refetch()}
-      disabled={!state.seedCount}
+      disabled={!state.seedCount || retrieveLoading || createLoading || addLoading}
       className="rounded-md bg-blue-900 p-3 font-semibold text-white  disabled:cursor-not-allowed disabled:opacity-25"
     >
-      {retrieveLoading || createLoading || addLoading ? 'Genarating...' : 'Create Playlist'}
+      {retrieveLoading || createLoading || addLoading ? 'Generating...' : 'Create Playlist'}
     </button>
   )
 }
