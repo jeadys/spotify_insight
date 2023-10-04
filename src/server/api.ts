@@ -6,7 +6,7 @@ import { authOptions } from '@/auth/[...nextauth]'
 type FetchWrapperProps = {
   url: string
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
-  body?: any
+  body?: unknown
 }
 
 const fetchWrapper = async ({ url, method, body }: FetchWrapperProps) => {
@@ -20,9 +20,6 @@ const fetchWrapper = async ({ url, method, body }: FetchWrapperProps) => {
     const response = await fetch(url, {
       method: method,
       cache: 'default',
-      next: {
-        revalidate: 3600,
-      },
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${session.accessToken}`,
