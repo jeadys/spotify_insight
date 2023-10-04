@@ -24,6 +24,7 @@
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
       "@/utils/*": ["utils/*"],
+      "@/store/*": ["store/*"],
       "@/auth/*": ["pages/api/auth/*"],
       "@/providers/*": ["providers/*"],
       "@/server/*": ["server/*"],

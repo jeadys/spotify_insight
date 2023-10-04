@@ -3,7 +3,7 @@
 import { PauseIcon, PlayIcon } from '@heroicons/react/solid'
 
 import MusicBar from '@/components/playback/MusicBar'
-import { usePlaybackStore } from 'store/usePlayback'
+import { usePlaybackStore } from '@/store/usePlayback'
 
 type Props = {
   uri: string

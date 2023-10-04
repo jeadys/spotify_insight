@@ -17,12 +17,10 @@ export default async function Album({ params: { albumId } }: Params) {
 
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <AlbumHeader albumId={albumId} />
 
       <Section title="Tracks" description={`Album tracks of ${album.name}`}>
         <Suspense fallback={<SkeletonTrackList contentAmount={10} />}>
-          {/* @ts-expect-error Server Component */}
           <AlbumTrackList albumId={albumId} cover={album.images?.[2]?.url} />
         </Suspense>
       </Section>

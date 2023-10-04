@@ -14,28 +14,24 @@ export default async function Library() {
     <>
       <Section title="Saved Playlists">
         <Suspense fallback={<SkeletonAlbumList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <SavedPlayList />
         </Suspense>
       </Section>
 
       <Section title="Saved Albums">
         <Suspense fallback={<SkeletonAlbumList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <SavedAlbumList />
         </Suspense>
       </Section>
 
       <Section title="Saved Tracks">
         <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <SavedTrackList />
         </Suspense>
       </Section>
 
       <Section title="Followed artists">
         <Suspense fallback={<SkeletonArtistList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <FollowedArtistList />
         </Suspense>
       </Section>

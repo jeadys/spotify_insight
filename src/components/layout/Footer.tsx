@@ -2,7 +2,7 @@ import { HeartIcon } from '@heroicons/react/solid'
 
 export default function Footer() {
   return (
-    <>
+    <footer>
       <hr className="my-10 h-px border-0 bg-gray-900" />
       <div className="my-5 flex flex-col justify-between gap-5 text-sm text-white sm:flex-row">
         <div className="flex items-center">
@@ -17,6 +17,6 @@ export default function Footer() {
           <li className="my-2">Terms</li>
         </ul>
       </div>
-    </>
+    </footer>
   )
 }

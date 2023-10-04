@@ -79,7 +79,6 @@ export default async function Generator() {
 
       <Section title="Public Playlists">
         <Suspense fallback={<SkeletonAlbumList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <SavedPlayList />
         </Suspense>
       </Section>

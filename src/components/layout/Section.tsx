@@ -1,6 +1,6 @@
 'use client'
 
-import { useProfileFilterStore } from 'store/useProfileFilter'
+import { useProfileFilterStore } from '@/store/useProfileFilter'
 
 type Props = {
   title: string

@@ -25,7 +25,6 @@ export default async function page() {
   return (
     <>
       <Suspense fallback={<SkeletonHeader />}>
-        {/* @ts-expect-error Server Component */}
         <ProfileHeader />
       </Suspense>
 
@@ -55,7 +54,6 @@ export default async function page() {
 
       <Section title="Recent Streams" description="Enjoying these tracks">
         <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <RecentTrackList />
         </Suspense>
       </Section>

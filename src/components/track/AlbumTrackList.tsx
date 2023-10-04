@@ -22,7 +22,7 @@ export default async function AlbumTrackList({ albumId, cover }: Props) {
   return (
     <ul className="w-full">
       {albumTracks.items.map((track) => (
-        <li key={track.id} className="group flex items-center gap-5 p-2 hover:bg-gray-1200">
+        <li key={track.id} className="group flex items-center gap-5 rounded-md p-2 hover:bg-gray-1200">
           <div className="relative flex flex-shrink-0 items-center justify-center">
             <Image
               src={cover || '/images/nocover.webp'}

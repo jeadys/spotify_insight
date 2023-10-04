@@ -19,21 +19,18 @@ export default async function SearchResult({ params: { searchTerm } }: Params) {
     <>
       <Section title="Artists" description={`Result based on ${searchTerm}`}>
         <Suspense fallback={<SkeletonArtistList contentAmount={10} />}>
-          {/* @ts-expect-error Server Component */}
           <SearchArtistList searchTerm={searchTerm} />
         </Suspense>
       </Section>
 
       <Section title="Albums" description={`Result based on ${searchTerm}`}>
         <Suspense fallback={<SkeletonAlbumList contentAmount={10} />}>
-          {/* @ts-expect-error Server Component */}
           <SearchAlbumList searchTerm={searchTerm} />
         </Suspense>
       </Section>
 
       <Section title="Tracks" description={`Result based on ${searchTerm}`}>
         <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>
-          {/* @ts-expect-error Server Component */}
           <SearchTrackList searchTerm={searchTerm} />
         </Suspense>
       </Section>

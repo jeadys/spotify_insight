@@ -3,7 +3,7 @@
 import { XIcon } from '@heroicons/react/solid'
 
 import { useStore } from '@/hooks/useStore'
-import { initialGeneratorState, useGeneratorStore } from 'store/useGenerator'
+import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 
 export default function GeneratorSeed() {
   const removeSeed = useGeneratorStore((state) => state.removeSeed)

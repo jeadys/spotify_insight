@@ -6,19 +6,15 @@
     "@heroicons/react": "^1.0.6",
     "@tanstack/react-query": "^4.19.0",
     "@tanstack/react-query-devtools": "^4.19.0",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
     "clsx": "^1.2.1",
     "dayjs": "^1.11.7",
-    "next": "^13.3.1",
+    "next": "^13.5.4",
     "next-auth": "^4.20.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-spotify-web-playback": "^0.13.4",
     "recharts": "^2.4.3",
     "vercel": "^28.7.0",
-    "web-vitals": "^3.1.0",
     "zustand": "^4.3.6"
   },
   "scripts": {
@@ -27,23 +23,10 @@
     "start": "next start",
     "pretty": "prettier --write \"./src/**/*.{ts,tsx}\""
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "devDependencies": {
     "@tailwindcss/line-clamp": "^0.4.2",
-    "@types/jest": "^29.2.3",
     "@types/node": "^18.11.10",
-    "@types/react": "^18.0.25",
+    "@types/react": "^18.2.24",
     "@types/react-dom": "^18.0.9",
     "@types/recharts": "^1.8.24",
     "@types/spotify-api": "^0.0.19",
@@ -51,12 +34,12 @@
     "@typescript-eslint/parser": "^5.45.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.28.0",
-    "eslint-config-next": "^13.2.3",
+    "eslint-config-next": "^13.5.4",
     "eslint-plugin-import": "^2.26.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.0",
     "prettier-plugin-tailwindcss": "^0.2.0",
     "tailwindcss": "^3.2.7",
-    "typescript": "^5.0.4"
+    "typescript": "^5.2.2"
   }
 }

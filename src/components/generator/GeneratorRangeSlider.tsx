@@ -1,9 +1,9 @@
 'use client'
 
 import { useStore } from '@/hooks/useStore'
-import type { AttributeType } from 'store/useGenerator'
-import { initialGeneratorState } from 'store/useGenerator'
-import { useGeneratorStore } from 'store/useGenerator'
+import type { AttributeType } from '@/store/useGenerator'
+import { initialGeneratorState } from '@/store/useGenerator'
+import { useGeneratorStore } from '@/store/useGenerator'
 
 type Props = {
   title: AttributeType

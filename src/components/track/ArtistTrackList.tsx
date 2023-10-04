@@ -21,7 +21,7 @@ export default async function ArtistTrackList({ artistId }: Props) {
   return (
     <ul className="w-full">
       {artistTopTracks.tracks.map((track) => (
-        <li key={track.id} className="group flex items-center gap-5 p-2 hover:bg-gray-1200">
+        <li key={track.id} className="group flex items-center gap-5 rounded-md p-2 hover:bg-gray-1200">
           <div className="relative flex flex-shrink-0 items-center justify-center">
             <Image
               src={track.album?.images?.[2]?.url || '/images/nocover.webp'}
