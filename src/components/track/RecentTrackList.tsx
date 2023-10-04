@@ -36,7 +36,7 @@ export default async function RecentTrackList() {
 
           <ul className="w-full">
             {tracks.map(({ track, played_at }) => (
-              <li key={track.id + played_at} className="group flex items-center gap-5 p-2 hover:bg-gray-1200">
+              <li key={track.id + played_at} className="group flex items-center gap-5 rounded-md p-2 hover:bg-gray-1200">
                 <div className="relative flex flex-shrink-0 items-center justify-center">
                   <Link href={`/track/${track.id}`}>
                     <Image
