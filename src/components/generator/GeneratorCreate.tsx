@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import { useStore } from '@/hooks/useStore'
 import { addTracksToPlaylist, createPlaylist, getRecommendationsFromSeeds } from '@/server/api'
+import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 import { calculateTargetAttribute } from '@/utils/calculateTargetAttribute'
 import { initialGeneratorState, useGeneratorStore } from 'store/useGenerator'
 

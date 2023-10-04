@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { getTopArtists } from '@/server/api'
-import { useProfileFilterStore } from 'store/useProfileFilter'
+import { useProfileFilterStore } from '@/store/useProfileFilter'
 
 /**
  *A custom React hook for fetching a user's top artists from the server, based on the current search term from the user's profile filter.

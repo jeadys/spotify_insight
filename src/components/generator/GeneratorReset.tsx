@@ -1,6 +1,6 @@
 'use client'
 
-import { useGeneratorStore } from 'store/useGenerator'
+import { useGeneratorStore } from '@/store/useGenerator'
 
 export default function GeneratorReset() {
   const reset = useGeneratorStore((state) => state.reset)

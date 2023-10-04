@@ -9,7 +9,8 @@ import SearchInput from '@/components/layout/SearchInput'
 import useGeneratorSearch from '@/hooks/query/useGeneratorSearch'
 import useDebounce from '@/hooks/useDebounce'
 import useFocus from '@/hooks/useFocus'
-import { useGeneratorStore } from 'store/useGenerator'
+import { useStore } from '@/hooks/useStore'
+import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 
 export default function GeneratorSearch() {
   const [search, setSearch] = useState('')

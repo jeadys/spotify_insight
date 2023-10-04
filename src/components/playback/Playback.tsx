@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 import SpotifyPlayer from 'react-spotify-web-playback'
 
-import { usePlaybackStore } from 'store/usePlayback'
+import { usePlaybackStore } from '@/store/usePlayback'
 
 export default function TrackPlayer() {
   const { data: session } = useSession()
