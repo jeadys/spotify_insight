@@ -7,7 +7,7 @@ type Props = {
 
 export default function TrackAlbum({ albumId, albumName }: Props) {
   return (
-    <Link href={`/album/${albumId}`} className="max-w-max text-gray-400 line-clamp-1 hover:underline album:hidden">
+    <Link href={`/album/${albumId}`} className="line-clamp-1 max-w-max text-gray-400 hover:underline album:hidden">
       {albumName}
     </Link>
   )

@@ -25,12 +25,12 @@ export default function TopArtist() {
           </Link>
 
           <span className="flex flex-col">
-            <Link href={`/artist/${artist.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+            <Link href={`/artist/${artist.id}`} className="line-clamp-1 max-w-max text-white hover:underline">
               {artist.name}
             </Link>
 
             {artist.genres[0] && (
-              <Link href={`/genre/${artist.genres[0]}`} className="max-w-max text-gray-400 line-clamp-1 hover:underline">
+              <Link href={`/genre/${artist.genres[0]}`} className="line-clamp-1 max-w-max text-gray-400 hover:underline">
                 {artist.genres[0]}
               </Link>
             )}

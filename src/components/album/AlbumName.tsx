@@ -7,7 +7,7 @@ type Props = {
 
 export default function AlbumName({ albumId, albumName }: Props) {
   return (
-    <Link href={`/album/${albumId}`} className="max-w-max text-white line-clamp-1 hover:underline">
+    <Link href={`/album/${albumId}`} className="line-clamp-1 max-w-max text-white hover:underline">
       {albumName}
     </Link>
   )

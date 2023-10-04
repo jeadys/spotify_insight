@@ -30,10 +30,10 @@ export default function TopTrack() {
           </div>
 
           <span className="flex flex-col">
-            <Link href={`/track/${track.id}`} className="max-w-max text-white line-clamp-1 hover:underline">
+            <Link href={`/track/${track.id}`} className="line-clamp-1 max-w-max text-white hover:underline">
               {track.name}
             </Link>
-            <Link href={`/artist/${track.artists[0].id}`} className="max-w-max text-gray-400 line-clamp-1 hover:underline">
+            <Link href={`/artist/${track.artists[0].id}`} className="line-clamp-1 max-w-max text-gray-400 hover:underline">
               {track.artists[0].name}
             </Link>
           </span>

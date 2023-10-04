@@ -7,7 +7,7 @@ type Props = {
 
 export default function ArtistName({ artistId, artistName }: Props) {
   return (
-    <Link href={`/artist/${artistId}`} className="max-w-max text-white line-clamp-1 hover:underline">
+    <Link href={`/artist/${artistId}`} className="line-clamp-1 max-w-max text-white hover:underline">
       {artistName}
     </Link>
   )
