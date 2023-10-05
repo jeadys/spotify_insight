@@ -16,7 +16,7 @@ export default async function ArtistGenreList({ artistId }: Props) {
         <Link
           key={genre}
           href={`/genre/${genre}`}
-          className="line-clamp-1 max-w-max rounded-full bg-gray-1200 px-3 py-2 text-white hover:bg-gray-1100"
+          className="line-clamp-1 max-w-max break-all rounded-full bg-gray-1200 px-3 py-2 text-white hover:bg-gray-1100"
         >
           {genre}
         </Link>

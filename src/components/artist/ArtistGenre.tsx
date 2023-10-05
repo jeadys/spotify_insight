@@ -8,7 +8,7 @@ export default function ArtistGenre({ artistGenre }: Props) {
   return (
     <>
       {artistGenre ? (
-        <Link href={`/genre/${artistGenre}`} className="line-clamp-1 max-w-max text-gray-400 hover:underline">
+        <Link href={`/genre/${artistGenre}`} className="line-clamp-1 max-w-max break-all text-gray-400 hover:underline">
           {artistGenre}
         </Link>
       ) : (

@@ -27,8 +27,8 @@ export default function TrackHeader({ track }: Props) {
 
         <div className="capitalize text-white">
           <h2>{track.type}</h2>
-          <h1 className="text-3xl font-black sm:text-4xl">{track.name}</h1>
-          <Link href={`/artist/${track.artists[0].id}`} className="text-xl text-gray-300 hover:underline">
+          <h1 className="line-clamp-1 break-all text-3xl font-black sm:text-4xl">{track.name}</h1>
+          <Link href={`/artist/${track.artists[0].id}`} className="line-clamp-1 break-all text-xl text-gray-300 hover:underline">
             {track.artists[0].name}
           </Link>
           <Link href={track.external_urls.spotify} target="_blank" className="block max-w-max">

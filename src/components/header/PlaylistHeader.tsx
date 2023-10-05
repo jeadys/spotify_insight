@@ -28,8 +28,8 @@ export default async function AlbumHeader({ playlistId }: Props) {
 
         <div className="capitalize text-white">
           <h2>{playlist.type}</h2>
-          <h1 className="text-3xl font-black sm:text-4xl">{playlist.name}</h1>
-          <Link href={playlist.owner.external_urls.spotify} className="text-xl text-gray-300 hover:underline">
+          <h1 className="line-clamp-1 break-all text-3xl font-black sm:text-4xl">{playlist.name}</h1>
+          <Link href={playlist.owner.external_urls.spotify} className="line-clamp-1 break-all text-xl text-gray-300 hover:underline">
             {playlist.owner.display_name}
           </Link>
           <Link href={playlist.external_urls.spotify} target="_blank" className="block max-w-max">

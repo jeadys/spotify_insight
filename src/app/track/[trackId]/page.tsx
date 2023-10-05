@@ -38,7 +38,7 @@ export default async function Track({ params: { trackId } }: Params) {
           </Link>
 
           <span className="sm:flex sm:flex-col">
-            <Link href={`/album/${track.album.id}`} className="line-clamp-1 max-w-max text-white hover:underline">
+            <Link href={`/album/${track.album.id}`} className="line-clamp-1 max-w-max break-all text-white hover:underline">
               {track.album.name}
             </Link>
 

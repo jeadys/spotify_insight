@@ -29,8 +29,8 @@ export default async function AlbumHeader({ albumId }: Props) {
 
         <div className="capitalize text-white">
           <h2>{album.type}</h2>
-          <h1 className="text-3xl font-black sm:text-4xl">{album.name}</h1>
-          <Link href={`/artist/${album.artists[0].id}`} className="text-xl text-gray-300 hover:underline">
+          <h1 className="line-clamp-1 break-all text-3xl font-black sm:text-4xl">{album.name}</h1>
+          <Link href={`/artist/${album.artists[0].id}`} className="line-clamp-1 break-all text-xl text-gray-300 hover:underline">
             {album.artists[0].name}
           </Link>
           <Link href={album.external_urls.spotify} target="_blank" className="block max-w-max">
