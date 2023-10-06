@@ -1,11 +1,9 @@
-import React from 'react'
-
-import Image from 'next/image'
-
-import PlaybackHandle from '@/components/playback/PlaybackHandle'
 import TrackAlbum from '@/components/track/TrackAlbum'
 import TrackDuration from '@/components/track/TrackDuration'
+import TrackList from '@/components/track/TrackList'
+import TrackListItem from '@/components/track/TrackListItem'
 import TrackName from '@/components/track/TrackName'
+import TrackPlaybackControl from '@/components/track/TrackPlaybackControl'
 import { getArtistTopTracks } from '@/server/api'
 
 type Props = {
@@ -16,24 +14,19 @@ export default async function ArtistTrackList({ artistId }: Props) {
   const artistTopTracks = await getArtistTopTracks(artistId)
   if (!artistTopTracks?.tracks?.length) return <span className="text-white">No tracks found</span>
 
-  const trackQueue = artistTopTracks.tracks.map((track) => track.uri)
+  const uris = artistTopTracks.tracks.map((track) => track.uri)
 
   return (
-    <ul className="w-full">
+    <TrackList>
       {artistTopTracks.tracks.map((track) => (
-        <li key={track.id} className="group flex items-center gap-5 rounded-md p-2 hover:bg-gray-1200">
-          <div className="relative flex flex-shrink-0 items-center justify-center">
-            <Image
-              src={track.album?.images?.[2]?.url || '/images/nocover.webp'}
-              alt={track.name}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="h-10 w-10 rounded-md object-cover group-hover:blur-xs"
-            />
-
-            <PlaybackHandle uri={track.uri} queue={trackQueue} />
-          </div>
+        <TrackListItem key={track.id}>
+          <TrackPlaybackControl
+            showPlaybackControls
+            trackImage={track.album?.images?.[2]?.url}
+            trackName={track.name}
+            trackUri={track.uri}
+            trackUris={uris}
+          />
 
           <span className="flex-grow">
             <TrackName trackId={track.id} trackName={track.name} />
@@ -42,8 +35,8 @@ export default async function ArtistTrackList({ artistId }: Props) {
           <TrackAlbum albumId={track.album.id} albumName={track.album.name} />
 
           <TrackDuration trackDuration={track.duration_ms} />
-        </li>
+        </TrackListItem>
       ))}
-    </ul>
+    </TrackList>
   )
 }
