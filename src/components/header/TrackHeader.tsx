@@ -1,17 +1,20 @@
-'use client'
-
+import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import MetadataGrid from '@/components/analysis/MetadataGrid'
 import MetadataItem from '@/components/analysis/MetadataItem'
 import Header from '@/components/layout/Header'
+import { getTrackById } from '@/server/api'
 import { formatTrackDuration } from '@/utils/formatTrackDuration'
 
 type Props = {
-  track: SpotifyApi.SingleTrackResponse
+  trackId: string
 }
-export default function TrackHeader({ track }: Props) {
+
+export default async function TrackHeader({ trackId }: Props) {
+  const track = await getTrackById(trackId)
+
   return (
     <Header>
       <div className="flex flex-col items-center gap-4 sm:flex-row">
@@ -27,8 +30,8 @@ export default function TrackHeader({ track }: Props) {
 
         <div className="capitalize text-white">
           <h2>{track.type}</h2>
-          <h1 className="text-3xl font-black sm:text-4xl">{track.name}</h1>
-          <Link href={`/artist/${track.artists[0].id}`} className="text-xl text-gray-300 hover:underline">
+          <h1 className="line-clamp-1 break-all text-3xl font-black sm:text-4xl">{track.name}</h1>
+          <Link href={`/artist/${track.artists[0].id}`} className="line-clamp-1 break-all text-xl text-gray-300 hover:underline">
             {track.artists[0].name}
           </Link>
           <Link href={track.external_urls.spotify} target="_blank" className="block max-w-max">
@@ -38,6 +41,7 @@ export default function TrackHeader({ track }: Props) {
       </div>
 
       <MetadataGrid>
+        <MetadataItem title="Released" value={dayjs(track.album.release_date).format('MMMM DD, YYYY')} />
         <MetadataItem title="Duration" value={formatTrackDuration(track.duration_ms)} />
         <MetadataItem title="Popularity" value={track.popularity / 10} />
       </MetadataGrid>

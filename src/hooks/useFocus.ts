@@ -3,9 +3,13 @@ import { useEffect, useRef } from 'react'
 export default function useFocus() {
   const inputRef = useRef<HTMLInputElement>(null)
 
-  useEffect(() => {
+  const focus = () => {
     if (inputRef.current) inputRef.current.focus()
+  }
+
+  useEffect(() => {
+    focus()
   }, [])
 
-  return inputRef
+  return { inputRef, focus }
 }

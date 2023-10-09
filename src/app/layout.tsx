@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: Props) {
           <ReactQueryWrapper>
             <ScrollToTop />
             <div className="min-h-screen bg-gray-1300">
-              <div className="mx-auto min-h-screen max-w-7xl py-5 px-6 sm:px-10">
+              <div className="mx-auto min-h-screen max-w-7xl px-6 py-5 sm:px-10">
                 <Navigation />
                 <main className="grid-col grid gap-10">{children}</main>
                 <Footer />

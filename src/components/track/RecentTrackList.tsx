@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
-import React from 'react'
 
 import dayjs from 'dayjs'
-import Image from 'next/image'
-import Link from 'next/link'
 
 import TrackAlbum from '@/components/track/TrackAlbum'
 import TrackArtist from '@/components/track/TrackArtist'
+import TrackList from '@/components/track/TrackList'
+import TrackListItem from '@/components/track/TrackListItem'
 import TrackName from '@/components/track/TrackName'
+import TrackPlaybackControl from '@/components/track/TrackPlaybackControl'
 import TrackPlayedAt from '@/components/track/TrackStream'
 import { getRecentlyPlayedTracks } from '@/server/api'
 
@@ -34,21 +34,15 @@ export default async function RecentTrackList() {
         <article key={date}>
           <h4 className="my-5 font-semibold text-white">{date}</h4>
 
-          <ul className="w-full">
+          <TrackList>
             {tracks.map(({ track, played_at }) => (
-              <li key={track.id + played_at} className="group flex items-center gap-5 rounded-md p-2 hover:bg-gray-1200">
-                <div className="relative flex flex-shrink-0 items-center justify-center">
-                  <Link href={`/track/${track.id}`}>
-                    <Image
-                      src={track.album?.images?.[2]?.url || '/images/nocover.webp'}
-                      alt={track.name}
-                      width="0"
-                      height="0"
-                      sizes="100vw"
-                      className="h-10 w-10 rounded-md object-cover"
-                    />
-                  </Link>
-                </div>
+              <TrackListItem key={track.id + played_at}>
+                <TrackPlaybackControl
+                  trackImage={track.album?.images?.[2]?.url}
+                  trackName={track.name}
+                  trackUri={track.uri}
+                  trackUris={[track.uri]}
+                />
 
                 <span className="flex-grow">
                   <TrackName trackId={track.id} trackName={track.name} />
@@ -58,9 +52,9 @@ export default async function RecentTrackList() {
                 <TrackAlbum albumId={track.album.id} albumName={track.album.name} />
 
                 <TrackPlayedAt playedAt={played_at} />
-              </li>
+              </TrackListItem>
             ))}
-          </ul>
+          </TrackList>
         </article>
       ))}
     </>

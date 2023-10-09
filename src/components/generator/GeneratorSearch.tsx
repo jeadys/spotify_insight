@@ -16,12 +16,15 @@ export default function GeneratorSearch() {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 1000)
   const { data, isInitialLoading } = useGeneratorSearch(debouncedSearch)
-  const inputRef = useFocus()
   const addSeed = useGeneratorStore((state) => state.addSeed)
+  const removeSeed = useGeneratorStore((state) => state.removeSeed)
+  // Custom useStore hook needed for persist storage to work with NextJS Hydration
+  const state = useStore(useGeneratorStore, (state) => state) ?? initialGeneratorState
+  const maxSeed = 5
 
   return (
     <div>
-      <SearchInput value={search} placeholder="Search artist and track seeds" inputRef={inputRef} setSearch={setSearch} />
+      <SearchInput value={search} placeholder="Search artist and track seeds" setSearch={setSearch} />
 
       {isInitialLoading && <SkeletonGenerator contentAmount={3} />}
 
@@ -31,11 +34,7 @@ export default function GeneratorSearch() {
             <p className="mt-5 font-medium text-white">Artists</p>
             <ul>
               {data?.artists?.items.map((artist) => (
-                <li
-                  key={artist.id}
-                  onClick={() => addSeed('artist', artist.id, artist.name)}
-                  className="my-5 flex max-w-max cursor-pointer items-center gap-5 hover:underline"
-                >
+                <li key={artist.id} className="my-5 flex max-w-max items-center gap-5">
                   <Image
                     src={artist.images?.[2]?.url || '/images/nocover.webp'}
                     alt={artist.name}
@@ -45,10 +44,26 @@ export default function GeneratorSearch() {
                     className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
                   />
 
-                  <span>
-                    <span className="text-white line-clamp-1">{artist.name}</span>
-                    <span className="text-gray-400 line-clamp-1">{artist.genres[0] || 'N/A'}</span>
+                  <span
+                    onClick={() =>
+                      state.artist.find((artistSeed) => artistSeed.id === artist.id)
+                        ? removeSeed('artist', artist.id)
+                        : addSeed('artist', artist.id, artist.name)
+                    }
+                    className={`${
+                      state.seedCount < maxSeed ||
+                      (state.seedCount == maxSeed && state.artist.find((artistSeed) => artistSeed.id === artist.id))
+                        ? 'cursor-pointer'
+                        : 'pointer-events-none opacity-40'
+                    }`}
+                  >
+                    <span className="line-clamp-1 text-white">{artist.name}</span>
+                    <span className="line-clamp-1 text-gray-400">{artist.genres[0] || 'N/A'}</span>
                   </span>
+
+                  {state.artist.find((artistSeed) => artistSeed.id === artist.id) && (
+                    <span className="rounded-md bg-blue-600 p-1 text-sm text-white">Seeded</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -60,11 +75,7 @@ export default function GeneratorSearch() {
             <p className="font-medium text-white">Tracks</p>
             <ul>
               {data?.tracks?.items.map((track) => (
-                <li
-                  key={track.id}
-                  onClick={() => addSeed('track', track.id, `${track.name} - ${track.artists[0].name}`)}
-                  className="my-5 flex max-w-max cursor-pointer items-center gap-5 hover:underline"
-                >
+                <li key={track.id} className="my-5 flex max-w-max items-center gap-5">
                   <Image
                     src={track.album.images?.[2]?.url || '/images/nocover.webp'}
                     alt={track.name}
@@ -74,10 +85,26 @@ export default function GeneratorSearch() {
                     className="h-10 w-10 flex-shrink-0 rounded-md object-cover"
                   />
 
-                  <span>
-                    <span className="text-white line-clamp-1">{track.name}</span>
-                    <span className="text-gray-400 line-clamp-1">{track.artists[0].name}</span>
+                  <span
+                    onClick={() =>
+                      state.track.find((trackSeed) => trackSeed.id === track.id)
+                        ? removeSeed('track', track.id)
+                        : addSeed('track', track.id, track.name)
+                    }
+                    className={`${
+                      state.seedCount < maxSeed ||
+                      (state.seedCount == maxSeed && state.track.find((trackSeed) => trackSeed.id === track.id))
+                        ? 'cursor-pointer'
+                        : 'pointer-events-none opacity-40'
+                    }`}
+                  >
+                    <span className="line-clamp-1 text-white">{track.name}</span>
+                    <span className="line-clamp-1 text-gray-400">{track.artists[0].name}</span>
                   </span>
+
+                  {state.track.find((trackSeed) => trackSeed.id === track.id) && (
+                    <span className="rounded-md bg-blue-600 p-1 text-sm text-white">Seeded</span>
+                  )}
                 </li>
               ))}
             </ul>

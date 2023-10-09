@@ -7,7 +7,7 @@ type Props = {
 
 export default function TrackName({ trackId, trackName }: Props) {
   return (
-    <Link href={`/track/${trackId}`} className="max-w-max text-white line-clamp-1 hover:underline">
+    <Link href={`/track/${trackId}`} className="line-clamp-1 max-w-max break-all text-white hover:underline">
       {trackName}
     </Link>
   )

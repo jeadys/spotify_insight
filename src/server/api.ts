@@ -507,6 +507,16 @@ export const getAudioFeaturesForTrack = async (trackId: string): Promise<Spotify
 }
 
 /**
+ * Get audio features for several tracks
+ *
+ * GET /v1/audio-features?ids={ids}
+ * https://developer.spotify.com/get-several-audio-features/
+ */
+export const getAudioFeaturesForMultipleTracks = async (trackIds: string[]): Promise<SpotifyApi.MultipleAudioFeaturesResponse> => {
+  return fetchWrapper({ url: `https://api.spotify.com/v1/audio-features?ids=${trackIds}`, method: 'GET' })
+}
+
+/**
  * Get Audio Analysis for a Track
  *
  * GET /v1/audio-analysis/{id}

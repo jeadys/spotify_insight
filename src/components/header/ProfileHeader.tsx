@@ -21,7 +21,7 @@ export default async function ProfileHeader() {
 
         <div className="capitalize text-white">
           <h2>{userProfile.type}</h2>
-          <h1 className="text-3xl font-black sm:text-4xl">{userProfile.display_name}</h1>
+          <h1 className="line-clamp-1 break-all text-3xl font-black sm:text-4xl">{userProfile.display_name}</h1>
         </div>
       </div>
     </Header>
