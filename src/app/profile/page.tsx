@@ -24,7 +24,7 @@ export default async function page() {
 
   return (
     <>
-      <Suspense fallback={<SkeletonHeader />}>
+      <Suspense fallback={<SkeletonHeader imageShape="round" hideStatistics />}>
         <ProfileHeader />
       </Suspense>
 

@@ -10,7 +10,7 @@ export default function SkeletonAlbumList({ contentAmount }: Props) {
     <ListItem key={index}>
       <div className="h-24 w-24 rounded-md bg-gray-1100 object-cover sm:h-32 sm:w-32"></div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 sm:mt-2">
         <div className="h-4 w-32 rounded-md bg-gray-1100"></div>
         <div className="flex gap-3">
           <div className="h-4 w-10 rounded-md bg-gray-1100"></div>

@@ -5,6 +5,7 @@ import Image from 'next/image'
 
 import MusicBar from '@/components/playback/MusicBar'
 import { usePlaybackStore } from '@/store/usePlayback'
+import clsx from 'clsx'
 
 type Props = {
   showPlaybackControls?: boolean
@@ -12,9 +13,10 @@ type Props = {
   trackUris: string[]
   trackImage: string
   trackName: string
+  imageSize?: 'small' | 'medium' | 'large'
 }
 
-export default function TrackPlaybackControl({ showPlaybackControls, trackUri, trackUris, trackImage, trackName }: Props) {
+export default function TrackPlaybackControl({ showPlaybackControls, trackUri, trackUris, trackImage, trackName, imageSize }: Props) {
   const setPlayback = usePlaybackStore((state) => state.setPlayback)
   const offset = usePlaybackStore((state) => state.offset)
 
@@ -26,7 +28,9 @@ export default function TrackPlaybackControl({ showPlaybackControls, trackUri, t
         width="0"
         height="0"
         sizes="100vw"
-        className="h-10 w-10 rounded-md object-cover group-hover:blur-xs"
+        className={clsx('h-10 w-10 rounded-md object-cover group-hover:blur-xs', {
+          'h-14 w-14': imageSize === 'medium',
+        })}
       />
 
       {showPlaybackControls && (

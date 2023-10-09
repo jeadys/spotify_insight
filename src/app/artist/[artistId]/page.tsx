@@ -7,6 +7,7 @@ import SkeletonArtistList from '@/components/artist/SkeletonArtistList'
 import ArtistGenreList from '@/components/genre/ArtistGenreList'
 import SkeletonGenreList from '@/components/genre/SkeletonGenreList'
 import ArtistHeader from '@/components/header/ArtistHeader'
+import SkeletonHeader from '@/components/header/SkeletonHeader'
 import Section from '@/components/layout/Section'
 import ArtistTrackList from '@/components/track/ArtistTrackList'
 import SkeletonTrackList from '@/components/track/SkeletonTrackList'
@@ -23,7 +24,9 @@ export default async function Artist({ params: { artistId } }: Params) {
 
   return (
     <>
-      <ArtistHeader artistId={artistId} />
+      <Suspense fallback={<SkeletonHeader imageShape="round" />}>
+        <ArtistHeader artistId={artistId} />
+      </Suspense>
 
       <Section title="Genres" description={`Associated with ${artist.name}`}>
         <Suspense fallback={<SkeletonGenreList contentAmount={5} />}>
@@ -32,7 +35,7 @@ export default async function Artist({ params: { artistId } }: Params) {
       </Section>
 
       <Section title="Tracks" description={`Released by ${artist.name}`}>
-        <Suspense fallback={<SkeletonTrackList contentAmount={10} />}>
+        <Suspense fallback={<SkeletonTrackList contentAmount={10} hideAttribution />}>
           <ArtistTrackList artistId={artistId} />
         </Suspense>
       </Section>

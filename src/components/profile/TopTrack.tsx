@@ -21,6 +21,7 @@ export default function TopTrack() {
             trackName={track.name}
             trackUri={track.uri}
             trackUris={uris}
+            imageSize="medium"
           />
 
           <span className="flex flex-col">
