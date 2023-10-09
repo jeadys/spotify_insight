@@ -1,8 +1,9 @@
-import { getTrackById } from '@/server/api'
 import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
-import Label from '../ui/Label'
+
+import Label from '@/components/ui/Label'
+import { getTrackById } from '@/server/api'
 
 type Props = {
   trackId: string

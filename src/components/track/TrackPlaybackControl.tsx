@@ -1,11 +1,11 @@
 'use client'
 
 import { PauseIcon, PlayIcon } from '@heroicons/react/solid'
+import clsx from 'clsx'
 import Image from 'next/image'
 
 import MusicBar from '@/components/playback/MusicBar'
 import { usePlaybackStore } from '@/store/usePlayback'
-import clsx from 'clsx'
 
 type Props = {
   showPlaybackControls?: boolean

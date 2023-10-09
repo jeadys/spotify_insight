@@ -6,8 +6,8 @@ import TrackAudioFeature from '@/components/analysis/TrackAudioFeature'
 import SkeletonHeader from '@/components/header/SkeletonHeader'
 import TrackHeader from '@/components/header/TrackHeader'
 import Section from '@/components/layout/Section'
-import { getTrackById } from '@/server/api'
 import SkeletonAudioFeature from '@/components/skeleton/SkeletonAudioFeature'
+import { getTrackById } from '@/server/api'
 
 type Params = {
   params: {

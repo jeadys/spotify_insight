@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -6,7 +7,6 @@ import MetadataItem from '@/components/analysis/MetadataItem'
 import Header from '@/components/layout/Header'
 import { getTrackById } from '@/server/api'
 import { formatTrackDuration } from '@/utils/formatTrackDuration'
-import dayjs from 'dayjs'
 
 type Props = {
   trackId: string
