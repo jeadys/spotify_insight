@@ -1,14 +1,13 @@
-import dayjs from 'dayjs'
-import Image from 'next/image'
-import Link from 'next/link'
+import { Suspense } from 'react'
 
-import TrackAudioFeatureChart from '@/components/analysis/TrackAudioFeatureChart'
-import TrackAudioFeatureProgressBar from '@/components/analysis/TrackAudioFeatureProgressBar'
-import TrackAudioFeatureStatistics from '@/components/analysis/TrackAudioFeatureStatistics'
+import RelatedAlbum from '@/components/album/RelatedAlbum'
+import SkeletonAlbumList from '@/components/album/SkeletonAlbumList'
+import TrackAudioFeature from '@/components/analysis/TrackAudioFeature'
+import SkeletonHeader from '@/components/header/SkeletonHeader'
 import TrackHeader from '@/components/header/TrackHeader'
 import Section from '@/components/layout/Section'
-import Label from '@/components/ui/Label'
-import { getAudioFeaturesForTrack, getTrackById } from '@/server/api'
+import { getTrackById } from '@/server/api'
+import SkeletonAudioFeature from '@/components/skeleton/SkeletonAudioFeature'
 
 type Params = {
   params: {
@@ -18,49 +17,41 @@ type Params = {
 
 export default async function Track({ params: { trackId } }: Params) {
   const track = await getTrackById(trackId)
-  const trackAudioFeatures = await getAudioFeaturesForTrack(trackId)
 
   return (
     <>
-      <TrackHeader track={track} />
+      <Suspense fallback={<SkeletonHeader imageShape="square" />}>
+        <TrackHeader trackId={trackId} />
+      </Suspense>
 
       <Section title="Appears on" description={`Albums featuring ${track.name}`}>
-        <div className="flex max-w-max flex-row items-center gap-5 sm:flex-col sm:items-start">
-          <Link href={`/album/${track.album.id}`} className="flex-shrink-0">
-            <Image
-              src={track.album.images?.[1]?.url || '/images/nocover.webp'}
-              alt={track.album.name}
-              width="0"
-              height="0"
-              sizes="100vw"
-              className="h-24 w-24 rounded-md object-cover sm:h-32 sm:w-32"
-            />
-          </Link>
-
-          <span className="sm:flex sm:flex-col">
-            <Link href={`/album/${track.album.id}`} className="line-clamp-1 max-w-max break-all text-white hover:underline">
-              {track.album.name}
-            </Link>
-
-            <span className="flex flex-row">
-              <Label value={track.album.total_tracks} icon="music" />
-              <Label value={dayjs(track.album.release_date).year()} />
-            </span>
-          </span>
-        </div>
+        <Suspense fallback={<SkeletonAlbumList contentAmount={1} />}>
+          <RelatedAlbum trackId={trackId} />
+        </Suspense>
       </Section>
 
-      {trackAudioFeatures && (
-        <Section title="Track Analysis" description={`Audio elements of ${track.name}`}>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <div className="flex flex-col gap-5">
-              <TrackAudioFeatureProgressBar trackAudioFeatures={trackAudioFeatures} />
-              <TrackAudioFeatureStatistics trackAudioFeatures={trackAudioFeatures} />
+      <Section title="Track Analysis" description={`Audio elements of ${track.name}`}>
+        <Suspense
+          fallback={
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+              <div className="flex flex-col gap-5">
+                <SkeletonAudioFeature contentAmount={6} />
+                <ul className="grid w-full grid-cols-2 gap-5 lg:grid-cols-3">
+                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
+                </ul>
+              </div>
             </div>
-            <TrackAudioFeatureChart trackAudioFeatures={trackAudioFeatures} />
-          </div>
-        </Section>
-      )}
+          }
+        >
+          <TrackAudioFeature trackId={trackId} />
+        </Suspense>
+      </Section>
     </>
   )
 }
