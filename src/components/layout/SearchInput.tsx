@@ -3,26 +3,46 @@ import React from 'react'
 
 import { SearchIcon, XIcon } from '@heroicons/react/solid'
 
+import useFocus from '@/hooks/useFocus'
+
 type Props = {
   value: string
   placeholder: string
-  inputRef: React.RefObject<HTMLInputElement>
   setSearch: Dispatch<SetStateAction<string>>
 }
 
-export default function SearchInput({ value, placeholder, inputRef, setSearch }: Props) {
+export default function SearchInput({ value, placeholder, setSearch }: Props) {
+  const { inputRef, focus } = useFocus()
+
   return (
-    <form className="flex w-full flex-row items-center gap-2 rounded-full border-solid bg-gray-1200 py-1 px-3 text-sm text-white sm:w-80">
-      <SearchIcon className="h-6 w-6 flex-shrink-0" />
-      <input
-        type="text"
-        value={value}
-        placeholder={placeholder}
-        ref={inputRef}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full bg-transparent py-2 focus:outline-none"
-      />
-      <span>{value && <XIcon className="h-6 w-6 flex-shrink-0" onClick={() => setSearch('')} />}</span>
-    </form>
+    <div className="relative w-full text-white sm:max-w-xs">
+      <form>
+        <input
+          type="text"
+          value={value}
+          placeholder={placeholder}
+          ref={inputRef}
+          onChange={(e) => setSearch(e.target.value)}
+          className="h-12 w-full rounded-full border-2 border-transparent bg-gray-1200 px-12 text-sm hover:bg-gray-1100 focus:border-slate-200 focus:outline-none"
+        />
+      </form>
+      <div className="pointer-events-none absolute bottom-0 top-0 flex w-full items-center justify-between px-4">
+        <span className=" cursor-pointer">
+          <SearchIcon className=" h-6 w-6 flex-shrink-0 " />
+        </span>
+
+        {value && (
+          <button
+            onClick={() => {
+              setSearch('')
+              focus()
+            }}
+            className="pointer-events-auto"
+          >
+            <XIcon className="h-6 w-6 flex-shrink-0" />
+          </button>
+        )}
+      </div>
+    </div>
   )
 }
