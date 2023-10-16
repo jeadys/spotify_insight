@@ -2,9 +2,9 @@
 
 import Link from 'next/link'
 
-import useTopArtists from '@/hooks/query/useTopArtists'
+import { useTopArtists } from '@/hooks/query/useTopArtists'
 
-export default function TopGenre() {
+export const TopGenre = () => {
   const topArtists = useTopArtists()
   if (!topArtists?.items?.length) return <span className="text-white">No genre associations</span>
 

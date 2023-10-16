@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 
-import GenreArtistList from '@/components/artist/GenreArtistList'
-import SkeletonArtistList from '@/components/artist/SkeletonArtistList'
-import Section from '@/components/layout/Section'
+import { GenreArtistList } from '@/components/artist/GenreArtistList'
+import { SkeletonArtistList } from '@/components/artist/SkeletonArtistList'
+import { Section } from '@/components/layout/Section'
 
 type Params = {
   params: {

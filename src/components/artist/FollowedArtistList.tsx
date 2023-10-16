@@ -1,15 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import ArtistGenre from '@/components/artist/ArtistGenre'
-import ArtistName from '@/components/artist/ArtistName'
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import Label from '@/components/ui/Label'
+import { ArtistGenre } from '@/components/artist/ArtistGenre'
+import { ArtistName } from '@/components/artist/ArtistName'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { Label } from '@/components/ui/Label'
 import { getCurrentUserFollowedArtists } from '@/server/api'
 import { formatFollowCount } from '@/utils/formatFollowCount'
 
-export default async function FollowedArtistList() {
+export const FollowedArtistList = async () => {
   const followedArtists = await getCurrentUserFollowedArtists(12)
   if (!followedArtists?.artists?.items?.length) return <span className="text-white">No followed artists</span>
 

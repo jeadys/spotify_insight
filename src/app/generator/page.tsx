@@ -1,13 +1,13 @@
 import { Suspense } from 'react'
 
-import SkeletonAlbumList from '@/components/album/SkeletonAlbumList'
-import GeneratorCreate from '@/components/generator/GeneratorCreate'
-import GeneratorRangeSlider from '@/components/generator/GeneratorRangeSlider'
-import GeneratorReset from '@/components/generator/GeneratorReset'
-import GeneratorSearch from '@/components/generator/GeneratorSearch'
-import GeneratorSeed from '@/components/generator/GeneratorSeed'
-import Section from '@/components/layout/Section'
-import SavedPlayList from '@/components/playlist/SavedPlaylist'
+import { SkeletonAlbumList } from '@/components/album/SkeletonAlbumList'
+import { GeneratorCreate } from '@/components/generator/GeneratorCreate'
+import { GeneratorRangeSlider } from '@/components/generator/GeneratorRangeSlider'
+import { GeneratorReset } from '@/components/generator/GeneratorReset'
+import { GeneratorSearch } from '@/components/generator/GeneratorSearch'
+import { GeneratorSeed } from '@/components/generator/GeneratorSeed'
+import { Section } from '@/components/layout/Section'
+import { SavedPlayList } from '@/components/playlist/SavedPlaylist'
 
 export default async function Generator() {
   return (

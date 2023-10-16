@@ -9,7 +9,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export default function ReactQueryWrapper({ children }: Props) {
+export const ReactQueryWrapper = ({ children }: Props) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({

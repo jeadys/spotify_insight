@@ -1,13 +1,13 @@
 import { Suspense } from 'react'
 
-import AlbumCopyright from '@/components/album/AlbumCopyright'
-import AlbumAudioFeature from '@/components/analysis/AlbumAudioFeature'
-import AlbumHeader from '@/components/header/AlbumHeader'
-import SkeletonHeader from '@/components/header/SkeletonHeader'
-import Section from '@/components/layout/Section'
-import SkeletonAudioFeature from '@/components/skeleton/SkeletonAudioFeature'
-import AlbumTrackList from '@/components/track/AlbumTrackList'
-import SkeletonTrackList from '@/components/track/SkeletonTrackList'
+import { AlbumCopyright } from '@/components/album/AlbumCopyright'
+import { AlbumAudioFeature } from '@/components/analysis/AlbumAudioFeature'
+import { AlbumHeader } from '@/components/header/AlbumHeader'
+import { SkeletonHeader } from '@/components/header/SkeletonHeader'
+import { Section } from '@/components/layout/Section'
+import { SkeletonAudioFeature } from '@/components/skeleton/SkeletonAudioFeature'
+import { AlbumTrackList } from '@/components/track/AlbumTrackList'
+import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
 import { getAlbumById } from '@/server/api'
 
 type Params = {

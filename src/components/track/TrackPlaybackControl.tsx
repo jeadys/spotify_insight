@@ -4,7 +4,7 @@ import { PauseIcon, PlayIcon } from '@heroicons/react/solid'
 import clsx from 'clsx'
 import Image from 'next/image'
 
-import MusicBar from '@/components/playback/MusicBar'
+import { MusicBar } from '@/components/playback/MusicBar'
 import { usePlaybackStore } from '@/store/usePlayback'
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
   imageSize?: 'small' | 'medium' | 'large'
 }
 
-export default function TrackPlaybackControl({ showPlaybackControls, trackUri, trackUris, trackImage, trackName, imageSize }: Props) {
+export const TrackPlaybackControl = ({ showPlaybackControls, trackUri, trackUris, trackImage, trackName, imageSize }: Props) => {
   const setPlayback = usePlaybackStore((state) => state.setPlayback)
   const offset = usePlaybackStore((state) => state.offset)
 

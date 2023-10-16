@@ -4,7 +4,7 @@ type Props = {
   albumId: string
 }
 
-export default async function AlbumCopyright({ albumId }: Props) {
+export const AlbumCopyright = async ({ albumId }: Props) => {
   const album = await getAlbumById(albumId)
 
   return (

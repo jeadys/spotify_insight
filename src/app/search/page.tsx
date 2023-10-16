@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 
-import NewAlbumList from '@/components/album/NewAlbumList'
-import SkeletonAlbumList from '@/components/album/SkeletonAlbumList'
-import Section from '@/components/layout/Section'
+import { NewAlbumList } from '@/components/album/NewAlbumList'
+import { SkeletonAlbumList } from '@/components/album/SkeletonAlbumList'
+import { Section } from '@/components/layout/Section'
 
 export default async function page() {
   return (

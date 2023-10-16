@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from 'clsx'
 
 type Props = {
@@ -8,7 +10,7 @@ type Props = {
   contentAmount: number
 }
 
-export default function Skeleton({ imageShape, imageSize, gridFlow, gridSize, contentAmount }: Props) {
+export const Skeleton = ({ imageShape, imageSize, gridFlow, gridSize, contentAmount }: Props) => {
   const skeletons = new Array(contentAmount).fill(null).map((_, index) => (
     <div
       key={index}

@@ -5,7 +5,7 @@ type Props = {
   value: number
 }
 
-export default function ProgressBarGridItem({ title, value }: Props) {
+export const ProgressBarItem = ({ title, value }: Props) => {
   return (
     <li className="capitalize">
       <h4 className="mb-2 text-white">{title}</h4>

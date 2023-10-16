@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 
 type Props = {
@@ -5,7 +7,7 @@ type Props = {
   albumName: string
 }
 
-export default function AlbumName({ albumId, albumName }: Props) {
+export const AlbumName = ({ albumId, albumName }: Props) => {
   return (
     <Link href={`/album/${albumId}`} className="line-clamp-1 max-w-max break-all text-white hover:underline">
       {albumName}

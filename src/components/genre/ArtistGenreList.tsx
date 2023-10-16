@@ -6,7 +6,7 @@ type Props = {
   artistId: string
 }
 
-export default async function ArtistGenreList({ artistId }: Props) {
+export const ArtistGenreList = async ({ artistId }: Props) => {
   const artist = await getArtistById(artistId)
   if (!artist?.genres?.length) return <span className="text-white">No genre associations</span>
 

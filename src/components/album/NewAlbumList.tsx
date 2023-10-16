@@ -2,13 +2,13 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AlbumName from '@/components/album/AlbumName'
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import Label from '@/components/ui/Label'
+import { AlbumName } from '@/components/album/AlbumName'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { Label } from '@/components/ui/Label'
 import { getNewReleases } from '@/server/api'
 
-export default async function NewAlbumList() {
+export const NewAlbumList = async () => {
   const newReleases = await getNewReleases(50)
   if (!newReleases?.albums?.items?.length) return <span className="text-white">No albums found</span>
 

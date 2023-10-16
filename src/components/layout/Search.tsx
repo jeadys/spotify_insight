@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import SearchInput from '@/components/layout/SearchInput'
-import useDebounce from '@/hooks/useDebounce'
+import { SearchInput } from '@/components/layout/SearchInput'
+import { useDebounce } from '@/hooks/useDebounce'
 
-export default function Search() {
+export const Search = () => {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 1000)
   const router = useRouter()

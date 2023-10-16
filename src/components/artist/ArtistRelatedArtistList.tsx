@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import ArtistGenre from '@/components/artist/ArtistGenre'
-import ArtistName from '@/components/artist/ArtistName'
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import Label from '@/components/ui/Label'
+import { ArtistGenre } from '@/components/artist/ArtistGenre'
+import { ArtistName } from '@/components/artist/ArtistName'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { Label } from '@/components/ui/Label'
 import { getArtistRelatedArtists } from '@/server/api'
 import { formatFollowCount } from '@/utils/formatFollowCount'
 
@@ -13,7 +13,7 @@ type Props = {
   artistId: string
 }
 
-export default async function ArtistRelatedArtistList({ artistId }: Props) {
+export const ArtistRelatedArtistList = async ({ artistId }: Props) => {
   const artistRelatedArtists = await getArtistRelatedArtists(artistId)
   if (!artistRelatedArtists?.artists?.length) return <span className="text-white">No related artists</span>
 

@@ -2,16 +2,16 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import MetadataGrid from '@/components/analysis/MetadataGrid'
-import MetadataItem from '@/components/analysis/MetadataItem'
-import Header from '@/components/layout/Header'
+import { MetadataGrid } from '@/components/analysis/MetadataGrid'
+import { MetadataItem } from '@/components/analysis/MetadataItem'
+import { Header } from '@/components/layout/Header'
 import { getAlbumById } from '@/server/api'
 
 type Props = {
   albumId: string
 }
 
-export default async function AlbumHeader({ albumId }: Props) {
+export const AlbumHeader = async ({ albumId }: Props) => {
   const album = await getAlbumById(albumId)
 
   return (

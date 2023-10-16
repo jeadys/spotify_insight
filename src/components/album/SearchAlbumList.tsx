@@ -2,17 +2,17 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AlbumName from '@/components/album/AlbumName'
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import Label from '@/components/ui/Label'
+import { AlbumName } from '@/components/album/AlbumName'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { Label } from '@/components/ui/Label'
 import { getSearchItems } from '@/server/api'
 
 type Props = {
   searchTerm: string
 }
 
-export default async function SearchAlbumList({ searchTerm }: Props) {
+export const SearchAlbumList = async ({ searchTerm }: Props) => {
   const searchResult = await getSearchItems(searchTerm, 12)
   if (!searchResult?.albums?.items?.length) return <span className="text-white">No albums found</span>
 

@@ -1,11 +1,13 @@
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
+'use client'
+
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
 
 type Props = {
   contentAmount: number
 }
 
-export default function SkeletonArtistList({ contentAmount }: Props) {
+export const SkeletonArtistList = ({ contentAmount }: Props) => {
   const skeletons = new Array(contentAmount).fill(null).map((_, index) => (
     <ListItem key={index}>
       <div className="h-24 w-24 rounded-full bg-gray-1100 object-cover sm:h-32 sm:w-32"></div>

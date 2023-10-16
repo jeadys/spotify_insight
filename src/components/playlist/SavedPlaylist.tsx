@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import PlaylistName from '@/components/playlist/PlaylistName'
-import Label from '@/components/ui/Label'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { PlaylistName } from '@/components/playlist/PlaylistName'
+import { Label } from '@/components/ui/Label'
 import { getCurrentUserSavedPlaylists } from '@/server/api'
 
-export default async function SavedPlayList() {
+export const SavedPlayList = async () => {
   const savedPlaylists = await getCurrentUserSavedPlaylists(12)
   if (!savedPlaylists?.items?.length) return <span className="text-white">No playlists saved</span>
 

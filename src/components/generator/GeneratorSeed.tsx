@@ -5,7 +5,7 @@ import { XIcon } from '@heroicons/react/solid'
 import { useStore } from '@/hooks/useStore'
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 
-export default function GeneratorSeed() {
+export const GeneratorSeed = () => {
   const removeSeed = useGeneratorStore((state) => state.removeSeed)
   // Custom useStore hook needed for persist storage to work with NextJS Hydration
   const state = useStore(useGeneratorStore, (state) => state) ?? initialGeneratorState

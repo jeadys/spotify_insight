@@ -28,6 +28,15 @@
           "caseInsensitive": true
         }
       }
-    ]
-  }
+    ],
+    "import/no-default-export": "error"
+  },
+  "overrides": [
+    {
+      "files": ["src/app/**/*", "src/middleware.ts"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ]
 }

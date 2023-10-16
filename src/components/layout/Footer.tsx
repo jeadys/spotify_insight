@@ -1,6 +1,8 @@
+'use client'
+
 import { HeartIcon } from '@heroicons/react/solid'
 
-export default function Footer() {
+export const Footer = () => {
   return (
     <footer>
       <hr className="my-10 h-px border-0 bg-gray-900" />

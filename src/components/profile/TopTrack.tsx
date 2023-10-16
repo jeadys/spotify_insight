@@ -2,10 +2,10 @@
 
 import Link from 'next/link'
 
-import TrackPlaybackControl from '@/components/track/TrackPlaybackControl'
-import useTopTracks from '@/hooks/query/useTopTracks'
+import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
+import { useTopTracks } from '@/hooks/query/useTopTracks'
 
-export default function TopTrack() {
+export const TopTrack = () => {
   const topTracks = useTopTracks()
   if (!topTracks?.items?.length) return <span className="text-white">No tracks found</span>
 

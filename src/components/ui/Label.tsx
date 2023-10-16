@@ -1,3 +1,5 @@
+'use client'
+
 import { MusicNoteIcon, HeartIcon, CalendarIcon } from '@heroicons/react/solid'
 
 type Props = {
@@ -6,7 +8,7 @@ type Props = {
   className?: string
 }
 
-export default function Label({ value, icon, className = '' }: Props) {
+export const Label = ({ value, icon, className = '' }: Props) => {
   const iconComponent = (() => {
     switch (icon) {
       case 'heart':
@@ -21,7 +23,7 @@ export default function Label({ value, icon, className = '' }: Props) {
   })()
 
   return (
-    <span className={`mt-2 mr-2 max-w-max rounded-md bg-gray-1200 px-2 py-1 text-xs text-white ${className}`}>
+    <span className={`mr-2 mt-2 max-w-max rounded-md bg-gray-1200 px-2 py-1 text-xs text-white ${className}`}>
       {iconComponent}
       {value}
     </span>

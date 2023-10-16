@@ -2,7 +2,7 @@
 
 import { PauseIcon, PlayIcon } from '@heroicons/react/solid'
 
-import MusicBar from '@/components/playback/MusicBar'
+import { MusicBar } from '@/components/playback/MusicBar'
 import { usePlaybackStore } from '@/store/usePlayback'
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   queue: string[]
 }
 
-export default function PlaybackHandle({ uri, queue }: Props) {
+export const PlaybackHandle = ({ uri, queue }: Props) => {
   const setPlayback = usePlaybackStore((state) => state.setPlayback)
   const offset = usePlaybackStore((state) => state.offset)
 

@@ -7,7 +7,7 @@ type Props = {
   buttonMessage: string
 }
 
-export default function DiscoverButton({ titleMessage, buttonMessage }: Props) {
+export const DiscoverButton = ({ titleMessage, buttonMessage }: Props) => {
   return (
     <div className="flex flex-col items-center gap-5 text-white">
       <h3>{titleMessage}</h3>

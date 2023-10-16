@@ -1,8 +1,10 @@
+'use client'
+
 type Props = {
   contentAmount: number
 }
 
-export default function SkeletonAudioFeature({ contentAmount }: Props) {
+export const SkeletonAudioFeature = ({ contentAmount }: Props) => {
   const skeletons = new Array(contentAmount).fill(null).map((_, index) => (
     <li key={index} className="capitalize">
       <h4 className="mb-2 h-6 w-32 rounded-md bg-gray-1100"></h4>

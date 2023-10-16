@@ -1,16 +1,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import MetadataGrid from '@/components/analysis/MetadataGrid'
-import MetadataItem from '@/components/analysis/MetadataItem'
-import Header from '@/components/layout/Header'
+import { MetadataGrid } from '@/components/analysis/MetadataGrid'
+import { MetadataItem } from '@/components/analysis/MetadataItem'
+import { Header } from '@/components/layout/Header'
 import { getArtistById } from '@/server/api'
 
 type Props = {
   artistId: string
 }
 
-export default async function ArtistHeader({ artistId }: Props) {
+export const ArtistHeader = async ({ artistId }: Props) => {
   const artist = await getArtistById(artistId)
 
   return (

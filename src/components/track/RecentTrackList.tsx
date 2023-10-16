@@ -2,20 +2,20 @@
 
 import dayjs from 'dayjs'
 
-import TrackAlbum from '@/components/track/TrackAlbum'
-import TrackArtist from '@/components/track/TrackArtist'
-import TrackList from '@/components/track/TrackList'
-import TrackListItem from '@/components/track/TrackListItem'
-import TrackName from '@/components/track/TrackName'
-import TrackPlaybackControl from '@/components/track/TrackPlaybackControl'
-import TrackPlayedAt from '@/components/track/TrackStream'
+import { TrackAlbum } from '@/components/track/TrackAlbum'
+import { TrackArtist } from '@/components/track/TrackArtist'
+import { TrackList } from '@/components/track/TrackList'
+import { TrackListItem } from '@/components/track/TrackListItem'
+import { TrackName } from '@/components/track/TrackName'
+import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
+import { TrackPlayedAt } from '@/components/track/TrackPlayedAt'
 import { getRecentlyPlayedTracks } from '@/server/api'
 
 type TracksByDay = {
   [date: string]: { track: SpotifyApi.TrackObjectFull; played_at: string; index: number }[]
 }
 
-export default async function RecentTrackList() {
+export const RecentTrackList = async () => {
   const recentTracks = await getRecentlyPlayedTracks(50)
   if (!recentTracks?.items?.length) return <span className="text-white">No tracks found</span>
 

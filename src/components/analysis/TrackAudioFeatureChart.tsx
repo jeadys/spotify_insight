@@ -1,12 +1,12 @@
 'use client'
 
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts'
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart, ResponsiveContainer } from 'recharts'
 
 type Props = {
   trackAudioFeatures: SpotifyApi.AudioFeaturesResponse
 }
 
-export default function TrackAudioFeatureChart({ trackAudioFeatures }: Props) {
+export const TrackAudioFeatureChart = ({ trackAudioFeatures }: Props) => {
   const data = [
     {
       name: 'danceability',

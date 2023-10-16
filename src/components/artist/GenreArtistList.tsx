@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import ArtistName from '@/components/artist/ArtistName'
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import Label from '@/components/ui/Label'
+import { ArtistName } from '@/components/artist/ArtistName'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { Label } from '@/components/ui/Label'
 import { getArtistBasedOnGenre } from '@/server/api'
 import { formatFollowCount } from '@/utils/formatFollowCount'
 
@@ -12,7 +12,7 @@ type Props = {
   id: string
 }
 
-export default async function GenreArtistList({ id }: Props) {
+export const GenreArtistList = async ({ id }: Props) => {
   const artistBasedOnGenre = await getArtistBasedOnGenre(id.replace(/%20/g, '-'), 50)
   if (!artistBasedOnGenre?.artists?.items?.length) return <span className="text-white">No artists found</span>
 
