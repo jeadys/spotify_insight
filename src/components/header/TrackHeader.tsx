@@ -2,9 +2,9 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import MetadataGrid from '@/components/analysis/MetadataGrid'
-import MetadataItem from '@/components/analysis/MetadataItem'
-import Header from '@/components/layout/Header'
+import { MetadataGrid } from '@/components/analysis/MetadataGrid'
+import { MetadataItem } from '@/components/analysis/MetadataItem'
+import { Header } from '@/components/layout/Header'
 import { getTrackById } from '@/server/api'
 import { formatTrackDuration } from '@/utils/formatTrackDuration'
 
@@ -12,7 +12,7 @@ type Props = {
   trackId: string
 }
 
-export default async function TrackHeader({ trackId }: Props) {
+export const TrackHeader = async ({ trackId }: Props) => {
   const track = await getTrackById(trackId)
 
   return (

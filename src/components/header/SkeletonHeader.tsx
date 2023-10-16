@@ -1,3 +1,5 @@
+'use client'
+
 import clsx from 'clsx'
 
 type Props = {
@@ -5,7 +7,7 @@ type Props = {
   hideStatistics?: boolean
 }
 
-export default function SkeletonHeader({ imageShape, hideStatistics }: Props) {
+export const SkeletonHeader = ({ imageShape, hideStatistics }: Props) => {
   return (
     <header className="flex animate-pulse flex-col gap-3 pt-5 sm:pt-10">
       <div className="flex flex-col items-center gap-4 sm:flex-row">

@@ -1,9 +1,11 @@
+'use client'
+
 type Props = {
   contentAmount: number
   hideAttribution?: boolean
 }
 
-export default function TrackSkeleton({ contentAmount, hideAttribution }: Props) {
+export const SkeletonTrackList = ({ contentAmount, hideAttribution }: Props) => {
   const skeletons = new Array(contentAmount).fill(null).map((_, index) => (
     <li key={index} className="flex items-center gap-5 p-2">
       <span className="h-10 w-10 rounded-md bg-gray-1100"></span>

@@ -14,7 +14,7 @@ type Props = {
   gap: number
 }
 
-export default function GeneratorSlider({ title, description, min, max, step, gap }: Props) {
+export const GeneratorRangeSlider = ({ title, description, min, max, step, gap }: Props) => {
   const setRangeValue = useGeneratorStore((state) => state.setRangeValue)
   // Custom useStore hook needed for persist storage to work with NextJS Hydration
   const minValue = useStore(useGeneratorStore, (state) => state[title].min) ?? initialGeneratorState[title].min

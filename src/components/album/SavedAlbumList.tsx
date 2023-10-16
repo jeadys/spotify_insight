@@ -2,13 +2,13 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AlbumName from '@/components/album/AlbumName'
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import Label from '@/components/ui/Label'
+import { AlbumName } from '@/components/album/AlbumName'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { Label } from '@/components/ui/Label'
 import { getCurrentUserSavedAlbums } from '@/server/api'
 
-export default async function SavedAlbumList() {
+export const SavedAlbumList = async () => {
   const savedAlbums = await getCurrentUserSavedAlbums(12)
   if (!savedAlbums?.items?.length) return <span className="text-white">No albums saved</span>
 

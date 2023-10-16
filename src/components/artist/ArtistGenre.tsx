@@ -1,10 +1,12 @@
+'use client'
+
 import Link from 'next/link'
 
 type Props = {
   artistGenre: string
 }
 
-export default function ArtistGenre({ artistGenre }: Props) {
+export const ArtistGenre = ({ artistGenre }: Props) => {
   return (
     <>
       {artistGenre ? (

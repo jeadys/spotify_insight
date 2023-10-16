@@ -5,7 +5,7 @@ import SpotifyPlayer from 'react-spotify-web-playback'
 
 import { usePlaybackStore } from '@/store/usePlayback'
 
-export default function TrackPlayer() {
+export const Playback = () => {
   const { data: session } = useSession()
   const offset = usePlaybackStore((state) => state.offset)
   const trackQueue = usePlaybackStore((state) => state.queue)

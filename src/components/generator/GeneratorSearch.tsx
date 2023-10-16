@@ -4,15 +4,14 @@ import { useState } from 'react'
 
 import Image from 'next/image'
 
-import SkeletonGenerator from '@/components/generator/SkeletonGenerator'
-import SearchInput from '@/components/layout/SearchInput'
-import useGeneratorSearch from '@/hooks/query/useGeneratorSearch'
-import useDebounce from '@/hooks/useDebounce'
-import useFocus from '@/hooks/useFocus'
+import { SkeletonGenerator } from '@/components/generator/SkeletonGenerator'
+import { SearchInput } from '@/components/layout/SearchInput'
+import { useGeneratorSearch } from '@/hooks/query/useGeneratorSearch'
+import { useDebounce } from '@/hooks/useDebounce'
 import { useStore } from '@/hooks/useStore'
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 
-export default function GeneratorSearch() {
+export const GeneratorSearch = () => {
   const [search, setSearch] = useState('')
   const debouncedSearch = useDebounce(search, 1000)
   const { data, isInitialLoading } = useGeneratorSearch(debouncedSearch)

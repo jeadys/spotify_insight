@@ -1,8 +1,8 @@
-import FeatureItem from '@/components/analysis/FeatureItem'
-import FeatureList from '@/components/analysis/FeatureList'
-import ProgressBarGrid from '@/components/analysis/ProgressBarGrid'
-import ProgressBarItem from '@/components/analysis/ProgressBarItem'
-import TrackAudioFeatureChart from '@/components/analysis/TrackAudioFeatureChart'
+import { FeatureItem } from '@/components/analysis/FeatureItem'
+import { FeatureList } from '@/components/analysis/FeatureList'
+import { ProgressBarGrid } from '@/components/analysis/ProgressBarGrid'
+import { ProgressBarItem } from '@/components/analysis/ProgressBarItem'
+import { TrackAudioFeatureChart } from '@/components/analysis/TrackAudioFeatureChart'
 import { getAudioFeaturesForTrack } from '@/server/api'
 import { calculateTotalBars } from '@/utils/calculateTotalBars'
 import { calculateTotalBeats } from '@/utils/calculateTotalBeats'
@@ -12,7 +12,7 @@ type Props = {
   trackId: string
 }
 
-export default async function TrackAudioFeature({ trackId }: Props) {
+export const TrackAudioFeature = async ({ trackId }: Props) => {
   const trackAudioFeatures = await getAudioFeaturesForTrack(trackId)
   if (!trackAudioFeatures) return <span className="text-white">No tracks to analyse</span>
 

@@ -1,17 +1,17 @@
-import TrackAlbum from '@/components/track/TrackAlbum'
-import TrackArtist from '@/components/track/TrackArtist'
-import TrackDuration from '@/components/track/TrackDuration'
-import TrackList from '@/components/track/TrackList'
-import TrackListItem from '@/components/track/TrackListItem'
-import TrackName from '@/components/track/TrackName'
-import TrackPlaybackControl from '@/components/track/TrackPlaybackControl'
+import { TrackAlbum } from '@/components/track/TrackAlbum'
+import { TrackArtist } from '@/components/track/TrackArtist'
+import { TrackDuration } from '@/components/track/TrackDuration'
+import { TrackList } from '@/components/track/TrackList'
+import { TrackListItem } from '@/components/track/TrackListItem'
+import { TrackName } from '@/components/track/TrackName'
+import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
 import { getSearchItems } from '@/server/api'
 
 type Props = {
   searchTerm: string
 }
 
-export default async function SearchTrackList({ searchTerm }: Props) {
+export const SearchTrackList = async ({ searchTerm }: Props) => {
   const searchResult = await getSearchItems(searchTerm, 12)
   if (!searchResult?.tracks?.items?.length) return <span className="text-white">No tracks found</span>
 

@@ -7,7 +7,7 @@ type Props = {
   large?: boolean
 }
 
-export default function MetadataItem({ title, value }: Props) {
+export const MetadataItem = ({ title, value }: Props) => {
   return (
     <li className="capitalize">
       <h3 className="text-xl font-bold text-blue-300">{value}</h3>

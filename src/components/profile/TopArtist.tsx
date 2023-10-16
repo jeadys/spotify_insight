@@ -3,9 +3,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import useTopArtists from '@/hooks/query/useTopArtists'
+import { useTopArtists } from '@/hooks/query/useTopArtists'
 
-export default function TopArtist() {
+export const TopArtist = () => {
   const topArtists = useTopArtists()
   if (!topArtists?.items?.length) return <span className="text-white">No artists found</span>
 

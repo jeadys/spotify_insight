@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
-import Header from '@/components/layout/Header'
+import { Header } from '@/components/layout/Header'
 import { getCurrentUsersProfile } from '@/server/api'
 
-export default async function ProfileHeader() {
+export const ProfileHeader = async () => {
   const userProfile = await getCurrentUsersProfile()
 
   return (

@@ -2,12 +2,12 @@ import '@/styles/globals.css'
 
 import { Saira } from 'next/font/google'
 
-import NextAuthWrapper from '@/components/core/NextAuthWrapper'
-import ReactQueryWrapper from '@/components/core/ReactQueryWrapper'
-import ScrollToTop from '@/components/core/ScrollToTop'
-import Footer from '@/components/layout/Footer'
-import Navigation from '@/components/layout/Navigation'
-import Playback from '@/components/playback/Playback'
+import { NextAuthWrapper } from '@/components/core/NextAuthWrapper'
+import { ReactQueryWrapper } from '@/components/core/ReactQueryWrapper'
+import { ScrollToTop } from '@/components/core/ScrollToTop'
+import { Footer } from '@/components/layout/Footer'
+import { Navigation } from '@/components/layout/Navigation'
+import { Playback } from '@/components/playback/Playback'
 
 const saira = Saira({
   subsets: ['latin'],

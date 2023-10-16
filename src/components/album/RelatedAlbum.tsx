@@ -2,13 +2,13 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import Label from '@/components/ui/Label'
+import { Label } from '@/components/ui/Label'
 import { getTrackById } from '@/server/api'
 
 type Props = {
   trackId: string
 }
-export default async function RelatedAlbum({ trackId }: Props) {
+export const RelatedAlbum = async ({ trackId }: Props) => {
   const track = await getTrackById(trackId)
 
   return (

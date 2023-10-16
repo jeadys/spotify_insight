@@ -7,7 +7,7 @@ type ProfileFilterProps = {
   term: 'short_term' | 'medium_term' | 'long_term'
 }[]
 
-export default function ProfileFilter() {
+export const ProfileFilter = () => {
   const profileFilterItems: ProfileFilterProps = [
     {
       title: '4 Weeks',

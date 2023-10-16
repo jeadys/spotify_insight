@@ -1,12 +1,12 @@
 import { Suspense } from 'react'
 
-import PlaylistAudioFeature from '@/components/analysis/PlaylistAudioFeature'
-import PlaylistHeader from '@/components/header/PlaylistHeader'
-import SkeletonHeader from '@/components/header/SkeletonHeader'
-import Section from '@/components/layout/Section'
-import SkeletonAudioFeature from '@/components/skeleton/SkeletonAudioFeature'
-import PlaylistTrackList from '@/components/track/PlaylistTrackList'
-import SkeletonTrackList from '@/components/track/SkeletonTrackList'
+import { PlaylistAudioFeature } from '@/components/analysis/PlaylistAudioFeature'
+import { PlaylistHeader } from '@/components/header/PlaylistHeader'
+import { SkeletonHeader } from '@/components/header/SkeletonHeader'
+import { Section } from '@/components/layout/Section'
+import { SkeletonAudioFeature } from '@/components/skeleton/SkeletonAudioFeature'
+import { PlaylistTrackList } from '@/components/track/PlaylistTrackList'
+import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
 import { getPlaylistById } from '@/server/api'
 
 type Params = {

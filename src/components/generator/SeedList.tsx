@@ -12,7 +12,7 @@ type Props = {
   }[]
 }
 
-export default function SeedList({ seedType, seeds }: Props) {
+export const SeedList = ({ seedType, seeds }: Props) => {
   const removeSeed = useGeneratorStore((state) => state.removeSeed)
 
   return seeds.length ? (

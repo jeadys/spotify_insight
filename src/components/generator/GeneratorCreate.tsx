@@ -9,7 +9,7 @@ import { addTracksToPlaylist, createPlaylist, getRecommendationsFromSeeds } from
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 import { calculateTargetAttribute } from '@/utils/calculateTargetAttribute'
 
-export default function GeneratorCreate() {
+export const GeneratorCreate = () => {
   // Custom useStore hook needed for persist storage to work with NextJS Hydration
   const state = useStore(useGeneratorStore, (state) => state) ?? initialGeneratorState
   const session = useSession()

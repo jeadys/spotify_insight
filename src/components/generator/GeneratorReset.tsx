@@ -2,7 +2,7 @@
 
 import { useGeneratorStore } from '@/store/useGenerator'
 
-export default function GeneratorReset() {
+export const GeneratorReset = () => {
   const reset = useGeneratorStore((state) => state.reset)
 
   return (

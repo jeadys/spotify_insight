@@ -9,7 +9,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export default function Section({ title, description, showTerm, children }: Props) {
+export const Section = ({ title, description, showTerm, children }: Props) => {
   const termDescription = useProfileFilterStore((state) => state.description)
 
   return (

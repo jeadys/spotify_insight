@@ -2,17 +2,17 @@ import dayjs from 'dayjs'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import AlbumName from '@/components/album/AlbumName'
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import Label from '@/components/ui/Label'
+import { AlbumName } from '@/components/album/AlbumName'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { Label } from '@/components/ui/Label'
 import { getArtistAlbums } from '@/server/api'
 
 type Props = {
   artistId: string
 }
 
-export default async function ArtistAlbumList({ artistId }: Props) {
+export const ArtistAlbumList = async ({ artistId }: Props) => {
   const artistAlbums = await getArtistAlbums(artistId, 12)
   if (!artistAlbums?.items?.length) return <span className="text-white">No albums found</span>
 

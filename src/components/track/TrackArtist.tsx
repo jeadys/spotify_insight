@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 
 type Props = {
@@ -5,7 +7,7 @@ type Props = {
   artistName: string
 }
 
-export default function TrackArtist({ artistId, artistName }: Props) {
+export const TrackArtist = ({ artistId, artistName }: Props) => {
   return (
     <Link key={artistId} href={`/artist/${artistId}`} className="line-clamp-1 max-w-max break-all text-gray-400 hover:underline">
       {artistName}

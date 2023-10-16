@@ -3,7 +3,7 @@ import React from 'react'
 
 import { SearchIcon, XIcon } from '@heroicons/react/solid'
 
-import useFocus from '@/hooks/useFocus'
+import { useFocus } from '@/hooks/useFocus'
 
 type Props = {
   value: string
@@ -11,7 +11,7 @@ type Props = {
   setSearch: Dispatch<SetStateAction<string>>
 }
 
-export default function SearchInput({ value, placeholder, setSearch }: Props) {
+export const SearchInput = ({ value, placeholder, setSearch }: Props) => {
   const { inputRef, focus } = useFocus()
 
   return (

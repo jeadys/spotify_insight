@@ -1,8 +1,10 @@
+'use client'
+
 type Props = {
   contentAmount: number
 }
 
-export default function SkeletonGenerator({ contentAmount }: Props) {
+export const SkeletonGenerator = ({ contentAmount }: Props) => {
   const skeletons = new Array(contentAmount).fill(null).map((_, index) => (
     <li key={index} className="my-5 flex items-center gap-5">
       <span className="h-10 w-10 rounded-md bg-gray-1100"></span>

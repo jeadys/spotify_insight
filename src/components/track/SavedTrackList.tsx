@@ -1,13 +1,13 @@
-import TrackAlbum from '@/components/track/TrackAlbum'
-import TrackArtist from '@/components/track/TrackArtist'
-import TrackDuration from '@/components/track/TrackDuration'
-import TrackList from '@/components/track/TrackList'
-import TrackListItem from '@/components/track/TrackListItem'
-import TrackName from '@/components/track/TrackName'
-import TrackPlaybackControl from '@/components/track/TrackPlaybackControl'
+import { TrackAlbum } from '@/components/track/TrackAlbum'
+import { TrackArtist } from '@/components/track/TrackArtist'
+import { TrackDuration } from '@/components/track/TrackDuration'
+import { TrackList } from '@/components/track/TrackList'
+import { TrackListItem } from '@/components/track/TrackListItem'
+import { TrackName } from '@/components/track/TrackName'
+import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
 import { getCurrentUserSavedTracks } from '@/server/api'
 
-export default async function SavedTrackList() {
+export const SavedTrackList = async () => {
   const savedTracks = await getCurrentUserSavedTracks(12)
   if (!savedTracks?.items?.length) return <span className="text-white">No tracks found</span>
 

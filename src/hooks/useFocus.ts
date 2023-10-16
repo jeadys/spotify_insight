@@ -1,6 +1,8 @@
+'use client'
+
 import { useEffect, useRef } from 'react'
 
-export default function useFocus() {
+export const useFocus = () => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const focus = () => {

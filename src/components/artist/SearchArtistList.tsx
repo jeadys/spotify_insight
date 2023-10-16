@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import ArtistGenre from '@/components/artist/ArtistGenre'
-import ArtistName from '@/components/artist/ArtistName'
-import List from '@/components/layout/List'
-import ListItem from '@/components/layout/ListItem'
-import Label from '@/components/ui/Label'
+import { ArtistGenre } from '@/components/artist/ArtistGenre'
+import { ArtistName } from '@/components/artist/ArtistName'
+import { List } from '@/components/layout/List'
+import { ListItem } from '@/components/layout/ListItem'
+import { Label } from '@/components/ui/Label'
 import { getSearchItems } from '@/server/api'
 import { formatFollowCount } from '@/utils/formatFollowCount'
 
@@ -13,7 +13,7 @@ type Props = {
   searchTerm: string
 }
 
-export default async function SearchArtistList({ searchTerm }: Props) {
+export const SearchArtistList = async ({ searchTerm }: Props) => {
   const searchResult = await getSearchItems(searchTerm, 12)
   if (!searchResult?.artists?.items?.length) return <span className="text-white">No artists found</span>
 

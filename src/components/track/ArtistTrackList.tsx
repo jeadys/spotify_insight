@@ -1,16 +1,16 @@
-import TrackAlbum from '@/components/track/TrackAlbum'
-import TrackDuration from '@/components/track/TrackDuration'
-import TrackList from '@/components/track/TrackList'
-import TrackListItem from '@/components/track/TrackListItem'
-import TrackName from '@/components/track/TrackName'
-import TrackPlaybackControl from '@/components/track/TrackPlaybackControl'
+import { TrackAlbum } from '@/components/track/TrackAlbum'
+import { TrackDuration } from '@/components/track/TrackDuration'
+import { TrackList } from '@/components/track/TrackList'
+import { TrackListItem } from '@/components/track/TrackListItem'
+import { TrackName } from '@/components/track/TrackName'
+import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
 import { getArtistTopTracks } from '@/server/api'
 
 type Props = {
   artistId: string
 }
 
-export default async function ArtistTrackList({ artistId }: Props) {
+export const ArtistTrackList = async ({ artistId }: Props) => {
   const artistTopTracks = await getArtistTopTracks(artistId)
   if (!artistTopTracks?.tracks?.length) return <span className="text-white">No tracks found</span>
 

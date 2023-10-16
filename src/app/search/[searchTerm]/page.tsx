@@ -1,12 +1,12 @@
 import { Suspense } from 'react'
 
-import SearchAlbumList from '@/components/album/SearchAlbumList'
-import SkeletonAlbumList from '@/components/album/SkeletonAlbumList'
-import SearchArtistList from '@/components/artist/SearchArtistList'
-import SkeletonArtistList from '@/components/artist/SkeletonArtistList'
-import Section from '@/components/layout/Section'
-import SearchTrackList from '@/components/track/SearchTrackList'
-import SkeletonTrackList from '@/components/track/SkeletonTrackList'
+import { SearchAlbumList } from '@/components/album/SearchAlbumList'
+import { SkeletonAlbumList } from '@/components/album/SkeletonAlbumList'
+import { SearchArtistList } from '@/components/artist/SearchArtistList'
+import { SkeletonArtistList } from '@/components/artist/SkeletonArtistList'
+import { Section } from '@/components/layout/Section'
+import { SearchTrackList } from '@/components/track/SearchTrackList'
+import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
 
 type Params = {
   params: {

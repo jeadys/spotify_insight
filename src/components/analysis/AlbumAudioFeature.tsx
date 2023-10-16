@@ -1,5 +1,5 @@
-import ProgressBarGrid from '@/components/analysis/ProgressBarGrid'
-import ProgressBarItem from '@/components/analysis/ProgressBarItem'
+import { ProgressBarGrid } from '@/components/analysis/ProgressBarGrid'
+import { ProgressBarItem } from '@/components/analysis/ProgressBarItem'
 import { getAlbumTracks, getAudioFeaturesForMultipleTracks } from '@/server/api'
 import { calculateaverageAudioFeature } from '@/utils/calculateAverageAudioFeature'
 
@@ -7,7 +7,7 @@ type Props = {
   albumId: string
 }
 
-export default async function AlbumAudioFeature({ albumId }: Props) {
+export const AlbumAudioFeature = async ({ albumId }: Props) => {
   const albumTracks = await getAlbumTracks(albumId, 50)
   if (!albumTracks?.items?.length) return <span className="text-white">No tracks to analyse</span>
 
