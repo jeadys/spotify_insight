@@ -19,6 +19,7 @@ type Props = {
 export const TrackPlaybackControl = ({ showPlaybackControls, trackUri, trackUris, trackImage, trackName, imageSize }: Props) => {
   const setPlayback = usePlaybackStore((state) => state.setPlayback)
   const offset = usePlaybackStore((state) => state.offset)
+  const isPlaying = usePlaybackStore((state) => state.isPlaying)
 
   return (
     <div className="relative flex flex-shrink-0 items-center justify-center">
@@ -35,11 +36,11 @@ export const TrackPlaybackControl = ({ showPlaybackControls, trackUri, trackUris
 
       {showPlaybackControls && (
         <>
-          {offset === trackUri ? (
+          {offset === trackUri && isPlaying ? (
             <>
               <PauseIcon
                 className="absolute hidden h-8 w-8 fill-white hover:cursor-pointer group-hover:block"
-                onClick={() => setPlayback(trackUri, trackUris)}
+                onClick={() => usePlaybackStore.setState({ isPlaying: false })}
               />
 
               <MusicBar className="absolute h-4 w-4 group-hover:hidden" />
@@ -47,7 +48,7 @@ export const TrackPlaybackControl = ({ showPlaybackControls, trackUri, trackUris
           ) : (
             <PlayIcon
               className="absolute hidden h-8 w-8 fill-white hover:cursor-pointer group-hover:block"
-              onClick={() => setPlayback(trackUri, trackUris)}
+              onClick={() => setPlayback(trackUri, trackUris, true)}
             />
           )}
         </>
