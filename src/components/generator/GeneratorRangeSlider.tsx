@@ -1,9 +1,7 @@
 'use client'
 
 import { useStore } from '@/hooks/useStore'
-import type { AttributeType } from '@/store/useGenerator'
-import { initialGeneratorState } from '@/store/useGenerator'
-import { useGeneratorStore } from '@/store/useGenerator'
+import { AttributeType, initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 
 type Props = {
   title: AttributeType
@@ -51,8 +49,8 @@ export const GeneratorRangeSlider = ({ title, description, min, max, step, gap }
       </header>
       <div className="wrapper">
         <div className="input-wrapper">
-          <input className="input" type="range" value={minValue} min={min} max={max} step={step} onChange={handleMinChange} />
-          <input className="input" type="range" value={maxValue} min={min} max={max} step={step} onChange={handleMaxChange} />
+          <input className="input" title="min" type="range" value={minValue} min={min} max={max} step={step} onChange={handleMinChange} />
+          <input className="input" title="max" type="range" value={maxValue} min={min} max={max} step={step} onChange={handleMaxChange} />
         </div>
 
         <div className="control-wrapper">

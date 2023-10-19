@@ -9,20 +9,22 @@ import { getArtistBasedOnGenre } from '@/server/api'
 import { formatFollowCount } from '@/utils/formatFollowCount'
 
 type Props = {
-  id: string
+  genreId: string
 }
 
-export const GenreArtistList = async ({ id }: Props) => {
-  const artistBasedOnGenre = await getArtistBasedOnGenre(id.replace(/%20/g, '-'), 50)
+export const GenreArtistList = async ({ genreId }: Props) => {
+  const artistBasedOnGenre = await getArtistBasedOnGenre(genreId, 50)
   if (!artistBasedOnGenre?.artists?.items?.length) return <span className="text-white">No artists found</span>
 
-  const fileteredArtistBasedOnGenre = artistBasedOnGenre.artists.items
-    .filter((a) => a.genres.includes(decodeURIComponent(id)))
-    .sort((a, b) => b.popularity - a.popularity)
+  // Spotify API gives inconsistent search results based on genre, so we filter out irrelevant artists.
+  const filteredArtistBasedOnGenre = artistBasedOnGenre.artists.items
+    .filter((artist) => artist.genres.includes(decodeURIComponent(genreId)))
+    .sort((artistA, artistB) => artistB.followers.total - artistA.followers.total)
+    .slice(0, 12)
 
   return (
     <List>
-      {fileteredArtistBasedOnGenre.map((artist) => (
+      {filteredArtistBasedOnGenre.map((artist) => (
         <ListItem key={artist.id}>
           <Link href={`/artist/${artist.id}`} className="flex-shrink-0">
             <Image
