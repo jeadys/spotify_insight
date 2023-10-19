@@ -10,6 +10,7 @@ import { SkeletonHeader } from '@/components/header/SkeletonHeader'
 import { Section } from '@/components/layout/Section'
 import { TopArtist } from '@/components/profile/TopArtist'
 import { TopGenre } from '@/components/profile/TopGenre'
+import { TopStat } from '@/components/profile/TopStat'
 import { TopTrack } from '@/components/profile/TopTrack'
 import { Skeleton } from '@/components/skeleton/Skeleton'
 import { RecentTrackList } from '@/components/track/RecentTrackList'
@@ -48,6 +49,12 @@ export default async function page() {
             fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={12} gridSize="compact" />}
           >
             <TopTrack />
+          </Suspense>
+        </Section>
+
+        <Section title="Top Stats" description="Past" showTerm>
+          <Suspense fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={6} gridSize="compact" />}>
+            <TopStat />
           </Suspense>
         </Section>
       </Hydrate>

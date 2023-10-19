@@ -9,6 +9,7 @@ export const Playback = () => {
   const { data: session } = useSession()
   const offset = usePlaybackStore((state) => state.offset)
   const trackQueue = usePlaybackStore((state) => state.queue)
+  const isPlaying = usePlaybackStore((state) => state.isPlaying)
 
   if (!session?.accessToken) return null
 
@@ -16,8 +17,9 @@ export const Playback = () => {
     <SpotifyPlayer
       magnifySliderOnHover={false}
       callback={(state) => {
-        usePlaybackStore.setState({ offset: state.track.uri })
+        usePlaybackStore.setState({ offset: state.track.uri, queue: trackQueue, isPlaying: state.isPlaying })
       }}
+      play={isPlaying}
       layout="responsive"
       offset={trackQueue.indexOf(offset)}
       token={session.accessToken}

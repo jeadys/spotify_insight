@@ -10,7 +10,7 @@ export const ProfileHeader = async () => {
     <Header>
       <div className="flex flex-col items-center gap-4 sm:flex-row">
         <Image
-          src={userProfile.images?.[0]?.url || '/images/nocover.webp'}
+          src={userProfile.images?.[1]?.url || '/images/nocover.webp'}
           alt={userProfile.display_name || ''}
           width="0"
           height="0"
