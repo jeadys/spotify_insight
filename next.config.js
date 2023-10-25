@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  experimental: {
+    serverActions: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -19,7 +22,7 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/profile',
+        destination: '/profile?timeRange=short',
         permanent: false,
       },
     ]

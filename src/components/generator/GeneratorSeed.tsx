@@ -1,7 +1,6 @@
 'use client'
 
-import { XIcon } from '@heroicons/react/solid'
-
+import { GeneratorSeedItem } from '@/components/generator/GeneratorSeedItem'
 import { useStore } from '@/hooks/useStore'
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 
@@ -20,10 +19,7 @@ export const GeneratorSeed = () => {
       {state.artist.length ? (
         <ul className="flex flex-wrap items-center gap-2 text-white">
           {state.artist.map((artist) => (
-            <li key={artist.id} className="flex items-center gap-2 rounded-md bg-gray-1200 p-2">
-              <XIcon onClick={() => removeSeed('artist', artist.id)} className="h-6 w-6 shrink-0 hover:cursor-pointer" />
-              <span className="line-clamp-1 break-all">{artist.name}</span>
-            </li>
+            <GeneratorSeedItem key={artist.id} seedType="artist" id={artist.id} name={artist.name} />
           ))}
         </ul>
       ) : (
@@ -34,10 +30,7 @@ export const GeneratorSeed = () => {
       {state.track.length ? (
         <ul className="flex flex-wrap items-center gap-2 text-white">
           {state.track.map((track) => (
-            <li key={track.id} className="flex items-center gap-2 rounded-md bg-gray-1200 p-2 ">
-              <XIcon onClick={() => removeSeed('track', track.id)} className="h-6 w-6 shrink-0 hover:cursor-pointer" />
-              <span className="line-clamp-1 break-all">{track.name}</span>
-            </li>
+            <GeneratorSeedItem key={track.id} seedType="track" id={track.id} name={track.name} />
           ))}
         </ul>
       ) : (
