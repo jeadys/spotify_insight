@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware'
 export type SeedType = 'artist' | 'track'
 export type AttributeType = 'acousticness' | 'danceability' | 'energy' | 'instrumentalness' | 'popularity' | 'valence'
 
-type GeneratorState = {
+export type GeneratorState = {
   seedCount: number
   artist: {
     id: string

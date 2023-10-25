@@ -23,7 +23,7 @@ export const Navigation = () => {
     },
     {
       title: 'Profile',
-      link: '/profile',
+      link: '/profile?timeRange=short',
       icon: <UserIcon className="mr-2 h-6 w-6 " />,
     },
     {

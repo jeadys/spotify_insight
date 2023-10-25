@@ -5,7 +5,7 @@ type Props = {
   children: React.ReactNode
 }
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
   return (
     <>
       <Section title="Browse catalog" description="Find artists, albums and tracks">

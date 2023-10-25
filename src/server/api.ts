@@ -1,31 +1,44 @@
+'use server'
+
+import { revalidatePath } from 'next/cache'
 import { getServerSession } from 'next-auth'
-import { getSession } from 'next-auth/react'
 
 import { authOptions } from '@/auth/[...nextauth]'
 
 type FetchWrapperProps = {
   url: string
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+  cache?: RequestCache
   body?: unknown
+  tags?: string[]
 }
 
-const fetchWrapper = async ({ url, method, body }: FetchWrapperProps) => {
-  const session = typeof window === 'undefined' ? await getServerSession(authOptions) : await getSession()
+const fetchWrapper = async ({ url, method, cache = 'force-cache', body, tags }: FetchWrapperProps) => {
+  const session = await getServerSession(authOptions)
 
   if (!session) {
     throw new Error('No session available')
   }
 
   try {
-    const response = await fetch(url, {
+    const requestOptions: RequestInit = {
       method: method,
-      cache: 'default',
+      cache: cache,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${session.accessToken}`,
       },
-      body: JSON.stringify(body),
-    })
+    }
+
+    if (body !== undefined) {
+      requestOptions.body = JSON.stringify(body)
+    }
+
+    if (tags !== undefined) {
+      requestOptions.next = { tags: tags }
+    }
+
+    const response = await fetch(url, requestOptions)
 
     if (!response.ok) throw new Error(`Request to ${url} resulted in a ${response.status}: ${response.statusText}`)
 
@@ -195,7 +208,10 @@ export const getCategoryPlaylists = async (categoryId: string, limit: number): P
  * @returns {Promise}
  */
 export const getTopArtists = async (timeRange: string, limit: number): Promise<SpotifyApi.UsersTopArtistsResponse> => {
-  return fetchWrapper({ url: `https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}&limit=${limit}`, method: 'GET' })
+  return fetchWrapper({
+    url: `https://api.spotify.com/v1/me/top/artists?time_range=${timeRange}_term&limit=${limit}`,
+    method: 'GET',
+  })
 }
 
 /**
@@ -208,7 +224,10 @@ export const getTopArtists = async (timeRange: string, limit: number): Promise<S
  * @returns {Promise}
  */
 export const getTopTracks = async (timeRange: string, limit: number): Promise<SpotifyApi.UsersTopTracksResponse> => {
-  return fetchWrapper({ url: `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}&limit=${limit}`, method: 'GET' })
+  return fetchWrapper({
+    url: `https://api.spotify.com/v1/me/top/tracks?time_range=${timeRange}_term&limit=${limit}`,
+    method: 'GET',
+  })
 }
 
 /**
@@ -387,7 +406,7 @@ type getRecommendationsBasedOnSeedsProps = {
  * @param {object} getRecommendationsBasedOnSeedsProps Object
  * @returns {Promise}
  */
-export const getRecommendationsFromSeeds = async ({
+export const getRecommendationsBasedOnSeeds = async ({
   seedArtists,
   seedTracks,
   targetAcousticness,
@@ -450,6 +469,36 @@ export const addTracksToPlaylist = async (
 }
 
 /**
+ * Create playlist based on seeds
+ *
+ * GET /v1/recommendations
+ * https://developer.spotify.com/get-recommendations/
+ *
+ * POST /v1/users/{user_id}/playlists/{playlist_id}/tracks
+ * https://developer.spotify.com/web-api/add-tracks-to-playlist/
+ *
+ * POST /v1/users/{user_id}/playlists
+ * https://developer.spotify.com/web-api/create-playlist/
+ */
+export const createPlaylistBasedOnSeeds = async (data: getRecommendationsBasedOnSeedsProps) => {
+  const session = await getServerSession(authOptions)
+  const recommendations = await getRecommendationsBasedOnSeeds(data)
+
+  if (recommendations.tracks) {
+    const create = await createPlaylist(session?.user.id, 'Discover Anytime', 'Created at https://spotify-insight-jeadys.vercel.app', true)
+    if (create) {
+      const add = await addTracksToPlaylist(
+        create.id,
+        recommendations.tracks.map((track) => track.uri)
+      )
+      if (add) {
+        revalidatePath('/generator')
+      }
+    }
+  }
+}
+
+/**
  * Search for artists/albums/tracks/playlists/show/episode
  *
  * GET /v1/search
@@ -472,12 +521,24 @@ export const getSearchItems = async (query: string, limit: number): Promise<Spot
  * @returns {Promise}
  */
 export const getSearchSeeds = async (query: string, limit: number): Promise<SpotifyApi.SearchResponse> => {
-  return fetchWrapper({ url: `https://api.spotify.com/v1/search?q=${query}&type=artist,track&limit=${limit}`, method: 'GET' })
+  return fetchWrapper({
+    url: `https://api.spotify.com/v1/search?q=${query}&type=artist,track&limit=${limit}`,
+    method: 'GET',
+  })
 }
 
+/**
+ * Search for artists/albums/tracks/playlists/show/episode
+ *
+ * GET /v1/search
+ * https://developer.spotify.com/web-api/search-item/
+ * @param {string} query The search term
+ * @param {number} limit Total amount of items to return
+ * @returns {Promise}
+ */
 export const getArtistBasedOnGenre = async (query: string, limit: number): Promise<SpotifyApi.SearchResponse> => {
   return fetchWrapper({
-    url: `https://api.spotify.com/v1/search?q=genre:"${query}"&type=artist&limit=${limit}`,
+    url: `https://api.spotify.com/v1/search?q=genre:"${query}"&type=artist,track&limit=${limit}`,
     method: 'GET',
   })
 }
@@ -531,6 +592,14 @@ export const getAudioAnalysisForTrack = async (trackId: string): Promise<Spotify
   return fetchWrapper({ url: `https://api.spotify.com/v1/audio-analysis/${trackId}`, method: 'GET' })
 }
 
+/**
+ * Get a User’s Recently Played Tracks
+ *
+ * GET /v1/me/player/recently-played
+ * https://developer.spotify.com/web-api/get-users-top-artists-and-tracks/
+ * @param {number} limit Total amount of items to return
+ * @returns {Promise}
+ */
 export const getRecentlyPlayedTracks = async (limit: number): Promise<SpotifyApi.UsersRecentlyPlayedTracksResponse> => {
   return fetchWrapper({ url: `https://api.spotify.com/v1/me/player/recently-played?limit=${limit}`, method: 'GET' })
 }

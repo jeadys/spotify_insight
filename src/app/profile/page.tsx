@@ -1,9 +1,6 @@
 import { Suspense } from 'react'
 
-import { dehydrate, Hydrate } from '@tanstack/react-query'
-
-import { getQueryClient } from '@/components/core/getQueryClient'
-import { ProfileFilter } from '@/components/filter/ProfileFilter'
+import { TimeRangeFilter } from '@/components/filter/TimeRangeFilter'
 import { SkeletonGenreList } from '@/components/genre/SkeletonGenreList'
 import { ProfileHeader } from '@/components/header/ProfileHeader'
 import { SkeletonHeader } from '@/components/header/SkeletonHeader'
@@ -15,13 +12,10 @@ import { TopTrack } from '@/components/profile/TopTrack'
 import { Skeleton } from '@/components/skeleton/Skeleton'
 import { RecentTrackList } from '@/components/track/RecentTrackList'
 import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
-import { getTopArtists, getTopTracks } from '@/server/api'
 
-export default async function page() {
-  const queryClient = getQueryClient()
-  await queryClient.prefetchQuery(['topArtists', 'short_term'], () => getTopArtists('short_term', 12))
-  await queryClient.prefetchQuery(['topTracks', 'short_term'], () => getTopTracks('short_term', 12))
-  const dehydratedState = dehydrate(queryClient)
+// export default async function page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+export default async function page({ searchParams }: any) {
+  const timeRange = searchParams.timeRange || 'short'
 
   return (
     <>
@@ -29,35 +23,40 @@ export default async function page() {
         <ProfileHeader />
       </Suspense>
 
-      <ProfileFilter />
+      <TimeRangeFilter />
 
-      <Hydrate state={dehydratedState}>
-        <Section title="Top Genres" description="Past" showTerm>
-          <Suspense fallback={<SkeletonGenreList contentAmount={12} />}>
-            <TopGenre />
-          </Suspense>
-        </Section>
+      <Section title="Top Genres" description="Past" timeRange={timeRange}>
+        <Suspense key={timeRange} fallback={<SkeletonGenreList contentAmount={12} />}>
+          <TopGenre timeRange={timeRange} />
+        </Suspense>
+      </Section>
 
-        <Section title="Top Artists" description="Past" showTerm>
-          <Suspense fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="round" contentAmount={12} gridSize="compact" />}>
-            <TopArtist />
-          </Suspense>
-        </Section>
+      <Section title="Top Artists" description="Past" timeRange={timeRange}>
+        <Suspense
+          key={timeRange}
+          fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="round" contentAmount={12} gridSize="compact" />}
+        >
+          <TopArtist timeRange={timeRange} />
+        </Suspense>
+      </Section>
 
-        <Section title="Top Tracks" description="Past" showTerm>
-          <Suspense
-            fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={12} gridSize="compact" />}
-          >
-            <TopTrack />
-          </Suspense>
-        </Section>
+      <Section title="Top Tracks" description="Past" timeRange={timeRange}>
+        <Suspense
+          key={timeRange}
+          fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={12} gridSize="compact" />}
+        >
+          <TopTrack timeRange={timeRange} />
+        </Suspense>
+      </Section>
 
-        <Section title="Top Stats" description="Past" showTerm>
-          <Suspense fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={6} gridSize="compact" />}>
-            <TopStat />
-          </Suspense>
-        </Section>
-      </Hydrate>
+      <Section title="Top Stats" description="Past" timeRange={timeRange}>
+        <Suspense
+          key={timeRange}
+          fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={6} gridSize="compact" />}
+        >
+          <TopStat timeRange={timeRange} />
+        </Suspense>
+      </Section>
 
       <Section title="Recent Streams" description="Enjoying these tracks">
         <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>

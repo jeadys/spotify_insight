@@ -6,5 +6,5 @@
  * @example calculateTargetAttribute(80, 100) // returns 0.9
  */
 export const calculateTargetAttribute = (min: number, max: number): number => {
-  return min + max / 2 / 100
+  return (min + max) / 2 / 100
 }

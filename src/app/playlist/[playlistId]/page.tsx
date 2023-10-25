@@ -24,7 +24,7 @@ export default async function Album({ params: { playlistId } }: Params) {
         <PlaylistHeader playlistId={playlistId} />
       </Suspense>
 
-      <Section title="Playlist Analysis" description={`Audio elements ${playlist.name}`}>
+      <Section title="Playlist Analysis" description={`Audio elements of ${playlist.name}`}>
         <Suspense fallback={<SkeletonAudioFeature contentAmount={6} />}>
           <PlaylistAudioFeature playlistId={playlistId} />
         </Suspense>

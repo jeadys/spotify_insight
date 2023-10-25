@@ -3,26 +3,24 @@
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import Image from 'next/image'
+import Link from 'next/link'
 
 dayjs.extend(relativeTime)
 
 type Props = {
   type: 'popularity' | 'release' | 'duration'
   title: string
-  value: string
-  trackName: string
-  trackImage: string
-  trackArtist: string
+  track: SpotifyApi.TrackObjectFull
 }
 
-export const TopItem = ({ type, title, value, trackName, trackImage, trackArtist }: Props) => {
+export const TopItem = ({ type, title, track }: Props) => {
   return (
     <>
       <h4 className="text-lg font-semibold text-white">{title}</h4>
       <li className="flex items-center gap-5">
         <Image
-          src={trackImage || '/images/nocover.webp'}
-          alt={trackName}
+          src={track.album.images?.[0]?.url || '/images/nocover.webp'}
+          alt={track.name}
           width="0"
           height="0"
           sizes="100vw"
@@ -31,15 +29,21 @@ export const TopItem = ({ type, title, value, trackName, trackImage, trackArtist
 
         <span>
           <h3 className="text-sm text-blue-300">
-            {type == 'popularity' && <span>{value} score</span>}
+            {type == 'popularity' && <span>{track.popularity / 10} score</span>}
 
-            {type == 'release' && <span>{dayjs(value).fromNow()}</span>}
+            {type == 'release' && <span>{dayjs(track.album.release_date).fromNow()}</span>}
 
-            {type == 'duration' && <span>{value}</span>}
+            {type == 'duration' && <span>{track.duration_ms}</span>}
           </h3>
 
-          <h3 className="text-white">{trackName}</h3>
-          <h4 className="text-gray-400">{trackArtist}</h4>
+          <span className="flex flex-col">
+            <Link href={`/track/${track.id}`} className="line-clamp-1 max-w-max break-all text-white hover:underline">
+              {track.name}
+            </Link>
+            <Link href={`/artist/${track.artists[0].id}`} className="line-clamp-1 max-w-max break-all text-gray-400 hover:underline">
+              {track.artists[0].name}
+            </Link>
+          </span>
         </span>
       </li>
     </>
