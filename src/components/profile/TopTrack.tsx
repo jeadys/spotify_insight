@@ -1,12 +1,14 @@
-'use client'
-
 import Link from 'next/link'
 
 import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
-import { useTopTracks } from '@/hooks/query/useTopTracks'
+import { getTopTracks } from '@/server/api'
 
-export const TopTrack = () => {
-  const topTracks = useTopTracks()
+type Props = {
+  timeRange: string
+}
+
+export const TopTrack = async ({ timeRange }: Props) => {
+  const topTracks = await getTopTracks(timeRange, 12)
   if (!topTracks?.items?.length) return <span className="text-white">No tracks found</span>
 
   const uris = topTracks.items.map((track) => track.uri)

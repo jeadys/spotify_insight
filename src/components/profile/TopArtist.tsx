@@ -1,12 +1,14 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { useTopArtists } from '@/hooks/query/useTopArtists'
+import { getTopArtists } from '@/server/api'
 
-export const TopArtist = () => {
-  const topArtists = useTopArtists()
+type Props = {
+  timeRange: string
+}
+
+export const TopArtist = async ({ timeRange }: Props) => {
+  const topArtists = await getTopArtists(timeRange, 12)
   if (!topArtists?.items?.length) return <span className="text-white">No artists found</span>
 
   return (

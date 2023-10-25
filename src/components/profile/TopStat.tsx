@@ -1,16 +1,18 @@
-'use client'
-
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 import { TopItem } from '@/components/profile/TopItem'
-import { useTopTracks } from '@/hooks/query/useTopTracks'
+import { getTopTracks } from '@/server/api'
 import { formatTrackDuration } from '@/utils/formatTrackDuration'
 
 dayjs.extend(relativeTime)
 
-export const TopStat = () => {
-  const topTracks = useTopTracks()
+type Props = {
+  timeRange: string
+}
+
+export const TopStat = async ({ timeRange }: Props) => {
+  const topTracks = await getTopTracks(timeRange, 12)
   if (!topTracks?.items?.length) return <span className="text-white">No stats found</span>
 
   const initialTrack = topTracks.items[0]
@@ -37,63 +39,18 @@ export const TopStat = () => {
   return (
     <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 5xl:grid-cols-3">
       <ul className="flex flex-col gap-5">
-        <TopItem
-          type="popularity"
-          title="Most Popular"
-          value={(highestPopularity.popularity / 10).toString()}
-          trackArtist={highestPopularity.artists[0].name}
-          trackName={highestPopularity.name}
-          trackImage={highestPopularity.album.images?.[0]?.url}
-        />
-
-        <TopItem
-          type="popularity"
-          title="Most Obscure"
-          value={(lowestPopularity.popularity / 10).toString()}
-          trackArtist={lowestPopularity.artists[0].name}
-          trackName={lowestPopularity.name}
-          trackImage={lowestPopularity.album.images?.[0]?.url}
-        />
+        <TopItem type="popularity" title="Most Popular" track={highestPopularity} />
+        <TopItem type="popularity" title="Most Obscure" track={lowestPopularity} />
       </ul>
 
       <ul className="flex flex-col gap-5">
-        <TopItem
-          type="release"
-          title="Newest"
-          value={newestRelease.album.release_date}
-          trackArtist={newestRelease.artists[0].name}
-          trackName={newestRelease.name}
-          trackImage={newestRelease.album.images?.[0]?.url}
-        />
-
-        <TopItem
-          type="release"
-          title="oldest"
-          value={oldestRelease.album.release_date}
-          trackArtist={oldestRelease.artists[0].name}
-          trackName={oldestRelease.name}
-          trackImage={oldestRelease.album.images?.[0]?.url}
-        />
+        <TopItem type="release" title="Newest" track={newestRelease} />
+        <TopItem type="release" title="oldest" track={oldestRelease} />
       </ul>
 
       <ul className="flex flex-col gap-5">
-        <TopItem
-          type="duration"
-          title="Longest"
-          value={formatTrackDuration(highestDuration.duration_ms)}
-          trackArtist={highestDuration.artists[0].name}
-          trackName={highestDuration.name}
-          trackImage={highestDuration.album.images?.[0]?.url}
-        />
-
-        <TopItem
-          type="duration"
-          title="Shortest"
-          value={formatTrackDuration(lowestDuration.duration_ms)}
-          trackArtist={lowestDuration.artists[0].name}
-          trackName={lowestDuration.name}
-          trackImage={lowestDuration.album.images?.[0]?.url}
-        />
+        <TopItem type="duration" title="Longest" track={highestDuration} />
+        <TopItem type="duration" title="Shortest" track={lowestDuration} />
       </ul>
     </div>
   )

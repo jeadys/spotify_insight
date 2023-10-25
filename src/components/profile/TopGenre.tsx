@@ -1,11 +1,13 @@
-'use client'
-
 import Link from 'next/link'
 
-import { useTopArtists } from '@/hooks/query/useTopArtists'
+import { getTopArtists } from '@/server/api'
 
-export const TopGenre = () => {
-  const topArtists = useTopArtists()
+type Props = {
+  timeRange: string
+}
+
+export const TopGenre = async ({ timeRange }: Props) => {
+  const topArtists = await getTopArtists(timeRange, 12)
   if (!topArtists?.items?.length) return <span className="text-white">No genre associations</span>
 
   const topGenres = [...new Set(topArtists.items.flatMap((artist) => artist.genres))].slice(0, 12)
