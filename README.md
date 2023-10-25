@@ -6,7 +6,6 @@ Get more insight on your Spotify usage and discover new tracks & artists.
 
 - NextJS
 - Next-Auth
-- React-Query
 - Typescript
 - TailwindCSS
 
