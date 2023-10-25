@@ -3,9 +3,9 @@
 import { useTransition } from 'react'
 
 import { useStore } from '@/hooks/useStore'
+import { createPlaylistBasedOnSeeds } from '@/server/api'
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 import { calculateTargetAttribute } from '@/utils/calculateTargetAttribute'
-import { createPlaylistBasedOnSeeds } from '@/server/api'
 
 export const GeneratorCreate = () => {
   const [isPending, startTransition] = useTransition()
