@@ -12,7 +12,6 @@ type Props = {
 
 export const GeneratorSeedItem = ({ seedType, id, name }: Props) => {
   const removeSeed = useGeneratorStore((state) => state.removeSeed)
-  // Custom useStore hook needed for persist storage to work with NextJS Hydration
 
   return (
     <li key={id} className="flex items-center gap-2 rounded-md bg-gray-1200 p-2">

@@ -4,8 +4,7 @@ import { GeneratorSeedItem } from '@/components/generator/GeneratorSeedItem'
 import { useStore } from '@/hooks/useStore'
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 
-export const GeneratorSeed = () => {
-  const removeSeed = useGeneratorStore((state) => state.removeSeed)
+export const GeneratorSeedList = () => {
   // Custom useStore hook needed for persist storage to work with NextJS Hydration
   const state = useStore(useGeneratorStore, (state) => state) ?? initialGeneratorState
 
