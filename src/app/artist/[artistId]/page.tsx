@@ -36,7 +36,7 @@ export default async function Artist({ params: { artistId } }: Params) {
         </Suspense>
       </Section>
 
-      <Section title="Artist Analysis" description={`Audio elements ${artist.name}`}>
+      <Section title="Artist Analysis" description={`Audio elements of ${artist.name}`}>
         <Suspense fallback={<SkeletonAudioFeature contentAmount={6} />}>
           <ArtistAudioFeature artistId={artistId} />
         </Suspense>
