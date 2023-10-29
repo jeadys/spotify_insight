@@ -5,6 +5,8 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { formatTrackDuration } from '@/utils/formatTrackDuration'
+
 dayjs.extend(relativeTime)
 
 type Props = {
@@ -33,7 +35,7 @@ export const TopItem = ({ type, title, track }: Props) => {
 
             {type == 'release' && <span>{dayjs(track.album.release_date).fromNow()}</span>}
 
-            {type == 'duration' && <span>{track.duration_ms}</span>}
+            {type == 'duration' && <span>{formatTrackDuration(track.duration_ms)}</span>}
           </h3>
 
           <span className="flex flex-col">

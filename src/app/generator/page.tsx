@@ -18,7 +18,7 @@ export default async function Generator({ searchParams }: any) {
     <>
       <Section title="Seeds" description="Seeds based on artists and tracks">
         <div className="grid gap-5 sm:grid-cols-2">
-          <div>
+          <div className="flex flex-col gap-5">
             <GeneratorSearch />
             <Suspense key={search} fallback={<SkeletonGenerator contentAmount={3} />}>
               <GeneratorSearchList searchParams={search} />

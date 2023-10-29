@@ -13,9 +13,9 @@ export const GeneratorSearchList = async ({ searchParams }: Props) => {
   return (
     <>
       <div className="flex flex-col">
-        {data?.artists?.items && (
+        <p className="mt-5 font-medium text-white">Artists</p>
+        {data?.artists?.items.length ? (
           <>
-            <p className="mt-5 font-medium text-white">Artists</p>
             <ul>
               {data?.artists?.items.map((artist) => (
                 <GeneratorSearchItem
@@ -29,11 +29,13 @@ export const GeneratorSearchList = async ({ searchParams }: Props) => {
               ))}
             </ul>
           </>
+        ) : (
+          <p className="my-2 text-white">No artists found</p>
         )}
 
-        {data?.tracks?.items && (
+        <p className="font-medium text-white">Tracks</p>
+        {data?.tracks?.items.length ? (
           <>
-            <p className="font-medium text-white">Tracks</p>
             <ul>
               {data?.tracks?.items.map((track) => (
                 <GeneratorSearchItem
@@ -47,6 +49,8 @@ export const GeneratorSearchList = async ({ searchParams }: Props) => {
               ))}
             </ul>
           </>
+        ) : (
+          <p className="my-2 text-white">No tracks found</p>
         )}
       </div>
     </>
