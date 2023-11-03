@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react'
 import React from 'react'
 
-import { SearchIcon, XIcon } from '@heroicons/react/solid'
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/solid'
 
 import { useFocus } from '@/hooks/useFocus'
 
@@ -33,7 +33,7 @@ export const SearchInput = ({ value, placeholder, setSearch }: Props) => {
       </form>
       <div className="pointer-events-none absolute bottom-0 top-0 flex w-full items-center justify-between px-4">
         <span className=" cursor-pointer">
-          <SearchIcon className=" h-6 w-6 flex-shrink-0 " />
+          <MagnifyingGlassIcon className=" h-6 w-6 flex-shrink-0 " />
         </span>
 
         {value && (
@@ -44,7 +44,7 @@ export const SearchInput = ({ value, placeholder, setSearch }: Props) => {
             }}
             className="pointer-events-auto"
           >
-            <XIcon className="h-6 w-6 flex-shrink-0" />
+            <XMarkIcon className="h-6 w-6 flex-shrink-0" />
           </button>
         )}
       </div>

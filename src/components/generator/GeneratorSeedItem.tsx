@@ -1,6 +1,6 @@
 'use client'
 
-import { XIcon } from '@heroicons/react/solid'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 
 import { SeedType, useGeneratorStore } from '@/store/useGenerator'
 
@@ -15,7 +15,7 @@ export const GeneratorSeedItem = ({ seedType, id, name }: Props) => {
 
   return (
     <li key={id} className="flex items-center gap-2 rounded-md bg-gray-1200 p-2">
-      <XIcon onClick={() => removeSeed(seedType, id)} className="h-6 w-6 shrink-0 hover:cursor-pointer" />
+      <XMarkIcon onClick={() => removeSeed(seedType, id)} className="h-6 w-6 shrink-0 hover:cursor-pointer" />
       <span className="line-clamp-1 break-all">{name}</span>
     </li>
   )

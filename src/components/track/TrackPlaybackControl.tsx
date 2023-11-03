@@ -1,6 +1,6 @@
 'use client'
 
-import { PauseIcon, PlayIcon } from '@heroicons/react/solid'
+import { PauseIcon, PlayIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import Image from 'next/image'
 
@@ -36,20 +36,28 @@ export const TrackPlaybackControl = ({ showPlaybackControls, trackUri, trackUris
 
       {showPlaybackControls && (
         <>
-          {offset === trackUri && isPlaying ? (
+          {offset !== trackUri && (
+            <PlayIcon
+              className="absolute hidden h-8 w-8 fill-white hover:cursor-pointer group-hover:block"
+              onClick={() => setPlayback(trackUri, trackUris, true)}
+            />
+          )}
+
+          {offset === trackUri && !isPlaying && (
+            <PlayIcon
+              className="absolute hidden h-8 w-8 fill-white hover:cursor-pointer group-hover:block"
+              onClick={() => usePlaybackStore.setState({ isPlaying: true })}
+            />
+          )}
+
+          {offset === trackUri && isPlaying && (
             <>
               <PauseIcon
                 className="absolute hidden h-8 w-8 fill-white hover:cursor-pointer group-hover:block"
                 onClick={() => usePlaybackStore.setState({ isPlaying: false })}
               />
-
               <MusicBar className="absolute h-4 w-4 group-hover:hidden" />
             </>
-          ) : (
-            <PlayIcon
-              className="absolute hidden h-8 w-8 fill-white hover:cursor-pointer group-hover:block"
-              onClick={() => setPlayback(trackUri, trackUris, true)}
-            />
           )}
         </>
       )}

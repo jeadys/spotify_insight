@@ -1,6 +1,6 @@
 'use client'
 
-import { MusicNoteIcon, HeartIcon, CalendarIcon } from '@heroicons/react/solid'
+import { MusicalNoteIcon, HeartIcon, CalendarIcon } from '@heroicons/react/24/solid'
 
 type Props = {
   value: string | number
@@ -14,7 +14,7 @@ export const Label = ({ value, icon, className = '' }: Props) => {
       case 'heart':
         return <HeartIcon className="mr-2 inline h-3 w-3" />
       case 'music':
-        return <MusicNoteIcon className="mr-2 inline h-3 w-3" />
+        return <MusicalNoteIcon className="mr-2 inline h-3 w-3" />
       case 'calendar':
         return <CalendarIcon className="mr-2 inline h-3 w-3" />
       default:
