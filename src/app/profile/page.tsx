@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 
+import { ProfileAudioFeature } from '@/components/analysis/ProfileAudioFeature'
 import { TimeRangeFilter } from '@/components/filter/TimeRangeFilter'
 import { SkeletonGenreList } from '@/components/genre/SkeletonGenreList'
 import { ProfileHeader } from '@/components/header/ProfileHeader'
@@ -24,6 +25,12 @@ export default async function page({ searchParams }: { searchParams: { [key: str
 
       <TimeRangeFilter />
 
+      <Section title="Top Stats" description="Past" timeRange={timeRange}>
+        <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>
+          <ProfileAudioFeature timeRange={timeRange} />
+        </Suspense>
+      </Section>
+
       <Section title="Top Genres" description="Past" timeRange={timeRange}>
         <Suspense key={timeRange} fallback={<SkeletonGenreList contentAmount={12} />}>
           <TopGenre timeRange={timeRange} />
@@ -45,15 +52,6 @@ export default async function page({ searchParams }: { searchParams: { [key: str
           fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={12} gridSize="compact" />}
         >
           <TopTrack timeRange={timeRange} />
-        </Suspense>
-      </Section>
-
-      <Section title="Top Stats" description="Past" timeRange={timeRange}>
-        <Suspense
-          key={timeRange}
-          fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={6} gridSize="compact" />}
-        >
-          <TopStat timeRange={timeRange} />
         </Suspense>
       </Section>
 

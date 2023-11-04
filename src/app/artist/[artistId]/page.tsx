@@ -30,15 +30,15 @@ export default async function Artist({ params: { artistId } }: Params) {
         <ArtistHeader artistId={artistId} />
       </Suspense>
 
-      <Section title="Genres" description={`Associated with ${artist.name}`}>
-        <Suspense fallback={<SkeletonGenreList contentAmount={5} />}>
-          <ArtistGenreList artistId={artistId} />
-        </Suspense>
-      </Section>
-
       <Section title="Artist Analysis" description={`Audio elements of ${artist.name}`}>
         <Suspense fallback={<SkeletonAudioFeature contentAmount={6} />}>
           <ArtistAudioFeature artistId={artistId} />
+        </Suspense>
+      </Section>
+
+      <Section title="Genres" description={`Associated with ${artist.name}`}>
+        <Suspense fallback={<SkeletonGenreList contentAmount={5} />}>
+          <ArtistGenreList artistId={artistId} />
         </Suspense>
       </Section>
 
