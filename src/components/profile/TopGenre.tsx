@@ -13,16 +13,17 @@ export const TopGenre = async ({ timeRange }: Props) => {
   const topGenres = [...new Set(topArtists.items.flatMap((artist) => artist.genres))].slice(0, 12)
 
   return (
-    <div className="flex flex-wrap gap-5">
+    <ul className="flex flex-wrap gap-5">
       {topGenres.map((genre) => (
-        <Link
-          key={genre}
-          href={`/genre/${genre}`}
-          className="line-clamp-1 max-w-max break-all rounded-full bg-gray-1200 px-3 py-2 text-white hover:bg-gray-1100"
-        >
-          {genre}
-        </Link>
+        <li key={genre}>
+          <Link
+            href={`/genre/${genre}`}
+            className="line-clamp-1 max-w-max break-all rounded-full bg-gray-1200 px-3 py-2 text-white hover:bg-gray-1100"
+          >
+            {genre}
+          </Link>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }

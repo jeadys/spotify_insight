@@ -481,6 +481,8 @@ export const addTracksToPlaylist = async (
  * https://developer.spotify.com/web-api/create-playlist/
  */
 export const createPlaylistBasedOnSeeds = async (data: getRecommendationsBasedOnSeedsProps) => {
+  if (!data.seedArtists.length && !data.seedTracks.length) return
+
   const session = await getServerSession(authOptions)
   const recommendations = await getRecommendationsBasedOnSeeds(data)
 

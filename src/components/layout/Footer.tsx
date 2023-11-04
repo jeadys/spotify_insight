@@ -1,6 +1,6 @@
 'use client'
 
-import { HeartIcon } from '@heroicons/react/solid'
+import { HeartIcon } from '@heroicons/react/24/solid'
 
 export const Footer = () => {
   return (

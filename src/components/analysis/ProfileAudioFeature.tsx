@@ -1,12 +1,12 @@
 import { ProgressBarGrid } from '@/components/analysis/ProgressBarGrid'
 import { ProgressBarItem } from '@/components/analysis/ProgressBarItem'
 import { TrackAudioFeatureScatter } from '@/components/analysis/TrackAudioFeatureScatter'
-import { getAudioFeaturesForMultipleTracks, getPlaylistTracks } from '@/server/api'
+import { getAudioFeaturesForMultipleTracks, getTopTracks } from '@/server/api'
 import { calculateaverageAudioFeature } from '@/utils/calculateAverageAudioFeature'
 import { mergeTracksWithAudioFeatures } from '@/utils/mergeTracksWithAudioFeatures'
 
 type Props = {
-  playlistId: string
+  timeRange: string
 }
 
 type Accumulator = {
@@ -14,12 +14,12 @@ type Accumulator = {
   ids: string[]
 }
 
-export const PlaylistAudioFeature = async ({ playlistId }: Props) => {
-  const playlistTracks = await getPlaylistTracks(playlistId, 100)
-  if (!playlistTracks?.items?.length) return <span className="text-white">No tracks to analyse</span>
+export const ProfileAudioFeature = async ({ timeRange }: Props) => {
+  const topTracks = await getTopTracks(timeRange, 50)
+  if (!topTracks?.items?.length) return <span className="text-white">No tracks found</span>
 
-  const { tracks, ids } = playlistTracks.items.reduce(
-    (accumulator: Accumulator, { track }) => {
+  const { tracks, ids } = topTracks.items.reduce(
+    (accumulator: Accumulator, track) => {
       if (track) {
         accumulator.tracks.push(track)
         accumulator.ids.push(track.id)
@@ -29,7 +29,7 @@ export const PlaylistAudioFeature = async ({ playlistId }: Props) => {
     { tracks: [], ids: [] }
   )
 
-  const totalTracks = playlistTracks.total
+  const totalTracks = topTracks.items.length
   const trackAudioFeatures = await getAudioFeaturesForMultipleTracks(ids)
   const averageAudioFeature = calculateaverageAudioFeature(trackAudioFeatures, totalTracks)
   const mergedTracksWithAudioFeatures = mergeTracksWithAudioFeatures(tracks, trackAudioFeatures)

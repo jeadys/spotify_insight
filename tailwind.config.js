@@ -24,6 +24,9 @@ module.exports = {
         'album': { 'max': '768px' },
         'duration': { 'max': '440px' },
       },
+      width: {
+        '144': '36rem',
+      },
       height: {
         '144': '36rem',
       },

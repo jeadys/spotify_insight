@@ -17,11 +17,11 @@ export const SkeletonGenerator = ({ contentAmount }: Props) => {
   ))
 
   return (
-    <>
+    <div className="flex flex-col">
       <p className="mt-5 font-medium text-white">Artists</p>
       <ul className="animate-pulse">{skeletons}</ul>
       <p className="font-medium text-white">Tracks</p>
       <ul className="animate-pulse">{skeletons}</ul>
-    </>
+    </div>
   )
 }

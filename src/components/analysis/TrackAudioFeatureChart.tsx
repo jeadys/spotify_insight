@@ -35,7 +35,7 @@ export const TrackAudioFeatureChart = ({ trackAudioFeatures }: Props) => {
   ]
 
   return (
-    <div className="mx-auto h-80 w-full max-w-lg md:h-144 lg:max-w-none">
+    <div className="mx-auto h-80 w-80  max-w-lg sm:h-144 sm:w-144 lg:max-w-none">
       <ResponsiveContainer width="100%">
         <RadarChart data={data} innerRadius={25}>
           <PolarGrid gridType="circle" stroke="#1f2937" />

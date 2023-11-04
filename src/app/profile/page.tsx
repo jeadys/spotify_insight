@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 
+import { ProfileAudioFeature } from '@/components/analysis/ProfileAudioFeature'
 import { TimeRangeFilter } from '@/components/filter/TimeRangeFilter'
 import { SkeletonGenreList } from '@/components/genre/SkeletonGenreList'
 import { ProfileHeader } from '@/components/header/ProfileHeader'
@@ -13,8 +14,7 @@ import { Skeleton } from '@/components/skeleton/Skeleton'
 import { RecentTrackList } from '@/components/track/RecentTrackList'
 import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
 
-// export default async function page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
-export default async function page({ searchParams }: any) {
+export default async function page({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const timeRange = searchParams.timeRange || 'short'
 
   return (
@@ -24,6 +24,12 @@ export default async function page({ searchParams }: any) {
       </Suspense>
 
       <TimeRangeFilter />
+
+      <Section title="Top Stats" description="Past" timeRange={timeRange}>
+        <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>
+          <ProfileAudioFeature timeRange={timeRange} />
+        </Suspense>
+      </Section>
 
       <Section title="Top Genres" description="Past" timeRange={timeRange}>
         <Suspense key={timeRange} fallback={<SkeletonGenreList contentAmount={12} />}>
@@ -46,15 +52,6 @@ export default async function page({ searchParams }: any) {
           fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={12} gridSize="compact" />}
         >
           <TopTrack timeRange={timeRange} />
-        </Suspense>
-      </Section>
-
-      <Section title="Top Stats" description="Past" timeRange={timeRange}>
-        <Suspense
-          key={timeRange}
-          fallback={<Skeleton gridFlow="leftRight" imageSize="small" imageShape="square" contentAmount={6} gridSize="compact" />}
-        >
-          <TopStat timeRange={timeRange} />
         </Suspense>
       </Section>
 

@@ -14,21 +14,7 @@ export const PlaylistTrackList = async ({ playlistId }: Props) => {
   const playlistTracks = await getPlaylistTracks(playlistId, 100)
   if (!playlistTracks?.items?.length) return <span className="text-white">No tracks found</span>
 
-  type Acc = {
-    uris: string[]
-    ids: string[]
-  }
-
-  const { uris, ids } = playlistTracks.items.reduce(
-    (acc: Acc, { track }) => {
-      if (track) {
-        acc.uris.push(track.uri)
-        acc.ids.push(track.id)
-      }
-      return acc
-    },
-    { uris: [], ids: [] }
-  )
+  const uris = playlistTracks.items.map(({ track }) => track.uri)
 
   return (
     <TrackList>

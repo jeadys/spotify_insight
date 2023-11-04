@@ -3,7 +3,7 @@
 import type { ReactElement } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-import { AdjustmentsIcon, LogoutIcon, SearchIcon, UserIcon } from '@heroicons/react/outline'
+import { AdjustmentsHorizontalIcon, ArrowLeftOnRectangleIcon, MagnifyingGlassIcon, UserIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Link from 'next/link'
 import { signOut } from 'next-auth/react'
@@ -19,7 +19,7 @@ export const Navigation = () => {
     {
       title: 'Search',
       link: '/search',
-      icon: <SearchIcon className="mr-2 h-6 w-6" />,
+      icon: <MagnifyingGlassIcon className="mr-2 h-6 w-6" />,
     },
     {
       title: 'Profile',
@@ -29,7 +29,7 @@ export const Navigation = () => {
     {
       title: 'Generator',
       link: '/generator',
-      icon: <AdjustmentsIcon className="mr-2 h-6 w-6 rotate-90" />,
+      icon: <AdjustmentsHorizontalIcon className="mr-2 h-6 w-6" />,
     },
   ]
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
@@ -75,7 +75,7 @@ export const Navigation = () => {
 
         <button className="ml-auto hidden lg:block" onClick={() => signOut()}>
           <span className="flex items-center rounded-md p-2 hover:bg-gray-1100">
-            <LogoutIcon className="mr-2 h-6 w-6" />
+            <ArrowLeftOnRectangleIcon className="mr-2 h-6 w-6" />
             <span className="uppercase">Sign out</span>
           </span>
         </button>
@@ -112,7 +112,7 @@ export const Navigation = () => {
 
           <button className="block w-full rounded-md px-4 py-2 text-left uppercase hover:bg-gray-1100" onClick={() => signOut()}>
             <span className="flex items-center  hover:bg-gray-1100">
-              <LogoutIcon className="mr-2 h-6 w-6" />
+              <ArrowLeftOnRectangleIcon className="mr-2 h-6 w-6" />
               <span className="uppercase">Sign out</span>
             </span>
           </button>

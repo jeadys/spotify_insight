@@ -6,25 +6,25 @@ import { GeneratorRangeSlider } from '@/components/generator/GeneratorRangeSlide
 import { GeneratorReset } from '@/components/generator/GeneratorReset'
 import { GeneratorSearch } from '@/components/generator/GeneratorSearch'
 import { GeneratorSearchList } from '@/components/generator/GeneratorSearchList'
-import { GeneratorSeed } from '@/components/generator/GeneratorSeed'
+import { GeneratorSeedList } from '@/components/generator/GeneratorSeedList'
 import { SkeletonGenerator } from '@/components/generator/SkeletonGenerator'
 import { Section } from '@/components/layout/Section'
 import { SavedPlayList } from '@/components/playlist/SavedPlaylist'
 
-export default async function Generator({ searchParams }: any) {
+export default async function Generator({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const search = searchParams.search
 
   return (
     <>
       <Section title="Seeds" description="Seeds based on artists and tracks">
         <div className="grid gap-5 sm:grid-cols-2">
-          <div>
+          <div className="flex flex-col gap-5">
             <GeneratorSearch />
             <Suspense key={search} fallback={<SkeletonGenerator contentAmount={3} />}>
               <GeneratorSearchList searchParams={search} />
             </Suspense>
           </div>
-          <GeneratorSeed />
+          <GeneratorSeedList />
         </div>
       </Section>
 
