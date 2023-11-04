@@ -11,7 +11,7 @@ import { SkeletonGenerator } from '@/components/generator/SkeletonGenerator'
 import { Section } from '@/components/layout/Section'
 import { SavedPlayList } from '@/components/playlist/SavedPlaylist'
 
-export default async function Generator({ searchParams }: any) {
+export default async function Generator({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const search = searchParams.search
 
   return (

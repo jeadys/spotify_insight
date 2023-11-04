@@ -13,8 +13,7 @@ import { Skeleton } from '@/components/skeleton/Skeleton'
 import { RecentTrackList } from '@/components/track/RecentTrackList'
 import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
 
-// export default async function page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
-export default async function page({ searchParams }: any) {
+export default async function page({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const timeRange = searchParams.timeRange || 'short'
 
   return (

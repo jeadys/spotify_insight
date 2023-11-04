@@ -2,7 +2,7 @@ import { GeneratorSearchItem } from '@/components/generator/GeneratorSearchItem'
 import { getSearchSeeds } from '@/server/api'
 
 type Props = {
-  searchParams: string
+  searchParams?: string
 }
 
 export const GeneratorSearchList = async ({ searchParams }: Props) => {
