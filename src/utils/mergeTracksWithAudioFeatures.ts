@@ -34,6 +34,9 @@ export const mergeTracksWithAudioFeatures = (
       name: track.name,
       artist: track.artists[0].name,
       image: track.album?.images?.[2]?.url || '/images/nocover.webp',
+      id: track.id,
+      uri: track.uri,
+      preview: track.preview_url,
     }
   })
 
