@@ -38,12 +38,14 @@ export type GeneratorState = {
     min: number
     max: number
   }
+  isPublic: boolean
 }
 
 type GeneratorActions = {
   addSeed: (seedType: SeedType, id: string, name: string) => void
   removeSeed: (seedType: SeedType, id: string) => void
   setRangeValue: (attributeType: AttributeType, min: number, max: number) => void
+  setIsPublic: (isPublic: boolean) => void
   reset: () => void
 }
 
@@ -75,6 +77,7 @@ export const initialGeneratorState: GeneratorState = {
     min: 10,
     max: 90,
   },
+  isPublic: true,
 }
 
 export const useGeneratorStore = create<GeneratorState & GeneratorActions>()(
@@ -119,6 +122,12 @@ export const useGeneratorStore = create<GeneratorState & GeneratorActions>()(
             min: min,
             max: max,
           },
+        })),
+
+      setIsPublic: (isPublic: boolean) =>
+        set((state) => ({
+          ...state,
+          isPublic: isPublic,
         })),
 
       reset: () => set(initialGeneratorState),
