@@ -37,12 +37,18 @@ export const ProfileAudioFeature = async ({ timeRange }: Props) => {
   return (
     <>
       <ProgressBarGrid>
-        <ProgressBarItem title="danceability" value={averageAudioFeature.danceability} />
-        <ProgressBarItem title="energy" value={averageAudioFeature.energy} />
-        <ProgressBarItem title="speechiness" value={averageAudioFeature.speechiness} />
-        <ProgressBarItem title="acousticness" value={averageAudioFeature.acousticness} />
-        <ProgressBarItem title="liveness" value={averageAudioFeature.liveness} />
-        <ProgressBarItem title="valence" value={averageAudioFeature.valence} />
+        <ul>
+          <ProgressBarItem leftTitle="Unrhythmic" rightTitle="Danceable" value={averageAudioFeature.danceability} />
+          <ProgressBarItem leftTitle="Electric" rightTitle="Acoustic" value={averageAudioFeature.acousticness} />
+        </ul>
+        <ul>
+          <ProgressBarItem leftTitle="Relaxing" rightTitle="Energetic" value={averageAudioFeature.energy} />
+          <ProgressBarItem leftTitle="Sad" rightTitle="Happy" value={averageAudioFeature.valence} />
+        </ul>
+        <ul>
+          <ProgressBarItem leftTitle="Musical" rightTitle="Spoken" value={averageAudioFeature.speechiness} />
+          <ProgressBarItem leftTitle="Studio" rightTitle="Live" value={averageAudioFeature.liveness} />
+        </ul>
       </ProgressBarGrid>
 
       <TrackAudioFeatureScatter trackAudioFeatures={mergedTracksWithAudioFeatures} />
