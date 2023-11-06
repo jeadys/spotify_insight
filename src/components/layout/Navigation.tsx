@@ -4,11 +4,15 @@ import type { ReactElement } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
 import { AdjustmentsHorizontalIcon, ArrowLeftOnRectangleIcon, MagnifyingGlassIcon, UserIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 
 export const Navigation = () => {
+  const pathname = usePathname()
+
   type NavigationProps = {
     title: string
     link: string
@@ -66,7 +70,13 @@ export const Navigation = () => {
         </div>
         {navigationItems.map((navigationItem) => (
           <li key={navigationItem.title} className="hidden lg:block">
-            <Link className="flex items-center rounded-md p-2 hover:bg-gray-1100" href={navigationItem.link}>
+            <Link
+              className={clsx(`flex items-center rounded-md p-2`, {
+                'hover:bg-gray-1100': pathname != navigationItem.link,
+                'pointer-events-none bg-gray-1200': pathname == navigationItem.link.split('?')[0],
+              })}
+              href={navigationItem.link}
+            >
               {navigationItem.icon}
               {navigationItem.title}
             </Link>
@@ -101,7 +111,13 @@ export const Navigation = () => {
         <ul className="absolute right-0 z-30 w-1/2 max-w-max rounded-md border border-gray-700 bg-gray-1200 text-white lg:hidden">
           {navigationItems.map((navigationItem) => (
             <li key={navigationItem.title} onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-              <Link href={navigationItem.link} className="flex items-center rounded-md px-4 py-2 hover:bg-gray-1100">
+              <Link
+                href={navigationItem.link}
+                className={clsx(`flex items-center rounded-md p-2`, {
+                  'hover:bg-gray-1100': pathname != navigationItem.link,
+                  'pointer-events-none bg-gray-1200': pathname == navigationItem.link.split('?')[0],
+                })}
+              >
                 {navigationItem.icon}
                 {navigationItem.title}
               </Link>
