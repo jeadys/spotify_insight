@@ -1,8 +1,7 @@
 'use client'
 
-import clsx from 'clsx'
-
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import clsx from 'clsx'
 
 import { useStore } from '@/hooks/useStore'
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'

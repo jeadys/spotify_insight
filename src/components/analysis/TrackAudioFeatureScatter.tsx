@@ -10,7 +10,7 @@ import { CustomScatterShape } from '@/components/analysis/CustomScatterShape'
 import { CustomScatterToolTip } from '@/components/analysis/CustomScatterToolTip'
 import { formatAxisLabel } from '@/utils/formatAxisLabel'
 
-export type MergedTrackAndAudioFeatureObject = Partial<SpotifyApi.TrackLinkObject> & Partial<SpotifyApi.AudioFeaturesObject>
+export type MergedTrackAndAudioFeatureObject = Partial<SpotifyApi.TrackObjectFull> & Partial<SpotifyApi.AudioFeaturesObject>
 
 type Props = {
   trackAudioFeatures: MergedTrackAndAudioFeatureObject[]
