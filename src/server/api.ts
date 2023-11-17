@@ -480,14 +480,19 @@ export const addTracksToPlaylist = async (
  * POST /v1/users/{user_id}/playlists
  * https://developer.spotify.com/web-api/create-playlist/
  */
-export const createPlaylistBasedOnSeeds = async (data: getRecommendationsBasedOnSeedsProps) => {
+export const createPlaylistBasedOnSeeds = async (data: getRecommendationsBasedOnSeedsProps, isPublic: boolean) => {
   if (!data.seedArtists.length && !data.seedTracks.length) return
 
   const session = await getServerSession(authOptions)
   const recommendations = await getRecommendationsBasedOnSeeds(data)
 
   if (recommendations.tracks) {
-    const create = await createPlaylist(session?.user.id, 'Discover Anytime', 'Created at https://spotify-insight-jeadys.vercel.app', true)
+    const create = await createPlaylist(
+      session?.user.id,
+      'Discover Anytime',
+      'Created at https://spotify-insight-jeadys.vercel.app',
+      isPublic
+    )
     if (create) {
       const add = await addTracksToPlaylist(
         create.id,

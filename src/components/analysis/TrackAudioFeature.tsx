@@ -1,6 +1,5 @@
 import { FeatureItem } from '@/components/analysis/FeatureItem'
 import { FeatureList } from '@/components/analysis/FeatureList'
-import { ProgressBarGrid } from '@/components/analysis/ProgressBarGrid'
 import { ProgressBarItem } from '@/components/analysis/ProgressBarItem'
 import { TrackAudioFeatureChart } from '@/components/analysis/TrackAudioFeatureChart'
 import { getAudioFeaturesForTrack } from '@/server/api'
@@ -19,14 +18,18 @@ export const TrackAudioFeature = async ({ trackId }: Props) => {
   return (
     <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
       <div className="flex flex-col gap-5">
-        <ProgressBarGrid>
-          <ProgressBarItem title="danceability" value={trackAudioFeatures.danceability} />
-          <ProgressBarItem title="energy" value={trackAudioFeatures.energy} />
-          <ProgressBarItem title="speechiness" value={trackAudioFeatures.speechiness} />
-          <ProgressBarItem title="acousticness" value={trackAudioFeatures.acousticness} />
-          <ProgressBarItem title="liveness" value={trackAudioFeatures.liveness} />
-          <ProgressBarItem title="valence" value={trackAudioFeatures.valence} />
-        </ProgressBarGrid>
+        <div className="grid grid-cols-1 gap-5 text-sm md:grid-cols-2">
+          <ul>
+            <ProgressBarItem leftTitle="Unrhythmic" rightTitle="Danceable" value={trackAudioFeatures.danceability} />
+            <ProgressBarItem leftTitle="Electric" rightTitle="Acoustic" value={trackAudioFeatures.acousticness} />
+            <ProgressBarItem leftTitle="Relaxing" rightTitle="Energetic" value={trackAudioFeatures.energy} />
+          </ul>
+          <ul>
+            <ProgressBarItem leftTitle="Sad" rightTitle="Happy" value={trackAudioFeatures.valence} />
+            <ProgressBarItem leftTitle="Musical" rightTitle="Spoken" value={trackAudioFeatures.speechiness} />
+            <ProgressBarItem leftTitle="Studio" rightTitle="Live" value={trackAudioFeatures.liveness} />
+          </ul>
+        </div>
 
         <FeatureList>
           <FeatureItem title="BPM" value={Math.round(trackAudioFeatures.tempo)} />

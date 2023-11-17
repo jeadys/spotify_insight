@@ -17,17 +17,21 @@ export const GeneratorCreate = () => {
       <button
         onClick={() =>
           startTransition(() =>
-            createPlaylistBasedOnSeeds({
-              seedArtists: state.artist.map((artist) => artist.id),
-              seedTracks: state.track.map((track) => track.id),
-              targetAcousticness: calculateTargetAttribute(state.acousticness.min, state.acousticness.max),
-              targetDanceability: calculateTargetAttribute(state.danceability.min, state.danceability.max),
-              targetEnergy: calculateTargetAttribute(state.energy.min, state.energy.max),
-              targetInstrumentalness: calculateTargetAttribute(state.instrumentalness.min, state.instrumentalness.max),
-              targetPopularity: state.popularity.min + state.popularity.max / 2,
-              targetValence: calculateTargetAttribute(state.valence.min, state.valence.max),
-              limit: 50,
-            })
+            createPlaylistBasedOnSeeds(
+              {
+                seedArtists: state.artist.map((artist) => artist.id),
+                seedTracks: state.track.map((track) => track.id),
+                targetAcousticness: calculateTargetAttribute(state.acousticness.min, state.acousticness.max),
+                targetDanceability: calculateTargetAttribute(state.danceability.min, state.danceability.max),
+                targetEnergy: calculateTargetAttribute(state.energy.min, state.energy.max),
+                targetInstrumentalness: calculateTargetAttribute(state.instrumentalness.min, state.instrumentalness.max),
+                targetPopularity: state.popularity.min + state.popularity.max / 2,
+                targetValence: calculateTargetAttribute(state.valence.min, state.valence.max),
+
+                limit: 50,
+              },
+              state.isPublic
+            )
           )
         }
         className="rounded-md bg-blue-900 p-3 font-semibold text-white  disabled:cursor-not-allowed disabled:opacity-25"

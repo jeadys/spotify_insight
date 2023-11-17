@@ -7,6 +7,7 @@ import { GeneratorReset } from '@/components/generator/GeneratorReset'
 import { GeneratorSearch } from '@/components/generator/GeneratorSearch'
 import { GeneratorSearchList } from '@/components/generator/GeneratorSearchList'
 import { GeneratorSeedList } from '@/components/generator/GeneratorSeedList'
+import { GeneratorSwitch } from '@/components/generator/GeneratorSwitch'
 import { SkeletonGenerator } from '@/components/generator/SkeletonGenerator'
 import { Section } from '@/components/layout/Section'
 import { SavedPlayList } from '@/components/playlist/SavedPlaylist'
@@ -85,6 +86,8 @@ export default async function Generator({ searchParams }: { searchParams: { [key
           />
         </div>
       </Section>
+
+      <GeneratorSwitch />
 
       <div className="flex flex-wrap justify-between gap-5">
         <GeneratorCreate />
