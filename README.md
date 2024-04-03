@@ -1,13 +1,37 @@
-# Spotify Insight
+# Spotify Music Insights and Discovery
 
-Get more insight on your Spotify usage and discover new tracks & artists.
+## Overview
+This project aims to empower users with detailed insights into their Spotify usage to enhance their music discovery experience. By providing personalized profiles showcasing top genres, tracks, and artists, along with features like analysis, playlist generation, and recommendations, users can delve deeper into their music preferences and discover new content tailored to their tastes.
 
-## Made with
+## Features
+- **Personalized Profiles**: Users can access personalized profiles reflecting their music listening habits, including top genres, tracks, and artists.
+- **Detailed Analysis**: Dive into comprehensive analysis of listening habits, including metrics like listening duration, frequency, and diversity.
+- **Playlist Generation**: Generate custom playlists based on user preferences, top tracks, or selected genres.
+- **Recommendations**: Receive personalized recommendations for new tracks and artists based on listening history and preferences.
+- **Discovery**: Explore curated content and discover new tracks, artists, and genres beyond user preferences, enhancing the music exploration experience.
 
-- NextJS
-- Next-Auth
-- Typescript
-- TailwindCSS
+https://github.com/jeadys/spotify_insight/assets/107939865/eff55c73-f8b2-44a5-8b7c-824a24d54c01
+
+
+Profile analysis          |  Playlist generator
+:-------------------------:|:-------------------------:
+![](https://github.com/jeadys/spotify_insight/assets/107939865/4577fed3-d335-4375-bd8c-d2a8d63377c4)  |  ![](https://github.com/jeadys/spotify_insight/assets/107939865/d5ff9471-9109-427f-b727-f2dfa9f7b4bf)
+
+
+## Technologies Used
+- Next.js: React framework for building server-side rendered web applications.
+- Next-Auth: Authentication library for Next.js applications.
+- TypeScript: Superset of JavaScript providing static typing and other advanced features.
+- Tailwind CSS: Utility-first CSS framework for quickly building custom designs.
+- Spotify API: Integration with the Spotify API for accessing user data and recommendations.
+
+## Getting Started
+### Prerequisites
+- Node.js installed on your machine
+- A Spotify Developer account to obtain API credentials
+
+### Installation
+1. Clone the repository:
 
 ## Install
 
