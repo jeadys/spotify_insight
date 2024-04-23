@@ -25,9 +25,11 @@ module.exports = {
         'duration': { 'max': '440px' },
       },
       width: {
+        '88': '22rem',
         '144': '36rem',
       },
       height: {
+        '88': '22rem',
         '144': '36rem',
       },
       maxWidth: {
