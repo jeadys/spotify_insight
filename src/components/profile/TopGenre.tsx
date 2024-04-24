@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { getTopArtists } from '@/server/api'
+import { getTopArtists } from '@/server/api/user'
 
 type Props = {
   timeRange: string

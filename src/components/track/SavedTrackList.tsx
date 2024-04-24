@@ -5,7 +5,7 @@ import { TrackList } from '@/components/track/TrackList'
 import { TrackListItem } from '@/components/track/TrackListItem'
 import { TrackName } from '@/components/track/TrackName'
 import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
-import { getCurrentUserSavedTracks } from '@/server/api'
+import { getCurrentUserSavedTracks } from '@/server/api/user'
 
 export const SavedTrackList = async () => {
   const savedTracks = await getCurrentUserSavedTracks(12)
