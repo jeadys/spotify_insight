@@ -3,7 +3,7 @@
 import { useTransition } from 'react'
 
 import { useStore } from '@/hooks/useStore'
-import { createPlaylistBasedOnSeeds } from '@/server/api'
+import { createPlaylistBasedOnSeeds } from '@/server/api/playlist'
 import { initialGeneratorState, useGeneratorStore } from '@/store/useGenerator'
 import { calculateTargetAttribute } from '@/utils/calculateTargetAttribute'
 

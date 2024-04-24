@@ -7,7 +7,7 @@ import { Section } from '@/components/layout/Section'
 import { SkeletonAudioFeature } from '@/components/skeleton/SkeletonAudioFeature'
 import { PlaylistTrackList } from '@/components/track/PlaylistTrackList'
 import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
-import { getPlaylistById } from '@/server/api'
+import { getPlaylistById } from '@/server/api/playlist'
 
 type Params = {
   params: {
