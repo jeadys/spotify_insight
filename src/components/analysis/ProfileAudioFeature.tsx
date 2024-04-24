@@ -1,7 +1,7 @@
 import { ProgressBarGrid } from '@/components/analysis/ProgressBarGrid'
 import { ProgressBarItem } from '@/components/analysis/ProgressBarItem'
 import { TrackAudioFeatureScatter } from '@/components/analysis/TrackAudioFeatureScatter'
-import { getAudioFeaturesForMultipleTracks, getTopTracks } from '@/server/api'
+import { getAudioFeaturesForMultipleTracks } from '@/server/api/track'
 import { calculateaverageAudioFeature } from '@/utils/calculateAverageAudioFeature'
 import { mergeTracksWithAudioFeatures } from '@/utils/mergeTracksWithAudioFeatures'
 
