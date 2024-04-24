@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { MetadataGrid } from '@/components/analysis/MetadataGrid'
 import { MetadataItem } from '@/components/analysis/MetadataItem'
 import { Header } from '@/components/layout/Header'
-import { getAlbumById } from '@/server/api'
+import { getAlbumById } from '@/server/api/album'
 
 type Props = {
   albumId: string

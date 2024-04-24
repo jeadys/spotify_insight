@@ -4,7 +4,7 @@ import { TrackList } from '@/components/track/TrackList'
 import { TrackListItem } from '@/components/track/TrackListItem'
 import { TrackName } from '@/components/track/TrackName'
 import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
-import { getAlbumTracks } from '@/server/api'
+import { getAlbumTracks } from '@/server/api/album'
 
 type Props = {
   albumId: string
