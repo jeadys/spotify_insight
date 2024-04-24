@@ -1,5 +1,5 @@
 import { GeneratorSearchItem } from '@/components/generator/GeneratorSearchItem'
-import { getSearchSeeds } from '@/server/api'
+import { getSearchSeeds } from '@/server/api/discovery'
 
 type Props = {
   searchParams?: string
