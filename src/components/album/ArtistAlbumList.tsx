@@ -6,7 +6,7 @@ import { AlbumName } from '@/components/album/AlbumName'
 import { List } from '@/components/layout/List'
 import { ListItem } from '@/components/layout/ListItem'
 import { Label } from '@/components/ui/Label'
-import { getArtistAlbums } from '@/server/api'
+import { getArtistAlbums } from '@/server/api/artist'
 
 type Props = {
   artistId: string

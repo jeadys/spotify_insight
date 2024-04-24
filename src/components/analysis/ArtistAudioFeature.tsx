@@ -1,6 +1,6 @@
 import { ProgressBarGrid } from '@/components/analysis/ProgressBarGrid'
 import { ProgressBarItem } from '@/components/analysis/ProgressBarItem'
-import { getArtistTopTracks, getAudioFeaturesForMultipleTracks } from '@/server/api'
+import { getArtistTopTracks } from '@/server/api/artist'
 import { calculateaverageAudioFeature } from '@/utils/calculateAverageAudioFeature'
 
 type Props = {

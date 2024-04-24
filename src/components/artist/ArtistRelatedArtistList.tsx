@@ -6,7 +6,7 @@ import { ArtistName } from '@/components/artist/ArtistName'
 import { List } from '@/components/layout/List'
 import { ListItem } from '@/components/layout/ListItem'
 import { Label } from '@/components/ui/Label'
-import { getArtistRelatedArtists } from '@/server/api'
+import { getArtistRelatedArtists } from '@/server/api/artist'
 import { formatFollowCount } from '@/utils/formatFollowCount'
 
 type Props = {
