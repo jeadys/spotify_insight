@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { MetadataGrid } from '@/components/analysis/MetadataGrid'
 import { MetadataItem } from '@/components/analysis/MetadataItem'
 import { Header } from '@/components/layout/Header'
-import { getPlaylistById } from '@/server/api'
+import { getPlaylistById } from '@/server/api/playlist'
 
 type Props = {
   playlistId: string

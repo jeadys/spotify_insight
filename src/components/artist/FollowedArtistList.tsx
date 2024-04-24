@@ -6,7 +6,7 @@ import { ArtistName } from '@/components/artist/ArtistName'
 import { List } from '@/components/layout/List'
 import { ListItem } from '@/components/layout/ListItem'
 import { Label } from '@/components/ui/Label'
-import { getCurrentUserFollowedArtists } from '@/server/api'
+import { getCurrentUserFollowedArtists } from '@/server/api/user'
 import { formatFollowCount } from '@/utils/formatFollowCount'
 
 export const FollowedArtistList = async () => {

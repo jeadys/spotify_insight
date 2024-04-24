@@ -2,8 +2,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 
 import { TopItem } from '@/components/profile/TopItem'
-import { getTopTracks } from '@/server/api'
-import { formatTrackDuration } from '@/utils/formatTrackDuration'
+import { getTopTracks } from '@/server/api/user'
 
 dayjs.extend(relativeTime)
 

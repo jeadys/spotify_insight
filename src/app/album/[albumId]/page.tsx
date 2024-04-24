@@ -8,7 +8,7 @@ import { Section } from '@/components/layout/Section'
 import { SkeletonAudioFeature } from '@/components/skeleton/SkeletonAudioFeature'
 import { AlbumTrackList } from '@/components/track/AlbumTrackList'
 import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
-import { getAlbumById } from '@/server/api'
+import { getAlbumById } from '@/server/api/album'
 
 type Params = {
   params: {

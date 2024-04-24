@@ -9,7 +9,7 @@ import { TrackListItem } from '@/components/track/TrackListItem'
 import { TrackName } from '@/components/track/TrackName'
 import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
 import { TrackPlayedAt } from '@/components/track/TrackPlayedAt'
-import { getRecentlyPlayedTracks } from '@/server/api'
+import { getRecentlyPlayedTracks } from '@/server/api/user'
 
 type TracksByDay = {
   [date: string]: { track: SpotifyApi.TrackObjectFull; played_at: string; index: number }[]

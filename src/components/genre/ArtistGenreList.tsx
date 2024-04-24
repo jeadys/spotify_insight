@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { getArtistById } from '@/server/api'
+import { getArtistById } from '@/server/api/artist'
 
 type Props = {
   artistId: string

@@ -6,7 +6,7 @@ import { AlbumName } from '@/components/album/AlbumName'
 import { List } from '@/components/layout/List'
 import { ListItem } from '@/components/layout/ListItem'
 import { Label } from '@/components/ui/Label'
-import { getNewReleases } from '@/server/api'
+import { getNewReleases } from '@/server/api/discovery'
 
 export const NewAlbumList = async () => {
   const newReleases = await getNewReleases(50)

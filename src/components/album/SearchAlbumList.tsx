@@ -6,7 +6,7 @@ import { AlbumName } from '@/components/album/AlbumName'
 import { List } from '@/components/layout/List'
 import { ListItem } from '@/components/layout/ListItem'
 import { Label } from '@/components/ui/Label'
-import { getSearchItems } from '@/server/api'
+import { getSearchItems } from '@/server/api/discovery'
 
 type Props = {
   searchTerm: string

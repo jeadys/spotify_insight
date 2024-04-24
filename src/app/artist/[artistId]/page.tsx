@@ -13,7 +13,7 @@ import { Section } from '@/components/layout/Section'
 import { SkeletonAudioFeature } from '@/components/skeleton/SkeletonAudioFeature'
 import { ArtistTrackList } from '@/components/track/ArtistTrackList'
 import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
-import { getArtistById } from '@/server/api'
+import { getArtistById } from '@/server/api/artist'
 
 type Params = {
   params: {

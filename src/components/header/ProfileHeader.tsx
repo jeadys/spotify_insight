@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { Header } from '@/components/layout/Header'
-import { getCurrentUsersProfile } from '@/server/api'
+import { getCurrentUsersProfile } from '@/server/api/user'
 
 export const ProfileHeader = async () => {
   const userProfile = await getCurrentUsersProfile()

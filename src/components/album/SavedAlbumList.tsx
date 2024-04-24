@@ -6,7 +6,7 @@ import { AlbumName } from '@/components/album/AlbumName'
 import { List } from '@/components/layout/List'
 import { ListItem } from '@/components/layout/ListItem'
 import { Label } from '@/components/ui/Label'
-import { getCurrentUserSavedAlbums } from '@/server/api'
+import { getCurrentUserSavedAlbums } from '@/server/api/user'
 
 export const SavedAlbumList = async () => {
   const savedAlbums = await getCurrentUserSavedAlbums(12)

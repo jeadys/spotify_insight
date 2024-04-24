@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { Label } from '@/components/ui/Label'
-import { getTrackById } from '@/server/api'
+import { getTrackById } from '@/server/api/track'
 
 type Props = {
   trackId: string

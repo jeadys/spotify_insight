@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { MetadataGrid } from '@/components/analysis/MetadataGrid'
 import { MetadataItem } from '@/components/analysis/MetadataItem'
 import { Header } from '@/components/layout/Header'
-import { getTrackById } from '@/server/api'
+import { getTrackById } from '@/server/api/track'
 import { formatTrackDuration } from '@/utils/formatTrackDuration'
 
 type Props = {

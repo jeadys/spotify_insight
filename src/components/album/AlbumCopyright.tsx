@@ -1,4 +1,4 @@
-import { getAlbumById } from '@/server/api'
+import { getAlbumById } from '@/server/api/album'
 
 type Props = {
   albumId: string

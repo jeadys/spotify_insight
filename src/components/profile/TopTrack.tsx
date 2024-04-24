@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { TrackPlaybackControl } from '@/components/track/TrackPlaybackControl'
-import { getTopTracks } from '@/server/api'
+import { getTopTracks } from '@/server/api/user'
 
 type Props = {
   timeRange: string

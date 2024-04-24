@@ -5,7 +5,7 @@ import { List } from '@/components/layout/List'
 import { ListItem } from '@/components/layout/ListItem'
 import { PlaylistName } from '@/components/playlist/PlaylistName'
 import { Label } from '@/components/ui/Label'
-import { getCurrentUserSavedPlaylists } from '@/server/api'
+import { getCurrentUserSavedPlaylists } from '@/server/api/user'
 
 export const SavedPlayList = async () => {
   const savedPlaylists = await getCurrentUserSavedPlaylists(12)
