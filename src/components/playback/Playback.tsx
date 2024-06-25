@@ -16,9 +16,6 @@ export const Playback = () => {
   return (
     <SpotifyPlayer
       magnifySliderOnHover={false}
-      callback={(state) => {
-        usePlaybackStore.setState({ offset: state.track.uri, queue: trackQueue, isPlaying: state.isPlaying })
-      }}
       play={isPlaying}
       layout="responsive"
       offset={trackQueue.indexOf(offset)}
