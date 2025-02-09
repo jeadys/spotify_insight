@@ -8,11 +8,12 @@ import { SkeletonHeader } from '@/components/header/SkeletonHeader'
 import { Section } from '@/components/layout/Section'
 import { TopArtist } from '@/components/profile/TopArtist'
 import { TopGenre } from '@/components/profile/TopGenre'
-import { TopStat } from '@/components/profile/TopStat'
 import { TopTrack } from '@/components/profile/TopTrack'
 import { Skeleton } from '@/components/skeleton/Skeleton'
+import { SkeletonAudioFeature } from '@/components/skeleton/SkeletonAudioFeature'
 import { RecentTrackList } from '@/components/track/RecentTrackList'
 import { SkeletonTrackList } from '@/components/track/SkeletonTrackList'
+import { SkeletonScatter } from '@/components/skeleton/SkeletonScatter'
 
 export default async function page({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
   const timeRange = searchParams.timeRange || 'short'
@@ -25,11 +26,18 @@ export default async function page({ searchParams }: { searchParams: { [key: str
 
       <TimeRangeFilter />
 
-      <Section title="Top Stats" description="Past" timeRange={timeRange}>
-        <Suspense fallback={<SkeletonTrackList contentAmount={12} />}>
+      {/* <Section title="Top Stats" description="Past" timeRange={timeRange}>
+        <Suspense
+          fallback={
+            <>
+              <SkeletonAudioFeature contentAmount={6} />
+              <SkeletonScatter />
+            </>
+          }
+        >
           <ProfileAudioFeature timeRange={timeRange} />
         </Suspense>
-      </Section>
+      </Section> */}
 
       <Section title="Top Genres" description="Past" timeRange={timeRange}>
         <Suspense key={timeRange} fallback={<SkeletonGenreList contentAmount={12} />}>
