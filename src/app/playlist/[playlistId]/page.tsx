@@ -24,11 +24,11 @@ export default async function Album({ params: { playlistId } }: Params) {
         <PlaylistHeader playlistId={playlistId} />
       </Suspense>
 
-      <Section title="Playlist Analysis" description={`Audio elements of ${playlist.name}`}>
+      {/* <Section title="Playlist Analysis" description={`Audio elements of ${playlist.name}`}>
         <Suspense fallback={<SkeletonAudioFeature contentAmount={6} />}>
-          <PlaylistAudioFeature playlistId={playlistId} />
+        <PlaylistAudioFeature playlistId={playlistId} />
         </Suspense>
-      </Section>
+      </Section> */}
 
       <Section title="Tracks" description={`Playlist tracks of ${playlist.name}`}>
         <Suspense fallback={<SkeletonTrackList contentAmount={10} />}>
