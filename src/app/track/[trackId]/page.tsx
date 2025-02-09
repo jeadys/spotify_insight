@@ -29,29 +29,30 @@ export default async function Track({ params: { trackId } }: Params) {
           <RelatedAlbum trackId={trackId} />
         </Suspense>
       </Section>
-
+      {/* 
       <Section title="Track Analysis" description={`Audio elements of ${track.name}`}>
         <Suspense
           fallback={
             <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
               <div className="flex flex-col gap-5">
                 <SkeletonAudioFeature contentAmount={6} />
-                <ul className="grid w-full grid-cols-2 gap-5 lg:grid-cols-3">
-                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
-                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
-                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
-                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
-                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
-                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
-                  <li className="h-24 rounded-md bg-gray-1200 p-5 text-center capitalize sm:h-28"></li>
+                <ul className="grid w-full animate-pulse grid-cols-2 gap-5 lg:grid-cols-3">
+                  <li className="h-24 rounded-md bg-gray-1100 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1100 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1100 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1100 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1100 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1100 p-5 text-center capitalize sm:h-28"></li>
+                  <li className="h-24 rounded-md bg-gray-1100 p-5 text-center capitalize sm:h-28"></li>
                 </ul>
               </div>
+              <div className="relative h-80 w-80 animate-pulse rounded-full bg-gray-1100 sm:h-144 sm:w-144"></div>
             </div>
           }
         >
           <TrackAudioFeature trackId={trackId} />
         </Suspense>
-      </Section>
+      </Section> */}
     </>
   )
 }
