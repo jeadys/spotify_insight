@@ -6,12 +6,13 @@ type Props = {
 
 export const SkeletonAudioFeature = ({ contentAmount }: Props) => {
   const skeletons = new Array(contentAmount).fill(null).map((_, index) => (
-    <li key={index} className="capitalize">
-      <h4 className="mb-2 h-6 w-32 rounded-md bg-gray-1100"></h4>
-      <div className="h-2 rounded-full bg-gray-1100">
-        <div className="h-2 rounded-full bg-gray-1100"></div>
-      </div>
+    <li key={index} className="mb-2 flex w-full items-center justify-center gap-5 capitalize text-white">
+      <h4 className="h-4 w-14 rounded-md bg-gray-1100"></h4>
+
+      <div className="h-2 w-32 max-w-sm rounded-full bg-gray-1100"></div>
+
+      <h4 className="h-4 w-14 rounded-md bg-gray-1100"></h4>
     </li>
   ))
-  return <ul className="grid w-full animate-pulse grid-cols-2 items-start justify-start gap-5 gap-y-5 lg:grid-cols-3">{skeletons}</ul>
+  return <div className="grid animate-pulse grid-cols-1 gap-2 text-sm md:grid-cols-3">{skeletons}</div>
 }
