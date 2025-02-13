@@ -10,6 +10,9 @@ This project aims to empower users with detailed insights into their Spotify usa
 - **Recommendations**: Receive personalized recommendations for new tracks and artists based on listening history and preferences.
 - **Discovery**: Explore curated content and discover new tracks, artists, and genres beyond user preferences, enhancing the music exploration experience.
 
+
+https://github.com/user-attachments/assets/f2bb2a36-7d09-4844-9cf3-459951c71599
+
 https://github.com/jeadys/spotify_insight/assets/107939865/72ed72b8-f9bb-4a5f-9f89-d00d10e744ca
 
 
