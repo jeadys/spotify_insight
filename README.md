@@ -13,8 +13,6 @@ This project aims to empower users with detailed insights into their Spotify usa
 
 https://github.com/user-attachments/assets/f2bb2a36-7d09-4844-9cf3-459951c71599
 
-https://github.com/jeadys/spotify_insight/assets/107939865/72ed72b8-f9bb-4a5f-9f89-d00d10e744ca
-
 
 Profile analysis          |  Playlist generator
 :-------------------------:|:-------------------------:
